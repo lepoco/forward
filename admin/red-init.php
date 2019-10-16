@@ -12,5 +12,4 @@
 		require_once(ADMPATH.'red-config.php');
 	else
 		exit('Fatal error');
-
 ?>
