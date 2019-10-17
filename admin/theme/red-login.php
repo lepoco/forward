@@ -11,9 +11,9 @@
 
 <div id="login-bg">
 	<picture>
-		<source srcset="<?php echo $this->uri; ?>admin/img/bg.webp" type="image/webp">
-		<source srcset="<?php echo $this->uri; ?>admin/img/bg.jpeg" type="image/jpeg">
-		<img alt="This is my face" src="<?php echo $this->uri; ?>admin/img/bg.jpeg">
+		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.webp" type="image/webp">
+		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.jpeg" type="image/jpeg">
+		<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/bg.jpeg">
 	</picture>
 </div>
 <section id="red-login">

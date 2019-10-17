@@ -21,10 +21,10 @@
 	else
 		exit(RED_DEBUG ? 'The red-db.php file was not found!' : '');
 
-	if (is_file(ADMPATH.'red-class.php'))
-		include(ADMPATH.'red-class.php');
+	if (is_file(ADMPATH.'red-physic.php'))
+		include(ADMPATH.'red-physic.php');
 	else
-		exit(RED_DEBUG ? 'The red-class.php file was not found!' : '');
+		exit(RED_DEBUG ? 'The red-physic.php file was not found!' : '');
 
-	$RED = RED();
+	$RED = new RED();
 ?>

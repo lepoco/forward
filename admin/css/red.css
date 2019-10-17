@@ -25,7 +25,34 @@ body {
 	margin-top: 25px;
 }
 
-#red-login {
+#home-footer {
+	position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    color: #eee;
+    font-size: 10px;
+    font-weight: 200;
+}
+
+#github {
+	display: flex;
+	color: #fff;
+    justify-content: center;
+    align-items: center;
+	font-weight: 200;
+    font-size: 15px;
+}
+
+#github svg {
+	margin-right: 10px;
+} 
+
+#github p {
+	margin: 0;
+}
+
+#red-home, #red-login {
 	position: absolute;
     top: 0;
     bottom: 0;
@@ -34,7 +61,7 @@ body {
     align-items: center;
 }
 
-#login-bg img {
+#home-bg img, #login-bg img {
 	position: fixed;
     width: 100%;
     min-height: 100%;
@@ -42,17 +69,17 @@ body {
     object-fit: cover;
 }
 
-#login-card h1 {
+#home-card h1, #login-card h1 {
 	font-size: 30px;
 	font-weight: 700;
 }
 
-#login-card .card, #add-new-card .card {
+#home-card .card, #login-card .card, #add-new-card .card {
 	min-width: 100%;
 	border: none !important;
 }
 
-#login-card button, #add-new-card button {
+#home-card a, #login-card button, #add-new-card button {
 	border-radius: 0 !important;
 	border-bottom-right-radius: .25rem !important;
 	border-bottom-left-radius: .25rem !important;

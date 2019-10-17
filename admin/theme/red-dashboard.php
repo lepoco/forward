@@ -16,10 +16,10 @@
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="<?php echo $this->uri; ?>admin">Dashboard <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="<?php echo $this->home_url(); ?>dashboard">Dashboard <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $this->uri; ?>signout">Sign out</a>
+				<a class="nav-link" href="<?php echo $this->home_url(); ?>dashboard/signout">Sign out</a>
 			</li>
 		</ul>
 	</div>

@@ -4,14 +4,14 @@
 </Files>
 
 <IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteBase /forward/
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule . index.php [L]
-</IfModule>
+RewriteEngine On
+RewriteBase /
 
-# Used to hide the file extensions
-Options +MultiViews
+RewriteCond %{REQUEST_URI} ^(.*)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+RewriteRule .* forward/index.php?url=%1&%{QUERY_STRING} [L]
+</IfModule>
 
 # index file priority
 DirectoryIndex index.php
