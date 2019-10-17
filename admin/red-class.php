@@ -17,6 +17,7 @@
 	class RED
 	{
 		private $page;
+		private $uri;
 
 		private $HOOK;
 		private $DB;
@@ -34,12 +35,16 @@
 
 			self::parse_url();
 
+			$this->uri = $this->DB['options']->get('siteurl')->value;
+
 			if($this->page == 'admin'){
 				$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
 				self::admin();
+			}else if($this->page == 'ajax'){
+				self::ajax();
 			}else{
 				self::forward();
-			}	
+			}
 		}
 
 		private function init()
@@ -128,11 +133,17 @@
 					]
 				]);
 				$this->DB['options'] = new \Filebase\Database(['dir' => DB_PATH.DB_OPTIONS]);
-				$this->DB['records'] = new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS]);
 				$item = $this->DB['options']->get('siteurl');
-				$item->value = 'default';
+				$item->value = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 				$item->save();
 
+				$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
+				$item = $this->DB['users']->get('admin');
+				$item->password = 'admin';
+				$item->email = 'admin@example.com';
+				$item->save();
+
+				$this->DB['records'] = new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS]);
 				$item = $this->DB['records']->get('sample');
 				$item->url = 'https://rdev.cc/';
 				$item->clicks = 1;
@@ -147,7 +158,7 @@
 
 		public function page($data)
 		{
-			return new RED_PAGES($data);
+			return new RED_PAGES($data, $this->uri);
 		}
 
 		private function admin()
@@ -156,6 +167,11 @@
 				require_once(ADMPATH.'theme/red-admin.php');
 			else
 				$this->page(['title' => 'Page not found']);
+		}
+
+		private function ajax()
+		{
+			
 		}
 
 		private function forward()
@@ -196,11 +212,14 @@
 	class RED_PAGES
 	{
 		private $title;
+		private $uri;
 
-		public function __construct($data)
-		{
+		public function __construct($data, $uri)
+		{	
+			$this->uri = $uri;
+
 			if(isset($data['page']))
-				$page = $data[$page];
+				$page = $data['page'];
 			else
 				$page = '404';
 

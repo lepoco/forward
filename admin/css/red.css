@@ -1,0 +1,48 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	min-height: 100%;
+}
+
+* {
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+#red-login {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#login-bg img {
+	position: fixed;
+    width: 100%;
+    min-height: 100%;
+    filter: brightness(50%);
+    object-fit: cover;
+}
+
+#login-card h1 {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+#login-card .card {
+	min-width: 100%;
+	border: none !important;
+}
+
+#login-card button {
+	border-radius: 0 !important;
+	border-bottom-right-radius: .25rem !important;
+	border-bottom-left-radius: .25rem !important;
+}

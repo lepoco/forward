@@ -7,14 +7,8 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
+	$this->head(); ?>
 
 
-	$logged_in = false;
 
-	if($logged_in){
-		$this->page(['page' => 'dashboard', 'title' => 'Dashboard']);
-	}else{
-		$this->page(['page' => 'login', 'title' => 'Sign In']);
-	}
-
-?>
+<?php $this->footer(); ?>
