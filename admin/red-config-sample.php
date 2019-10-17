@@ -21,11 +21,21 @@
 	/** The name of the database for records */
 	define('DB_RECORDS', 'db_records');
 
+	/** Salt for passwords */
+	define('RED_SALT', 'example_salt');
+
+	/** Salt for passwords */
+	define('RED_SESSION', 'example_session_salt');
+
+	/** Salt for nonce */
+	define('RED_NONCE', 'example_nonce_salt');
+
 	/** WebName */
 	define('RED_NAME', 'Forward');
 
 	/** Debug */
 	define('RED_DEBUG', true);
+
 
 	/** Parse URL */
 	foreach (array('home' => "/",'page' => "/(?'page'[\w\-]+)",'dashboard' => "/dashboard/(?'dashboard'[\w\-]+)",) as $action => $rule )

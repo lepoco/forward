@@ -9,11 +9,22 @@
  */
 	namespace Forward;
 
-	if (!is_file(ADMPATH.'red-config.php'))
-		if (is_file(ADMPATH.'red-config-sample.php'))
-			file_put_contents(ADMPATH.'red-config.php', file_get_contents(ADMPATH.'red-config-sample.php'), FILE_APPEND);
-		else
+	function salter($length = 10) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 61)];}
+		return $randomString;
+	}
+
+	if (!is_file(ADMPATH.'red-config.php')){
+		if (is_file(ADMPATH.'red-config-sample.php')){
+			$config = str_replace(array('example_salt', 'example_session_salt', 'example_nonce_salt'), array(salter(50), salter(50), salter(50)), file_get_contents(ADMPATH.'red-config-sample.php'));
+			file_put_contents(ADMPATH.'red-config.php', $config);
+		}else{
 			exit('Fatal error');
+		}
+	}
+		
 	require_once(ADMPATH.'red-config.php');
 
 	if (is_file(ADMPATH.'db/red-db.php'))

@@ -10,7 +10,7 @@ RewriteBase /
 RewriteCond %{REQUEST_URI} ^(.*)$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
-RewriteRule .* forward/index.php?url=%1&%{QUERY_STRING} [L]
+RewriteRule .* forward/index.php [L]
 </IfModule>
 
 # index file priority

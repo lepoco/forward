@@ -115,7 +115,7 @@
 
 
 
-		
+
 	/*
 	#Htaccess
 	$htaccess = ABSPATH.'.htaccess';

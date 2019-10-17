@@ -36,9 +36,10 @@
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
 					if(defined('RED_DASHBOARD'))
 					{
-						if(RED_DASHBOARD == 'signout')
-						{
-
+						if(RED_DASHBOARD == 'users'){
+							echo 'users';
+						}else if(RED_DASHBOARD == 'signout'){
+							echo 'signout';
 						}else{
 							$this->page(['title' => 'Dashboard page not found']);
 						}
@@ -102,7 +103,7 @@
 
 		private function forward()
 		{
-			$record = $this->DB['records']->get($this->page);
+			$record = $this->DB['records']->get(RED_PAGE);
 
 			if($record->url == NULL)
 				$this->page(['title' => 'Page not found']);
