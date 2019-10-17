@@ -9,10 +9,12 @@
  */
 	namespace Forward;
 
-	if (is_file(ADMPATH.'red-config.php'))
-		require_once(ADMPATH.'red-config.php');
-	else
-		exit('Fatal error');
+	if (!is_file(ADMPATH.'red-config.php'))
+		if (is_file(ADMPATH.'red-config-sample.php'))
+			file_put_contents(ADMPATH.'red-config.php', file_get_contents(ADMPATH.'red-config-sample.php'), FILE_APPEND);
+		else
+			exit('Fatal error');
+	require_once(ADMPATH.'red-config.php');
 
 	if (is_file(ADMPATH.'db/red-db.php'))
 		include(ADMPATH.'db/red-db.php');

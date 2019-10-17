@@ -51,7 +51,21 @@
 		{
 			$item = $this->DB['options']->get('siteurl');
 
-			if($item->value == ''){
+			if($item->value == '')
+			{
+
+				/*
+				#Htaccess
+				$htaccess = ABSPATH.'.htaccess';
+				if (is_file($htaccess)) {
+					$current = file_get_contents($htaccess);
+					file_put_contents($htaccess, str_replace('RewriteEngine on', 'RewriteEngine on'.PHP_EOL.'RewriteBase /'.$this->page, $current), FILE_APPEND);
+				}else{
+					exit('There is no htacess file!');
+				}
+				*/
+
+
 				$db = new \Filebase\Database([
 					'dir'            => DB_PATH.DB_OPTIONS,
 					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
@@ -171,7 +185,13 @@
 
 		private function ajax()
 		{
-			
+			if (isset($_GET['query']))
+			{
+				exit;
+			}else{
+				header("Location: " . $this->uri);
+				exit;
+			}
 		}
 
 		private function forward()
@@ -200,7 +220,7 @@
 			if(is_file(ADMPATH.'theme/red-404.php'))
 				exit(require_once(ADMPATH.'theme/red-404.php'));
 			else
-				exit('Fatal error');
+				exit(RED_DEBUG ? 'The red-404.php file was not found!' : '');
 		}
 
 		public static function error($id, $title)

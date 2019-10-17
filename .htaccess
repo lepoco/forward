@@ -1,5 +1,20 @@
+<Files "*.json">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
 <IfModule mod_rewrite.c>
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule . index.php [L]
+    RewriteEngine on
+    RewriteBase /forward/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule . index.php [L]
 </IfModule>
+
+# Used to hide the file extensions
+Options +MultiViews
+
+# index file priority
+DirectoryIndex index.php
+
+# forbid file listing for root and subdirectories
+Options All -Indexes

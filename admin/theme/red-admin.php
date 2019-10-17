@@ -9,7 +9,7 @@
  */
 
 
-	$logged_in = false;
+	$logged_in = true;
 
 	if($logged_in){
 		$this->page(['page' => 'dashboard', 'title' => 'Dashboard']);
