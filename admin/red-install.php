@@ -102,7 +102,7 @@
 
 	$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
 	$item = $this->DB['users']->get('admin');
-	$item->password = 'admin';
+	$item->password = self::encrypt('admin');
 	$item->email = 'admin@example.com';
 	$item->save();
 

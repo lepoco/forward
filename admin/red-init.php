@@ -10,9 +10,9 @@
 	namespace Forward;
 
 	function salter($length = 10) {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$characters = '$/.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 61)];}
+		for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 64)];}
 		return $randomString;
 	}
 

@@ -122,12 +122,26 @@
 			$this->page = $URI[2];
 		}
 
-		public static function error_404()
+		private function encrypt($string, $type = 'password')
 		{
-			if(is_file(ADMPATH.'theme/red-404.php'))
-				exit(require_once(ADMPATH.'theme/red-404.php'));
-			else
-				exit(RED_DEBUG ? 'The red-404.php file was not found!' : '');
+			if($type == 'password')
+			{
+				return password_hash(hash_hmac('sha256', $string, RED_SALT), PASSWORD_ARGON2ID);
+			}
+		}
+
+		private function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
+		{
+
+			if($type == 'password')
+			{
+				if (password_verify(($plain ? hash_hmac('sha256', $input_string, RED_SALT) : $input_string), $db_string))
+				{
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			}
 		}
 
 		public static function error($id, $title)
