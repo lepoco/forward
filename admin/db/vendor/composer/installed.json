@@ -1,0 +1,57 @@
+[
+    {
+        "name": "tmarois/filebase",
+        "version": "v1.0.24",
+        "version_normalized": "1.0.24.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tmarois/Filebase.git",
+            "reference": "b660650472362e45f78d97cb395f09889196d164"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tmarois/Filebase/zipball/b660650472362e45f78d97cb395f09889196d164",
+            "reference": "b660650472362e45f78d97cb395f09889196d164",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6"
+        },
+        "require-dev": {
+            "php-coveralls/php-coveralls": "^2.0",
+            "phpunit/phpunit": "5.*",
+            "symfony/yaml": "^3.4"
+        },
+        "suggest": {
+            "symfony/yaml": "Allows Yaml format"
+        },
+        "time": "2019-02-24T22:55:23+00:00",
+        "type": "package",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Filebase\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Timothy Marois",
+                "email": "timothymarois@gmail.com"
+            }
+        ],
+        "description": "A Simple but Powerful Flat File Database Storage.",
+        "homepage": "https://github.com/filebase/Filebase",
+        "keywords": [
+            "database",
+            "document",
+            "file",
+            "file-files",
+            "filebase",
+            "flat",
+            "flat-file",
+            "key-value",
+            "serverless"
+        ]
+    }
+]

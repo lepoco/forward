@@ -8,6 +8,8 @@
  * @license https://opensource.org/licenses/MIT
  */
 
+	namespace Forward;
+
 	if (!defined('ABSPATH'))
 		define('ABSPATH', dirname( __FILE__ ).'/');
 

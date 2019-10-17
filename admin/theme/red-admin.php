@@ -7,5 +7,4 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
 ?>

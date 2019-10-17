@@ -1,2 +1,5 @@
 #Ignore files
 admin/red-config.php
+admin/db/db_options
+admin/db/db_records
+admin/db/db_users
