@@ -34,6 +34,10 @@
 	define('RED_NAME', 'Forward');
 
 	/** Debug */
+	define('RED_VERSION', 'beta 1.0.0');
+
+
+	/** Debug */
 	define('RED_DEBUG', true);
 
 

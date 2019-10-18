@@ -17,8 +17,14 @@ body {
 }
 
 #red-dashboard {
-	padding-top: 25px;
 	background-color: #f8f9fa;
+}
+
+#dashboard-stats {
+	background-color: #2b3e4b;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	color: #fff;
 }
 
 #links-table {
@@ -101,6 +107,57 @@ body {
 	border-bottom-left-radius: .25rem !important;
 }
 
+#red-about {
+	margin-top: 15px;
+}
+
+#github-about a {
+	display: flex;
+	align-items: center;
+	color: #000;
+}
+
+#github-about svg {
+	margin-right: 10px;
+}
+
+#github-about p {
+	margin: 0;
+}
+
+.stats-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.stats-header svg {
+	width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    padding: 5px;
+    fill: #fff;
+	margin-right: 15px;
+}
+
+.stats-header h1 {
+	font-size: 20px;
+	margin: 0;
+}
+
+.stats-header p {
+	margin: 0;
+	opacity: .55;
+	font-size: 11px;
+}
+
 .navbar-right {
 	justify-content: flex-end;
+}
+
+.col-no-gutters {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
