@@ -20,10 +20,13 @@
 	<meta name="mobile-web-app-capable" content="no">
 	<meta name="apple-mobile-web-app-capable" content="no">
 	<meta name="msapplication-starturl" content="/">
-	<title><?php echo $this->title(); ?></title>
+	<meta name="msapplication-TileImage" content="<?php echo $this->home_url(); ?>admin/img/forward-fav.png" />
+	<link rel="icon" href="<?php echo $this->home_url(); ?>admin/img/forward-fav.png" sizes="192x192" />
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $this->home_url(); ?>admin/img/forward-fav.png" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo $this->home_url(); ?>admin/css/red.css">
+	<title><?php echo $this->title(); ?></title>
 	<style>
 		body {
 			font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

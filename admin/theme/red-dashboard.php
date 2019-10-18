@@ -22,6 +22,9 @@
 				<a class="nav-link" href="<?php echo $this->home_url(); ?>dashboard/users">Users</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $this->home_url(); ?>dashboard/about">About</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->home_url(); ?>dashboard/signout">Sign out</a>
 			</li>
 		</ul>

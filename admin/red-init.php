@@ -32,6 +32,11 @@
 	else
 		exit(RED_DEBUG ? 'The red-db.php file was not found!' : '');
 
+	if (is_file(ADMPATH.'red-page.php'))
+		include(ADMPATH.'red-page.php');
+	else
+		exit(RED_DEBUG ? 'The red-page.php file was not found!' : '');
+
 	if (is_file(ADMPATH.'red-physic.php'))
 		include(ADMPATH.'red-physic.php');
 	else

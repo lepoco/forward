@@ -19,14 +19,18 @@
 <section id="red-home">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-lg-6">
-				<img src="#" alt="logo">
+			<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
+				<picture id="forward-logo">
+					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.webp" type="image/webp">
+					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg" type="image/jpeg">
+					<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg">
+				</picture>
 			</div>
 			<div class="col-12 col-lg-6">
 				<div id="home-card">
 					<div class="card">
 						<div class="card-body">
-							<h1>Forward</h1>
+							<h1>Forward | Short links manager</h1>
 							<p>Access to the site requires administrator privileges</p>
 						</div>
 						<a href="https://github.com/rapiddev/forward" target="_blank" rel="noopener" class="btn btn-primary">
@@ -42,6 +46,10 @@
 	</div>
 	<div id="home-footer">
 		Copyright © 2019 RapidDev | MIT License
+		<br>
+		Background image: <i>Joyston Judah</i>
+		<br>
+		Logo font: Questrial by <i>Joe Prince</i>
 	</div>
 </section>
 
