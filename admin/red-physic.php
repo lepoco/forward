@@ -25,12 +25,12 @@
 			);
 
 			switch (RED_PAGE) {
-				case 'home':
-					$this->page(['title' => 'Home page', 'page' => 'home']);
-					break;
 				case 'dashboard':
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
 					self::admin();
+					break;
+				case 'home':
+					$this->page(['title' => 'Home page', 'page' => 'home']);
 					break;
 				case '404':
 					$this->page(['title' => 'Page not found']);
