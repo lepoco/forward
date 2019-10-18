@@ -13,13 +13,13 @@
 	define('DB_PATH', ADMPATH.'db/');
 
 	/** The name of the database for users */
-	define('DB_USERS', 'db_users');
+	define('DB_USERS', 'users_database');
 
 	/** The name of the database for options */
-	define('DB_OPTIONS', 'db_options');
+	define('DB_OPTIONS', 'options_database');
 
 	/** The name of the database for records */
-	define('DB_RECORDS', 'db_records');
+	define('DB_RECORDS', 'records_database');
 
 	/** Salt for passwords */
 	define('RED_SALT', 'example_salt');

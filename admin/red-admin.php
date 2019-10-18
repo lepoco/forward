@@ -19,6 +19,8 @@
 				$this->page(['page' => 'users', 'title' => 'Users']);
 			}else if(RED_DASHBOARD == 'about'){
 				$this->page(['page' => 'about', 'title' => 'About']);
+			}else if(RED_DASHBOARD == 'settings'){
+				$this->page(['page' => 'settings', 'title' => 'Settings']);
 			}else if(RED_DASHBOARD == 'signout'){
 				echo 'signout';
 			}else{

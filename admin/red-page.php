@@ -57,6 +57,7 @@
 				'dashboard' => array('Dashboard', 'dashboard'),
 				'users' => array('Users', 'dashboard/users'),
 				'about' => array('About', 'dashboard/about'),
+				'settings' => array('Settings', 'dashboard/settings'),
 				'signout' => array('Sign Out', 'dashboard/signout'),
 			);
 

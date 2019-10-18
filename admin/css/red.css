@@ -74,7 +74,7 @@ body {
 	margin: 0;
 }
 
-#red-home, #red-login {
+#red-home, #red-login, #red-install {
 	position: absolute;
     top: 0;
     bottom: 0;
@@ -83,7 +83,7 @@ body {
     align-items: center;
 }
 
-#home-bg img, #login-bg img {
+#big-background img {
 	position: fixed;
     width: 100%;
     min-height: 100%;

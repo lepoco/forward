@@ -1,20 +1,15 @@
+Options All -Indexes
+
 <Files "*.json">
-    Order Deny,Allow
-    Deny from all
+Order Deny,Allow
+Deny from all
 </Files>
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
-
 RewriteCond %{REQUEST_URI} ^(.*)$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt|webp)$
-RewriteRule .* forward/index.php [L]
+RewriteRule .* /forward/index.php [L]
 </IfModule>
-
-# index file priority
-DirectoryIndex index.php
-
-# forbid file listing for root and subdirectories
-Options All -Indexes

@@ -9,7 +9,7 @@
  */
 	$this->head(); ?>
 
-<div id="home-bg">
+<div id="big-background">
 	<picture>
 		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.webp" type="image/webp">
 		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.jpeg" type="image/jpeg">
