@@ -35,18 +35,7 @@
 					break;
 				case 'dashboard':
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
-					if(defined('RED_DASHBOARD'))
-					{
-						if(RED_DASHBOARD == 'users'){
-							echo 'users';
-						}else if(RED_DASHBOARD == 'signout'){
-							echo 'signout';
-						}else{
-							$this->page(['title' => 'Dashboard page not found']);
-						}
-					}else{
-						self::admin();
-					}
+					self::admin();
 					break;
 				case 'ajax':
 					self::ajax();

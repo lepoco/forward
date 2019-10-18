@@ -42,6 +42,15 @@ body {
     font-weight: 200;
 }
 
+#forward-navbar-logo {
+	display: flex;
+	align-items: center;
+}
+#forward-navbar-logo img {
+	width: 100%;
+    max-width: 110px;
+}
+
 #github {
 	display: flex;
 	color: #fff;
@@ -90,4 +99,8 @@ body {
 	border-radius: 0 !important;
 	border-bottom-right-radius: .25rem !important;
 	border-bottom-left-radius: .25rem !important;
+}
+
+.navbar-right {
+	justify-content: flex-end;
 }
