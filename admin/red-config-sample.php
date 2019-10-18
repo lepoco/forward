@@ -38,7 +38,7 @@
 
 
 	/** Debug */
-	define('RED_DEBUG', true);
+	define('RED_DEBUG', false);
 
 
 	/** Parse URL */

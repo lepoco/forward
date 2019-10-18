@@ -22,7 +22,9 @@
 			}else if(RED_DASHBOARD == 'settings'){
 				$this->page(['page' => 'settings', 'title' => 'Settings']);
 			}else if(RED_DASHBOARD == 'signout'){
-				echo 'signout';
+				self::signout();
+			}else if(RED_DASHBOARD == 'ajax'){
+				self::ajax();
 			}else{
 				$this->page(['title' => 'Dashboard page not found']);
 			}

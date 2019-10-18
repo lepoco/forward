@@ -15,19 +15,14 @@
 		private $page;
 		private $uri;
 
-		private $HOOK;
 		private $DB;
 
 		public function __construct()
 		{
-			$HOOK = new RED_HOOK();
-
 			$this->DB = array(
 				'options' => new \Filebase\Database(['dir' => DB_PATH.DB_OPTIONS]),
 				'records' => new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS])
 			);
-
-			self::init();
 
 			switch (RED_PAGE) {
 				case 'home':
@@ -37,9 +32,6 @@
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
 					self::admin();
 					break;
-				case 'ajax':
-					self::ajax();
-					break;
 				case '404':
 					$this->page(['title' => 'Page not found']);
 					break;
@@ -47,24 +39,6 @@
 					self::forward();
 					break;
 			}
-		}
-
-		private function init()
-		{
-			$item = $this->DB['options']->get('siteurl');
-
-			if($item->value == '')
-			{
-				if (is_file(ADMPATH.'red-install.php'))
-					require_once(ADMPATH.'red-install.php');
-			else
-				$this->page(['title' => 'Page not found']);
-			}
-		}
-
-		public function hook()
-		{
-			return new $HOOK;
 		}
 
 		public function page($data)
@@ -82,13 +56,17 @@
 
 		private function ajax()
 		{
-			if (isset($_GET['query']))
+			if (isset($_POST['action']))
 			{
 				exit;
 			}else{
-				header("Location: " . $this->uri);
-				exit;
+				exit(header("Location: " . $this->DB['options']->get('siteurl')->value));
 			}
+		}
+
+		private function signout()
+		{
+			exit('signed out');
 		}
 
 		private function forward()
@@ -134,25 +112,15 @@
 			}
 		}
 
-		public static function error($id, $title)
+		private function include($path)
 		{
-
-		}
-	}
-
-	class RED_HOOK
-	{
-		public function __construct()
-		{
-
+			if (is_file($path))
+				return require_once(ADMPATH.'red-admin.php');
+			else
+				exit(RED_DEBUG ? 'The '.$path.' file was not found!' : '');
 		}
 
-		public function add($name)
-		{
-			echo $name;
-		}
-
-		public function do()
+		private function error($id, $title)
 		{
 
 		}
