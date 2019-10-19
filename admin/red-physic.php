@@ -15,7 +15,7 @@
 		private $page;
 		private $uri;
 
-		private $DB;
+		public $DB;
 
 		public function __construct()
 		{
@@ -49,62 +49,14 @@
 		private function admin()
 		{
 			if (is_file(ADMPATH.'red-admin.php'))
-				require_once(ADMPATH.'red-admin.php');
-			else
-				$this->page(['title' => 'Page not found']);
-		}
-
-		private function ajax()
-		{
-			if (isset($_POST['action']))
 			{
-				if($_POST['action'] == 'addUser')
-				{
-
-					if($_POST['userPassword'] != $_POST['userPasswordConfirm'])
-						exit('error_3');
-
-					if($_POST['userName'] == '' || $_POST['userPassword'] == '')
-						exit('error_4');
-
-					$user = $this->DB['users']->get($_POST['userName']);
-
-					if($user->password == NULL)
-					{
-						$user->email = $_POST['userEmail'];
-						$user->password = self::encrypt($_POST['userPassword']);
-						$user->save();
-						exit('success');
-					}else{
-						exit('error_4');
-					}
-				}else if($_POST['action'] == 'addRecord')
-				{
-					if($_POST['forward-url'] == '' || $_POST['forward-slug'] == '')
-						exit('error_4');
-
-					$record = $this->DB['records']->get($_POST['forward-slug']);
-
-					if($record->url == NULL)
-					{
-						$record->url = $_POST['forward-url'];
-						$record->clicks = 0;
-						$record->save();
-					}else{
-						exit('error_5');
-					}
-					var_dump($_POST);
-					exit('success');
-				}
-				exit;
-			}else{
-				exit(header("Location: " . $this->DB['options']->get('siteurl')->value));
+				require_once(ADMPATH.'red-admin.php');
+				RED_ADMIN::init($this);
 			}
-		}
-
-		private function signout()
-		{
-			exit('signed out');
+			else
+			{
+				$this->page(['title' => 'Page not found']);
+			}
 		}
 
 		private function forward()
@@ -128,6 +80,14 @@
 			$this->page = $URI[2];
 		}
 
+		public static function rand($length)
+		{
+			$characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$randomString = '';
+			for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 35)];}
+			return $randomString;
+		}
+
 		public static function encrypt($string, $type = 'password')
 		{
 			if($type == 'password')
@@ -139,14 +99,6 @@
 			}
 		}
 
-		public static function rand($length)
-		{
-			$characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-			$randomString = '';
-			for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 35)];}
-			return $randomString;
-		}
-
 		public static function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
 		{
 
@@ -155,7 +107,20 @@
 				if (password_verify(($plain ? hash_hmac('sha256', $input_string, RED_SALT) : $input_string), $db_string))
 				{
 					return TRUE;
-				}else{
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			else if($type == 'nonce')
+			{
+				if(($plain ? hash_hmac('sha1', $input_string, RED_NONCE) : $input_string) == $db_string)
+				{
+					return TRUE;
+				}
+				else
+				{
 					return FALSE;
 				}
 			}

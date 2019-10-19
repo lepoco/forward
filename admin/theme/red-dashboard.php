@@ -52,8 +52,10 @@ $this->head(); $this->menu(); ?>
 				<form id="add-record-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 					<div class="card">
 						<div class="card-body">
+							<?php $rand = RED::rand(6); ?>
 							<input type="hidden" value="addRecord" name="action">
 							<input type="hidden" value="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
+							<input type="hidden" value="<?php echo $rand; ?>" name="randValue">
 							<div class="form-row">
 								<div class="col">
 									<div class="form-group">
@@ -64,7 +66,7 @@ $this->head(); $this->menu(); ?>
 								<div class="col">
 									<div class="form-group">
 										<label for="forward-slug">Slug <i>(optional)</i></label>
-										<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo RED::rand(6); ?>">
+										<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo $rand; ?>">
 									</div>
 								</div>
 							</div>

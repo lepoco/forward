@@ -15,7 +15,7 @@ $this->head(); $this->menu(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<button class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add new user</button>
+				<button class="btn btn-outline-dark" data-toggle="modal" data-target="#userModal">Add new user</button>
 			</div>
 			<div class="col-12" id="users-table">
 				<table class="table table-striped">
@@ -52,7 +52,7 @@ $this->head(); $this->menu(); ?>
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">
 					<input type="hidden" value="addUser" name="action">
-					<input type="hidden" value="nonce" name="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>">
+					<input type="hidden" value="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
 					<div class="form-group">
 						<label for="userName">Login</label>
 						<input type="text" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter login">

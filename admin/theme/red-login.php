@@ -7,7 +7,10 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	$this->head(); ?>
+
+	namespace Forward;
+
+$this->head(); ?>
 
 <div id="big-background">
 	<picture>
@@ -28,22 +31,22 @@
 			</div>
 			<div class="col-12 col-lg-6">
 				<div id="login-card">
-					<form>
+					<form id="login-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 						<div class="card">
 							<div class="card-body">
 								<h1>Sign in</h1>
-								
-								  <div class="form-group">
-								    <label for="exampleInputEmail1">Email address</label>
-								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-								  </div>
-								  <div class="form-group">
-								    <label for="exampleInputPassword1">Password</label>
-								    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-								  </div>
-								
+								<input type="hidden" value="<?php echo RED::encrypt('ajax_login_nonce', 'nonce'); ?>" name="nonce">
+								<input type="hidden" value="signIn" name="action">
+								<div class="form-group">
+									<label for="login">Email address</label>
+									<input type="text" class="form-control" name="login" id="login" placeholder="Enter login/email">
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" id="button-form" class="btn btn-primary">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -51,5 +54,30 @@
 		</div>
 	</div>
 </section>
-
+<script>
+	window.onload = function() {
+		jQuery('#button-form').on('click', function(e){
+			e.preventDefault();
+			console.log($("#login-form").serialize());
+			jQuery.ajax({
+				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				type:'post',
+				data:$("#login-form").serialize(),
+				success:function(e)
+				{
+					if(e == 'success')
+					{
+						location.reload();
+					}
+					console.log(e);
+				},
+				fail:function(xhr, textStatus, errorThrown){
+					console.log(xhr);
+					console.log(textStatus);
+					alert(errorThrown);
+				}
+			});
+		});
+	};
+</script>
 <?php $this->footer(); ?>
