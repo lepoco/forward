@@ -41,12 +41,12 @@
 	define('RED_VERSION', 'beta 1.0.0');
 
 	/** Password hash type */
-	if(NULL != PASSWORD_ARGON2ID)
+	if(defined('PASSWORD_ARGON2ID'))
 		define('RED_ALGO', PASSWORD_ARGON2ID);
-	else if(NULL != PASSWORD_ARGON2I)
+	else if(defined('PASSWORD_ARGON2I'))
 		define('RED_ALGO', PASSWORD_ARGON2I);
-	else if(NULL != PASSWORD_BCRYPT)
+	else if(defined('PASSWORD_BCRYPT'))
 		define('RED_ALGO', PASSWORD_BCRYPT);
-	else if(NULL != PASSWORD_DEFAULT)
+	else if(defined('PASSWORD_DEFAULT'))
 		define('RED_ALGO', PASSWORD_DEFAULT);
 ?>
