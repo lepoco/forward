@@ -60,11 +60,51 @@
 		}
 
 		private function forward()
-		{
+		{	
+
 			$record = $this->DB['records']->get(RED_PAGE);
 
 			if($record->url == NULL)
 				$this->page(['title' => 'Page not found']);
+
+			$lang = self::parseLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+			
+			if(is_array($record->locations))
+			{
+				if(array_key_exists($lang, $record->locations))
+				{
+					$record->locations[$lang] += 1;
+				}
+				else
+				{
+					$record->locations[$lang] = 1;
+				}
+			}
+			else
+			{
+				$record->locations = array($lang => 1);
+			}
+
+
+			if(!is_array($record->referrers))
+				$record->referrers = array();
+
+			if(isset($_SERVER['HTTP_REFERER']))
+			{
+				$ref = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+
+				if(array_key_exists($ref, $record->referrers))
+					$record->referrers[$ref] += 1;
+				else
+					$record->referrers[$ref] += 1;
+			}
+			else
+			{
+				if(array_key_exists('direct', $record->referrers))
+					$record->referrers['direct'] += 1;
+				else
+					$record->referrers['direct'] += 1;
+			}
 
 			$record->clicks = $record->clicks + 1;
 			$record->save();
@@ -72,6 +112,27 @@
 			//Redirect
 			header("Location: " . $record->url);
 			exit;	
+		}
+
+		private function parseLanguage()
+		{
+			$langs = array();
+			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER["HTTP_ACCEPT_LANGUAGE"]), $matches, PREG_SET_ORDER);
+
+			foreach($matches as $match)
+			{
+				list($a, $b) = explode('-', $match[1]) + array('', '');
+				$value = isset($match[2]) ? (float) $match[2] : 1.0;
+				$langs[$match[1]] = $value;
+
+			}
+			arsort($langs);
+
+			if(count($langs) == 0){
+				return 'unknown';
+			}else{
+				return array_key_first($langs);
+			}
 		}
 
 		private function parse_url()

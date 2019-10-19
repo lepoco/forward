@@ -164,10 +164,6 @@
 						'valid.type' => 'string',
 						'valid.required' => true
 					],
-					'timestamp'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					],
 					'clicks'   => [
 						'valid.type' => 'int',
 						'valid.required' => false
