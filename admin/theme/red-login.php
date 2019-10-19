@@ -45,6 +45,9 @@ $this->head(); ?>
 									<label for="password">Password</label>
 									<input type="password" class="form-control" name="password" id="password" placeholder="Password">
 								</div>
+								<div id="login-alert" class="alert alert-danger fade show" role="alert" style="display: none;">
+									<strong>Holy guacamole!</strong> Incorrect login or password.
+								</div>
 							</div>
 							<button type="submit" id="button-form" class="btn btn-primary">Submit</button>
 						</div>
@@ -58,7 +61,12 @@ $this->head(); ?>
 	window.onload = function() {
 		jQuery('#button-form').on('click', function(e){
 			e.preventDefault();
-			console.log($("#login-form").serialize());
+
+			if(jQuery('#login-alert').is(':visible'))
+			{
+				jQuery('#login-alert').slideToggle();
+			}
+			
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
@@ -69,12 +77,13 @@ $this->head(); ?>
 					{
 						location.reload();
 					}
-					console.log(e);
+					else
+					{
+						jQuery('#login-alert').slideToggle();
+					}
 				},
 				fail:function(xhr, textStatus, errorThrown){
-					console.log(xhr);
-					console.log(textStatus);
-					alert(errorThrown);
+					jQuery('#login-alert').slideToggle();
 				}
 			});
 		});
