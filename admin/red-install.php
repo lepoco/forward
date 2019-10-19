@@ -23,14 +23,23 @@
 		}
 		public function __construct()
 		{
-			$this->request_uri = self::urlFix('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+			if (empty($_SERVER['HTTPS']))
+			{
+				$HTTP = 'http://';
+			}
+			else
+			{
+				$HTTP = 'https://';
+			}
+			
+			$this->request_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 			if (self::urlSlash($this->request_uri,'/') == false) 
 			{
 				$this->request_uri = $this->request_uri."/";
 			}
 
 
-			$this->script_uri = self::urlFix('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
+			$this->script_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
 			if (self::urlSlash($this->script_uri,'/') == false) 
 			{
 				$this->script_uri = $this->script_uri."/";
@@ -61,7 +70,7 @@
 					filter_var($_POST['optionsDB'], FILTER_SANITIZE_STRING),
 					filter_var($_POST['defUser'], FILTER_SANITIZE_STRING),
 					filter_var($_POST['defPassw'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['defaultUrl'], FILTER_SANITIZE_URL),
+					filter_var($_POST['defaultUrl'], FILTER_SANITIZE_URL)
 				);
 
 				exit('success');
