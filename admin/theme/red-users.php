@@ -48,8 +48,10 @@ $this->head(); $this->menu(); ?>
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<form id="add-user-form">
+			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">
+					<input type="hidden" value="addUser" name="action">
+					<input type="hidden" value="nonce" name="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>">
 					<div class="form-group">
 						<label for="userName">Login</label>
 						<input type="text" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter login">
@@ -88,7 +90,7 @@ $this->head(); $this->menu(); ?>
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
-				data:$("#add-user-form").serialize()+'&action=addUser&nonce=<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>',
+				data:$("#add-user-form").serialize(),
 				success:function(e)
 				{
 					console.log(e);

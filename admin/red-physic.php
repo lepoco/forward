@@ -58,8 +58,6 @@
 		{
 			if (isset($_POST['action']))
 			{
-				var_dump($_POST);
-
 				if($_POST['action'] == 'addUser')
 				{
 
@@ -80,6 +78,23 @@
 					}else{
 						exit('error_4');
 					}
+				}else if($_POST['action'] == 'addRecord')
+				{
+					if($_POST['forward-url'] == '' || $_POST['forward-slug'] == '')
+						exit('error_4');
+
+					$record = $this->DB['records']->get($_POST['forward-slug']);
+
+					if($record->url == NULL)
+					{
+						$record->url = $_POST['forward-url'];
+						$record->clicks = 0;
+						$record->save();
+					}else{
+						exit('error_5');
+					}
+					var_dump($_POST);
+					exit('success');
 				}
 				exit;
 			}else{
