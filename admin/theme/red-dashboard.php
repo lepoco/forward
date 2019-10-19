@@ -63,20 +63,20 @@
 		$referrers = array('unknown' => 0);
 	arsort($referrers);
 
-	switch (array_key_first($locations)) {
+	switch (key($locations)) {
 		case 'en-us':
 			$top_lang = 'English';
 			break;
 		
 		default:
-			$top_lang = array_key_first($locations);
+			$top_lang = key($locations);
 			break;
 	}
 
-	if(array_key_first($referrers) == 'direct')
+	if(key($referrers) == 'direct')
 		$top_referrer = 'Email, SMS, Direct';
 	else
-		$top_referrer = array_key_first($referrers);
+		$top_referrer = key($referrers);
 
 ?>
 
@@ -87,14 +87,19 @@
 				<div class="col-12 col-lg-3 col-no-gutters" style="background-color: #fff;height: inherit; overflow: auto;">
 					<ul class="list-unstyled" id="links-list">
 						<li><div class="card links-card"><div class="card-body"><small><strong id="total_records_count"><?php echo count($records); ?></strong> total links</small></div></div></li>
-						<?php foreach ($records as $key => $record): ?>
+						<?php foreach ($records as $key => $record):
+
+							$preURL = str_replace(array('https://www.', 'https://'), array('', ''), $record['url']);
+							if(strlen($preURL) > 35)
+								$preURL = substr($preURL, 0, 35).'...';
+							?>
 							<li>
 								<div class="card links-card">
 									<div class="card-body">
 										<div>
 											<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
 											<h2><a target="_blank" rel="noopener" href="<?php echo $siteurl.$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
-											<p><a target="_blank" rel="noopener" href="<?php echo $record['url'] ?>"><?php echo substr(str_replace(array('https://www.', 'https://'), array('', ''), $record['url']), 0, 35); ?>...</a></p>
+											<p><a target="_blank" rel="noopener" href="<?php echo $record['url'] ?>"><?php echo $preURL; ?></a></p>
 										</div>
 										<span><?php echo $record['clicks']; ?></span>
 									</div>
@@ -115,9 +120,8 @@
 								</div>
 								<form class="form-inline" id="add-record-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 									<?php
-
 										//Find unical slug
-										$rand = 'sad2';
+										$rand = RED::rand(6);
 										$sucRand = true;
 										while ($sucRand) {
 											$slug = $this->DB['records']->select('__id,url')->where('__id','=',$rand)->results();

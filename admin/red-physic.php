@@ -25,11 +25,11 @@
 			);
 
 			switch (RED_PAGE) {
-				case 'dashboard':
+				case '_forward_dashboard':
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS,'format' => \Filebase\Format\Jdb::class]);
 					self::admin();
 					break;
-				case 'home':
+				case '_forward_home':
 					$this->page(['title' => 'Home page', 'page' => 'home']);
 					break;
 				case '404':
@@ -43,6 +43,12 @@
 
 		public function page($data)
 		{
+			/** Display page class */
+			if (is_file(ADMPATH.'red-page.php'))
+				require_once(ADMPATH.'red-page.php');
+			else
+				exit(RED_DEBUG ? 'The red-page.php file was not found!' : '');
+			
 			return new RED_PAGES($data, $this->DB);
 		}
 
@@ -131,7 +137,7 @@
 			if(count($langs) == 0){
 				return 'unknown';
 			}else{
-				return array_key_first($langs);
+				return key($langs);
 			}
 		}
 

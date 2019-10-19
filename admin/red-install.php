@@ -24,33 +24,25 @@
 		public function __construct()
 		{
 			if (empty($_SERVER['HTTPS']))
-			{
 				$HTTP = 'http://';
-			}
 			else
-			{
 				$HTTP = 'https://';
-			}
 			
 			$this->request_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 			if (self::urlSlash($this->request_uri,'/') == false) 
-			{
 				$this->request_uri = $this->request_uri."/";
-			}
 
 
 			$this->script_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
 			if (self::urlSlash($this->script_uri,'/') == false) 
-			{
 				$this->script_uri = $this->script_uri."/";
-			}
 
-			if(!isset($_POST['action'])){
+			if(!isset($_POST['action']))
 				if($this->script_uri != $this->request_uri)
 					exit(header("Location: " . $this->script_uri));
-			}
 
-			if(isset($_POST['action'])){
+			if(isset($_POST['action']))
+			{
 
 				self::htaccess(
 					filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
@@ -215,15 +207,15 @@
 				]
 			]);
 
-			$item = $db->get('1ul24f');
+			$item = $db->get('EZK8H3');
 			$item->url = 'https://github.com/rapiddev/forward';
 			$item->clicks = 0;
 			$item->save();
-			$item = $db->get('m21n37');
+			$item = $db->get('QUBSE0');
 			$item->url = 'https://rdev.cc/';
 			$item->clicks = 0;
 			$item->save();
-			$item = $db->get('0m31n2');
+			$item = $db->get('M6GMLO');
 			$item->url = 'https://4geek.co/';
 			$item->clicks = 0;
 			$item->save();
@@ -258,13 +250,14 @@
 				]
 			]);
 
-			if(NULL != PASSWORD_ARGON2ID)
+			/** Password hash type */
+			if(defined('PASSWORD_ARGON2ID'))
 				define('RED_ALGO', PASSWORD_ARGON2ID);
-			else if(NULL != PASSWORD_ARGON2I)
+			else if(defined('PASSWORD_ARGON2I'))
 				define('RED_ALGO', PASSWORD_ARGON2I);
-			else if(NULL != PASSWORD_BCRYPT)
+			else if(defined('PASSWORD_BCRYPT'))
 				define('RED_ALGO', PASSWORD_BCRYPT);
-			else if(NULL != PASSWORD_DEFAULT)
+			else if(defined('PASSWORD_DEFAULT'))
 				define('RED_ALGO', PASSWORD_DEFAULT);
 
 			$item = $db->get($defUser);

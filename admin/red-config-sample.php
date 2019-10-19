@@ -9,6 +9,9 @@
  */
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
+
+	/** Debug */
+	define('RED_DEBUG', false);
 	
 	/** Database path */
 	define('DB_PATH', ADMPATH.'db/');
@@ -34,12 +37,10 @@
 	/** WebName */
 	define('RED_NAME', 'Forward');
 
-	/** Debug */
+	/** Forward version */
 	define('RED_VERSION', 'beta 1.0.0');
 
-	/** Debug */
-	define('RED_DEBUG', false);
-
+	/** Password hash type */
 	if(NULL != PASSWORD_ARGON2ID)
 		define('RED_ALGO', PASSWORD_ARGON2ID);
 	else if(NULL != PASSWORD_ARGON2I)
@@ -48,45 +49,4 @@
 		define('RED_ALGO', PASSWORD_BCRYPT);
 	else if(NULL != PASSWORD_DEFAULT)
 		define('RED_ALGO', PASSWORD_DEFAULT);
-	
-
-
-	/** Parse URL */
-	foreach (array(
-		'home' => "/",
-		'page' => "/(?'page'[\w\-]+)",
-		'get' => "/(?'get'[\w\-]+)?(.*?)",
-		'dashboard' => "/dashboard/(?'dashboard'[\w\-]+)"
-	) as $action => $rule )
-	{
-		if (preg_match( '~^'.$rule.'$~i', urldecode('/'.trim(str_replace(rtrim(dirname($_SERVER["SCRIPT_NAME"]),'/'),'',$_SERVER['REQUEST_URI']),'/')), $params ))
-		{
-
-			if (isset($params[0]))
-			{
-				if($params[0] == '/'){
-					defined('RED_PAGE') or define('RED_PAGE', 'home');
-				}
-				else if (isset($params['dashboard']))
-				{
-					defined('RED_DASHBOARD') or define('RED_DASHBOARD', $params['dashboard']);
-				}
-				else if(isset($params['get']))
-				{
-					if($params['get'] != 'dashboard')
-						defined('RED_PAGE') or define('RED_PAGE', $params['get']);
-				}
-				else if(isset($params['page']))
-				{
-					defined('RED_PAGE') or define('RED_PAGE', $params['page']);
-				}
-			}
-		}
-	}
-
-	if(!defined('RED_PAGE'))
-		if(defined('RED_DASHBOARD'))
-			define('RED_PAGE', 'dashboard');
-		else
-			define('RED_PAGE', '404');
 ?>

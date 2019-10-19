@@ -10,7 +10,7 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
-
+	/** Config file / Install Forward */
 	if (!is_file(ADMPATH.'red-config.php'))
 		if (is_file(ADMPATH.'red-install.php'))
 			require_once(ADMPATH.'red-install.php');
@@ -19,20 +19,43 @@
 	else
 		require_once(ADMPATH.'red-config.php');
 
+	/** Database class */
 	if (is_file(ADMPATH.'db/red-db.php'))
 		require_once(ADMPATH.'db/red-db.php');
 	else
 		exit(RED_DEBUG ? 'The red-db.php file was not found!' : '');
 
-	if (is_file(ADMPATH.'red-page.php'))
-		require_once(ADMPATH.'red-page.php');
-	else
-		exit(RED_DEBUG ? 'The red-page.php file was not found!' : '');
+	try
+	{
+		$DIR_URL = urldecode('/'.trim(str_replace(rtrim(dirname($_SERVER["SCRIPT_NAME"]),'/'),'',$_SERVER['REQUEST_URI']),'/'));
+		$DIR_URL = parse_url($DIR_URL);
+		$DIR_URL = explode( '/', $DIR_URL['path']);
+	}
+	catch (Exception $e)
+	{
+		exit(RED_DEBUG ? $e : '');
+	}
 
+	if(!isset($DIR_URL[0], $DIR_URL[1]))
+		exit(RED_DEBUG ? $e : 'URL Parsing error');
+
+	if($DIR_URL[1] == '')
+		defined('RED_PAGE') or define('RED_PAGE', '_forward_home');
+	else if($DIR_URL[1] == 'dashboard')
+		defined('RED_PAGE') or define('RED_PAGE', '_forward_dashboard');
+	else
+		defined('RED_PAGE') or define('RED_PAGE', filter_var($DIR_URL[1], FILTER_SANITIZE_STRING));
+
+	if(RED_PAGE == '_forward_dashboard')
+		if(isset($DIR_URL[2]))
+			defined('RED_DASHBOARD') or define('RED_DASHBOARD', filter_var($DIR_URL[2], FILTER_SANITIZE_STRING));
+
+	/** Main class */
 	if (is_file(ADMPATH.'red-physic.php'))
 		require_once(ADMPATH.'red-physic.php');
 	else
 		exit(RED_DEBUG ? 'The red-physic.php file was not found!' : '');
 
+	/** Start Forward */
 	$RED = new RED();
 ?>
