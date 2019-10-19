@@ -78,9 +78,9 @@ $this->head(); $this->menu(); ?>
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">#</th>
-							<th scope="col">Slug</th>
+							<th scope="col">Short URL</th>
 							<th scope="col">Original URL</th>
-							<th scope="col">Date</th>
+							<th scope="col">Date created</th>
 							<th scope="col">Clicks</th>
 							<th scope="col">Actions</th>
 						</tr>
@@ -88,12 +88,13 @@ $this->head(); $this->menu(); ?>
 					<tbody>
 						<?php
 
+						$siteurl = $this->DB['options']->get('siteurl')->value;
 						$records = $this->DB['records']->findAll();
 						$c = 0;
 						foreach($records as $record)
 						{
 							$c++;
-							echo '<tr><th scope="row">'.$c.'</th><td>'.$record->getId().'</td><td><a target="_blank" rel="noopener" href="'.$record->url.'">'.$record->url.'</a></td><td>'.$record->createdAt().'</td><td>'.$record->clicks.'</td><td class="td-buttons"><button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg></button> <button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></button></td></tr>';
+							echo '<tr><th scope="row">'.$c.'</th><td><a target="_blank" rel="noopener" href="'.$siteurl.$record->getId().'">/'.$record->getId().'</a></td><td><a target="_blank" rel="noopener" href="'.$record->url.'">'.$record->url.'</a></td><td>'.$record->createdAt().'</td><td>'.$record->clicks.'</td><td class="td-buttons"><button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg></button> <button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></button></td></tr>';
 						}
 						?>
 					</tbody>

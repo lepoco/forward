@@ -188,10 +188,19 @@
 			]);
 
 			$db = new \Filebase\Database(['dir' => $this->dbpath.$records]);
-			$item = $db->get('sample');
-			$item->url = 'https://rdev.cc/';
-			$item->clicks = 1;
+			$item = $db->get('1ul24f');
+			$item->url = 'https://github.com/rapiddev/forward';
+			$item->clicks = 0;
 			$item->save();
+			$item = $db->get('m21n37');
+			$item->url = 'https://rdev.cc/';
+			$item->clicks = 0;
+			$item->save();
+			$item = $db->get('0m31n2');
+			$item->url = 'https://4geek.co/';
+			$item->clicks = 0;
+			$item->save();
+
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$users,
