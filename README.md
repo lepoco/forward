@@ -42,10 +42,10 @@ Just press "Install". It's easy: D
 - [x] English
 
 ### Third party solutions
-- Filebase by the Timothy Marois [https://github.com/tmarois/Filebase](https://github.com/tmarois/Filebase)
-- Bootstrap by the Bootstrap team [https://getbootstrap.com/](https://getbootstrap.com/)
-- jQuery by the jQuery Foundation [https://jquery.org/](https://jquery.org/)
-- Material Design Icons by the Google and other creators | Maintained by Austin Andrews [https://materialdesignicons.com/](https://materialdesignicons.com/)
-- Picture of mountains by the Joyston Judah [https://www.pexels.com/@joyston-judah-331625](https://www.pexels.com/@joyston-judah-331625)
-- Questrial font by the Joe Prince [https://fonts.google.com/specimen/Questrial](https://fonts.google.com/specimen/Questrial)
-- Design inspired by the Bit.Ly [https://bitly.com/](https://bitly.com/)
+- Filebase by the Timothy Marois&nbsp;[https://github.com/tmarois/Filebase](https://github.com/tmarois/Filebase)
+- Bootstrap by the Bootstrap team&nbsp;[https://getbootstrap.com/](https://getbootstrap.com/)
+- jQuery by the jQuery Foundation&nbsp;[https://jquery.org/](https://jquery.org/)
+- Material Design Icons by the Google and other creators | Maintained by Austin Andrews&nbsp;[https://materialdesignicons.com/](https://materialdesignicons.com/)
+- Picture of mountains by the Joyston Judah&nbsp;[https://www.pexels.com/@joyston-judah-331625](https://www.pexels.com/@joyston-judah-331625)
+- Questrial font by the Joe Prince&nbsp;[https://fonts.google.com/specimen/Questrial](https://fonts.google.com/specimen/Questrial)
+- Design inspired by the Bit.Ly&nbsp;[https://bitly.com/](https://bitly.com/)
