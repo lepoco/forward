@@ -1,7 +1,18 @@
-![Logo](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-logo-bk.png?raw=true)
+![Banner](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-1.png?raw=true)
 # Forward
 [Created with ![heart](http://i.imgur.com/oXJmdtz.gif) in Poland by RapidDev](https://rdev.cc/)<br />
-A simple system for creating redirects based on PHP. Now you can shorten links on your own domain.
+Now you can have your own Bit.ly or Google URL shortener equivalent.
+Forward is a simple PHP-based tool with which you can shorten links and collect statistics about activity.
+
+## What data can I collect?
+With the help of Forward you can collect information about:
+- The number of clicks on the link
+- The language of the browser the user has
+- Where the click comes from (e.g., Facebook / YouTube)
+
+![Logo](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
+## Dashboard
+Simple intuitive interface modeled on Adobe and Bit.ly websites.
 
 ## What do we get?
 - [x] A fast CMS based on PHP for shortening links

@@ -8,6 +8,6 @@
  * @license https://opensource.org/licenses/MIT
  */
 	$this->head(); $this->menu(); ?>
-<div id="red-users">
+<div id="red-settings">
 </div>
 <?php $this->footer(); ?>
