@@ -153,7 +153,7 @@
 		{
 			if($type == 'password')
 			{
-				return password_hash(hash_hmac('sha256', $string, RED_SALT), PASSWORD_ARGON2ID);
+				return password_hash(hash_hmac('sha256', $string, RED_SALT), RED_ALGO);
 			}
 			else if($type == 'nonce')
 			{

@@ -258,9 +258,18 @@
 				]
 			]);
 
+			if(NULL != PASSWORD_ARGON2ID)
+				define('RED_ALGO', PASSWORD_ARGON2ID);
+			else if(NULL != PASSWORD_ARGON2I)
+				define('RED_ALGO', PASSWORD_ARGON2I);
+			else if(NULL != PASSWORD_BCRYPT)
+				define('RED_ALGO', PASSWORD_BCRYPT);
+			else if(NULL != PASSWORD_DEFAULT)
+				define('RED_ALGO', PASSWORD_DEFAULT);
+
 			$item = $db->get($defUser);
 			$item->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
-			$item->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), PASSWORD_ARGON2ID);
+			$item->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), RED_ALGO);
 			$item->save();
 		}
 	}

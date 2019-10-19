@@ -37,9 +37,18 @@
 	/** Debug */
 	define('RED_VERSION', 'beta 1.0.0');
 
-
 	/** Debug */
 	define('RED_DEBUG', false);
+
+	if(NULL != PASSWORD_ARGON2ID)
+		define('RED_ALGO', PASSWORD_ARGON2ID);
+	else if(NULL != PASSWORD_ARGON2I)
+		define('RED_ALGO', PASSWORD_ARGON2I);
+	else if(NULL != PASSWORD_BCRYPT)
+		define('RED_ALGO', PASSWORD_BCRYPT);
+	else if(NULL != PASSWORD_DEFAULT)
+		define('RED_ALGO', PASSWORD_DEFAULT);
+	
 
 
 	/** Parse URL */
