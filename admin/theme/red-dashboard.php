@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
  *
@@ -7,9 +7,9 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-
 	namespace Forward;
-
+	defined('ABSPATH') or die('No script kiddies please!');
+	
 	$this->head(); $this->menu();
 
 	$records = $this->DB['records']->select('__id,__created_at,url,clicks,referrers,locations')->orderBy('__created_at', 'DESC')->results();

@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
  *
@@ -7,8 +7,11 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	$this->head(); ?>
+	namespace Forward;
+	defined('ABSPATH') or die('No script kiddies please!');
 
+	$this->head();
+?>
 <div id="big-background">
 	<picture>
 		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.webp" type="image/webp">

@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
  *
@@ -7,10 +7,11 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-
 	namespace Forward;
+	defined('ABSPATH') or die('No script kiddies please!');
 
-$this->head(); $this->menu(); ?>
+	$this->head(); $this->menu();
+?>
 <div id="red-users">
 	<div class="container">
 		<div class="row">

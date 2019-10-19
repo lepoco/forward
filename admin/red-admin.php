@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
  *
@@ -8,6 +8,7 @@
  * @license https://opensource.org/licenses/MIT
  */
 	namespace Forward;
+	defined('ABSPATH') or die('No script kiddies please!');
 
 	class RED_ADMIN
 	{

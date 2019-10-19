@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
  *
@@ -7,7 +7,11 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	$this->head(); ?>
+	namespace Forward;
+	defined('ABSPATH') or die('No script kiddies please!');
+
+	$this->head();
+?>
 	<section id="404" style="position: relative;display: flex;align-items: center;justify-content: center;flex-flow: column;height:100%;width:100%;min-height: 100vh;background: #555;text-align: center;">
 		<canvas id="noise" style="z-index:100;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.05;"></canvas>
 		<h1 style="font-size: 150px;color:#fff;" class="glitch-title" data-content="404!">404!</h1>

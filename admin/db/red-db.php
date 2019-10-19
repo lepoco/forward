@@ -1,12 +1,14 @@
-<?php defined('ABSPATH') or die('No script kiddies please!');
+<?php
 /**
  * @package Forward
- * @subpackage Filebase
  *
- * @author Timothy Marois
- * @copyright Copyright (c) 2019, Timothy Marois
- * @link https://github.com/tmarois/Filebase
+ * @author RapidDev
+ * @copyright Copyright (c) 2019, RapidDev
+ * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
+	namespace Forward;
+	defined('ABSPATH') or die('No script kiddies please!');
+
 	require_once("vendor/autoload.php");
 ?>
