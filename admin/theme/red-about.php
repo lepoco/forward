@@ -28,11 +28,13 @@
 					</a>
 				</div>
 				<hr>
-				<h4>Used technologies</h1>
+				<h4>Used technologies & things</h1>
 					<ul class="list-unstyled">
 						<li><i>Filebase</i> by the Timothy Marois<br><a href="https://github.com/tmarois/Filebase">https://github.com/tmarois/Filebase</a><br><small>Filebase is open-sourced software licensed under the MIT license.</small></li>
 						<li><i>Bootstrap</i> by the Bootstrap team<br><a href="https://getbootstrap.com/">https://getbootstrap.com/</a><br><small>Bootstrap is open-sourced software licensed under the MIT license.</small></li>
 						<li><i>jQuery</i> by the The jQuery Foundation<br><a href="https://jquery.org/">https://jquery.org/</a><br><small>jQuery is open-sourced software licensed under the MIT license.</small></li>
+						<li><i>Material Design Icons</i> by the Google and other creators | Maintained by Austin Andrews<br><a href="https://materialdesignicons.com/">https://materialdesignicons.com/</a><br><small>Material Design Icons is open-sourced software licensed under the Apache License 2.0.</small></li>
+						<li><i>Picture of mountains</i> by the Joyston Judah<br><a href="https://www.pexels.com/@joyston-judah-331625">https://www.pexels.com/@joyston-judah-331625</a><br><small>Photos from the Pexels portal support the idea of open source.</small></li>
 					</ul>
 				<hr>
 				<p>
