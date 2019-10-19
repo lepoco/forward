@@ -8,7 +8,7 @@ class Jdb implements FormatInterface
      */
     public static function getFileExtension()
     {
-        return 'jdb';
+        return 'jsdb.php';
     }
 
     /**
@@ -34,7 +34,7 @@ class Jdb implements FormatInterface
             );
         }
 
-        return $encoded;
+        return '<?php die("No script kiddies please!");/*'.$encoded.'*/?>';
     }
 
     /**
@@ -44,7 +44,9 @@ class Jdb implements FormatInterface
      */
     public static function decode($data)
     {
-        $decoded = json_decode($data, true);
+        $decoded = substr($data, 41);
+        $decoded = substr($decoded, 0, -4);
+        $decoded = json_decode($decoded, true);
 
         if ($data !== false && $decoded === null) {
             throw new DecodingException(

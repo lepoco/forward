@@ -21,6 +21,7 @@
 		{
 			return new RED_INSTALL();
 		}
+
 		public function __construct()
 		{
 			if (empty($_SERVER['HTTPS']))
@@ -67,10 +68,14 @@
 
 				exit('success');
 
-			}else{
+			}
+			else
+			{
 				if (is_file(ADMPATH.'theme/red-install.php')) {
 					require_once(ADMPATH.'theme/red-install.php');
-				}else{
+				}
+				else
+				{
 					exit('Fatal error');
 				}
 			}
@@ -138,7 +143,7 @@
 				$dir = '';
 
 			$htaccess  = "";
-			$htaccess .= "Options All -Indexes\n\n<Files \"*.jdb\">\nOrder Deny,Allow\nDeny from all\n</Files>\n\n";
+			$htaccess .= "Options All -Indexes\n\n";
 			$htaccess .= "<IfModule mod_rewrite.c>\n";
 			$htaccess .= "RewriteEngine On\nRewriteBase /\nRewriteCond %{REQUEST_URI} ^(.*)$\nRewriteCond %{REQUEST_FILENAME} !-f\n";
 			$htaccess .= "RewriteRule .* $dir/index.php [L]\n</IfModule>";
@@ -149,10 +154,21 @@
 
 		private function database($users, $records, $options, $defUser, $defPass, $defUrl)
 		{
+			/** Get database file */
 			if (is_file(ADMPATH.'db/red-db.php'))
 				require_once(ADMPATH.'db/red-db.php');
 			else
 				exit('error_2');
+
+			/** Password hash type */
+			if(defined('PASSWORD_ARGON2ID'))
+				define('RED_ALGO', PASSWORD_ARGON2ID);
+			else if(defined('PASSWORD_ARGON2I'))
+				define('RED_ALGO', PASSWORD_ARGON2I);
+			else if(defined('PASSWORD_BCRYPT'))
+				define('RED_ALGO', PASSWORD_BCRYPT);
+			else if(defined('PASSWORD_DEFAULT'))
+				define('RED_ALGO', PASSWORD_DEFAULT);
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$options,
@@ -249,16 +265,6 @@
 					]
 				]
 			]);
-
-			/** Password hash type */
-			if(defined('PASSWORD_ARGON2ID'))
-				define('RED_ALGO', PASSWORD_ARGON2ID);
-			else if(defined('PASSWORD_ARGON2I'))
-				define('RED_ALGO', PASSWORD_ARGON2I);
-			else if(defined('PASSWORD_BCRYPT'))
-				define('RED_ALGO', PASSWORD_BCRYPT);
-			else if(defined('PASSWORD_DEFAULT'))
-				define('RED_ALGO', PASSWORD_DEFAULT);
 
 			$item = $db->get($defUser);
 			$item->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
