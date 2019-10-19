@@ -58,6 +58,29 @@
 		{
 			if (isset($_POST['action']))
 			{
+				var_dump($_POST);
+
+				if($_POST['action'] == 'addUser')
+				{
+
+					if($_POST['userPassword'] != $_POST['userPasswordConfirm'])
+						exit('error_3');
+
+					if($_POST['userName'] == '' || $_POST['userPassword'] == '')
+						exit('error_4');
+
+					$user = $this->DB['users']->get($_POST['userName']);
+
+					if($user->password == NULL)
+					{
+						$user->email = $_POST['userEmail'];
+						$user->password = self::encrypt($_POST['userPassword']);
+						$user->save();
+						exit('success');
+					}else{
+						exit('error_4');
+					}
+				}
 				exit;
 			}else{
 				exit(header("Location: " . $this->DB['options']->get('siteurl')->value));
@@ -90,15 +113,18 @@
 			$this->page = $URI[2];
 		}
 
-		private function encrypt($string, $type = 'password')
+		public static function encrypt($string, $type = 'password')
 		{
 			if($type == 'password')
 			{
 				return password_hash(hash_hmac('sha256', $string, RED_SALT), PASSWORD_ARGON2ID);
+			}else if($type == 'nonce')
+			{
+				return hash_hmac('sha1', $string, RED_NONCE);
 			}
 		}
 
-		private function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
+		public static function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
 		{
 
 			if($type == 'password')

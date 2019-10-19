@@ -107,8 +107,19 @@ body {
 	border-bottom-left-radius: .25rem !important;
 }
 
-#red-about {
-	margin-top: 15px;
+#red-about, #red-users, #users-table {
+	margin-top: 30px;
+}
+
+.btn-icon {
+	padding: 1px 4px !important;
+	margin-left: 10px;
+}
+
+.td-buttons {
+	display: flex;
+	align-items: center;
+    justify-content: flex-end;
 }
 
 #github-about a {

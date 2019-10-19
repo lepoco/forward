@@ -211,6 +211,14 @@
 						'valid.type' => 'string',
 						'valid.required' => true
 					],
+					'token'   => [
+						'valid.type' => 'string',
+						'valid.required' => false
+					],
+					'lastlogin'   => [
+						'valid.type' => 'string',
+						'valid.required' => false
+					],
 					'email'   => [
 						'valid.type' => 'string',
 						'valid.required' => false
@@ -220,6 +228,7 @@
 
 			$db = new \Filebase\Database(['dir' => $this->dbpath.$users]);
 			$item = $db->get($defUser);
+			$item->email = $defUser.'@example.com';
 			$item->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), PASSWORD_ARGON2ID);
 			$item->save();
 		}

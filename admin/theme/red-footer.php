@@ -12,6 +12,5 @@
 <script src="<?php echo $this->home_url(); ?>admin/js/jquery-3.4.1.js" crossorigin="anonymous"></script>
 <script src="<?php echo $this->home_url(); ?>admin/js/popper.js"></script>
 <script src="<?php echo $this->home_url(); ?>admin/js/bootstrap.js"></script>
-<script href="<?php echo $this->home_url(); ?>admin/js/red.js"></script>
 </body>
 </html>
