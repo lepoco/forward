@@ -57,13 +57,11 @@
 
 	if(count($locations) == 0)
 		$locations = array('unknown' => 0);
-	else
-		asort($locations);
+	arsort($locations);
 
 	if(count($referrers) == 0)
 		$referrers = array('unknown' => 0);
-	else
-		asort($referrers);
+	arsort($referrers);
 
 	switch (array_key_first($locations)) {
 		case 'en-us':
