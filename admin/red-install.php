@@ -129,7 +129,7 @@
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$options,
 				'backupLocation' => $this->dbpath.$options.'/backup',
-				'format'         => \Filebase\Format\Json::class,
+				'format'         => \Filebase\Format\Jdb::class,
 				'cache'          => true,
 				'cache_expires'  => 1800,
 				'pretty'         => true,
@@ -153,17 +153,13 @@
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$records,
 				'backupLocation' => $this->dbpath.$records.'/backup',
-				'format'         => \Filebase\Format\Json::class,
+				'format'         => \Filebase\Format\Jdb::class,
 				'cache'          => true,
 				'cache_expires'  => 1800,
 				'pretty'         => true,
 				'safe_filename'  => true,
 				'read_only'      => false,
 				'validate' => [
-					'name'   => [
-						'valid.type' => 'string',
-						'valid.required' => true
-					],
 					'url'   => [
 						'valid.type' => 'string',
 						'valid.required' => true
@@ -187,7 +183,6 @@
 				]
 			]);
 
-			$db = new \Filebase\Database(['dir' => $this->dbpath.$records]);
 			$item = $db->get('1ul24f');
 			$item->url = 'https://github.com/rapiddev/forward';
 			$item->clicks = 0;
@@ -205,17 +200,13 @@
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$users,
 				'backupLocation' => $this->dbpath.$users.'/backup',
-				'format'         => \Filebase\Format\Json::class,
+				'format'         => \Filebase\Format\Jdb::class,
 				'cache'          => true,
 				'cache_expires'  => 1800,
 				'pretty'         => true,
 				'safe_filename'  => true,
 				'read_only'      => false,
 				'validate' => [
-					'name'   => [
-						'valid.type' => 'string',
-						'valid.required' => true
-					],
 					'password'   => [
 						'valid.type' => 'string',
 						'valid.required' => true
@@ -235,9 +226,8 @@
 				]
 			]);
 
-			$db = new \Filebase\Database(['dir' => $this->dbpath.$users]);
 			$item = $db->get($defUser);
-			$item->email = $defUser.'@example.com';
+			$item->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
 			$item->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), PASSWORD_ARGON2ID);
 			$item->save();
 		}

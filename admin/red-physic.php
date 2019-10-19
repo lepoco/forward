@@ -20,13 +20,13 @@
 		public function __construct()
 		{
 			$this->DB = array(
-				'options' => new \Filebase\Database(['dir' => DB_PATH.DB_OPTIONS]),
-				'records' => new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS])
+				'options' => new \Filebase\Database(['dir' => DB_PATH.DB_OPTIONS,'format' => \Filebase\Format\Jdb::class]),
+				'records' => new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS,'format' => \Filebase\Format\Jdb::class])
 			);
 
 			switch (RED_PAGE) {
 				case 'dashboard':
-					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS]);
+					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS,'format' => \Filebase\Format\Jdb::class]);
 					self::admin();
 					break;
 				case 'home':
@@ -93,9 +93,14 @@
 			if($type == 'password')
 			{
 				return password_hash(hash_hmac('sha256', $string, RED_SALT), PASSWORD_ARGON2ID);
-			}else if($type == 'nonce')
+			}
+			else if($type == 'nonce')
 			{
 				return hash_hmac('sha1', $string, RED_NONCE);
+			}
+			else if($type == 'token')
+			{
+				return hash_hmac('sha256', $string, RED_SESSION);
 			}
 		}
 
@@ -116,6 +121,17 @@
 			else if($type == 'nonce')
 			{
 				if(($plain ? hash_hmac('sha1', $input_string, RED_NONCE) : $input_string) == $db_string)
+				{
+					return TRUE;
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			else if($type == 'token')
+			{
+				if(($plain ? hash_hmac('sha256', $input_string, RED_SESSION) : $input_string) == $db_string)
 				{
 					return TRUE;
 				}

@@ -54,7 +54,7 @@ $this->head(); $this->menu(); ?>
 						<div class="card-body">
 							<?php $rand = RED::rand(6); ?>
 							<input type="hidden" value="addRecord" name="action">
-							<input type="hidden" value="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
+							<input type="hidden" value="<?php echo RED::encrypt('ajax_add_record_nonce', 'nonce'); ?>" name="nonce">
 							<input type="hidden" value="<?php echo $rand; ?>" name="randValue">
 							<div class="form-row">
 								<div class="col">

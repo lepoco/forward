@@ -161,8 +161,16 @@
 					{
 						session_regenerate_id();
 
-						$_SESSION['loggedin'] = TRUE;
-						$_SESSION['user'] = $userName;
+						$token = $this->RED->encrypt($this->RED->rand(20), 'token');
+
+						$user = $this->RED->DB['users']->get($userName);
+						$user->token = $token;
+						$user->lastlogin = time();
+						$user->save();
+
+						$_SESSION['l'] = TRUE;
+						$_SESSION['u'] = $userName;
+						$_SESSION['t'] = $token;
 
 						exit('success');
 					}
@@ -175,6 +183,12 @@
 				}
 				else if($_POST['action'] == 'addRecord')
 				{
+					if(!self::verifyNonce('ajax_add_record_nonce'))
+						exit('error_2');
+
+					if(!isset($_POST['forward-url'], $_POST['forward-slug']))
+						exit('error_3');
+
 					if($_POST['forward-url'] == '' || $_POST['forward-slug'] == '')
 						exit('error_4');
 
@@ -222,14 +236,16 @@
 
 		public function isLoggedIn()
 		{
-			$this->LOGGED_IN = false;
+			$this->LOGGED_IN = FALSE;
 
-			if(isset($_SESSION['loggedin']))
+			if(isset($_SESSION['l'], $_SESSION['u'], $_SESSION['t']))
 			{
-				if($_SESSION['loggedin'])
-				{
-					$this->LOGGED_IN = true;
-				}
+				$user = $this->RED->DB['users']->get(filter_var($_SESSION['u'], FILTER_SANITIZE_STRING));
+
+				if($user->token != NULL)
+					if($user->token == $_SESSION['t'])
+						if($_SESSION['l'])
+							$this->LOGGED_IN = TRUE;
 			}
 		}
 

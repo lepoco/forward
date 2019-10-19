@@ -37,7 +37,7 @@ $this->head(); $this->menu(); ?>
 						foreach($users as $user)
 						{
 							$c++;
-							echo '<tr><th scope="row">'.$c.'</th><td>'.$user->getId().'</td><td>'.$user->email.'</td><td>'.$user->createdAt().'</td><td>'.$user->createdAt().'</td><td class="td-buttons"><button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg></button> <button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></button></td></tr>';
+							echo '<tr><th scope="row">'.$c.'</th><td>'.$user->getId().'</td><td>'.$user->email.'</td><td>'.$user->createdAt().'</td><td>'.($user->lastlogin != NULL ? date('Y-m-d H:i:s', $user->lastlogin) : 'Never').'</td><td class="td-buttons"><button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg></button> <button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></button></td></tr>';
 						}
 						?>
 					</tbody>
@@ -47,7 +47,7 @@ $this->head(); $this->menu(); ?>
 	</div>
 </div>
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content">
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">

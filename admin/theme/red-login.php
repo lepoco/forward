@@ -38,7 +38,7 @@ $this->head(); ?>
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_login_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="signIn" name="action">
 								<div class="form-group">
-									<label for="login">Email address</label>
+									<label for="login">Login</label>
 									<input type="text" class="form-control" name="login" id="login" placeholder="Enter login/email">
 								</div>
 								<div class="form-group">
