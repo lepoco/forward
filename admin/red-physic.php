@@ -24,7 +24,8 @@
 				'records' => new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS,'format' => \Filebase\Format\Jdb::class])
 			);
 
-			switch (RED_PAGE) {
+			switch (RED_PAGE)
+			{
 				case '_forward_dashboard':
 					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS,'format' => \Filebase\Format\Jdb::class]);
 					self::admin();
@@ -66,8 +67,7 @@
 		}
 
 		private function forward()
-		{	
-
+		{
 			$record = $this->DB['records']->get(RED_PAGE);
 
 			if($record->url == NULL)
@@ -76,20 +76,12 @@
 			$lang = self::parseLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
 			
 			if(is_array($record->locations))
-			{
 				if(array_key_exists($lang, $record->locations))
-				{
 					$record->locations[$lang] += 1;
-				}
 				else
-				{
 					$record->locations[$lang] = 1;
-				}
-			}
 			else
-			{
 				$record->locations = array($lang => 1);
-			}
 
 
 			if(!is_array($record->referrers))
@@ -123,7 +115,7 @@
 		private function parseLanguage()
 		{
 			$langs = array();
-			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER["HTTP_ACCEPT_LANGUAGE"]), $matches, PREG_SET_ORDER);
+			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), $matches, PREG_SET_ORDER);
 
 			foreach($matches as $match)
 			{
@@ -134,11 +126,10 @@
 			}
 			arsort($langs);
 
-			if(count($langs) == 0){
+			if(count($langs) == 0)
 				return 'unknown';
-			}else{
+			else
 				return key($langs);
-			}
 		}
 
 		private function parse_url()
@@ -173,39 +164,26 @@
 
 		public static function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
 		{
-
 			if($type == 'password')
 			{
 				if (password_verify(($plain ? hash_hmac('sha256', $input_string, RED_SALT) : $input_string), $db_string))
-				{
 					return TRUE;
-				}
 				else
-				{
 					return FALSE;
-				}
 			}
 			else if($type == 'nonce')
 			{
 				if(($plain ? hash_hmac('sha1', $input_string, RED_NONCE) : $input_string) == $db_string)
-				{
 					return TRUE;
-				}
 				else
-				{
 					return FALSE;
-				}
 			}
 			else if($type == 'token')
 			{
 				if(($plain ? hash_hmac('sha256', $input_string, RED_SESSION) : $input_string) == $db_string)
-				{
 					return TRUE;
-				}
 				else
-				{
 					return FALSE;
-				}
 			}
 		}
 
@@ -215,11 +193,6 @@
 				return require_once(ADMPATH.'red-admin.php');
 			else
 				exit(RED_DEBUG ? 'The '.$path.' file was not found!' : '');
-		}
-
-		private function error($id, $title)
-		{
-
 		}
 	}
 ?>

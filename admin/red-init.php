@@ -27,7 +27,7 @@
 
 	try
 	{
-		$DIR_URL = urldecode('/'.trim(str_replace(rtrim(dirname($_SERVER["SCRIPT_NAME"]),'/'),'',$_SERVER['REQUEST_URI']),'/'));
+		$DIR_URL = urldecode('/'.trim(str_replace(rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'),'',$_SERVER['REQUEST_URI']),'/'));
 		$DIR_URL = parse_url($DIR_URL);
 		$DIR_URL = explode( '/', $DIR_URL['path']);
 	}
