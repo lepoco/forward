@@ -23,8 +23,18 @@
 		}
 		public function __construct()
 		{
-			$this->script_uri = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]).'/';
-			$this->request_uri = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			$this->request_uri = self::urlFix('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+			if (self::urlSlash($this->request_uri,'/') == false) 
+			{
+				$this->request_uri = $this->request_uri."/";
+			}
+
+
+			$this->script_uri = self::urlFix('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
+			if (self::urlSlash($this->script_uri,'/') == false) 
+			{
+				$this->script_uri = $this->script_uri."/";
+			}
 
 			if(!isset($_POST['action'])){
 				if($this->script_uri != $this->request_uri)
@@ -63,6 +73,19 @@
 					exit('Fatal error');
 				}
 			}
+		}
+
+		function urlSlash($FullStr, $needle)
+		{
+			$StrLen = strlen($needle);
+			$FullStrEnd = substr($FullStr, strlen($FullStr) - $StrLen);
+			return $FullStrEnd == $needle;
+		}
+
+		function urlFix($p)
+		{
+			$p = str_replace('\\','/',trim($p));
+			return (substr($p,-1)!='/') ? $p.='/' : $p;
 		}
 
 		private function salter($length)
