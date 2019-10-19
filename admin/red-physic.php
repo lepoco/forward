@@ -139,6 +139,14 @@
 			}
 		}
 
+		public static function rand($length)
+		{
+			$characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$randomString = '';
+			for ($i = 0; $i < $length; $i++) {$randomString .= $characters[rand(0, 35)];}
+			return $randomString;
+		}
+
 		public static function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
 		{
 

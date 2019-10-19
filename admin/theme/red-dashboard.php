@@ -64,7 +64,7 @@ $this->head(); $this->menu(); ?>
 								<div class="col">
 									<div class="form-group">
 										<label for="forward-slug">Slug <i>(optional)</i></label>
-										<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="23h112">
+										<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo RED::rand(6); ?>">
 									</div>
 								</div>
 							</div>
@@ -82,7 +82,7 @@ $this->head(); $this->menu(); ?>
 							<th scope="col">Original URL</th>
 							<th scope="col">Date created</th>
 							<th scope="col">Clicks</th>
-							<th scope="col">Actions</th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -90,6 +90,7 @@ $this->head(); $this->menu(); ?>
 
 						$siteurl = $this->DB['options']->get('siteurl')->value;
 						$records = $this->DB['records']->findAll();
+						//$records = $this->DB['records']->orderBy('__created_at','ASC')->results();
 						$c = 0;
 						foreach($records as $record)
 						{
