@@ -110,9 +110,9 @@
 		private function htaccess($dir = 'forward/')
 		{
 			$htaccess  = "";
-			$htaccess .= "Options All -Indexes\n\n<Files \"*.json\">\nOrder Deny,Allow\nDeny from all\n</Files>\n\n";
+			$htaccess .= "Options All -Indexes\n\n<Files \"*.jdb\">\nOrder Deny,Allow\nDeny from all\n</Files>\n\n";
 			$htaccess .= "<IfModule mod_rewrite.c>\n";
-			$htaccess .= "RewriteEngine On\nRewriteBase /\nRewriteCond %{REQUEST_URI} ^(.*)$\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt|webp)$\n";
+			$htaccess .= "RewriteEngine On\nRewriteBase /\nRewriteCond %{REQUEST_URI} ^(.*)$\nRewriteCond %{REQUEST_FILENAME} !-f\n";
 			$htaccess .= "RewriteRule .* $dir/index.php [L]\n</IfModule>";
 
 			$path = ABSPATH.'.htaccess';
