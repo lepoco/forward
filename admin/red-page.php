@@ -66,7 +66,7 @@
 			else
 				$page = 'dashboard';
 
-			$html = '<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">';
+			$html = '<nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark">';
 			$html .= '<a class="navbar-brand" href="'.self::home_url().'dashboard"><picture id="forward-navbar-logo"><source srcset="'.self::home_url().'admin/img/forward-logo-wt.webp" type="image/webp"><source srcset="'.self::home_url().'admin/img/forward-logo-wt.png" type="image/png"><img alt="This is my face" src="'.self::home_url().'admin/img/forward-logo-wt.png"></picture></a>';
 			$html .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forward-navbar" aria-controls="forward-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
 			$html .= '<div class="collapse navbar-collapse navbar-right" id="forward-navbar"><ul class="navbar-nav">';

@@ -5,6 +5,7 @@ html {
 
 body {
 	position: relative;
+	display: initial;
 	margin: 0;
 	min-height: 100%;
 }
@@ -16,8 +17,28 @@ body {
 	transition: all 0.2s ease-in-out;
 }
 
-#red-dashboard {
+#main-nav {
+	position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+#forward {
+	min-height: 100%;
+}
+
+#red-dashboard, #red-about, #red-users {
+	min-height: 100%;
+	padding-top: 56px;
 	background-color: #f8f9fa;
+}
+
+#users-table {
+	margin-top: 35px;
+}
+
+#red-about, #red-users {
+	padding-top: 96px;
 }
 
 #dashboard-stats {
@@ -25,6 +46,23 @@ body {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	color: #fff;
+}
+
+#dashboard-content {
+	position: fixed;
+	display: inherit;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-top: 56px;
+	background-color: #f8f9fa;
+}
+
+#dashboard-content > .container-fluid, #dashboard-content > .container-fluid > .row {
+	height: 100%;
 }
 
 #links-table {
@@ -107,8 +145,48 @@ body {
 	border-bottom-left-radius: .25rem !important;
 }
 
-#red-about, #red-users, #users-table {
-	margin-top: 30px;
+.links-card {
+	cursor: pointer;
+	border-radius: 0 !important;
+}
+
+.links-card:hover {
+	background: #f8f9fa;
+}
+
+.links-card p, .links-card h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.links-card h2 {
+	font-size: 22px;
+	font-weight: 700;
+}
+
+.links-card p {
+	font-size: 12px;
+}
+
+.links-card h2 > a {
+	color: #333;
+}
+
+
+.links-card p > a {
+	color: orange;
+}
+
+.links-card > .card-body {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+	padding: 0.75rem !important;
+}
+
+.links-card > .card-body > span {
+	font-weight: 700;
+	font-size: 25px;
 }
 
 .btn-icon {
@@ -146,10 +224,10 @@ body {
 .stats-header svg {
 	width: 40px;
     height: 40px;
-    border: 1px solid #fff;
+    border: 1px solid #444;
     border-radius: 30px;
     padding: 5px;
-    fill: #fff;
+    fill: #444;
 	margin-right: 15px;
 }
 

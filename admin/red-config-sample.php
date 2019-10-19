@@ -55,20 +55,20 @@
 			if (isset($params[0]))
 			{
 				if($params[0] == '/'){
-					define('RED_PAGE', 'home');
+					defined('RED_PAGE') or define('RED_PAGE', 'home');
 				}
 				else if (isset($params['dashboard']))
 				{
-					define('RED_DASHBOARD', $params['dashboard']);
+					defined('RED_DASHBOARD') or define('RED_DASHBOARD', $params['dashboard']);
 				}
 				else if(isset($params['get']))
 				{
 					if($params['get'] != 'dashboard')
-						define('RED_PAGE', $params['get']);
+						defined('RED_PAGE') or define('RED_PAGE', $params['get']);
 				}
 				else if(isset($params['page']))
 				{
-					define('RED_PAGE', $params['page']);
+					defined('RED_PAGE') or define('RED_PAGE', $params['page']);
 				}
 			}
 		}
@@ -79,5 +79,4 @@
 			define('RED_PAGE', 'dashboard');
 		else
 			define('RED_PAGE', '404');
-?>
 ?>

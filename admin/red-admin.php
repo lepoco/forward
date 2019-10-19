@@ -186,28 +186,36 @@
 					if(!self::verifyNonce('ajax_add_record_nonce'))
 						exit('error_2');
 
-					if(!isset($_POST['forward-url'], $_POST['forward-slug']))
+					if(!isset($_POST['forward-url'], $_POST['forward-slug'], $_POST['randValue']))
 						exit('error_3');
 
-					if($_POST['forward-url'] == '' || $_POST['forward-slug'] == '')
+					if($_POST['forward-url'] == '' || $_POST['randValue'] == '')
 						exit('error_4');
 
-					$record = $this->RED->DB['records']->get($_POST['forward-slug']);
+					//$record = $this->RED->DB['records']->select('__id')->where('url','=',filter_var($_POST['forward-url'], FILTER_SANITIZE_URL))->results();
+					//if(isset($record[0]))
+					//	exit('error_5');
+
+					if($_POST['forward-slug'] == '')
+						$slug = filter_var($_POST['randValue'], FILTER_SANITIZE_STRING);
+					else
+						$slug = filter_var($_POST['forward-slug'], FILTER_SANITIZE_STRING);
+
+					$record = $this->RED->DB['records']->get($slug);
 
 					if($record->url == NULL)
 					{
 						$record->url = $_POST['forward-url'];
 						$record->clicks = 0;
 						$record->save();
+						exit('success');
 					}
 					else
 					{
-						exit('error_5');
+						exit('error_6');
 					}
-					var_dump($_POST);
-					exit('success');
 				}
-				exit;
+				exit('error_1');
 			}
 			else
 			{
