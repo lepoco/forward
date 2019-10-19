@@ -109,6 +109,10 @@
 
 		private function htaccess($dir = 'forward/')
 		{
+
+			if($dir == '/')
+				$dir = '';
+
 			$htaccess  = "";
 			$htaccess .= "Options All -Indexes\n\n<Files \"*.jdb\">\nOrder Deny,Allow\nDeny from all\n</Files>\n\n";
 			$htaccess .= "<IfModule mod_rewrite.c>\n";

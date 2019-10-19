@@ -1,4 +1,4 @@
-![Banner](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-1.png?raw=true)
+![Logo](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-logo-bk.png?raw=true)
 # Forward
 [Created with ![heart](http://i.imgur.com/oXJmdtz.gif) in Poland by RapidDev](https://rdev.cc/)<br />
 Now you can have your own Bit.ly or Google URL shortener equivalent.
@@ -12,7 +12,7 @@ With the help of Forward you can collect information about:
 
 ## Dashboard
 Simple intuitive interface modeled on Adobe and Bit.ly websites.
-![Logo](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
+![Login form](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
 
 ## Database
 The database is stored in the Flat-File format. That is, data was saved on the server in files.
