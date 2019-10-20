@@ -211,10 +211,27 @@
 					{
 						exit('error_6');
 					}
-				}else if($_POST['action'] == 'saveSettings')
+				}
+				else if($_POST['action'] == 'saveSettings')
 				{
 					if(!self::verifyNonce('ajax_save_settings_nonce'))
 						exit('error_2');
+
+					if(!isset(
+						$_POST['site_url'],
+						$_POST['dashboard_url'],
+						$_POST['redirect_404'],
+						$_POST['redirect_home'],
+						$_POST['redirect_home_url'],
+						$_POST['cache_redirects'],
+						$_POST['redirect_ssl'],
+						$_POST['admin_ssl'],
+						$_POST['js_redirect'],
+						$_POST['js_redirect_after'],
+						$_POST['captcha_site'],
+						$_POST['captcha_secret']
+					))
+						exit('error_3');
 
 					var_dump($_POST);
 				}

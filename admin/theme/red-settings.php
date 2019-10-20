@@ -38,46 +38,46 @@
 						<div class="tab-pane fade show active" id="v-pills-main" role="tabpanel" aria-labelledby="v-pills-main-tab">
 							<h2 class="display-4" style="font-size: 26px;">URLs</h2>
 							<div class="form-group">
-								<label for="siteurl">Site URL</label>
-								<input type="text" class="form-control" name="siteurl" id="siteurl" placeholder="<?php echo $this->DB['options']->get('siteurl')->value; ?>" value="<?php echo $this->DB['options']->get('siteurl')->value; ?>">
+								<label for="site_url">Site URL</label>
+								<input type="text" class="form-control" name="site_url" id="site_url" placeholder="<?php echo $this->DB['options']->get('siteurl')->value; ?>" value="<?php echo $this->DB['options']->get('siteurl')->value; ?>">
 							</div>
 							<div class="form-group">
-								<label for="dashboardurl">Dashboard URL</label>
-								<input type="text" class="form-control" name="dashboardurl" id="dashboardurl" placeholder="<?php echo $this->DB['options']->get('dashboard')->value; ?>" value="<?php echo $this->DB['options']->get('dashboard')->value; ?>">
+								<label for="dashboard_url">Dashboard URL</label>
+								<input type="text" class="form-control" name="dashboard_url" id="dashboard_url" placeholder="<?php echo $this->DB['options']->get('dashboard')->value; ?>" value="<?php echo $this->DB['options']->get('dashboard')->value; ?>">
 							</div>
 							<small>ATTENTION!<br/>Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.</small>
 						</div>
 						<div class="tab-pane fade" id="v-pills-redirects" role="tabpanel" aria-labelledby="v-pills-redirects-tab">
 							<h2 class="display-4" style="font-size: 26px;">Redirects</h2>
 							<div class="form-group">
-								<label for="redirect404">Redirect 404 page</label>
-								<select class="form-control" id="redirect404" name="redirect404">
+								<label for="redirect_404">Redirect 404 page</label>
+								<select class="form-control" id="redirect_404" name="redirect_404">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="redirect404url">Page to which redirect error 404</label>
-								<input type="text" class="form-control" id="redirect404url" id="redirect404url" placeholder="https://" value="<?php echo $this->DB['options']->get('404redirect')->value; ?>">
+								<label for="redirect_404_url">Page to which redirect error 404</label>
+								<input type="text" class="form-control" id="redirect_404_url" id="redirect_404_url" placeholder="https://" value="<?php echo $this->DB['options']->get('404redirect')->value; ?>">
 							</div>
 							<hr>
 							<div class="form-group">
-								<label for="redirecthome">Redirect Home page</label>
-								<select class="form-control" id="redirecthome" name="redirecthome">
+								<label for="redirect_home">Redirect Home page</label>
+								<select class="form-control" id="redirect_home" name="redirect_home">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="redirecthomeurl">Page to which redirect home page</label>
-								<input type="text" class="form-control" name="redirecthomeurl" id="redirecthomeurl" placeholder="https://" value="<?php echo $this->DB['options']->get('homeredirect')->value; ?>">
+								<label for="redirect_home_url">Page to which redirect home page</label>
+								<input type="text" class="form-control" name="redirect_home_url" id="redirect_home_url" placeholder="https://" value="<?php echo $this->DB['options']->get('homeredirect')->value; ?>">
 							</div>
 						</div>
 						<div class="tab-pane fade" id="v-pills-cache" role="tabpanel" aria-labelledby="v-pills-cache-tab">
 							<h2 class="display-4" style="font-size: 26px;">Cache</h2>
 							<div class="form-group">
-								<label for="enableredirectcache">Enable Cache for redirects database</label>
-								<select class="form-control" id="enableredirectcache" name="enableredirectcache">
+								<label for="cache_redirects">Enable Cache for redirects database</label>
+								<select class="form-control" id="cache_redirects" name="cache_redirects">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
@@ -86,30 +86,59 @@
 						<div class="tab-pane fade" id="v-pills-encryption" role="tabpanel" aria-labelledby="v-pills-encryption-tab">
 							<h2 class="display-4" style="font-size: 26px;">Connection encryption</h2>
 							<div class="form-group">
-								<label for="redirectSSL">Force HTTPS <i>(ssl connection)</i> for redirects</label>
-								<select class="form-control" name="redirectSSL" id="redirectSSL">
+								<label for="redirect_ssl">Force HTTPS <i>(ssl connection)</i> for redirects</label>
+								<select class="form-control" name="redirect_ssl" id="redirect_ssl">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="adminSSL">Force HTTPS <i>(ssl connection)</i> for dashboard</label>
-								<select class="form-control" name="adminSSL" id="adminSSL">
+								<label for="admin_ssl">Force HTTPS <i>(ssl connection)</i> for dashboard</label>
+								<select class="form-control" name="admin_ssl" id="admin_ssl">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
 							</div>
+							<small>
+								You don't have to spend money on certificates from companies like Comodo or RapidSSL.
+								<br>
+								You can generate a free certificate with <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let's Encrypt</a>.
+								<hr>
+								SSL is recommended.
+								<br>
+								You protect both yourself and your users against a number of attacks. MIDM and Session Hijacking are one of the most dangerous. Never put safety second.
+							</small>
 						</div>
 						<div class="tab-pane fade" id="v-pills-analytics" role="tabpanel" aria-labelledby="v-pills-analytics-tab">
 							<h2 class="display-4" style="font-size: 26px;">Google Analytics</h2>
 							<div class="form-group">
-								<label for="jsredirect">JS Redirection</label>
-								<select class="form-control" id="jsredirect" name="jsredirect">
+								<label for="js_redirect">JS Redirection</label>
+								<select class="form-control" id="js_redirect" name="js_redirect">
 									<option value="1">Enabled</option>
 									<option value="2" selected="selected">Disabled</option>
 								</select>
-								<small>Enable redirection via JavaScript.</small>
 							</div>
+							<div class="form-group">
+								<label for="gtag">Tracking Code (gtag)</label>
+								<input type="text" class="form-control" id="gtag" id="gtag" placeholder="eg.: UA-111112222-2" value="">
+							</div>
+							<div class="form-group">
+								<label for="js_redirect_after">Redirect after:</label>
+								<select class="form-control" name="js_redirect_after" id="js_redirect_after">
+									<option value="0" selected="selected">Immediately</option>
+									<option value="500">500ms</option>
+									<option value="1000">1000ms <i>(1 second)</i></option>
+									<option value="2000">2000ms <i>(2 seconds)</i></option>
+									<option value="3000">3000ms <i>(3 seconds)</i></option>
+								</select>
+							</div>
+							<small>
+								<strong>ATTENTION!</strong>
+								<br>
+								JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.
+								<br>
+								Anyway, if you want you can use it.
+							</small>
 						</div>
 						<div class="tab-pane fade" id="v-pills-captcha" role="tabpanel" aria-labelledby="v-pills-captcha-tab">
 							<h2 class="display-4" style="font-size: 26px;">Google ReCaptcha V3</h2>
@@ -139,8 +168,8 @@
 								<input disabled type="text" class="form-control" placeholder="<?php echo DB_USERS; ?>" value="<?php echo DB_USERS; ?>">
 							</div>
 							<div class="form-group">
-								<label>Users database</label>
-								<input disabled type="text" class="form-control" placeholder="<?php echo DB_USERS; ?>" value="<?php echo DB_USERS; ?>">
+								<label>Options database</label>
+								<input disabled type="text" class="form-control" placeholder="<?php echo DB_OPTIONS; ?>" value="<?php echo DB_OPTIONS; ?>">
 							</div>
 							<div class="form-group">
 								<label>Records database</label>
