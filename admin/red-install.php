@@ -49,6 +49,16 @@
 					filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
 				);
 
+				/** Password hash type */
+				if(defined('PASSWORD_ARGON2ID'))
+					define('RED_ALGO', PASSWORD_ARGON2ID);
+				else if(defined('PASSWORD_ARGON2I'))
+					define('RED_ALGO', PASSWORD_ARGON2I);
+				else if(defined('PASSWORD_BCRYPT'))
+					define('RED_ALGO', PASSWORD_BCRYPT);
+				else if(defined('PASSWORD_DEFAULT'))
+					define('RED_ALGO', PASSWORD_DEFAULT);
+
 				self::config(
 					filter_var($_POST['usersDB'], FILTER_SANITIZE_STRING),
 					filter_var($_POST['recordsDB'], FILTER_SANITIZE_STRING),
@@ -110,6 +120,7 @@
 
 				$this->salt = self::salter(50);
 
+				//Salts
 				$config = str_replace(array(
 					'example_salt',
 					'example_session_salt',
@@ -120,6 +131,29 @@
 					self::salter(50)),
 				$config);
 
+
+
+				//Cryptographic
+				switch (RED_ALGO) {
+					case 1: //PASSWORD_BCRYPT
+						$crypto = 'PASSWORD_BCRYPT';
+						break;
+					case 2: //PASSWORD_ARGON2I
+						$crypto = 'PASSWORD_ARGON2I';
+						break;
+					case 3: //PASSWORD_ARGON2ID
+						$crypto = 'PASSWORD_ARGON2ID';
+						break;
+					default: //PASSWORD_DEFAULT
+						$crypto = 'PASSWORD_DEFAULT';
+						break;
+				}
+				$config = str_replace(
+					'PASSWORD_DEFAULT',
+					$crypto,
+				$config);
+
+				//Databases
 				$config = str_replace(array(
 					'users_database',
 					'options_database',
@@ -159,16 +193,6 @@
 				require_once(ADMPATH.'db/red-db.php');
 			else
 				exit('error_2');
-
-			/** Password hash type */
-			if(defined('PASSWORD_ARGON2ID'))
-				define('RED_ALGO', PASSWORD_ARGON2ID);
-			else if(defined('PASSWORD_ARGON2I'))
-				define('RED_ALGO', PASSWORD_ARGON2I);
-			else if(defined('PASSWORD_BCRYPT'))
-				define('RED_ALGO', PASSWORD_BCRYPT);
-			else if(defined('PASSWORD_DEFAULT'))
-				define('RED_ALGO', PASSWORD_DEFAULT);
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$options,

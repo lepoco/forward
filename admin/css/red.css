@@ -150,6 +150,14 @@ body {
     align-items: center;
 }
 
+#red-settings {
+	padding-top: 86px;
+}
+
+#settings-form {
+	margin-top: 32px;
+}
+
 #red-users, #red-settings {
 	position: fixed;
     top: 0;
