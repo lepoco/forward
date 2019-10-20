@@ -56,9 +56,9 @@
 			$menu = array(
 				'dashboard' => array('Dashboard', 'dashboard'),
 				'users' => array('Users', 'dashboard/users'),
-				'about' => array('About', 'dashboard/about'),
 				'settings' => array('Settings', 'dashboard/settings'),
-				'signout' => array('Sign Out', 'dashboard/signout'),
+				'about' => array('About', 'dashboard/about'),
+				'signout' => array('Sign Out', 'dashboard/signout')
 			);
 
 			if(defined('RED_DASHBOARD'))

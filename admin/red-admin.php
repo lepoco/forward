@@ -211,6 +211,12 @@
 					{
 						exit('error_6');
 					}
+				}else if($_POST['action'] == 'saveSettings')
+				{
+					if(!self::verifyNonce('ajax_save_settings_nonce'))
+						exit('error_2');
+
+					var_dump($_POST);
 				}
 				exit('error_1');
 			}
