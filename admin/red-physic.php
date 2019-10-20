@@ -20,14 +20,30 @@
 		public function __construct()
 		{
 			$this->DB = array(
-				'options' => new \Filebase\Database(['dir' => DB_PATH.DB_OPTIONS,'format' => \Filebase\Format\Jdb::class]),
-				'records' => new \Filebase\Database(['dir' => DB_PATH.DB_RECORDS,'format' => \Filebase\Format\Jdb::class])
+				'options' => new \Filebase\Database([
+					'dir' => DB_PATH.DB_OPTIONS,
+					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
+					'format' => \Filebase\Format\Jdb::class,
+					'cache' => true,
+					'cache_expires' => 1800
+				]),
+				'records' => new \Filebase\Database([
+					'dir' => DB_PATH.DB_RECORDS,
+					'backupLocation' => DB_PATH.DB_RECORDS.'/backup',
+					'format' => \Filebase\Format\Jdb::class,
+					'cache' => true,
+					'cache_expires' => 1800
+				])
 			);
 
 			switch (RED_PAGE)
 			{
 				case '_forward_dashboard':
-					$this->DB['users'] = new \Filebase\Database(['dir' => DB_PATH.DB_USERS,'format' => \Filebase\Format\Jdb::class]);
+					$this->DB['users'] = new \Filebase\Database([
+						'dir' => DB_PATH.DB_USERS,
+						'backupLocation' => DB_PATH.DB_USERS.'/backup',
+						'format' => \Filebase\Format\Jdb::class
+					]);
 					self::admin();
 					break;
 				case '_forward_home':

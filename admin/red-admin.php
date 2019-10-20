@@ -193,10 +193,6 @@
 					if($_POST['forward-url'] == '' || $_POST['randValue'] == '')
 						exit('error_4');
 
-					//$record = $this->RED->DB['records']->select('__id')->where('url','=',filter_var($_POST['forward-url'], FILTER_SANITIZE_URL))->results();
-					//if(isset($record[0]))
-					//	exit('error_5');
-
 					if($_POST['forward-slug'] == '')
 						$slug = filter_var($_POST['randValue'], FILTER_SANITIZE_STRING);
 					else

@@ -26,8 +26,11 @@
 	<link rel="icon" href="<?php echo $this->home_url(); ?>admin/img/forward-fav.png" sizes="192x192" />
 	<link rel="apple-touch-icon-precomposed" href="<?php echo $this->home_url(); ?>admin/img/forward-fav.png" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo $this->home_url(); ?>admin/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo $this->home_url(); ?>admin/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo $this->home_url(); ?>admin/css/red.css">
+	<?php if (RED_PAGE == '_forward_dashboard'): ?>
+	<link rel="stylesheet" href="<?php echo $this->home_url(); ?>admin/css/chartist.css">
+	<?php endif ?>
 	<title><?php echo $this->title(); ?></title>
 	<style>
 		body {

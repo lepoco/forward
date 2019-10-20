@@ -27,7 +27,40 @@ body {
 	min-height: 100%;
 }
 
-#red-dashboard, #red-about, #red-users {
+.red-chart.ct-chart {
+	background-color: transparent;
+}
+
+.red-chart.ct-chart .ct-bar {
+	stroke: #007bff !important;
+	stroke-width: 40px !important;
+}
+
+.block-page {
+	position: fixed;
+	display: inherit;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100vw;
+}
+
+.block-page > .container-fluid, .block-page > .container, .block-page > .container > .row, .block-page > .container-fluid > .row {
+	height: 100%;
+}
+
+.distance-navbar {
+	padding-top: 56px;
+}
+
+#red-dashboard {
+	background-color: #f8f9fa;
+}
+
+
+#red-about, #red-users {
 	min-height: 100%;
 	padding-top: 56px;
 	background-color: #f8f9fa;
@@ -59,10 +92,6 @@ body {
 	right: 0;
 	margin-top: 56px;
 	background-color: #f8f9fa;
-}
-
-#dashboard-content > .container-fluid, #dashboard-content > .container-fluid > .row {
-	height: 100%;
 }
 
 #links-table {
@@ -151,6 +180,12 @@ body {
 	border-radius: 0 !important;
 	border-bottom-right-radius: .25rem !important;
 	border-bottom-left-radius: .25rem !important;
+}
+
+#records_list {
+	background-color: #fff;
+	overflow: auto;
+	height: inherit;
 }
 
 .links-card {
@@ -257,4 +292,12 @@ body {
 .col-no-gutters {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
+}
+
+
+@media(max-width: 991px)
+{
+	#records_list {
+		height: 300px;
+	}
 }

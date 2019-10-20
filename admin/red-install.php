@@ -175,16 +175,7 @@
 				'backupLocation' => $this->dbpath.$options.'/backup',
 				'format'         => \Filebase\Format\Jdb::class,
 				'cache'          => true,
-				'cache_expires'  => 1800,
-				'pretty'         => true,
-				'safe_filename'  => true,
-				'read_only'      => false,
-				'validate' => [
-					'value'   => [
-						'valid.type' => 'string',
-						'valid.required' => true
-					]
-				]
+				'cache_expires'  => 1800
 			]);
 
 			$item = $db->get('siteurl');
@@ -199,28 +190,7 @@
 				'backupLocation' => $this->dbpath.$records.'/backup',
 				'format'         => \Filebase\Format\Jdb::class,
 				'cache'          => true,
-				'cache_expires'  => 1800,
-				'pretty'         => true,
-				'safe_filename'  => true,
-				'read_only'      => false,
-				'validate' => [
-					'url'   => [
-						'valid.type' => 'string',
-						'valid.required' => true
-					],
-					'clicks'   => [
-						'valid.type' => 'int',
-						'valid.required' => false
-					],
-					'referrers'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					],
-					'locations'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					]
-				]
+				'cache_expires'  => 1800
 			]);
 
 			$item = $db->get('EZK8H3');
@@ -240,30 +210,7 @@
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$users,
 				'backupLocation' => $this->dbpath.$users.'/backup',
-				'format'         => \Filebase\Format\Jdb::class,
-				'cache'          => true,
-				'cache_expires'  => 1800,
-				'pretty'         => true,
-				'safe_filename'  => true,
-				'read_only'      => false,
-				'validate' => [
-					'password'   => [
-						'valid.type' => 'string',
-						'valid.required' => true
-					],
-					'token'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					],
-					'lastlogin'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					],
-					'email'   => [
-						'valid.type' => 'string',
-						'valid.required' => false
-					]
-				]
+				'format'         => \Filebase\Format\Jdb::class
 			]);
 
 			$item = $db->get($defUser);
