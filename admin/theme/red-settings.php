@@ -52,25 +52,31 @@
 							<div class="form-group">
 								<label for="redirect_404">Redirect 404 page</label>
 								<select class="form-control" id="redirect_404" name="redirect_404">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('redirect_404')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="redirect_404_url">Page to which redirect error 404</label>
-								<input type="text" class="form-control" id="redirect_404_url" id="redirect_404_url" placeholder="https://" value="<?php echo $this->DB['options']->get('404redirect')->value; ?>">
+								<input type="text" class="form-control" id="redirect_404_url" name="redirect_404_url" placeholder="https://" value="<?php echo $this->DB['options']->get('redirect_404_url')->value; ?>">
 							</div>
 							<hr>
 							<div class="form-group">
 								<label for="redirect_home">Redirect Home page</label>
 								<select class="form-control" id="redirect_home" name="redirect_home">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('redirect_home')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="redirect_home_url">Page to which redirect home page</label>
-								<input type="text" class="form-control" name="redirect_home_url" id="redirect_home_url" placeholder="https://" value="<?php echo $this->DB['options']->get('homeredirect')->value; ?>">
+								<input type="text" class="form-control" name="redirect_home_url" id="redirect_home_url" placeholder="https://" value="<?php echo $this->DB['options']->get('redirect_home_url')->value; ?>">
 							</div>
 						</div>
 						<div class="tab-pane fade" id="v-pills-cache" role="tabpanel" aria-labelledby="v-pills-cache-tab">
@@ -78,8 +84,11 @@
 							<div class="form-group">
 								<label for="cache_redirects">Enable Cache for redirects database</label>
 								<select class="form-control" id="cache_redirects" name="cache_redirects">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('cache_redirects')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 						</div>
@@ -88,15 +97,21 @@
 							<div class="form-group">
 								<label for="redirect_ssl">Force HTTPS <i>(ssl connection)</i> for redirects</label>
 								<select class="form-control" name="redirect_ssl" id="redirect_ssl">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('redirect_ssl')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="admin_ssl">Force HTTPS <i>(ssl connection)</i> for dashboard</label>
 								<select class="form-control" name="admin_ssl" id="admin_ssl">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('admin_ssl')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 							<small>
@@ -114,22 +129,28 @@
 							<div class="form-group">
 								<label for="js_redirect">JS Redirection</label>
 								<select class="form-control" id="js_redirect" name="js_redirect">
-									<option value="1">Enabled</option>
-									<option value="2" selected="selected">Disabled</option>
+									<?php
+										$option = $this->DB['options']->get('js_redirect')->value;
+									?>
+									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
+									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="gtag">Tracking Code (gtag)</label>
-								<input type="text" class="form-control" id="gtag" id="gtag" placeholder="eg.: UA-111112222-2" value="">
+								<input type="text" class="form-control" id="gtag" name="gtag" placeholder="eg.: UA-111112222-2" value="<?php echo $this->DB['options']->get('gtag')->value; ?>">
 							</div>
 							<div class="form-group">
 								<label for="js_redirect_after">Redirect after:</label>
 								<select class="form-control" name="js_redirect_after" id="js_redirect_after">
-									<option value="0" selected="selected">Immediately</option>
-									<option value="500">500ms</option>
-									<option value="1000">1000ms <i>(1 second)</i></option>
-									<option value="2000">2000ms <i>(2 seconds)</i></option>
-									<option value="3000">3000ms <i>(3 seconds)</i></option>
+									<?php
+										$option = $this->DB['options']->get('js_redirect_after')->value;
+									?>
+									<option value="0"<?php echo $option==0 ? ' selected="selected"' : ""; ?>>Immediately</option>
+									<option value="500"<?php echo $option==500 ? ' selected="selected"' : ""; ?>>500ms</option>
+									<option value="1000"<?php echo $option==1000 ? ' selected="selected"' : ""; ?>>1000ms <i>(1 second)</i></option>
+									<option value="2000"<?php echo $option==2000 ? ' selected="selected"' : ""; ?>>2000ms <i>(2 seconds)</i></option>
+									<option value="3000"<?php echo $option==3000 ? ' selected="selected"' : ""; ?>>3000ms <i>(3 seconds)</i></option>
 								</select>
 							</div>
 							<small>
@@ -144,11 +165,11 @@
 							<h2 class="display-4" style="font-size: 26px;">Google ReCaptcha V3</h2>
 							<div class="form-group">
 								<label for="captcha_site">ReCaptcha site key</label>
-								<input type="text" class="form-control" id="captcha_site" name="captcha_site" placeholder="eg.: 9Lb5ib4UACCCCM8mXw2nit90d-7vCcLd1LjQHWXn">
+								<input type="text" class="form-control" id="captcha_site" name="captcha_site" value="<?php echo $this->DB['options']->get('captcha_site')->value; ?>" placeholder="eg.: 9Lb5ib4UACCCCM8mXw2nit90d-7vCcLd1LjQHWXn">
 							</div>
 							<div class="form-group">
 								<label for="captcha_secret">ReCaptcha secret key</label>
-								<input type="text" class="form-control" id="captcha_secret" name="captcha_secret" placeholder="eg.: 9Lb5ib4UACCCCM8mXIAKcfHTbL7M3d-xHSWTyz-Q">
+								<input type="text" class="form-control" id="captcha_secret" name="captcha_secret" placeholder="eg.: 9Lb5ib4UACCCCM8mXIAKcfHTbL7M3d-xHSWTyz-Q" value="<?php echo $this->DB['options']->get('captcha_secret')->value; ?>">
 							</div>
 							<small>
 								You can enable <a href="https://www.google.com/recaptcha/admin/create" target="_blank" rel="noopener">Google ReCaptcha V3</a> for admin panel login.

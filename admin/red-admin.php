@@ -221,17 +221,55 @@
 						$_POST['site_url'],
 						$_POST['dashboard_url'],
 						$_POST['redirect_404'],
+						$_POST['redirect_404_url'],
 						$_POST['redirect_home'],
 						$_POST['redirect_home_url'],
 						$_POST['cache_redirects'],
 						$_POST['redirect_ssl'],
 						$_POST['admin_ssl'],
 						$_POST['js_redirect'],
+						$_POST['gtag'],
 						$_POST['js_redirect_after'],
 						$_POST['captcha_site'],
 						$_POST['captcha_secret']
 					))
 						exit('error_3');
+
+					$option = $this->RED->DB['options']->get('siteurl');
+					$option->save(['value' => $_POST['site_url']]);
+
+					$option = $this->RED->DB['options']->get('dashboard');
+					$option->save(['value' => $_POST['dashboard_url']]);
+
+					$option = $this->RED->DB['options']->get('redirect_404');
+					$option->save(['value' => ($_POST['redirect_404'] == '1' ? true : false)]);
+					$option = $this->RED->DB['options']->get('redirect_404_url');
+					$option->save(['value' => $_POST['redirect_404_url']]);
+
+					$option = $this->RED->DB['options']->get('redirect_home');
+					$option->save(['value' => ($_POST['redirect_home'] == '1' ? true : false)]);
+					$option = $this->RED->DB['options']->get('redirect_home_url');
+					$option->save(['value' => $_POST['redirect_home_url']]);
+
+					$option = $this->RED->DB['options']->get('cache_redirects');
+					$option->save(['value' => ($_POST['cache_redirects'] == '1' ? true : false)]);
+
+					$option = $this->RED->DB['options']->get('redirect_ssl');
+					$option->save(['value' => ($_POST['redirect_ssl'] == '1' ? true : false)]);
+					$option = $this->RED->DB['options']->get('admin_ssl');
+					$option->save(['value' => ($_POST['admin_ssl'] == '1' ? true : false)]);
+
+					$option = $this->RED->DB['options']->get('js_redirect');
+					$option->save(['value' => ($_POST['js_redirect'] == '1' ? true : false)]);
+					$option = $this->RED->DB['options']->get('gtag');
+					$option->save(['value' => $_POST['gtag']]);
+					$option = $this->RED->DB['options']->get('js_redirect_after');
+					$option->save(['value' => (int)$_POST['js_redirect_after']]);
+
+					$option = $this->RED->DB['options']->get('captcha_site');
+					$option->save(['value' => $_POST['captcha_site']]);
+					$option = $this->RED->DB['options']->get('captcha_secret');
+					$option->save(['value' => $_POST['captcha_secret']]);
 
 					var_dump($_POST);
 				}
