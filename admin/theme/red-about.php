@@ -15,10 +15,17 @@
 <div id="red-about">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<h1>Forward</h1>
-				<i><p>version <?php echo RED_VERSION; ?></p></i>
+			<div class="col-12 col-md-3">
+				<picture id="forward-logo">
+					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.webp" type="image/webp">
+					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.jpeg" type="image/jpeg">
+					<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.jpeg">
+				</picture>
 				<hr>
+				<h2 class="display-4" style="font-size: 31px;margin: 0;">Forward</h2>
+				<p><small><i>version <?php echo RED_VERSION; ?></i></small></p>
+			</div>
+			<div class="col-12 col-md-9">
 				<p>
 					Forward is a content management system created to shorten links and collect analytics.
 					<br>
@@ -43,20 +50,27 @@
 					</ul>
 				<hr>
 				<p>
-					<small>
-						Copyright (c) 2019 RapidDev
-						<br>
-						Leszek Pomianowski
-						<br>
-						https://rdev.cc/
-						<br><br>
-						Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-						<br><br>
-						The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-						<br><br>
-						THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-					</small>
+					<button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseLicense" aria-expanded="false" aria-controls="collapseLicense">
+						License
+					</button>
 				</p>
+				<div class="collapse" id="collapseLicense">
+					<div class="card card-body">
+						<small>
+							Copyright (c) 2019 RapidDev
+							<br>
+							Leszek Pomianowski
+							<br>
+							https://rdev.cc/
+							<br><br>
+							Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+							<br><br>
+							The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+							<br><br>
+							THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+						</small>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

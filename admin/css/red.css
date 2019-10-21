@@ -59,8 +59,12 @@ body {
 	background-color: #f8f9fa;
 }
 
+#red-about {
+	min-height: 100%;
+	padding-bottom: 30px;
+}
 
-#red-about, #red-users {
+#red-users {
 	min-height: 100%;
 	padding-top: 56px;
 	background-color: #f8f9fa;
