@@ -42,6 +42,7 @@
 				<h4>Used technologies & things</h1>
 					<ul class="list-unstyled">
 						<li><i>Filebase</i> by the Timothy Marois<br><a href="https://github.com/tmarois/Filebase">https://github.com/tmarois/Filebase</a><br><small>Filebase is open-sourced software licensed under the MIT license.</small></li>
+						<li><i>Chartist.js</i> by the Gion Kunz<br><a href="https://github.com/gionkunz/chartist-js">https://github.com/gionkunz/chartist-js</a><br><small>Chartist.js is open-sourced software licensed under the DO WHAT THE FUCK YOU WANT TO PUBLIC and MIT license.</small></li>
 						<li><i>Bootstrap</i> by the Bootstrap team<br><a href="https://getbootstrap.com/">https://getbootstrap.com/</a><br><small>Bootstrap is open-sourced software licensed under the MIT license.</small></li>
 						<li><i>jQuery</i> by the jQuery Foundation<br><a href="https://jquery.org/">https://jquery.org/</a><br><small>jQuery is open-sourced software licensed under the MIT license.</small></li>
 						<li><i>Material Design Icons</i> by the Google and other creators | Maintained by Austin Andrews<br><a href="https://materialdesignicons.com/">https://materialdesignicons.com/</a><br><small>Material Design Icons is open-sourced software licensed under the Apache License 2.0.</small></li>

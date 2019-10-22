@@ -43,6 +43,7 @@ Just press "Install". It's easy: D
 
 ### Third party solutions
 - Filebase by the Timothy Marois<br/>[https://github.com/tmarois/Filebase](https://github.com/tmarois/Filebase)
+- Chartist.js by the Gion Kunz<br/>[https://github.com/gionkunz/chartist-js](https://github.com/gionkunz/chartist-js)
 - Bootstrap by the Bootstrap team<br/>[https://getbootstrap.com/](https://getbootstrap.com/)
 - jQuery by the jQuery Foundation<br/>[https://jquery.org/](https://jquery.org/)
 - Material Design Icons by the Google and other creators | Maintained by Austin Andrews<br/>[https://materialdesignicons.com/](https://materialdesignicons.com/)
