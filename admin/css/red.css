@@ -208,16 +208,16 @@ body {
 	height: inherit;
 }
 
-.links-card {
+.links-card, .links-header {
 	cursor: pointer;
 	border-radius: 0 !important;
 }
 
-.links-card:hover {
+.links-card:hover, .links-header:hover {
 	background: #f8f9fa;
 }
 
-.links-card p, .links-card h2 {
+.links-card p, .links-card h2, .links-header p {
 	margin: 0;
 	padding: 0;
 }
@@ -227,7 +227,7 @@ body {
 	font-weight: 700;
 }
 
-.links-card p {
+.links-card p, .links-header p {
 	font-size: 12px;
 }
 
@@ -240,7 +240,7 @@ body {
 	color: orange;
 }
 
-.links-card > .card-body {
+.links-card > .card-body, .links-header > .card-body {
 	display: flex;
     justify-content: space-between;
     align-items: center;
@@ -319,5 +319,8 @@ body {
 {
 	#records_list {
 		height: 300px;
+	}
+	.red-chart.ct-chart .ct-bar {
+	    stroke-width: 10px !important;
 	}
 }
