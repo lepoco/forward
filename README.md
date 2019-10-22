@@ -29,6 +29,7 @@ Each Ajax query is verified by the SHA1 encrypted Nonce.
 ## What do we get?
 - [x] Fast link management system
 - [x] Automatic installation
+- [x] Animated charts
 - [x] A Flat-File database. You don't need MySQL!
 - [x] Administration panel
 - [x] Global statistics
