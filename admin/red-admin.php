@@ -30,7 +30,7 @@
 			self::isLoggedIn();
 
 
-			if(defined('RED_DASHBOARD'))
+			if(defined('RED_PAGE_DASHBOARD'))
 			{
 				if(!$this->LOGGED_IN)
 				{
@@ -43,23 +43,23 @@
 				}
 				else
 				{
-					if(RED_DASHBOARD == 'users')
+					if(RED_PAGE_DASHBOARD == 'users')
 					{
 						$this->RED->page(['page' => 'users', 'title' => 'Users']);
 					}
-					else if(RED_DASHBOARD == 'about')
+					else if(RED_PAGE_DASHBOARD == 'about')
 					{
 						$this->RED->page(['page' => 'about', 'title' => 'About']);
 					}
-					else if(RED_DASHBOARD == 'settings')
+					else if(RED_PAGE_DASHBOARD == 'settings')
 					{
 						$this->RED->page(['page' => 'settings', 'title' => 'Settings']);
 					}
-					else if(RED_DASHBOARD == 'signout')
+					else if(RED_PAGE_DASHBOARD == 'signout')
 					{
 						self::signout();
 					}
-					else if(RED_DASHBOARD == 'ajax')
+					else if(RED_PAGE_DASHBOARD == 'ajax')
 					{
 						self::ajax();
 					}

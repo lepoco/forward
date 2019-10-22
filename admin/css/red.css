@@ -55,6 +55,14 @@ body {
 	padding-top: 56px;
 }
 
+.nav-link > svg {
+	fill: rgba(255,255,255,.5);
+}
+
+.nav-link:hover > svg {
+	fill: rgba(255,255,255,.75);
+}
+
 #red-dashboard {
 	background-color: #f8f9fa;
 }

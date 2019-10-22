@@ -41,14 +41,14 @@
 
 	if($DIR_URL[1] == '')
 		defined('RED_PAGE') or define('RED_PAGE', '_forward_home');
-	else if($DIR_URL[1] == 'dashboard')
+	else if($DIR_URL[1] == RED_DASHBOARD)
 		defined('RED_PAGE') or define('RED_PAGE', '_forward_dashboard');
 	else
 		defined('RED_PAGE') or define('RED_PAGE', filter_var($DIR_URL[1], FILTER_SANITIZE_STRING));
 
 	if(RED_PAGE == '_forward_dashboard')
 		if(isset($DIR_URL[2]))
-			defined('RED_DASHBOARD') or define('RED_DASHBOARD', filter_var($DIR_URL[2], FILTER_SANITIZE_STRING));
+			defined('RED_PAGE_DASHBOARD') or define('RED_PAGE_DASHBOARD', filter_var($DIR_URL[2], FILTER_SANITIZE_STRING));
 
 	/** Main class */
 	if (is_file(ADMPATH.'red-physic.php'))

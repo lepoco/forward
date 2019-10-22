@@ -201,13 +201,42 @@
 				'cache'          => true,
 				'cache_expires'  => 1800
 			]);
+			
+			$option = $db->get('siteurl');
+			$option->save(['value' => $defUrl]);
 
-			$item = $db->get('siteurl');
-			$item->value = $defUrl;
-			$item->save();
-			$item = $db->get('dashboard');
-			$item->value = $defUrl.'dashboard/';
-			$item->save();
+			$option = $db->get('dashboard');
+			$option->save(['value' => $defUrl.'dashboard/']);
+
+			$option = $db->get('redirect_404');
+			$option->save(['value' => false]);
+			$option = $db->get('redirect_404_url');
+			$option->save(['value' => '']);
+
+			$option = $db->get('redirect_home');
+			$option->save(['value' => false]);
+			$option = $db->get('redirect_home_url');
+			$option->save(['value' => '']);
+
+			$option = $db->get('cache_redirects');
+			$option->save(['value' => true]);
+
+			$option = $db->get('redirect_ssl');
+			$option->save(['value' => false]);
+			$option = $db->get('admin_ssl');
+			$option->save(['value' => false]);
+
+			$option = $db->get('js_redirect');
+			$option->save(['value' => false]);
+			$option = $db->get('gtag');
+			$option->save(['value' => '']);
+			$option = $db->get('js_redirect_after');
+			$option->save(['value' => 0]);
+
+			$option = $db->get('captcha_site');
+			$option->save(['value' => '']);
+			$option = $db->get('captcha_secret');
+			$option->save(['value' => '']);
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$records,
