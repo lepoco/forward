@@ -113,8 +113,8 @@
 			if($record->url == NULL)
 				$this->page(['title' => 'Page not found']);
 
+			/** Languages */
 			$lang = self::parseLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-			
 			if(is_array($record->locations))
 				if(array_key_exists($lang, $record->locations))
 					$record->locations[$lang] += 1;
@@ -123,7 +123,25 @@
 			else
 				$record->locations = array($lang => 1);
 
+			/** Daily stats */
+			$time = time();
+			$time = array(
+				'key' => date('Y-m',$time),
+				'day' => date('d',$time),
+			);
+			
+			if(!is_array($record->stats))
+				$record->stats = array();
 
+			if(!array_key_exists($time['key'], $record->stats))
+				$record->stats[$time['key']] = array();
+
+			if(!array_key_exists($time['day'], $record->stats[$time['key']]))
+				$record->stats[$time['key']][$time['day']] = 1;
+			else
+				$record->stats[$time['key']][$time['day']] += 1;
+
+			/** Referrers */
 			if(!is_array($record->referrers))
 				$record->referrers = array();
 
@@ -144,6 +162,7 @@
 					$record->referrers['direct'] += 1;
 			}
 
+			/** Clicks */
 			$record->clicks = $record->clicks + 1;
 			$record->save();
 
