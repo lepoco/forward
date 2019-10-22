@@ -36,6 +36,8 @@
 				])
 			);
 
+			self::https();
+
 			switch (RED_PAGE)
 			{
 				case '_forward_dashboard':
@@ -55,6 +57,28 @@
 				default:
 					self::forward();
 					break;
+			}
+		}
+
+		private function https()
+		{
+			$force = false;
+
+			if(RED_PAGE == '_forward_dashboard')
+				if ($this->DB['options']->get('admin_ssl')->value)
+					$force = true;
+			else
+				if ($this->DB['options']->get('redirect_ssl')->value)
+					$force = true;
+
+			if($force)
+			{
+				if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off")
+				{
+					header('HTTP/1.1 301 Moved Permanently');
+					header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+					exit;
+				}
 			}
 		}
 

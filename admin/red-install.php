@@ -223,7 +223,7 @@
 
 			$option = $db->get('redirect_ssl');
 			$option->save(['value' => false]);
-			$option = $db->get('admin_ssl');
+			$option = $db->get('dashboard_ssl');
 			$option->save(['value' => false]);
 
 			$option = $db->get('js_redirect');

@@ -41,7 +41,7 @@
 	define('RED_NAME', 'Forward');
 
 	/** WebName */
-	define('RED_DS_NAME', 'dashboard');
+	define('RED_DASHBOARD', 'dashboard');
 
 	/** Forward version */
 	define('RED_VERSION', 'beta 1.0.0');

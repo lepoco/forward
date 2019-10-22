@@ -105,10 +105,10 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="admin_ssl">Force HTTPS <i>(ssl connection)</i> for dashboard</label>
-								<select class="form-control" name="admin_ssl" id="admin_ssl">
+								<label for="dashboard_ssl">Force HTTPS <i>(ssl connection)</i> for dashboard</label>
+								<select class="form-control" name="dashboard_ssl" id="dashboard_ssl">
 									<?php
-										$option = $this->DB['options']->get('admin_ssl')->value;
+										$option = $this->DB['options']->get('dashboard_ssl')->value;
 									?>
 									<option value="1"<?php echo $option ? ' selected="selected"' : ""; ?>>Enabled</option>
 									<option value="2"<?php echo !$option ? ' selected="selected"' : ""; ?>>Disabled</option>
@@ -185,16 +185,20 @@
 								<small><?php $p = str_replace('\\','/',trim(ADMPATH.'red-config.php')); echo $p; ?></small>
 							</p>
 							<div class="form-group">
+								<label>Dashboard URL path</label>
+								<input disabled type="text" class="form-control" value="/<?php echo RED_DASHBOARD; ?>/">
+							</div>
+							<div class="form-group">
 								<label>Users database</label>
-								<input disabled type="text" class="form-control" placeholder="<?php echo DB_USERS; ?>" value="<?php echo DB_USERS; ?>">
+								<input disabled type="text" class="form-control" value="<?php echo DB_USERS; ?>">
 							</div>
 							<div class="form-group">
 								<label>Options database</label>
-								<input disabled type="text" class="form-control" placeholder="<?php echo DB_OPTIONS; ?>" value="<?php echo DB_OPTIONS; ?>">
+								<input disabled type="text" class="form-control" value="<?php echo DB_OPTIONS; ?>">
 							</div>
 							<div class="form-group">
 								<label>Records database</label>
-								<input disabled type="text" class="form-control" placeholder="<?php echo DB_RECORDS; ?>" value="<?php echo DB_RECORDS; ?>">
+								<input disabled type="text" class="form-control" value="<?php echo DB_RECORDS; ?>">
 							</div>
 							<div class="form-group">
 								<label>Cryptographic method for passwords</label>
@@ -217,12 +221,12 @@
 
 								?>">
 								<small>Changing the cryptographic method will make all passwords stop working.</small>
-								<hr>
-								<div class="form-group">
-									<label>Debugging</label>
-									<input disabled type="text" class="form-control" value="<?php echo (RED_DEBUG ? 'Enabled' : 'Disabled'); ?>">
-									<small>Remember to turn off debugging if you have stopped testing the page.</small>
-								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+								<label>Debugging</label>
+								<input disabled type="text" class="form-control" value="<?php echo (RED_DEBUG ? 'Enabled' : 'Disabled'); ?>">
+								<small>Remember to turn off debugging if you have stopped testing the page.</small>
 							</div>
 						</div>
 					</div>

@@ -59,7 +59,7 @@ body {
 	fill: rgba(255,255,255,.5);
 }
 
-.nav-link:hover > svg {
+.nav-link:hover > svg, .nav-link.active > svg {
 	fill: rgba(255,255,255,.75);
 }
 

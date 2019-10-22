@@ -226,7 +226,7 @@
 						$_POST['redirect_home_url'],
 						$_POST['cache_redirects'],
 						$_POST['redirect_ssl'],
-						$_POST['admin_ssl'],
+						$_POST['dashboard_ssl'],
 						$_POST['js_redirect'],
 						$_POST['gtag'],
 						$_POST['js_redirect_after'],
@@ -256,8 +256,8 @@
 
 					$option = $this->RED->DB['options']->get('redirect_ssl');
 					$option->save(['value' => ($_POST['redirect_ssl'] == '1' ? true : false)]);
-					$option = $this->RED->DB['options']->get('admin_ssl');
-					$option->save(['value' => ($_POST['admin_ssl'] == '1' ? true : false)]);
+					$option = $this->RED->DB['options']->get('dashboard_ssl');
+					$option->save(['value' => ($_POST['dashboard_ssl'] == '1' ? true : false)]);
 
 					$option = $this->RED->DB['options']->get('js_redirect');
 					$option->save(['value' => ($_POST['js_redirect'] == '1' ? true : false)]);
