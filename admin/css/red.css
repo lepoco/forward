@@ -236,7 +236,7 @@ body {
 }
 
 
-.links-card p > a {
+.links-card p > a, #preview-record-url {
 	color: orange;
 }
 

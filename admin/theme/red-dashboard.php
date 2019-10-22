@@ -111,12 +111,12 @@
 		<div class="row">
 			<div class="col-12 col-lg-3 col-no-gutters" id="records_list">
 				<div class="card links-card"><div class="card-body"><small><strong id="total_records_count"><?php echo count($records); ?></strong> total links</small></div></div>
-				<?php foreach ($records as $key => $record):
+				<?php $c = 0;foreach ($records as $key => $record):$c++;
 					$preURL = str_replace(array('https://www.', 'https://'), array('', ''), $record['url']);
 					if(strlen($preURL) > 35)
 						$preURL = substr($preURL, 0, 35).'...';
 					?>
-					<div class="card links-card" data-daily="<?php echo $record['stats']; ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
@@ -155,17 +155,17 @@
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_add_record_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="<?php echo $rand; ?>" id="randValue" name="randValue">
 								<div class="row">
-									<div class="col-4 col-lg-3 col-no-gutters">
+									<div class="col-4 col-lg-3">
 										<div class="form-group">
 											<input type="text" id="forward-url" name="forward-url" class="form-control" placeholder="https://">
 										</div>
 									</div>
-									<div class="col-4 col-lg-3">
+									<div class="col-4 col-lg-3 col-no-gutters">
 										<div class="form-group">
 											<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo $rand; ?>">
 										</div>
 									</div>
-									<div class="col-4 col-lg-3 col-no-gutters">
+									<div class="col-4 col-lg-3">
 										<button type="submit" id="add-record-send" class="btn btn-block btn-outline-dark">Add new</button>
 									</div>
 								</div>
@@ -206,14 +206,10 @@
 							<hr>
 						</div>
 						<div class="col-12">
-							<?php
-								$curr_record = $records[key($records)];
-							?>
-							<div id="single-record" data-daily="<?php echo $curr_record['stats']; ?>">
-								<p><?php echo date('Y-m-d H:i', $curr_record['__created_at']); ?></p>
-								<h2>/<?php echo $curr_record['__id']; ?></h2>
-								<span><a href="<?php echo $curr_record['url']; ?>"><?php echo $curr_record['url']; ?></a></span>
-								
+							<div id="single-record">
+								<p id="preview-record-date"></p>
+								<h2 id="preview-record-slug"></h2>
+								<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
 								<div class="row">
 									<div class="col-12 col-no-gutters" style="height: 220px;">
 										<div class="ct-chart ct-perfect-fourth red-chart" style="height: 220px;"></div>
@@ -234,16 +230,66 @@
 	</div>
 </div>
 <script>
-	window.onload = function() {
+window.onload = function() {
+	/** Initial chart and changing charts content */
+	jQuery(function()
+	{
+		var bar_chart_height = 200;
+		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
+		var bar_chart_series = [];
+
+		var prev_record = jQuery('#first-record').data();
+		bar_chart_series = prev_record.daily.split('/');
+		jQuery('#preview-record-slug').html('/'+prev_record.slug);
+		jQuery('#preview-record-date').html(prev_record.date);
+		jQuery('#preview-record-url').attr('href', prev_record.url);
+		jQuery('#preview-record-url').html(prev_record.url);
+
+		new Chartist.Bar('.ct-chart', {labels: bar_chart_labels,series: [bar_chart_series]},{height: bar_chart_height,axisX: {position: 'start'},axisY: {position: 'end'}});
+
+		jQuery('.links-card').on('click', function()
+		{
+			var data = jQuery(this).data();
+			jQuery('#preview-record-slug').html('/'+data.slug);
+			jQuery('#preview-record-date').html(data.date);
+			jQuery('#preview-record-url').attr('href', data.url);
+			jQuery('#preview-record-url').html(data.url);
+
+			new Chartist.Bar('.ct-chart', {labels: bar_chart_labels,series: [data.daily.split('/')]},{height: bar_chart_height,axisX: {position: 'start'},axisY: {position: 'end'}});
+		});
+	});
+
+	/** Circle charts */
+	var data = {
+	  series: [5, 3, 4]
+	};
+
+	var sum = function(a, b) { return a + b };
+
+	new Chartist.Pie('.pie-chart1', data, {
+		donut: true,
+		donutWidth: 90,
+	  labelInterpolationFnc: function(value) {
+	    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+	  }
+	});
+
+	new Chartist.Pie('.pie-chart2', data, {
+		donut: true,
+		donutWidth: 90,
+	  labelInterpolationFnc: function(value) {
+	    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+	  }
+	});
+
+
+	/** AJAX - Add new record */
+	jQuery(function()
+	{
 		jQuery('#add-record-send').on('click', function(e){
 			e.preventDefault();
-			if(jQuery('#add-alert').is(':visible')){
-				jQuery('#add-alert').slideToggle();
-			}
-			if(jQuery('#add-success').is(':visible')){
-				jQuery('#add-success').slideToggle();
-			}
-
+			if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle();}
+			if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle();}
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
@@ -268,7 +314,6 @@
 						var date = '<?php echo date('Y-m-d', time()) ?>';
 
 						jQuery("#records_list div:first").after('<div class="card links-card"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
-
 
 						window.setTimeout(function(){
 							jQuery('#add-success').slideToggle()
@@ -310,51 +355,7 @@
 				}
 			});
 		});
-
-
-var prev_record = jQuery('#single-record').data();
-prev_record.daily = prev_record.daily.split('/');
-
-new Chartist.Bar('.ct-chart', {
-  labels: [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>],
-  // Our series array that contains series objects or in this case series data arrays
-  series: [prev_record.daily]
-}, {
-	height: 200,
-  axisX: {
-    // On the x-axis start means top and end means bottom
-    position: 'start'
-  },
-  axisY: {
-    // On the y-axis start means left and end means right
-    position: 'end'
-  }
-});
-
-
-var data = {
-  series: [5, 3, 4]
+	});
 };
-
-var sum = function(a, b) { return a + b };
-
-new Chartist.Pie('.pie-chart1', data, {
-	donut: true,
-	donutWidth: 90,
-  labelInterpolationFnc: function(value) {
-    return Math.round(value / data.series.reduce(sum) * 100) + '%';
-  }
-});
-
-new Chartist.Pie('.pie-chart2', data, {
-	donut: true,
-	donutWidth: 90,
-  labelInterpolationFnc: function(value) {
-    return Math.round(value / data.series.reduce(sum) * 100) + '%';
-  }
-});
-
-
-	};
 </script>
 <?php $this->footer(); ?>
