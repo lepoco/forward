@@ -16,7 +16,6 @@
 	$siteurl = $this->DB['options']->get('siteurl')->value;
 
 	$total_clicks = 0;
-
 	$locations = array();
 	$referrers = array();
 
@@ -25,85 +24,18 @@
 		'm' => date('m', time()),
 		'd' => date('d', time())
 	);
-
 	$date['days'] = cal_days_in_month(CAL_GREGORIAN, (int)$date['m'], (int)$date['y']);
 
-	foreach ($records as $key => $record)
-	{
-		$total_clicks += $record['clicks'];
-
-		if(is_array($record['locations']))
-		{
-			foreach ($record['locations'] as $location => $count)
-			{
-				if(array_key_exists($location, $locations))
-				{
-					$locations[$location] += $count;
-				}
-				else
-				{
-					$locations[$location] = $count;
-				}
-			}
-		}
-
-		if(is_array($record['referrers']))
-		{
-			foreach ($record['referrers'] as $referrer => $count)
-			{
-				if(array_key_exists($referrer, $referrers))
-				{
-					$referrers[$referrer] += $count;
-				}
-				else
-				{
-					$referrers[$referrer] = $count;
-				}
-			}
-		}
-
-		$stats = '';
-		if(is_array($record['stats']) && isset($record['stats'][$date['y'].'-'.$date['m']]))
-		{
-			for ($i=1; $i <= $date['days']; $i++)
-			{ 
-				$stats .= ($i > 1 ? '/' : '').(isset($record['stats'][$date['y'].'-'.$date['m']][$i]) ? $record['stats'][$date['y'].'-'.$date['m']][$i] : '0');
-			}
-		}
+	//A unique slug for the new URL
+	$rand = RED::rand(6);
+	$sucRand = true;
+	while ($sucRand) {
+		$slug = $this->DB['records']->select('__id,url')->where('__id','=',$rand)->results();
+		if(isset($slug[0]))
+			$rand = RED::rand(6);
 		else
-		{
-			for($i=1; $i <= $date['days']; $i++)
-			{
-				$stats .= ($i > 1 ? '/': '').'0';
-			}
-		}
-
-		$records[$key]['stats'] = $stats;
+			$sucRand = false;
 	}
-
-	if(count($locations) == 0)
-		$locations = array('unknown' => 0);
-	arsort($locations);
-
-	if(count($referrers) == 0)
-		$referrers = array('unknown' => 0);
-	arsort($referrers);
-
-	switch (key($locations)) {
-		case 'en-us':
-			$top_lang = 'English';
-			break;
-		
-		default:
-			$top_lang = key($locations);
-			break;
-	}
-
-	if(key($referrers) == 'direct')
-		$top_referrer = 'Email, SMS, Direct';
-	else
-		$top_referrer = key($referrers);
-
 ?>
 
 <div id="red-dashboard" class="block-page distance-navbar">
@@ -111,10 +43,67 @@
 		<div class="row">
 			<div class="col-12 col-lg-3 col-no-gutters" id="records_list">
 				<div class="card links-card"><div class="card-body"><small><strong id="total_records_count"><?php echo count($records); ?></strong> total links</small></div></div>
-				<?php $c = 0;foreach ($records as $key => $record):$c++;
+				<?php $c = 0;
+				foreach ($records as $key => $record):
+
+					/** Records counter */
+					$c++;
+
+					/** Total clicks */
+					$total_clicks += $record['clicks'];
+
+					/** Most popular location */
+					if(is_array($record['locations']))
+						foreach ($record['locations'] as $location => $count)
+							if(array_key_exists($location, $locations))
+								$locations[$location] += $count;
+							else
+								$locations[$location] = $count;
+					if(count($locations) == 0)
+						$locations = array('unknown' => 0);
+					arsort($locations);
+
+					/** Most popular referrer */
+					if(is_array($record['referrers']))
+						foreach ($record['referrers'] as $referrer => $count)
+							if(array_key_exists($referrer, $referrers))
+								$referrers[$referrer] += $count;
+							else
+								$referrers[$referrer] = $count;
+					if(count($referrers) == 0)
+						$referrers = array('unknown' => 0);
+					arsort($referrers);
+					
+					/** Daily statistics */
+					$stats = '';
+					if(is_array($record['stats']) && isset($record['stats'][$date['y'].'-'.$date['m']]))
+						for ($i=1; $i <= $date['days']; $i++)
+							$stats .= ($i > 1 ? '/' : '').(isset($record['stats'][$date['y'].'-'.$date['m']][$i]) ? $record['stats'][$date['y'].'-'.$date['m']][$i] : '0');
+					else
+						for($i=1; $i <= $date['days']; $i++)
+							$stats .= ($i > 1 ? '/': '').'0';
+					$record['stats'] = $stats;
+
+					/** Shorter URL */
 					$preURL = str_replace(array('https://www.', 'https://'), array('', ''), $record['url']);
 					if(strlen($preURL) > 35)
 						$preURL = substr($preURL, 0, 35).'...';
+					
+
+					switch (key($locations)) {
+						case 'en-us':
+						$top_lang = 'English';
+						break;
+
+						default:
+						$top_lang = key($locations);
+						break;
+					}
+
+					if(key($referrers) == 'direct')
+						$top_referrer = 'Email, SMS, Direct';
+					else
+						$top_referrer = key($referrers);
 					?>
 					<div class="card links-card"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
@@ -139,18 +128,6 @@
 								<strong>Success!</strong> New link was added.
 							</div>
 							<form id="add-record-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
-								<?php
-								//Find unical slug
-								$rand = RED::rand(6);
-								$sucRand = true;
-								while ($sucRand) {
-									$slug = $this->DB['records']->select('__id,url')->where('__id','=',$rand)->results();
-									if(isset($slug[0]))
-										$rand = RED::rand(6);
-									else
-										$sucRand = false;
-								}
-								?>
 								<input type="hidden" value="addRecord" name="action">
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_add_record_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="<?php echo $rand; ?>" id="randValue" name="randValue">
@@ -236,26 +213,19 @@ window.onload = function() {
 	{
 		var bar_chart_height = 200;
 		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
-		var bar_chart_series = [];
+
+		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#preview-record-url").html(u)}
+		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)console.log(e.element),e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}}),t.on("created",function(){window.__exampleAnimateTimeout&&(clearTimeout(window.__exampleAnimateTimeout),window.__exampleAnimateTimeout=null),window.__exampleAnimateTimeout=setTimeout(t.update.bind(t),12e3)})}
 
 		var prev_record = jQuery('#first-record').data();
-		bar_chart_series = prev_record.daily.split('/');
-		jQuery('#preview-record-slug').html('/'+prev_record.slug);
-		jQuery('#preview-record-date').html(prev_record.date);
-		jQuery('#preview-record-url').attr('href', prev_record.url);
-		jQuery('#preview-record-url').html(prev_record.url);
-
-		new Chartist.Bar('.ct-chart', {labels: bar_chart_labels,series: [bar_chart_series]},{height: bar_chart_height,axisX: {position: 'start'},axisY: {position: 'end'}});
+		display_record(prev_record.slug, prev_record.date, prev_record.url);
+		bar_chart_animate(prev_record.daily.split('/'));
 
 		jQuery('.links-card').on('click', function()
 		{
 			var data = jQuery(this).data();
-			jQuery('#preview-record-slug').html('/'+data.slug);
-			jQuery('#preview-record-date').html(data.date);
-			jQuery('#preview-record-url').attr('href', data.url);
-			jQuery('#preview-record-url').html(data.url);
-
-			new Chartist.Bar('.ct-chart', {labels: bar_chart_labels,series: [data.daily.split('/')]},{height: bar_chart_height,axisX: {position: 'start'},axisY: {position: 'end'}});
+			display_record(data.slug, data.date, data.url);
+			bar_chart_animate(data.daily.split('/'));
 		});
 	});
 
@@ -266,19 +236,85 @@ window.onload = function() {
 
 	var sum = function(a, b) { return a + b };
 
-	new Chartist.Pie('.pie-chart1', data, {
+	var donut = new Chartist.Pie('.pie-chart1', data, {
 		donut: true,
 		donutWidth: 90,
 	  labelInterpolationFnc: function(value) {
-	    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+		return Math.round(value / data.series.reduce(sum) * 100) + '%';
 	  }
 	});
+
+		donut.on('draw', function (data) {
+			if (data.type === 'slice') {
+				// Get the total path length in order to use for dash array animation
+				var pathLength = data.element._node.getTotalLength();
+
+				// Set a dasharray that matches the path length as prerequisite to animate dashoffset
+				data.element.attr({
+					'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+				});
+
+				// Create animation definition while also assigning an ID to the animation for later sync usage
+				var animationDefinition = {
+					'stroke-dashoffset': {
+						id: 'anim' + data.index,
+						dur: 500 * data.value / data.totalDataSum,
+						from: -pathLength + 'px',
+						to: '0px',
+						// We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+						fill: 'freeze'
+					}
+				};
+
+				// If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+				if (data.index !== 0) {
+					animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+				}
+
+				// We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+				data.element.attr({
+					'stroke-dashoffset': -pathLength + 'px'
+				});
+
+				// We can't use guided mode as the animations need to rely on setting begin manually
+				// See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+				data.element.animate(animationDefinition, false);
+
+				// add (naive) bounce
+				if (data.endAngle === 360) {
+					var index = data.index;
+					var dur = 1000 * data.value / data.totalDataSum / 2;
+					var from = 0;
+					var to = -pathLength / 3;
+
+					for (var i = 0; i < 4; i++) {
+						data.element.animate({
+							'stroke-dashoffset': {
+								id: 'anim' + (index + 1),
+								dur: dur,
+								from: from + 'px',
+								to: to + 'px',
+								fill: 'freeze',
+								begin: 'anim' + index + '.end'
+							}
+						}, false);
+
+						index++;
+						dur /= 1.75;
+
+						var t = from;
+						from = to;
+						to = t / 2.5;
+					}
+				}
+			}
+		});
 
 	new Chartist.Pie('.pie-chart2', data, {
 		donut: true,
 		donutWidth: 90,
 	  labelInterpolationFnc: function(value) {
-	    return Math.round(value / data.series.reduce(sum) * 100) + '%';
+		return Math.round(value / data.series.reduce(sum) * 100) + '%';
 	  }
 	});
 
