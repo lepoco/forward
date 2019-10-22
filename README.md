@@ -32,6 +32,7 @@ Each Ajax query is verified by the SHA1 encrypted Nonce.
 - [x] A Flat-File database. You don't need MySQL!
 - [x] Administration panel
 - [x] Global statistics
+- [x] Multilingual dashboard
 - [x] The ability to create multiple users
 
 ## How to install it?
@@ -40,6 +41,7 @@ Just press "Install". It's easy: D
 
 ### Available full language versions
 - [x] English
+- [x] Polish
 
 ### Third party solutions
 - Filebase by the Timothy Marois<br/>[https://github.com/tmarois/Filebase](https://github.com/tmarois/Filebase)
