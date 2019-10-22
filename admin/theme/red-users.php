@@ -33,7 +33,7 @@
 					<tbody>
 						<?php
 
-						$users = $this->DB['users']->findAll();
+						$users = $this->RED->DB['users']->findAll();
 						$c = 0;
 						foreach($users as $user)
 						{
@@ -53,7 +53,7 @@
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">
 					<input type="hidden" value="addUser" name="action">
-					<input type="hidden" value="<?php echo RED::encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
+					<input type="hidden" value="<?php echo $this->RED->encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
 					<div class="form-group">
 						<label for="userName">Login</label>
 						<input type="text" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter login">

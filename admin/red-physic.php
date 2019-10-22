@@ -90,7 +90,7 @@
 			else
 				exit(RED_DEBUG ? 'The red-page.php file was not found!' : '');
 			
-			return new RED_PAGES($data, $this->DB);
+			return new RED_PAGES($data, $this);
 		}
 
 		private function admin()
@@ -171,7 +171,7 @@
 			exit;	
 		}
 
-		private function parseLanguage()
+		public function parseLanguage()
 		{
 			$langs = array();
 			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), $matches, PREG_SET_ORDER);

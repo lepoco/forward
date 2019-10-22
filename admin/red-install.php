@@ -238,6 +238,11 @@
 			$option = $db->get('captcha_secret');
 			$option->save(['value' => '']);
 
+			$option = $db->get('language_type');
+			$option->save(['value' => 1]);
+			$option = $db->get('language_select');
+			$option->save(['value' => 'en']);
+
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$records,
 				'backupLocation' => $this->dbpath.$records.'/backup',

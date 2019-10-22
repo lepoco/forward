@@ -231,7 +231,9 @@
 						$_POST['gtag'],
 						$_POST['js_redirect_after'],
 						$_POST['captcha_site'],
-						$_POST['captcha_secret']
+						$_POST['captcha_secret'],
+						$_POST['language_type'],
+						$_POST['language_select']
 					))
 						exit('error_3');
 
@@ -270,6 +272,11 @@
 					$option->save(['value' => $_POST['captcha_site']]);
 					$option = $this->RED->DB['options']->get('captcha_secret');
 					$option->save(['value' => $_POST['captcha_secret']]);
+
+					$option = $this->RED->DB['options']->get('language_type');
+					$option->save(['value' => (int)$_POST['language_type']]);
+					$option = $this->RED->DB['options']->get('language_select');
+					$option->save(['value' => $_POST['language_select']]);
 
 					var_dump($_POST);
 				}

@@ -15,11 +15,14 @@
 		private $title;
 		private $uri;
 
-		private $DB;
+		private $RED;
 
-		public function __construct($data, $db)
+		private $LANG;
+		private $LANG_ARR;
+
+		public function __construct($data, $RED)
 		{	
-			$this->DB = $db;
+			$this->RED = $RED;
 
 			if(isset($data['page']))
 				$page = $data['page'];
@@ -40,23 +43,52 @@
 		private function home_url()
 		{
 			if($this->uri == null)
-				$this->uri = $this->DB['options']->get('siteurl')->value;
+				$this->uri = $this->RED->DB['options']->get('siteurl')->value;
 
 			return $this->uri;
 		}
 
 		private function title()
 		{
-			return RED_NAME . ($this->title != null ? ' | '.$this->title : '');
+			return RED_NAME . ($this->title != null ? ' | '.$this->e($this->title) : '');
+		}
+
+		private function e($string)
+		{
+			if($this->LANG == NULL)
+			{
+				if($this->RED->DB['options']->get('language_type')->value == 1)
+					$lang = $this->RED->parseLanguage($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+				else
+					$lang = $this->RED->DB['options']->get('language_select')->value;
+				
+				switch ($lang)
+				{
+					case 'pl': case 'pl_PL':
+						$this->LANG = 'pl_PL';
+						break;
+					default:
+						$this->LANG = 'en_EN';
+						break;
+				}
+			}
+
+			if(file_exists(ADMPATH.'/languages/'.$this->LANG.'.json'))
+				$this->LANG_ARR = json_decode(file_get_contents(ADMPATH.'/languages/'.$this->LANG.'.json'), true);
+
+			if(array_key_exists($string, $this->LANG_ARR))
+				return $this->LANG_ARR[$string];
+			else
+				return $string;
+
 		}
 
 		private function menu()
 		{
-
 			$menu = array(
-				'dashboard' => array('Dashboard', 'dashboard'),
-				'users' => array('Users', 'dashboard/users'),
-				'settings' => array('Settings', 'dashboard/settings')
+				'dashboard' => array($this->e('Dashboard'), 'dashboard'),
+				'users' => array($this->e('Users'), 'dashboard/users'),
+				'settings' => array($this->e('Settings'), 'dashboard/settings')
 			);
 
 			if(defined('RED_PAGE_DASHBOARD'))

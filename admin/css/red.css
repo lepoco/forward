@@ -51,6 +51,10 @@ body {
 	height: 100%;
 }
 
+hr {
+	border-top: 2px solid rgba(0,0,0,.1) !important;
+}
+
 .distance-navbar {
 	padding-top: 56px;
 }
@@ -61,6 +65,10 @@ body {
 
 .nav-link:hover > svg, .nav-link.active > svg {
 	fill: rgba(255,255,255,.75);
+}
+
+.uppercase {
+	text-transform: uppercase;
 }
 
 #red-dashboard {
