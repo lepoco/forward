@@ -12,13 +12,21 @@
 	
 	$this->head(); $this->menu();
 
-	$records = $this->DB['records']->select('__id,__created_at,url,clicks,referrers,locations')->orderBy('__created_at', 'DESC')->results();
+	$records = $this->DB['records']->select('__id,__created_at,url,clicks,stats,referrers,locations')->orderBy('__created_at', 'DESC')->results();
 	$siteurl = $this->DB['options']->get('siteurl')->value;
 
 	$total_clicks = 0;
 
 	$locations = array();
 	$referrers = array();
+
+	$date = array(
+		'y' => date('Y', time()),
+		'm' => date('m', time()),
+		'd' => date('d', time())
+	);
+
+	$date['days'] = cal_days_in_month(CAL_GREGORIAN, (int)$date['m'], (int)$date['y']);
 
 	foreach ($records as $key => $record)
 	{
@@ -53,6 +61,24 @@
 				}
 			}
 		}
+
+		$stats = '';
+		if(is_array($record['stats']) && isset($record['stats'][$date['y'].'-'.$date['m']]))
+		{
+			for ($i=1; $i <= $date['days']; $i++)
+			{ 
+				$stats .= ($i > 1 ? '/' : '').(isset($record['stats'][$date['y'].'-'.$date['m']][$i]) ? $record['stats'][$date['y'].'-'.$date['m']][$i] : '0');
+			}
+		}
+		else
+		{
+			for($i=1; $i <= $date['days']; $i++)
+			{
+				$stats .= ($i > 1 ? '/': '').'0';
+			}
+		}
+
+		$records[$key]['stats'] = $stats;
 	}
 
 	if(count($locations) == 0)
@@ -86,12 +112,11 @@
 			<div class="col-12 col-lg-3 col-no-gutters" id="records_list">
 				<div class="card links-card"><div class="card-body"><small><strong id="total_records_count"><?php echo count($records); ?></strong> total links</small></div></div>
 				<?php foreach ($records as $key => $record):
-
 					$preURL = str_replace(array('https://www.', 'https://'), array('', ''), $record['url']);
 					if(strlen($preURL) > 35)
 						$preURL = substr($preURL, 0, 35).'...';
 					?>
-					<div class="card links-card">
+					<div class="card links-card" data-daily="<?php echo $record['stats']; ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
@@ -181,10 +206,10 @@
 							<hr>
 						</div>
 						<div class="col-12">
-							<div id="single-record">
-								<?php
+							<?php
 								$curr_record = $records[key($records)];
-								?>
+							?>
+							<div id="single-record" data-daily="<?php echo $curr_record['stats']; ?>">
 								<p><?php echo date('Y-m-d H:i', $curr_record['__created_at']); ?></p>
 								<h2>/<?php echo $curr_record['__id']; ?></h2>
 								<span><a href="<?php echo $curr_record['url']; ?>"><?php echo $curr_record['url']; ?></a></span>
@@ -287,31 +312,13 @@
 		});
 
 
-var data = {
-  // A labels array that can contain any sort of values
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  // Our series array that contains series objects or in this case series data arrays
-  series: [
-    [5, 2, 4, 2, 11, 18, 9]
-  ]
-};
-
-// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
-// as you saw in the previous example
-var options = {
-  height: 200
-};
-
-// Create a new line chart object where as first parameter we pass in a selector
-// that is resolving to our chart container element. The Second parameter
-// is the actual data object. As a third parameter we pass in our custom options.
-//new Chartist.Line('.ct-chart', data, options);
+var prev_record = jQuery('#single-record').data();
+prev_record.daily = prev_record.daily.split('/');
 
 new Chartist.Bar('.ct-chart', {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  series: [
-    [5, 4, 3, 7, 5, 10, 3]
-  ]
+  labels: [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>],
+  // Our series array that contains series objects or in this case series data arrays
+  series: [prev_record.daily]
 }, {
 	height: 200,
   axisX: {
@@ -325,7 +332,7 @@ new Chartist.Bar('.ct-chart', {
 });
 
 
-data = {
+var data = {
   series: [5, 3, 4]
 };
 

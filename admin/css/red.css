@@ -33,7 +33,7 @@ body {
 
 .red-chart.ct-chart .ct-bar {
 	stroke: #007bff !important;
-	stroke-width: 40px !important;
+	stroke-width: 20px !important;
 }
 
 .block-page {
