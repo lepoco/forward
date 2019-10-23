@@ -52,6 +52,16 @@
 					self::admin();
 					break;
 				case '_forward_home':
+					if($this->DB['options']->get('redirect_home')->value)
+					{
+						$home_url = $this->DB['options']->get('redirect_home_url')->value;
+						if(!empty($home_url))
+						{
+							header('HTTP/1.1 301 Moved Permanently');
+							header('Location: ' . $home_url);
+							exit;
+						}
+					}
 					$this->page(['title' => 'Home page', 'page' => 'home']);
 					break;
 				case '404':

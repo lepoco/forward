@@ -29,6 +29,20 @@
 			else
 				$page = '404';
 
+			if($page == '404')
+			{
+				if($this->DB['options']->get('redirect_404')->value)
+				{
+					$home_url = $this->DB['options']->get('redirect_404_url')->value;
+					if(!empty($home_url))
+					{
+						header('HTTP/1.1 301 Moved Permanently');
+						header('Location: ' . $home_url);
+						exit;
+					}
+				}
+			}
+
 			if(isset($data['title']))
 				$this->title = $data['title'];
 			else
