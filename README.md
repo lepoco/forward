@@ -12,7 +12,7 @@ With the help of Forward you can collect information about:
 
 ## Dashboard
 Simple intuitive interface modeled on Adobe and Bit.ly websites.
-<br/>
+<br/><br/>
 ![Login form](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
 
 ## Database
