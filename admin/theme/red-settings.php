@@ -287,7 +287,7 @@
 					}
 					else
 					{
-						var error_text = 'An error has occurred.';
+						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
 						if(e == 'e_invalid_404')
 						{
 							var error_text = 'The 404 page redirect URL is not valid.';

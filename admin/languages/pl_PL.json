@@ -84,5 +84,11 @@
 	"Manager": "Menedżer",
 	"Has full permissions to do everything.": "Ma pełne uprawnienia, aby robić wszystko",
 	"Can add and delete records. Cannot change settings or add users.": "Może dodawać i usuwać rekordy. Nie może zmieniać ustawień ani dodawać użytkowników",
-	"Can only view data.": "Może tylko przeglądać dane"
+	"Can only view data.": "Może tylko przeglądać dane",
+	"Something went wrong!": "Coś poszło nie tak!",
+	"Success!": "Sukces!",
+	"Holy guacamole!": "Motyla noga!",
+	"New link was added.": "Nowy link został dodany.",
+	"You must provide a URL!": "Musisz podać adres URL",
+	"The URL you entered is not valid.": "Podany adres jest nieprawidłowy"
 }

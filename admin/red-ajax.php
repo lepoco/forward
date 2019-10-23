@@ -122,8 +122,8 @@
 
 			$record = $this->RED->DB['records']->get($slug);
 
-			if(!filter_var($_POST['forward-url'], FILTER_VALIDATE_URL))
-				exit(self::ERROR_INVALID_URL);
+			//if(!filter_var($_POST['forward-url'], FILTER_VALIDATE_URL))
+			//	exit(self::ERROR_INVALID_URL);
 			
 			$record->save(array('url' => $_POST['forward-url'], 'clicks' => 0));
 			exit(self::CODE_SUCCESS);

@@ -62,7 +62,7 @@
 							else
 								$locations[$location] = $count;
 					if(count($locations) == 0)
-						$locations = array('unknown' => 0);
+						$locations = array($this->e('Unknown') => 0);
 					arsort($locations);
 
 					/** Most popular referrer */
@@ -73,7 +73,7 @@
 							else
 								$referrers[$referrer] = $count;
 					if(count($referrers) == 0)
-						$referrers = array('unknown' => 0);
+						$referrers = array($this->e('Unknown') => 0);
 					arsort($referrers);
 					
 					/** Daily statistics */
@@ -125,10 +125,10 @@
 						<?php if ($this->RED->is_manager()): ?>
 						<div class="col-12">
 							<div id="add-alert" class="alert alert-danger fade show" role="alert" style="display: none;">
-								<strong>Holy guacamole!</strong> <span id="error_text">Something went wrong!</span>
+								<strong><?php echo $this->e('Holy guacamole!'); ?></strong> <span id="error_text"><?php echo $this->e('Something went wrong!'); ?></span>
 							</div>
 							<div id="add-success" class="alert alert-success fade show" role="alert" style="display: none;">
-								<strong>Success!</strong> New link was added.
+								<strong><?php echo $this->e('Success!'); ?></strong> <?php echo $this->e('New link was added.'); ?>
 							</div>
 							<form id="add-record-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 								<input type="hidden" value="add_record" name="action">
@@ -330,15 +330,15 @@ window.onload = function() {
 							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
 						}, 3000);
 					}else{
-						var error_text = 'Unknown';
+						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
 
 						if(e == 'e07')
 						{
-							error_text = 'You must provide a URL.';
+							error_text = '<?php echo $this->e('You must provide a URL!'); ?>';
 						}
 						else
 						{
-							error_text = 'The URL you entered is not valid.';
+							error_text = '<?php echo $this->e('The URL you entered is not valid.'); ?>';
 						}
 
 						jQuery('#error_text').html(error_text);
