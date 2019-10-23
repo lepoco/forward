@@ -217,7 +217,7 @@ window.onload = function() {
 		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
 
 		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#preview-record-url").html(u)}
-		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)console.log(e.element),e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
+		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
 
 		var prev_record = jQuery('#first-record').data();
 		display_record(prev_record.slug, prev_record.date, prev_record.url);
@@ -230,96 +230,6 @@ window.onload = function() {
 			bar_chart_animate(data.daily.split('/'));
 		});
 	});
-
-	/** Circle charts */
-	var data = {
-	  series: [5, 3, 4]
-	};
-
-	var sum = function(a, b) { return a + b };
-
-	var donut = new Chartist.Pie('.pie-chart1', data, {
-		donut: true,
-		donutWidth: 90,
-	  labelInterpolationFnc: function(value) {
-		return Math.round(value / data.series.reduce(sum) * 100) + '%';
-	  }
-	});
-
-		donut.on('draw', function (data) {
-			if (data.type === 'slice') {
-				// Get the total path length in order to use for dash array animation
-				var pathLength = data.element._node.getTotalLength();
-
-				// Set a dasharray that matches the path length as prerequisite to animate dashoffset
-				data.element.attr({
-					'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
-				});
-
-				// Create animation definition while also assigning an ID to the animation for later sync usage
-				var animationDefinition = {
-					'stroke-dashoffset': {
-						id: 'anim' + data.index,
-						dur: 500 * data.value / data.totalDataSum,
-						from: -pathLength + 'px',
-						to: '0px',
-						// We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-						fill: 'freeze'
-					}
-				};
-
-				// If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-				if (data.index !== 0) {
-					animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
-				}
-
-				// We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
-				data.element.attr({
-					'stroke-dashoffset': -pathLength + 'px'
-				});
-
-				// We can't use guided mode as the animations need to rely on setting begin manually
-				// See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
-				data.element.animate(animationDefinition, false);
-
-				// add (naive) bounce
-				if (data.endAngle === 360) {
-					var index = data.index;
-					var dur = 1000 * data.value / data.totalDataSum / 2;
-					var from = 0;
-					var to = -pathLength / 3;
-
-					for (var i = 0; i < 4; i++) {
-						data.element.animate({
-							'stroke-dashoffset': {
-								id: 'anim' + (index + 1),
-								dur: dur,
-								from: from + 'px',
-								to: to + 'px',
-								fill: 'freeze',
-								begin: 'anim' + index + '.end'
-							}
-						}, false);
-
-						index++;
-						dur /= 1.75;
-
-						var t = from;
-						from = to;
-						to = t / 2.5;
-					}
-				}
-			}
-		});
-
-	new Chartist.Pie('.pie-chart2', data, {
-		donut: true,
-		donutWidth: 90,
-	  labelInterpolationFnc: function(value) {
-		return Math.round(value / data.series.reduce(sum) * 100) + '%';
-	  }
-	});
-
 
 	/** AJAX - Add new record */
 	jQuery(function()

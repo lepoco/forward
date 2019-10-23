@@ -32,7 +32,7 @@ body {
 }
 
 .red-chart.ct-chart .ct-bar {
-	stroke: #007bff !important;
+	stroke: orange !important;
 	stroke-width: 20px !important;
 }
 
