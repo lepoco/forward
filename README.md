@@ -13,7 +13,11 @@ With the help of Forward you can collect information about:
 ## Dashboard
 Simple intuitive interface modeled on Adobe and Bit.ly websites.
 <br/><br/>
-![Login form](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
+![Login form](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-1.png?raw=true)
+<br/><br/>
+![Dashboard](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
+<br/><br/>
+![Options](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
 
 ## Database
 The database is stored in the Flat-File format. That is, data was saved on the server in files.
