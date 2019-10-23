@@ -17,7 +17,7 @@ Simple intuitive interface modeled on Adobe and Bit.ly websites.
 <br/><br/>
 ![Dashboard](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
 <br/><br/>
-![Options](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
+![Options](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-3.png?raw=true)
 
 ## Database
 The database is stored in the Flat-File format. That is, data was saved on the server in files.
