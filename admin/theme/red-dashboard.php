@@ -194,9 +194,11 @@
 										<h2 id="preview-record-slug"></h2>
 										<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
 									</div>
+									<?php if ($this->RED->is_manager()): ?>
 									<div class="col-2 col-md-1 remove-record">
-										<a href="#" data-id="" id="remove-record"><svg viewBox="0 0 24 24"><path d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></a>
+										<a href="#" id="delete-record-icon"><svg viewBox="0 0 24 24"><path d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></a>
 									</div>
+									<?php endif; ?>
 								</div>
 								<div class="row">
 									<div class="col-12 col-no-gutters" style="height: 220px;">
@@ -217,6 +219,22 @@
 		</div>
 	</div>
 </div>
+<?php if ($this->RED->is_manager()): ?>
+<div class="modal fade" id="delete-record-modal" tabindex="-1" role="dialog" aria-labelledby="delete-record-modalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h4>Delete record</h4>
+				<span>Are you sure you want to delete the <strong><span id="delete-record-name"></span></strong> record?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" id="delete-record-confirm" type="button" class="btn btn-danger">Delete record</button>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
 <script>
 window.onload = function() {
 	/** Initial chart and changing charts content */
@@ -225,7 +243,7 @@ window.onload = function() {
 		var bar_chart_height = 200;
 		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
 
-		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#preview-record-url").html(u)}
+		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#delete-record-icon").attr("data-id",r),jQuery("#preview-record-url").html(u)}
 		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
 
 		var prev_record = jQuery('#first-record').data();
@@ -237,6 +255,39 @@ window.onload = function() {
 			var data = jQuery(this).data();
 			display_record(data.slug, data.date, data.url);
 			bar_chart_animate(data.daily.split('/'));
+		});
+	});
+	<?php if ($this->RED->is_manager()): ?>
+	/** AJAX - Delete record */
+	jQuery(function(){
+		jQuery('#delete-record-icon').on('click', function(e){
+			e.preventDefault();
+			console.log(jQuery('#delete-record-icon').data());
+
+			var data = jQuery('#delete-record-icon').data();
+			
+			jQuery('#delete-record-name').html(data.id);
+			jQuery('#delete-record-confirm').attr('data-id', data.id);
+			jQuery('#delete-record-modal').modal('show');
+		});
+		jQuery('#delete-record-confirm').on('click', function(e){
+			e.preventDefault();
+			var data = jQuery(this).data();
+			jQuery.ajax({
+				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				type:'post',
+				data: 'action=removeRecord&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.id,
+				success:function(e)
+				{
+					console.log(e);
+				},
+				fail:function(xhr, textStatus, errorThrown){
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(errorThrown);
+					jQuery('#add-alert').slideToggle();
+				}
+			});
 		});
 	});
 
@@ -313,6 +364,7 @@ window.onload = function() {
 			});
 		});
 	});
+	<?php endif; ?>
 };
 </script>
 <?php $this->footer(); ?>

@@ -29,7 +29,6 @@
 			
 			self::isLoggedIn();
 
-
 			if(defined('RED_PAGE_DASHBOARD'))
 			{
 				if(!$this->LOGGED_IN)
@@ -298,6 +297,25 @@
 					$option->save(['value' => $_POST['language_select']]);
 
 					var_dump($_POST);
+				}
+				else if($_POST['action'] == 'removeRecord')
+				{
+					if(!self::verifyNonce('ajax_remove_record_nonce'))
+						exit('error_2');
+
+					if(!$this->RED->is_manager())
+						exit('error_pre');
+
+					if(!isset($_POST['record_id']))
+						exit('error_3');
+
+					$record = $this->RED->DB['records']->get(filter_var($_POST['record_id'], FILTER_SANITIZE_STRING));
+
+					if($record == NULL)
+						exit('error_4');
+
+					$record = $this->RED->DB['records']->delete(filter_var($_POST['record_id'], FILTER_SANITIZE_STRING));
+					exit('success');
 				}
 				exit('error_1');
 			}
