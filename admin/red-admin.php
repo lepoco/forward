@@ -65,7 +65,7 @@
 					}
 					else
 					{
-						$this->RED->page(['title' => 'Dashboard page not found']);
+						$this->RED->page(['title' => 'Page not found']);
 					}
 				}
 			}

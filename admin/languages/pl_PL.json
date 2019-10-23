@@ -81,5 +81,8 @@
 	"Last login": "Ostatnie logowanie",
 	"Administrator": "Administrator",
 	"Analyst": "Analityk",
-	"Manager": "Menedżer"
+	"Manager": "Menedżer",
+	"Has full permissions to do everything.": "Ma pełne uprawnienia, aby robić wszystko",
+	"Can add and delete records. Cannot change settings or add users.": "Może dodawać i usuwać rekordy. Nie może zmieniać ustawień ani dodawać użytkowników",
+	"Can only view data.": "Może tylko przeglądać dane"
 }

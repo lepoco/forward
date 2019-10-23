@@ -18,14 +18,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-3" style="margin-bottom: 40px;">
-				<h4><?php echo $this->e('Administrator'); ?></h4>
-				<span><?php echo $this->e('Has full permissions to do everything.'); ?></span>
+				<h5 style="margin:0"><?php echo $this->e('Administrator'); ?></h5>
+				<small><?php echo $this->e('Has full permissions to do everything.'); ?></small>
 				<hr>
-				<h4><?php echo $this->e('Manager'); ?></h4>
-				<span><?php echo $this->e('Can add and delete records. Cannot change settings or add users.'); ?></span>
+				<h5 style="margin:0"><?php echo $this->e('Manager'); ?></h5>
+				<small><?php echo $this->e('Can add and delete records. Cannot change settings or add users.'); ?></small>
 				<hr>
-				<h4><?php echo $this->e('Analyst'); ?></h4>
-				<span><?php echo $this->e('Can only view data.'); ?></span>
+				<h5 style="margin:0"><?php echo $this->e('Analyst'); ?></h5>
+				<small><?php echo $this->e('Can only view data.'); ?></small>
 				<hr>
 				<button id="add-user" data-toggle="modal" data-target="#addUserModal" class="btn btn-block btn-outline-dark"><?php echo $this->e('Add new user'); ?></button>
 			</div>
