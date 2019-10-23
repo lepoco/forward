@@ -55,7 +55,7 @@
 		<div class="modal-content">
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">
-					<input type="hidden" value="addUser" name="action">
+					<input type="hidden" value="add_user" name="action">
 					<input type="hidden" value="<?php echo $this->RED->encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
 					<div class="form-group">
 						<label for="userName">Login</label>

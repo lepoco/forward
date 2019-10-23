@@ -14,12 +14,10 @@
 ?>
 <div id="red-settings">
 	<form id="settings-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
-		<input type="hidden" value="saveSettings" name="action">
+		<input type="hidden" value="save_settings" name="action">
 		<input type="hidden" value="<?php echo RED::encrypt('ajax_save_settings_nonce', 'nonce'); ?>" name="nonce">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
-				</div>
 				<div class="col-12 col-md-3" style="margin-bottom: 50px;">
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-main-tab" data-toggle="pill" href="#v-pills-main" role="tab" aria-controls="v-pills-main" aria-selected="true"><?php echo $this->e('Main'); ?></a>
@@ -35,6 +33,12 @@
 					<button id="save-settings" type="submit" class="btn btn-block btn-outline-dark"><?php echo $this->e('Save settings'); ?></button>
 				</div>
 				<div class="col-12 col-md-9">
+					<div id="alert-error" class="alert alert-danger fade show" role="alert" style="display: none;">
+						<strong>Holy guacamole!</strong> <span id="error_text">Something went wrong!</span>
+					</div>
+					<div id="alert-success" class="alert alert-success fade show" role="alert" style="display: none;">
+						<strong>Success!</strong> Settings have been saved.
+					</div>
 					<div class="tab-content" id="v-pills-tabContent">
 						<div class="tab-pane fade show active" id="v-pills-main" role="tabpanel" aria-labelledby="v-pills-main-tab">
 							<h2 class="display-4" style="font-size: 26px;"><?php echo $this->e('URLs'); ?></h2>
@@ -265,12 +269,38 @@
 	window.onload = function() {
 		jQuery('#save-settings').on('click', function(e){
 			e.preventDefault();
+			if(jQuery('#alert-error').is(':visible')){jQuery('#alert-error').slideToggle(400,function(){jQuery('#add-alert').hide();});}
+			if(jQuery('#alert-success').is(':visible')){jQuery('#alert-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
+
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
 				data:$("#settings-form").serialize(),
 				success:function(e)
 				{
+					if(e == 's01')
+					{
+						jQuery('#alert-success').slideToggle();
+						window.setTimeout(function(){
+							jQuery('#alert-success').slideToggle(400, function(){jQuery('#alert-success').hide();});
+						}, 5000);
+					}
+					else
+					{
+						var error_text = 'An error has occurred.';
+						if(e == 'e_invalid_404')
+						{
+							var error_text = 'The 404 page redirect URL is not valid.';
+						}
+						else if(e == 'e_invalid_home')
+						{
+							var error_text = 'The home page redirect URL is not valid.';
+						}
+
+						jQuery('#error_text').text(error_text);
+						jQuery('#alert-error').slideToggle();
+					}
+
 					console.log(e);
 				},
 				fail:function(xhr, textStatus, errorThrown){

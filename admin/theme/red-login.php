@@ -36,8 +36,8 @@
 						<div class="card">
 							<div class="card-body">
 								<h1>Sign in</h1>
-								<input type="hidden" value="<?php echo RED::encrypt('ajax_login_nonce', 'nonce'); ?>" name="nonce">
-								<input type="hidden" value="signIn" name="action">
+								<input type="hidden" value="<?php echo RED::encrypt('ajax_sign_in_nonce', 'nonce'); ?>" name="nonce">
+								<input type="hidden" value="sign_in" name="action">
 								<div class="form-group">
 									<label for="login">Login</label>
 									<input type="text" class="form-control" name="login" id="login" placeholder="Enter login/email">
@@ -74,7 +74,7 @@
 				data:$("#login-form").serialize(),
 				success:function(e)
 				{
-					if(e == 'success')
+					if(e == 's01')
 					{
 						location.reload();
 					}

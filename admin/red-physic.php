@@ -296,10 +296,10 @@
 				return FALSE;
 		}
 
-		private function include($path)
+		public function include($path)
 		{
 			if (is_file($path))
-				return require_once(ADMPATH.'red-admin.php');
+				return require_once($path);
 			else
 				exit(RED_DEBUG ? 'The '.$path.' file was not found!' : '');
 		}

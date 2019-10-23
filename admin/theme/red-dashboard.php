@@ -131,7 +131,7 @@
 								<strong>Success!</strong> New link was added.
 							</div>
 							<form id="add-record-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
-								<input type="hidden" value="addRecord" name="action">
+								<input type="hidden" value="add_record" name="action">
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_add_record_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="<?php echo $rand; ?>" id="randValue" name="randValue">
 								<div class="row">
@@ -265,7 +265,7 @@ window.onload = function() {
 			console.log(jQuery('#delete-record-icon').data());
 
 			var data = jQuery('#delete-record-icon').data();
-			
+
 			jQuery('#delete-record-name').html(data.id);
 			jQuery('#delete-record-confirm').attr('data-id', data.id);
 			jQuery('#delete-record-modal').modal('show');
@@ -276,9 +276,12 @@ window.onload = function() {
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
-				data: 'action=removeRecord&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.id,
+				data: 'action=remove_record&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.id,
 				success:function(e)
 				{
+					if(e == 'success'){
+
+					}
 					console.log(e);
 				},
 				fail:function(xhr, textStatus, errorThrown){
@@ -296,15 +299,15 @@ window.onload = function() {
 	{
 		jQuery('#add-record-send').on('click', function(e){
 			e.preventDefault();
-			if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle();}
-			if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle();}
+			if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
+			if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
 				data:$("#add-record-form").serialize(),
 				success:function(e)
 				{
-					if(e == 'success')
+					if(e == 's01')
 					{
 						jQuery('#add-success').slideToggle();
 
@@ -324,30 +327,18 @@ window.onload = function() {
 						jQuery("#records_list div:first").after('<div class="card links-card"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
 
 						window.setTimeout(function(){
-							jQuery('#add-success').slideToggle()
+							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
 						}, 3000);
 					}else{
 						var error_text = 'Unknown';
 
-						if(e == 'error_2')
+						if(e == 'e07')
 						{
-							error_text = 'The form verification key is invalid.';
+							error_text = 'You must provide a URL.';
 						}
-						else if(e == 'error_3')
+						else
 						{
-							error_text = 'The form content is not valid.';
-						}
-						else if(e == 'error_4')
-						{
-							error_text = 'You must provide a url.';
-						}
-						else if(e == 'error_5')
-						{
-							error_text = 'This url has already been added.';
-						}
-						else if(e == 'error_6')
-						{
-							error_text = 'Shortcut with this slug already exists.';
+							error_text = 'The URL you entered is not valid.';
 						}
 
 						jQuery('#error_text').html(error_text);
