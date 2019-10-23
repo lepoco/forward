@@ -122,6 +122,7 @@
 			<div class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;height: inherit;overflow: auto;">
 				<div class="container-fluid">
 					<div class="row">
+						<?php if ($this->RED->is_manager()): ?>
 						<div class="col-12">
 							<div id="add-alert" class="alert alert-danger fade show" role="alert" style="display: none;">
 								<strong>Holy guacamole!</strong> <span id="error_text">Something went wrong!</span>
@@ -150,6 +151,7 @@
 								</div>
 							</form>
 						</div>
+						<?php endif; ?>
 						<div class="col-12" style="margin-top:32px;">
 							<ul class="list-inline">
 								<li class="list-inline-item">

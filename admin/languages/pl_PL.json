@@ -78,5 +78,8 @@
 	"Unknown": "Nieznany",
 	"Add new user": "Dodaj nowego użytkownika",
 	"Date created": "Data utworzenia",
-	"Last login": "Ostatnie logowanie"
+	"Last login": "Ostatnie logowanie",
+	"Administrator": "Administrator",
+	"Analyst": "Analityk",
+	"Manager": "Menedżer"
 }

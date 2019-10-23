@@ -38,22 +38,22 @@
 						if($_POST['action'] == 'signIn')
 							self::ajax();
 
-					header("Location: " . $RED->DB['options']->get('dashboard')->value);
+					header("Location: " . $this->RED->DB['options']->get('dashboard')->value);
 					exit;
 				}
 				else
 				{
-					if(RED_PAGE_DASHBOARD == 'users')
+					if(RED_PAGE_DASHBOARD == 'users' && $this->RED->is_admin())
 					{
 						$this->RED->page(['page' => 'users', 'title' => 'Users']);
+					}
+					else if(RED_PAGE_DASHBOARD == 'settings' && $this->RED->is_admin())
+					{
+						$this->RED->page(['page' => 'settings', 'title' => 'Settings']);
 					}
 					else if(RED_PAGE_DASHBOARD == 'about')
 					{
 						$this->RED->page(['page' => 'about', 'title' => 'About']);
-					}
-					else if(RED_PAGE_DASHBOARD == 'settings')
-					{
-						$this->RED->page(['page' => 'settings', 'title' => 'Settings']);
 					}
 					else if(RED_PAGE_DASHBOARD == 'signout')
 					{
@@ -91,29 +91,41 @@
 					if(!self::verifyNonce('ajax_add_user_nonce'))
 						exit('error_2');
 
+					if(!$this->RED->is_admin())
+						exit('error_pre');
+
 					if($_POST['userPassword'] != $_POST['userPasswordConfirm'])
 						exit('error_3');
 
-					if($_POST['userName'] == '' || $_POST['userPassword'] == '')
+					if(!isset(
+						$_POST['userName'],
+						$_POST['userEmail'],
+						$_POST['userRole'],
+						$_POST['userPassword'],
+						$_POST['userPasswordConfirm']
+					))
 						exit('error_4');
 
-					$user = $this->RED->DB['users']->get($_POST['userName']);
+					if($_POST['userName'] == '' || $_POST['userPassword'] == '')
+						exit('error_5');
+
+					$user = $this->RED->DB['users']->get(filter_var($_POST['userName'], FILTER_SANITIZE_STRING));
 
 					if($user->password == NULL)
 					{
 						$user->email = $_POST['userEmail'];
+						$user->role = ($_POST['userRole'] == 'admin' ? 'admin' : ( $_POST['userRole'] == 'manager' ? 'manager' : 'analyst' ));
 						$user->password = $this->RED->encrypt($_POST['userPassword']);
 						$user->save();
 						exit('success');
 					}
 					else
 					{
-						exit('error_4');
+						exit('error_6');
 					}
 				}
 				else if($_POST['action'] == 'signIn')
 				{
-
 					if(!self::verifyNonce('ajax_login_nonce'))
 						exit('error_2');
 
@@ -172,6 +184,7 @@
 						$_SESSION['l'] = TRUE;
 						$_SESSION['u'] = $userName;
 						$_SESSION['t'] = $token;
+						$_SESSION['r'] = $user->role;
 
 						exit('success');
 					}
@@ -186,6 +199,9 @@
 				{
 					if(!self::verifyNonce('ajax_add_record_nonce'))
 						exit('error_2');
+
+					if(!$this->RED->is_manager())
+						exit('error_pre');
 
 					if(!isset($_POST['forward-url'], $_POST['forward-slug'], $_POST['randValue']))
 						exit('error_3');
@@ -216,6 +232,9 @@
 				{
 					if(!self::verifyNonce('ajax_save_settings_nonce'))
 						exit('error_2');
+
+					if(!$this->RED->is_admin())
+						exit('error_pre');
 
 					if(!isset(
 						$_POST['site_url'],
@@ -311,7 +330,7 @@
 		{
 			$this->LOGGED_IN = FALSE;
 
-			if(isset($_SESSION['l'], $_SESSION['u'], $_SESSION['t']))
+			if(isset($_SESSION['l'], $_SESSION['u'], $_SESSION['t'], $_SESSION['r']))
 			{
 				$user = $this->RED->DB['users']->get(filter_var($_SESSION['u'], FILTER_SANITIZE_STRING));
 

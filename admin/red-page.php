@@ -85,11 +85,13 @@
 
 		private function menu()
 		{
-			$menu = array(
-				'dashboard' => array($this->e('Dashboard'), 'dashboard'),
-				'users' => array($this->e('Users'), 'dashboard/users'),
-				'settings' => array($this->e('Settings'), 'dashboard/settings')
-			);
+			$menu = array('dashboard' => array($this->e('Dashboard'), 'dashboard'));
+
+			if($this->RED->is_admin())
+			{
+				$menu['users'] = array($this->e('Users'), 'dashboard/users');
+				$menu['settings'] = array($this->e('Settings'), 'dashboard/settings');
+			}
 
 			if(defined('RED_PAGE_DASHBOARD'))
 				$page = RED_PAGE_DASHBOARD;

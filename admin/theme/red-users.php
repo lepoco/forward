@@ -18,17 +18,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-3" style="margin-bottom: 40px;">
+				<h4><?php echo $this->e('Administrator'); ?></h4>
+				<span><?php echo $this->e('Has full permissions to do everything.'); ?></span>
+				<hr>
+				<h4><?php echo $this->e('Manager'); ?></h4>
+				<span><?php echo $this->e('Can add and delete records. Cannot change settings or add users.'); ?></span>
+				<hr>
+				<h4><?php echo $this->e('Analyst'); ?></h4>
+				<span><?php echo $this->e('Can only view data.'); ?></span>
+				<hr>
 				<button id="add-user" data-toggle="modal" data-target="#addUserModal" class="btn btn-block btn-outline-dark"><?php echo $this->e('Add new user'); ?></button>
 			</div>
 			<div class="col-12 col-md-9">
 				<?php
-
-					$c = 0;
 					foreach($users as $user)
 					{
 						$html  = '<div class="card user-card"><div class="card-body"><div class="row">';
-						$html .= '<div class="col-12 col-sm-6" style="display:flex;align-items:center;padding-bottom:15px;padding-top:15px;">';
-						$html .= '<div><h2>'.$user->getId().'</h2><p><i>'.$user->email.'</i></p></div></div>';
+						$html .= '<div class="col-12 col-sm-6" style="display:flex;align-items:center;padding-bottom:5px;padding-top:5px;">';
+						$html .= '<div><h2>'.$user->getId().'</h2><p><i>'.$user->email.'</i></p><small>'.( $user->role == 'admin' ? $this->e('Administrator') : ( $user->role == 'analyst' ? $this->e('Analyst') : $this->e('Manager')) ).'</small></div></div>';
 						$html .= '<div class="col-12 col-sm-6">';
 						$html .= '<span><small>'.$this->e('Date created').':</small></span><p>'.$user->createdAt().'</p>';
 						$html .= '<span><small>'.$this->e('Last login').':</small></span><p>'.($user->lastlogin != NULL ? date('Y-m-d H:i:s', $user->lastlogin) : $this->e('Never')).'</p>';
@@ -57,6 +64,14 @@
 					<div class="form-group">
 						<label for="userEmail">Email address</label>
 						<input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+					</div>
+					<div class="form-group">
+						<label for="userRole">Role</label>
+						<select class="form-control" id="userRole" name="userRole">
+							<option value="analyst"><?php echo $this->e('Analyst'); ?></option>
+							<option value="manager"><?php echo $this->e('Manager'); ?></option>
+							<option value="admin"><?php echo $this->e('Administrator'); ?></option>
+						</select>
 					</div>
 					<div class="row">
 						<div class="col-12 col-lg-6">

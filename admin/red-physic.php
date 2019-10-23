@@ -15,6 +15,9 @@
 		private $page;
 		private $uri;
 
+		private $is_manager;
+		private $is_admin;
+
 		public $DB;
 
 		public function __construct()
@@ -244,6 +247,53 @@
 				else
 					return FALSE;
 			}
+		}
+
+
+		public function is_admin()
+		{
+			if($this->is_admin == NULL)
+			{
+				$this->is_admin = FALSE;
+
+				if(isset($_SESSION['l'], $_SESSION['u'], $_SESSION['t'], $_SESSION['r']))
+				{
+					$user = $this->DB['users']->get(filter_var($_SESSION['u'], FILTER_SANITIZE_STRING));
+
+					if($user->role != NULL)
+						if($user->role == $_SESSION['r'])
+							if($user->role == 'admin')
+								$this->is_admin = TRUE;
+				}
+			}
+
+			if($this->is_admin)
+				return TRUE;
+			else
+				return FALSE;
+		}
+
+		public function is_manager()
+		{
+			if($this->is_manager == NULL)
+			{
+				$this->is_manager = FALSE;
+
+				if(isset($_SESSION['l'], $_SESSION['u'], $_SESSION['t'], $_SESSION['r']))
+				{
+					$user = $this->DB['users']->get(filter_var($_SESSION['u'], FILTER_SANITIZE_STRING));
+
+					if($user->role != NULL)
+						if($user->role == $_SESSION['r'])
+							if($user->role == 'admin' || $user->role == 'manager')
+								$this->is_manager = TRUE;
+				}
+			}
+
+			if($this->is_manager)
+				return TRUE;
+			else
+				return FALSE;
 		}
 
 		private function include($path)

@@ -251,18 +251,18 @@
 				'cache_expires'  => 1800
 			]);
 
-			$item = $db->get('EZK8H3');
-			$item->url = 'https://github.com/rapiddev/forward';
-			$item->clicks = 0;
-			$item->save();
-			$item = $db->get('QUBSE0');
-			$item->url = 'https://rdev.cc/';
-			$item->clicks = 0;
-			$item->save();
-			$item = $db->get('M6GMLO');
-			$item->url = 'https://4geek.co/';
-			$item->clicks = 0;
-			$item->save();
+			$record = $db->get('EZK8H3');
+			$record->url = 'https://github.com/rapiddev/forward';
+			$record->clicks = 0;
+			$record->save();
+			$record = $db->get('QUBSE0');
+			$record->url = 'https://rdev.cc/';
+			$record->clicks = 0;
+			$record->save();
+			$record = $db->get('M6GMLO');
+			$record->url = 'https://4geek.co/';
+			$record->clicks = 0;
+			$record->save();
 
 
 			$db = new \Filebase\Database([
@@ -271,10 +271,11 @@
 				'format'         => \Filebase\Format\Jdb::class
 			]);
 
-			$item = $db->get($defUser);
-			$item->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
-			$item->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), RED_ALGO);
-			$item->save();
+			$user = $db->get($defUser);
+			$user->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
+			$user->role = 'admin';
+			$user->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), RED_ALGO);
+			$user->save();
 		}
 	}
 
