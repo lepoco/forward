@@ -107,7 +107,7 @@
 					else
 						$top_referrer = key($referrers);
 					?>
-					<div class="card links-card"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
@@ -188,9 +188,16 @@
 						</div>
 						<div class="col-12">
 							<div id="single-record">
-								<p id="preview-record-date"></p>
-								<h2 id="preview-record-slug"></h2>
-								<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
+								<div class="row">
+									<div class="col-10 col-md-11">
+										<p id="preview-record-date"></p>
+										<h2 id="preview-record-slug"></h2>
+										<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
+									</div>
+									<div class="col-2 col-md-1 remove-record">
+										<a href="#" data-id="" id="remove-record"><svg viewBox="0 0 24 24"><path d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></a>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-12 col-no-gutters" style="height: 220px;">
 										<div class="ct-chart ct-perfect-fourth red-chart" style="height: 220px;"></div>
