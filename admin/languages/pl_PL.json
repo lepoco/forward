@@ -87,8 +87,11 @@
 	"Can only view data.": "Może tylko przeglądać dane",
 	"Something went wrong!": "Coś poszło nie tak!",
 	"Success!": "Sukces!",
+	"Settings have been saved.": "Ustawienia zostały zapisane",
 	"Holy guacamole!": "Motyla noga!",
 	"New link was added.": "Nowy link został dodany.",
 	"You must provide a URL!": "Musisz podać adres URL",
-	"The URL you entered is not valid.": "Podany adres jest nieprawidłowy"
+	"The URL you entered is not valid!": "Podany adres jest nieprawidłowy!",
+	"The 404 page redirect URL is not valid!": "Adres przekierowania strony 404 jest nieprawidłowy!",
+	"The home page redirect URL is not valid!": "Adres przekierowania strony głównej jest nieprawidłowy!"
 }

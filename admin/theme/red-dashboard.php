@@ -338,7 +338,7 @@ window.onload = function() {
 						}
 						else
 						{
-							error_text = '<?php echo $this->e('The URL you entered is not valid.'); ?>';
+							error_text = '<?php echo $this->e('The URL you entered is not valid!'); ?>';
 						}
 
 						jQuery('#error_text').html(error_text);

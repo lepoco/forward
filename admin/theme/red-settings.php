@@ -34,10 +34,10 @@
 				</div>
 				<div class="col-12 col-md-9">
 					<div id="alert-error" class="alert alert-danger fade show" role="alert" style="display: none;">
-						<strong>Holy guacamole!</strong> <span id="error_text">Something went wrong!</span>
+						<strong><?php echo $this->e('Holy guacamole!'); ?></strong> <span id="error_text"><?php echo $this->e('Something went wrong!'); ?></span>
 					</div>
 					<div id="alert-success" class="alert alert-success fade show" role="alert" style="display: none;">
-						<strong>Success!</strong> Settings have been saved.
+						<strong><?php echo $this->e('Success!'); ?></strong> <?php echo $this->e('Settings have been saved.'); ?>
 					</div>
 					<div class="tab-content" id="v-pills-tabContent">
 						<div class="tab-pane fade show active" id="v-pills-main" role="tabpanel" aria-labelledby="v-pills-main-tab">
@@ -290,11 +290,11 @@
 						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
 						if(e == 'e_invalid_404')
 						{
-							var error_text = 'The 404 page redirect URL is not valid.';
+							var error_text = '<?php echo $this->e('The 404 page redirect URL is not valid!'); ?>';
 						}
 						else if(e == 'e_invalid_home')
 						{
-							var error_text = 'The home page redirect URL is not valid.';
+							var error_text = '<?php echo $this->e('The home page redirect URL is not valid!'); ?>';
 						}
 
 						jQuery('#error_text').text(error_text);
