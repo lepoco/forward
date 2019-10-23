@@ -11,43 +11,39 @@
 	defined('ABSPATH') or die('No script kiddies please!');
 
 	$this->head(); $this->menu();
+
+	$users = $this->RED->DB['users']->findAll();
 ?>
 <div id="red-users">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<button class="btn btn-outline-dark" data-toggle="modal" data-target="#userModal">Add new user</button>
+			<div class="col-12 col-md-3" style="margin-bottom: 40px;">
+				<button id="add-user" data-toggle="modal" data-target="#addUserModal" class="btn btn-block btn-outline-dark"><?php echo $this->e('Add new user'); ?></button>
 			</div>
-			<div class="col-12" id="users-table">
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Date created</th>
-							<th scope="col">Last login</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
+			<div class="col-12 col-md-9">
+				<?php
 
-						$users = $this->RED->DB['users']->findAll();
-						$c = 0;
-						foreach($users as $user)
-						{
-							$c++;
-							echo '<tr><th scope="row">'.$c.'</th><td>'.$user->getId().'</td><td>'.$user->email.'</td><td>'.$user->createdAt().'</td><td>'.($user->lastlogin != NULL ? date('Y-m-d H:i:s', $user->lastlogin) : 'Never').'</td><td class="td-buttons"><button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" /></svg></button> <button class="btn btn-dark btn-icon"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="#fff" d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></button></td></tr>';
-						}
-						?>
-					</tbody>
-				</table>
+					$c = 0;
+					foreach($users as $user)
+					{
+						$html  = '<div class="card user-card"><div class="card-body"><div class="row">';
+						$html .= '<div class="col-12 col-sm-6" style="display:flex;align-items:center;padding-bottom:15px;padding-top:15px;">';
+						$html .= '<div><h2>'.$user->getId().'</h2><p><i>'.$user->email.'</i></p></div></div>';
+						$html .= '<div class="col-12 col-sm-6">';
+						$html .= '<span><small>'.$this->e('Date created').':</small></span><p>'.$user->createdAt().'</p>';
+						$html .= '<span><small>'.$this->e('Last login').':</small></span><p>'.($user->lastlogin != NULL ? date('Y-m-d H:i:s', $user->lastlogin) : $this->e('Never')).'</p>';
+						$html .= '</div></div></div>';
+						$html .= '<div class="btn-group" role="group" aria-label="Basic example"><button type="button" class="btn btn-secondary">'.$this->e('Edit').'</button><button type="button" class="btn btn-secondary" data-userid="'.$user->getId().'" data-toggle="modal" data-target="#deleteUserModal">'.$this->e('Delete').'</button></div>';
+						$html .= '</div>';
+						echo $html;
+					}
+
+				?>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content">
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
@@ -82,6 +78,33 @@
 					<button type="submit" id="add-user-send" type="button" class="btn btn-primary">Add user</button>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h1>Delete user</h1>
+				<span>Are you sure you want to delete user D?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" id="add-user-send" type="button" class="btn btn-danger">Delete user</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h1>Delete user</h1>
+				<span>Are you sure you want to delete user D?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>

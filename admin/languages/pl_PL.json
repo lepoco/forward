@@ -71,5 +71,12 @@
 	"Debugging": "Debugowanie",
 	"Remember to turn off debugging if you have stopped testing the page.": "Pamiętaj, aby wyłączyć debugowanie kiedy skończysz testować witrynę.",
 	"Enabled": "Włączone",
-	"Disabled": "Wyłączone"
+	"Disabled": "Wyłączone",
+	"Edit": "Edytuj",
+	"Delete": "Usuń",
+	"Never": "Nigdy",
+	"Unknown": "Nieznany",
+	"Add new user": "Dodaj nowego użytkownika",
+	"Date created": "Data utworzenia",
+	"Last login": "Ostatnie logowanie"
 }

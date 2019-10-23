@@ -36,6 +36,27 @@ body {
 	stroke-width: 20px !important;
 }
 
+.user-card {
+	margin-bottom: 30px;
+}
+
+.user-card > .btn-group >.btn:not(:first-child) {
+	border-top-right-radius: 0 !important;
+}
+
+.user-card > .btn-group >.btn:not(:last-child) {
+	border-top-left-radius: 0 !important;
+}
+
+.user-card p, .user-card h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.user-card h2 {
+	font-weight: 400;
+}
+
 .block-page {
 	position: fixed;
 	display: inherit;
@@ -78,12 +99,6 @@ hr {
 #red-about {
 	min-height: 100%;
 	padding-bottom: 30px;
-}
-
-#red-users {
-	min-height: 100%;
-	padding-top: 56px;
-	background-color: #f8f9fa;
 }
 
 #users-table {
