@@ -67,6 +67,9 @@
 					case 'pl': case 'pl_PL':
 						$this->LANG = 'pl_PL';
 						break;
+					case 'de': case 'de_DE':
+						$this->LANG = 'de_DE';
+						break;
 					default:
 						$this->LANG = 'en_EN';
 						break;
