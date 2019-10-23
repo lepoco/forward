@@ -12,6 +12,7 @@ With the help of Forward you can collect information about:
 
 ## Dashboard
 Simple intuitive interface modeled on Adobe and Bit.ly websites.
+<br/>
 ![Login form](https://github.com/rapiddev/Forward/blob/master/admin/img/forward-screen-2.png?raw=true)
 
 ## Database
@@ -23,8 +24,12 @@ This wonderful solution was created by [Timothy Marois](https://github.com/tmaro
 ## Security
 Forward uses a number of security features. User passwords are encrypted via SHA256 and Argon 2.
 The session has a generated token, saved in the database, which is verified each time.
-The htaccess blocks access to the database files.
 Each Ajax query is verified by the SHA1 encrypted Nonce.
+
+## Roles
+- Administrator<br/>Has full permissions to do everything.
+- Manager<br/>Can add and delete records. Cannot change settings or add users.
+- Analyst<br/>Can only view data.
 
 ## What do we get?
 - [x] Fast link management system
@@ -32,6 +37,7 @@ Each Ajax query is verified by the SHA1 encrypted Nonce.
 - [x] Animated charts
 - [x] A Flat-File database. You don't need MySQL!
 - [x] Administration panel
+- [x] User roles
 - [x] Global statistics
 - [x] Multilingual dashboard
 - [x] The ability to create multiple users
