@@ -30,6 +30,9 @@
 				<button id="add-user" data-toggle="modal" data-target="#addUserModal" class="btn btn-block btn-outline-dark"><?php echo $this->e('Add new user'); ?></button>
 			</div>
 			<div class="col-12 col-md-9">
+				<div id="alert-success" class="alert alert-success fade show" role="alert" style="display: none;">
+					<strong><?php echo $this->e('Success!'); ?></strong> <span id="alert-success-text"><?php echo $this->e('A new user has been added.'); ?></span>
+				</div>
 				<?php
 					foreach($users as $user)
 					{
@@ -55,6 +58,9 @@
 		<div class="modal-content">
 			<form id="add-user-form" action="<?php echo $this->home_url().'dashboard/ajax/'; ?>">
 				<div class="modal-body">
+					<div id="alert-error" class="alert alert-danger fade show" role="alert" style="display: none;">
+						<strong><?php echo $this->e('Holy guacamole!'); ?></strong> <span id="error_text"><?php echo $this->e('Something went wrong!'); ?></span>
+					</div>
 					<input type="hidden" value="add_user" name="action">
 					<input type="hidden" value="<?php echo $this->RED->encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
 					<div class="form-group">
@@ -89,8 +95,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" id="add-user-send" type="button" class="btn btn-primary">Add user</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->e('Close'); ?></button>
+					<button type="submit" id="add-user-send" type="button" class="btn btn-primary"><?php echo $this->e('Add user'); ?></button>
 				</div>
 			</form>
 		</div>
@@ -100,12 +106,12 @@
 	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<h1>Delete user</h1>
+				<h1><?php echo $this->e('Delete user'); ?></h1>
 				<span>Are you sure you want to delete user D?</span>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="submit" id="add-user-send" type="button" class="btn btn-danger">Delete user</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->e('Close'); ?></button>
+				<button type="submit" id="add-user-send" type="button" class="btn btn-danger"><?php echo $this->e('Delete user'); ?></button>
 			</div>
 		</div>
 	</div>
@@ -114,8 +120,8 @@
 	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<h1>Delete user</h1>
-				<span>Are you sure you want to delete user D?</span>
+				<h1><?php echo $this->e('Error'); ?></h1>
+				<span><?php echo $this->e('You cannot delete yourself!'); ?></span>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -127,12 +133,57 @@
 	window.onload = function() {
 		jQuery('#add-user-send').on('click', function(e){
 			e.preventDefault();
+			if(jQuery('#alert-error').is(':visible')){jQuery('#alert-error').slideToggle(400,function(){jQuery('#add-alert').hide();});}
+			if(jQuery('#alert-success').is(':visible')){jQuery('#alert-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
 				type:'post',
 				data:$("#add-user-form").serialize(),
 				success:function(e)
 				{
+					if(e == 's01')
+					{
+						jQuery('#addUserModal').modal('hide');
+						jQuery('#alert-success').slideToggle();
+						window.setTimeout(function(){
+							jQuery('#alert-success').slideToggle(400, function(){jQuery('#alert-success').hide();});
+						}, 9000);
+					}
+					else
+					{
+						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
+						if(e == 'e07')
+						{
+							var error_text = '<?php echo $this->e('Login, password and email fields are required!'); ?>';
+						}
+						if(e == 'e08')
+						{
+							var error_text = '<?php echo $this->e('User with this login already exists!'); ?>';
+						}
+						else if(e == 'e12')
+						{
+							var error_text = '<?php echo $this->e('Passwords do not match!'); ?>';
+						}
+						else if(e == 'e13')
+						{
+							var error_text = '<?php echo $this->e('Password is too short!'); ?>';
+						}
+						else if(e == 'e14')
+						{
+							var error_text = '<?php echo $this->e('The password is too simple. Use letters, numbers and special characters!'); ?>';
+						}
+						else if(e == 'e15')
+						{
+							var error_text = '<?php echo $this->e('Email field is invalid!'); ?>';
+						}
+						else if(e == 'e16')
+						{
+							var error_text = '<?php echo $this->e('Login field contains illegal characters!'); ?>';
+						}
+
+						jQuery('#error_text').text(error_text);
+						jQuery('#alert-error').slideToggle();
+					}
 					console.log(e);
 				},
 				fail:function(xhr, textStatus, errorThrown){

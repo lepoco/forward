@@ -51,7 +51,7 @@
 			if (is_file(ADMPATH.'theme/red-'.$page.'.php'))
 				require_once(ADMPATH.'theme/red-'.$page.'.php');
 			else
-				echo 'Page file not found';
+				exit(RED_DEBUG ? 'Page '.$page.' file not found!' : '');
 		}
 
 		private function home_url()
@@ -97,7 +97,6 @@
 				return $this->LANG_ARR[$string];
 			else
 				return $string;
-
 		}
 
 		private function menu()

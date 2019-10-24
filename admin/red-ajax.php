@@ -33,6 +33,7 @@
 		private const ERROR_PASSWORD_TOO_SHORT       = 'e13';
 		private const ERROR_PASSWORD_TOO_SIMPLE      = 'e14';
 		private const ERROR_INVALID_EMAIL            = 'e15';
+		private const ERROR_SPECIAL_CHARACTERS       = 'e16';
 
 		private const CODE_SUCCESS                   = 's01';
 
@@ -214,6 +215,9 @@
 
 			if(empty($_POST['userName']) || empty($_POST['userPassword']) || empty($_POST['userEmail']))
 				exit(self::ERROR_EMPTY_ARGUMENTS);
+
+			if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['userName']))
+				exit(self::ERROR_SPECIAL_CHARACTERS);
 
 			if (!filter_var($_POST['userEmail'], FILTER_VALIDATE_EMAIL))
 				exit(self::ERROR_INVALID_EMAIL);
