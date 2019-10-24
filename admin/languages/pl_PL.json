@@ -106,5 +106,10 @@
 	"User with this login already exists!": "Użytkownik o tym loginie już istnieje!",
 	"Delete record": "Usuń rekord",
 	"Cancel": "Anuluj",
-	"Are you sure you want to delete the %s record?": "Na pewno chcesz usunąć rekord %s?"
+	"Are you sure you want to delete the %s record?": "Na pewno chcesz usunąć rekord %s?",
+	"Username": "Nazwa użytkownika",
+	"Email address": "Adres email",
+	"Role": "Rola",
+	"Password": "Hasło",
+	"Confirm password": "Potwierdź hasło"
 }

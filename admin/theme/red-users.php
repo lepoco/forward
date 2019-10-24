@@ -64,15 +64,15 @@
 					<input type="hidden" value="add_user" name="action">
 					<input type="hidden" value="<?php echo $this->RED->encrypt('ajax_add_user_nonce', 'nonce'); ?>" name="nonce">
 					<div class="form-group">
-						<label for="userName">Login</label>
-						<input type="text" class="form-control" id="userName" name="userName" aria-describedby="emailHelp" placeholder="Enter login">
+						<label for="userName"><?php echo $this->e('Username'); ?></label>
+						<input type="text" class="form-control" id="userName" name="userName">
 					</div>
 					<div class="form-group">
-						<label for="userEmail">Email address</label>
-						<input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+						<label for="userEmail"><?php echo $this->e('Email address'); ?></label>
+						<input type="email" class="form-control" id="userEmail" name="userEmail">
 					</div>
 					<div class="form-group">
-						<label for="userRole">Role</label>
+						<label for="userRole"><?php echo $this->e('Role'); ?></label>
 						<select class="form-control" id="userRole" name="userRole">
 							<option value="analyst"><?php echo $this->e('Analyst'); ?></option>
 							<option value="manager"><?php echo $this->e('Manager'); ?></option>
@@ -82,14 +82,14 @@
 					<div class="row">
 						<div class="col-12 col-lg-6">
 							<div class="form-group">
-								<label for="userPassword">Password</label>
-								<input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password">
+								<label for="userPassword"><?php echo $this->e('Password'); ?></label>
+								<input type="password" class="form-control" id="userPassword" name="userPassword">
 							</div>
 						</div>
 						<div class="col-12 col-lg-6">
 							<div class="form-group">
-								<label for="userPasswordConfirm">Confirm password</label>
-								<input type="password" class="form-control" id="userPasswordConfirm" name="userPasswordConfirm" placeholder="Password">
+								<label for="userPasswordConfirm"><?php echo $this->e('Confirm password'); ?></label>
+								<input type="password" class="form-control" id="userPasswordConfirm" name="userPasswordConfirm">
 							</div>
 						</div>
 					</div>

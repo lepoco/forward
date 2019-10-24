@@ -135,7 +135,7 @@
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_add_record_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="<?php echo $rand; ?>" id="randValue" name="randValue">
 								<div class="row">
-									<div class="col-4 col-lg-3">
+									<div class="col-8 col-lg-3">
 										<div class="form-group">
 											<input type="text" id="forward-url" name="forward-url" class="form-control" placeholder="https://">
 										</div>
@@ -145,7 +145,7 @@
 											<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo $rand; ?>">
 										</div>
 									</div>
-									<div class="col-4 col-lg-3">
+									<div class="col-12 col-lg-3">
 										<button type="submit" id="add-record-send" class="btn btn-block btn-outline-dark"><?php echo $this->e('Add new'); ?></button>
 									</div>
 								</div>
