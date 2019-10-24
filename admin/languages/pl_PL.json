@@ -103,5 +103,8 @@
 	"Password is too short!": "Hasło jest za krótkie!",
 	"The password is too simple. Use letters, numbers and special characters!": "Hasło jest za proste. Użyj liter, cyfr oraz znaków specjalnych!",
 	"Passwords do not match!": "Hasła nie są jednakowe!",
-	"User with this login already exists!": "Użytkownik o tym loginie już istnieje!"
+	"User with this login already exists!": "Użytkownik o tym loginie już istnieje!",
+	"Delete record": "Usuń rekord",
+	"Cancel": "Anuluj",
+	"Are you sure you want to delete the %s record?": "Na pewno chcesz usunąć rekord %s?"
 }

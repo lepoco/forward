@@ -224,12 +224,12 @@
 	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<h4>Delete record</h4>
-				<span>Are you sure you want to delete the <strong><span id="delete-record-name"></span></strong> record?</span>
+				<h4><?php echo $this->e('Delete record'); ?></h4>
+				<span><?php echo sprintf($this->e('Are you sure you want to delete the %s record?'), '<strong><span id="delete-record-name"></span></strong>'); ?></span>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="submit" id="delete-record-confirm" type="button" class="btn btn-danger">Delete record</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->e('Cancel'); ?></button>
+				<button type="submit" id="delete-record-confirm" type="button" class="btn btn-danger"><?php echo $this->e('Delete record'); ?></button>
 			</div>
 		</div>
 	</div>

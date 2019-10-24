@@ -124,7 +124,7 @@
 				<span><?php echo $this->e('You cannot delete yourself!'); ?></span>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->e('Cancel'); ?></button>
 			</div>
 		</div>
 	</div>
