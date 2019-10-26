@@ -73,7 +73,7 @@
 			}
 		}
 
-		private function https()
+		private function https() : void
 		{
 			$force = false;
 
@@ -95,7 +95,7 @@
 			}
 		}
 
-		public function page($data)
+		public function page(array $data) : RED_PAGES
 		{
 			/** Display page class */
 			if (is_file(ADMPATH.'red-page.php'))
@@ -106,7 +106,7 @@
 			return new RED_PAGES($data, $this);
 		}
 
-		private function admin()
+		private function admin() : void
 		{
 			if (is_file(ADMPATH.'red-admin.php'))
 			{
@@ -119,7 +119,7 @@
 			}
 		}
 
-		private function forward()
+		private function forward() : void
 		{
 			$record = $this->DB['records']->get(RED_PAGE);
 
@@ -184,7 +184,7 @@
 			exit;	
 		}
 
-		public function parseLanguage()
+		public function parseLanguage() : string
 		{
 			$langs = array();
 			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), $matches, PREG_SET_ORDER);
@@ -204,13 +204,13 @@
 				return key($langs);
 		}
 
-		private function parse_url()
+		private function parse_url() : void
 		{
 			$URI = explode("/", $_SERVER['REQUEST_URI']);
 			$this->page = $URI[2];
 		}
 
-		public static function rand($length)
+		public static function rand(int $length) : string
 		{
 			$characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$randomString = '';
@@ -218,7 +218,7 @@
 			return $randomString;
 		}
 
-		public static function encrypt($string, $type = 'password')
+		public static function encrypt(string $string, string $type = 'password') : string
 		{
 			if($type == 'password')
 			{
@@ -234,7 +234,7 @@
 			}
 		}
 
-		public static function compare_crypt($input_string, $db_string, $type = 'password', $plain = true)
+		public static function compare_crypt(string $input_string, string $db_string, string $type = 'password', bool $plain = true) : bool
 		{
 			if($type == 'password')
 			{
@@ -260,7 +260,7 @@
 		}
 
 
-		public function is_admin()
+		public function is_admin() : bool
 		{
 			if($this->is_admin == NULL)
 			{
@@ -283,7 +283,7 @@
 				return FALSE;
 		}
 
-		public function is_manager()
+		public function is_manager() : bool
 		{
 			if($this->is_manager == NULL)
 			{
@@ -306,7 +306,7 @@
 				return FALSE;
 		}
 
-		public function include($path)
+		public function include($path) : object
 		{
 			if (is_file($path))
 				return require_once($path);

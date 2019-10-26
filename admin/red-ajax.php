@@ -37,12 +37,12 @@
 
 		private const CODE_SUCCESS                   = 's01';
 
-		public static function init($RED)
+		public static function init(RED $RED) : RED_AJAX
 		{
 			return new RED_AJAX($RED);
 		}
 
-		public function __construct($RED)
+		public function __construct(RED $RED)
 		{
 			$this->RED = $RED;
 
@@ -67,7 +67,7 @@
 			die; //Kill if something is wrong
 		}
 
-		private function verifyNonce()
+		private function verifyNonce() : bool
 		{
 			if(isset($_POST['nonce']))
 				if($this->RED->compare_crypt('ajax_'.$this->ACTION.'_nonce', $this->NONCE, 'nonce'))
@@ -78,7 +78,7 @@
 				return FALSE;
 		}
 
-		private function checkAction()
+		private function checkAction() : bool
 		{
 			if(method_exists($this,$this->ACTION))
 				return TRUE;
@@ -86,7 +86,7 @@
 				return FALSE;
 		}
 
-		private function checkPermission($type)
+		private function checkPermission(string $type) : void
 		{
 			if($type == 'manager')
 				if(!$this->RED->is_manager())
@@ -102,7 +102,7 @@
 		*/
 
 
-		private function add_record()
+		private function add_record() : void
 		{
 			self::checkPermission('manager');
 
@@ -130,7 +130,7 @@
 			exit(self::CODE_SUCCESS);
 		}
 
-		private function remove_record()
+		private function remove_record() : void
 		{
 			self::checkPermission('manager');
 
@@ -146,7 +146,7 @@
 			exit(self::CODE_SUCCESS);
 		}
 
-		private function sign_in()
+		private function sign_in() : void
 		{
 			if(!isset(
 				$_POST['login'],
@@ -200,7 +200,7 @@
 			exit(self::CODE_SUCCESS);
 		}
 
-		private function add_user()
+		private function add_user() : void
 		{
 			self::checkPermission('admin');
 
@@ -245,7 +245,7 @@
 			exit(self::CODE_SUCCESS);
 		}
 
-		private function save_settings()
+		private function save_settings() : void
 		{
 			self::checkPermission('admin');
 

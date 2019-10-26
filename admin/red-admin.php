@@ -15,12 +15,12 @@
 		private $RED;
 		private $LOGGED_IN;
 
-		public static function init($RED)
+		public static function init(RED $RED) : RED_ADMIN
 		{
 			return new RED_ADMIN($RED);
 		}
 
-		public function __construct($RED)
+		public function __construct(RED $RED)
 		{
 			$this->RED = $RED;
 
@@ -71,13 +71,13 @@
 			}
 		}
 
-		private function ajax()
+		private function ajax() : void
 		{
 			$this->RED->include(ADMPATH.'red-ajax.php');
 			RED_AJAX::init($this->RED);
 		}
 
-		public function isLoggedIn()
+		public function isLoggedIn() : void
 		{
 			$this->LOGGED_IN = FALSE;
 
@@ -92,7 +92,7 @@
 			}
 		}
 
-		public function signout()
+		public function signout() : void
 		{
 			session_destroy();
 			header("Location: " . $this->RED->DB['options']->get('dashboard')->value);

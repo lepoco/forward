@@ -20,7 +20,7 @@
 		private $LANG;
 		private $LANG_ARR;
 
-		public function __construct($data, $RED)
+		public function __construct(array $data, RED $RED)
 		{	
 			$this->RED = $RED;
 
@@ -54,7 +54,7 @@
 				exit(RED_DEBUG ? 'Page '.$page.' file not found!' : '');
 		}
 
-		private function home_url()
+		private function home_url() : string
 		{
 			if($this->uri == null)
 				$this->uri = $this->RED->DB['options']->get('siteurl')->value;
@@ -62,12 +62,12 @@
 			return $this->uri;
 		}
 
-		private function title()
+		private function title() : string
 		{
 			return RED_NAME . ($this->title != null ? ' | '.$this->e($this->title) : '');
 		}
 
-		private function e($string)
+		private function e(string $string) : string
 		{
 			if($this->LANG == NULL)
 			{
@@ -99,7 +99,7 @@
 				return $string;
 		}
 
-		private function menu()
+		private function menu() : void
 		{
 			$menu = array('dashboard' => array($this->e('Dashboard'), 'dashboard'));
 
@@ -129,7 +129,7 @@
 			echo $html;
 		}
 
-		private function head()
+		private function head() : void
 		{
 			if (is_file(ADMPATH.'theme/red-head.php'))
 				require_once(ADMPATH.'theme/red-head.php');
@@ -137,7 +137,7 @@
 				echo 'Header file not found';
 		}
 
-		public function footer()
+		public function footer() : void
 		{
 			if (is_file(ADMPATH.'theme/red-footer.php'))
 				require_once(ADMPATH.'theme/red-footer.php');
