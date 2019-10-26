@@ -121,6 +121,8 @@
 
 		private function forward() : void
 		{
+			self::https();
+			
 			$record = $this->DB['records']->get(RED_PAGE);
 
 			if($record->url == NULL)
