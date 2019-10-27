@@ -10,7 +10,14 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
-
+	/**
+	*
+	* RED_AJAX
+	*
+	* @author   Leszek Pomianowski <https://rdev.cc>
+	* @version  $Id: red-ajax.php;RED_AJAX,v beta 1.0 2019/10/27
+	* @access   public
+	*/
 	class RED_AJAX
 	{
 		private $RED;
@@ -37,6 +44,13 @@
 
 		private const CODE_SUCCESS                   = 's01';
 
+		/**
+		* init
+		* Returns the RED_AJAX object without initializing the object
+		*
+		* @access   public
+		* @return   object RED_AJAX
+		*/
 		public static function init(RED $RED) : RED_AJAX
 		{
 			return new RED_AJAX($RED);

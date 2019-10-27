@@ -10,6 +10,14 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
+	/**
+	*
+	* RED_PAGES
+	*
+	* @author   Leszek Pomianowski <https://rdev.cc>
+	* @version  $Id: red-page.php;RED_PAGES,v beta 1.0 2019/10/27
+	* @access   public
+	*/
 	class RED_PAGES
 	{
 		private $title;
@@ -20,6 +28,15 @@
 		private $LANG;
 		private $LANG_ARR;
 
+		/**
+		* __construct
+		* Displays the page
+		*
+		* @access   public
+		* @param	array $data
+		* @param	object RED
+		* @return   void
+		*/
 		public function __construct(array $data, RED $RED)
 		{	
 			$this->RED = $RED;
@@ -54,6 +71,13 @@
 				exit(RED_DEBUG ? 'Page '.$page.' file not found!' : '');
 		}
 
+		/**
+		* home_url
+		* Returns the main website address
+		*
+		* @access   private
+		* @return   string $this->uri
+		*/
 		private function home_url() : string
 		{
 			if($this->uri == null)
@@ -62,12 +86,27 @@
 			return $this->uri;
 		}
 
+		/**
+		* title
+		* Returns the translated title of the site
+		*
+		* @access   private
+		* @return   string title
+		*/
 		private function title() : string
 		{
 			return RED_NAME . ($this->title != null ? ' | '.$this->e($this->title) : '');
 		}
 
-		private function e(string $string) : string
+		/**
+		* e
+		* Returns a translated piece of text based on a defined language
+		*
+		* @access   private
+		* @param	string $raw_text
+		* @return   string translated_text
+		*/
+		private function e(string $raw_text) : string
 		{
 			if($this->LANG == NULL)
 			{
@@ -93,12 +132,19 @@
 			if(file_exists(ADMPATH.'/languages/'.$this->LANG.'.json'))
 				$this->LANG_ARR = json_decode(file_get_contents(ADMPATH.'/languages/'.$this->LANG.'.json'), true);
 
-			if(array_key_exists($string, $this->LANG_ARR))
-				return $this->LANG_ARR[$string];
+			if(array_key_exists($raw_text, $this->LANG_ARR))
+				return $this->LANG_ARR[$raw_text];
 			else
-				return $string;
+				return $raw_text;
 		}
 
+		/**
+		* menu
+		* Prints the main menu of the administration panel
+		*
+		* @access   private
+		* @return   void (echo)
+		*/
 		private function menu() : void
 		{
 			$menu = array('dashboard' => array($this->e('Dashboard'), 'dashboard'));
@@ -129,6 +175,13 @@
 			echo $html;
 		}
 
+		/**
+		* head
+		* Prints the head part of the panel page
+		*
+		* @access   private
+		* @return   void (echo)
+		*/
 		private function head() : void
 		{
 			if (is_file(ADMPATH.'theme/red-head.php'))
@@ -137,6 +190,13 @@
 				echo 'Header file not found';
 		}
 
+		/**
+		* footer
+		* Prints the footer part of the panel page
+		*
+		* @access   private
+		* @return   void (echo)
+		*/
 		public function footer() : void
 		{
 			if (is_file(ADMPATH.'theme/red-footer.php'))

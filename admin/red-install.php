@@ -10,6 +10,14 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
+	/**
+	*
+	* RED_INSTALL
+	*
+	* @author   Leszek Pomianowski <https://rdev.cc>
+	* @version  $Id: red-install.php;RED_INSTALL,v beta 1.0 2019/10/27
+	* @access   public
+	*/
 	class RED_INSTALL
 	{
 		private $request_uri;
@@ -17,26 +25,37 @@
 		private $dbpath;
 		private $salt;
 
-		public static function init()
+		/**
+		* init
+		* Returns the RED_INSTALL object without initializing the object
+		*
+		* @access   public
+		* @return   object RED_INSTALL
+		*/
+		public static function init() : RED_INSTALL
 		{
 			return new RED_INSTALL();
 		}
 
+		/**
+		* __construct
+		* Installs the necessary components
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function __construct()
 		{
 			if (empty($_SERVER['HTTPS']))
 				$HTTP = 'http://';
 			else
 				$HTTP = 'https://';
+
+			self::check_files();
 			
 			$this->request_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-			if (self::urlSlash($this->request_uri,'/') == false) 
-				$this->request_uri = $this->request_uri."/";
-
 
 			$this->script_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
-			if (self::urlSlash($this->script_uri,'/') == false) 
-				$this->script_uri = $this->script_uri."/";
 
 			if(!isset($_POST['action']))
 				if($this->script_uri != $this->request_uri)
@@ -91,20 +110,50 @@
 			}
 		}
 
-		function urlSlash($FullStr, $needle)
+		/**
+		* check_files
+		* Checks if the files already exist
+		*
+		* @return void
+		*/
+		private function check_files() : void
 		{
-			$StrLen = strlen($needle);
-			$FullStrEnd = substr($FullStr, strlen($FullStr) - $StrLen);
-			return $FullStrEnd == $needle;
+			if (!is_file(ADMPATH.'red-config-sample.php'))
+				exit('File red-config-sample.php does not exist. This file is required for installation.');
+
+			if (!is_file(ADMPATH.'db/red-db.php'))
+				exit('File db/red-db.php does not exist. This file is required for installation.');
+
+			if (is_file(ABSPATH.'.htaccess'))
+				exit('File .htaccess exists. Remove it to complete the installation.');
+
+			if (is_file(ADMPATH.'red-config.php'))
+				exit('File red-config.php exists. Remove it to complete the installation.');
 		}
 
-		function urlFix($p)
+		/**
+		* urlFix
+		* Removes unnecessary parentheses and validates the url
+		*
+		* @access   private
+		* @param	string $p
+		* @return   string $p
+		*/
+		private function urlFix(string $p) : string
 		{
 			$p = str_replace('\\','/',trim($p));
 			return (substr($p,-1)!='/') ? $p.='/' : $p;
 		}
 
-		private function salter($length)
+		/**
+		* salter
+		* Generates random salt
+		*
+		* @access   private
+		* @param	string $length
+		* @return   string $randomString
+		*/
+		private function salter(int $length) : string
 		{
 			$characters = '$/.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$randomString = '';
@@ -112,67 +161,77 @@
 			return $randomString;
 		}
 
-		private function config($db_users, $db_records, $db_options)
+		/**
+		* config
+		* Creates a red-config.php file
+		*
+		* @access   private
+		* @param	string $db_users
+		* @param	string $db_records
+		* @param	string $db_options
+		* @return   void
+		*/
+		private function config(string $db_users, string $db_records, string $db_options) : void
 		{
-			if (is_file(ADMPATH.'red-config-sample.php'))
-			{
-				$config = file_get_contents( ADMPATH . 'red-config-sample.php' );
+			$config = file_get_contents( ADMPATH . 'red-config-sample.php' );
 
-				$this->salt = self::salter(50);
+			$this->salt = self::salter(50);
 
-				//Salts
-				$config = str_replace(array(
-					'example_salt',
-					'example_session_salt',
-					'example_nonce_salt'
-				), array(
-					$this->salt,
-					self::salter(50),
-					self::salter(50)),
-				$config);
+			//Salts
+			$config = str_replace(array(
+				'example_salt',
+				'example_session_salt',
+				'example_nonce_salt'
+			), array(
+				$this->salt,
+				self::salter(50),
+				self::salter(50)),
+			$config);
 
-
-
-				//Cryptographic
-				switch (RED_ALGO) {
-					case 1: //PASSWORD_BCRYPT
-						$crypto = 'PASSWORD_BCRYPT';
-						break;
-					case 2: //PASSWORD_ARGON2I
-						$crypto = 'PASSWORD_ARGON2I';
-						break;
-					case 3: //PASSWORD_ARGON2ID
-						$crypto = 'PASSWORD_ARGON2ID';
-						break;
-					default: //PASSWORD_DEFAULT
-						$crypto = 'PASSWORD_DEFAULT';
-						break;
-				}
-				$config = str_replace(
-					'PASSWORD_DEFAULT',
-					$crypto,
-				$config);
-
-				//Databases
-				$config = str_replace(array(
-					'users_database',
-					'options_database',
-					'records_database'
-				), array(
-					$db_users,
-					$db_options,
-					$db_records),
-				$config);
-				
-				file_put_contents(ADMPATH.'red-config.php', $config);
-			}else{
-				exit('error_1');
+			//Cryptographic
+			switch (RED_ALGO) {
+				case 1: //PASSWORD_BCRYPT
+					$crypto = 'PASSWORD_BCRYPT';
+					break;
+				case 2: //PASSWORD_ARGON2I
+					$crypto = 'PASSWORD_ARGON2I';
+					break;
+				case 3: //PASSWORD_ARGON2ID
+					$crypto = 'PASSWORD_ARGON2ID';
+					break;
+				default: //PASSWORD_DEFAULT
+					$crypto = 'PASSWORD_DEFAULT';
+					break;
 			}
+			$config = str_replace(
+				'PASSWORD_DEFAULT',
+				$crypto,
+			$config);
+
+			//Databases
+			$config = str_replace(array(
+				'users_database',
+				'options_database',
+				'records_database'
+			), array(
+				$db_users,
+				$db_options,
+				$db_records),
+			$config);
+			
+			file_put_contents(ADMPATH.'red-config.php', $config);
 		}
 
-		private function htaccess($dir = 'forward/')
+		/**
+		* htaccess
+		* Creates a .htaccess file
+		*
+		* @access   private
+		* @param	string $dir
+		* @return   void
+		*/
+		private function htaccess(string $dir = 'forward/') : void
 		{
-
 			if($dir == '/')
 				$dir = '';
 
@@ -186,7 +245,20 @@
 			file_put_contents($path, $htaccess);
 		}
 
-		private function database($users, $records, $options, $defUser, $defPass, $defUrl)
+		/**
+		* database
+		* Adds all necessary information to the database
+		*
+		* @access   private
+		* @param	string $users
+		* @param	string $records
+		* @param	string $options
+		* @param	string $defUser
+		* @param	string $defPass
+		* @param	string $defUrl
+		* @return   void
+		*/
+		private function database(string $users, string $records, string $options, string $defUser, string $defPass, string $defUrl) : void
 		{
 			/** Get database file */
 			if (is_file(ADMPATH.'db/red-db.php'))

@@ -10,11 +10,26 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
+	/**
+	*
+	* RED_ADMIN
+	*
+	* @author   Leszek Pomianowski <https://rdev.cc>
+	* @version  $Id: red-admin.php;RED_ADMIN,v beta 1.0 2019/10/27
+	* @access   public
+	*/
 	class RED_ADMIN
 	{
 		private $RED;
 		private $LOGGED_IN;
 
+		/**
+		* init
+		* Returns the RED_ADMIN object without initializing the object
+		*
+		* @access   public
+		* @return   object RED_ADMIN
+		*/
 		public static function init(RED $RED) : RED_ADMIN
 		{
 			return new RED_ADMIN($RED);
@@ -23,6 +38,12 @@
 		public function __construct(RED $RED)
 		{
 			$this->RED = $RED;
+
+			$this->RED->DB['users'] = new \Filebase\Database([
+				'dir' => DB_PATH.DB_USERS,
+				'backupLocation' => DB_PATH.DB_USERS.'/backup',
+				'format' => \Filebase\Format\Jdb::class
+			]);
 
 			session_start();
 			session_regenerate_id();
@@ -71,10 +92,10 @@
 			}
 		}
 
-		private function ajax() : void
+		private function ajax() : RED_AJAX
 		{
 			$this->RED->include(ADMPATH.'red-ajax.php');
-			RED_AJAX::init($this->RED);
+			return RED_AJAX::init($this->RED);
 		}
 
 		public function isLoggedIn() : void

@@ -10,45 +10,37 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
+	/**
+	*
+	* RED
+	*
+	* @author   Leszek Pomianowski <https://rdev.cc>
+	* @version  $Id: red-physic.php;RED,v beta 1.0 2019/10/27
+	* @access   public
+	*/
 	class RED
 	{
-		private $page;
-		private $uri;
+		public $DB;
 
 		private $is_manager;
 		private $is_admin;
 
-		public $DB;
-
+		/**
+		* __construct
+		* Registers the database, verifies the page id and redirect
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function __construct()
 		{
-			$this->DB = array(
-				'options' => new \Filebase\Database([
-					'dir' => DB_PATH.DB_OPTIONS,
-					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
-					'format' => \Filebase\Format\Jdb::class,
-					'cache' => true,
-					'cache_expires' => 1800
-				]),
-				'records' => new \Filebase\Database([
-					'dir' => DB_PATH.DB_RECORDS,
-					'backupLocation' => DB_PATH.DB_RECORDS.'/backup',
-					'format' => \Filebase\Format\Jdb::class,
-					'cache' => true,
-					'cache_expires' => 1800
-				])
-			);
+			self::database();
 
 			self::https();
 
 			switch (RED_PAGE)
 			{
 				case '_forward_dashboard':
-					$this->DB['users'] = new \Filebase\Database([
-						'dir' => DB_PATH.DB_USERS,
-						'backupLocation' => DB_PATH.DB_USERS.'/backup',
-						'format' => \Filebase\Format\Jdb::class
-					]);
 					self::admin();
 					break;
 				case '_forward_home':
@@ -73,6 +65,40 @@
 			}
 		}
 
+		/**
+		* database
+		* Loads database objects into an array
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function database() : void
+		{
+			$this->DB = array(
+				'options' => new \Filebase\Database([
+					'dir' => DB_PATH.DB_OPTIONS,
+					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
+					'format' => \Filebase\Format\Jdb::class,
+					'cache' => true,
+					'cache_expires' => 1800
+				]),
+				'records' => new \Filebase\Database([
+					'dir' => DB_PATH.DB_RECORDS,
+					'backupLocation' => DB_PATH.DB_RECORDS.'/backup',
+					'format' => \Filebase\Format\Jdb::class,
+					'cache' => true,
+					'cache_expires' => 1800
+				])
+			);
+		}
+
+		/**
+		* https
+		* Checks whether the encryption enforcement option is enabled
+		*
+		* @access   private
+		* @return   void
+		*/
 		private function https() : void
 		{
 			$force = false;
@@ -95,30 +121,40 @@
 			}
 		}
 
+		/**
+		* page
+		* Checks if the RED_PAGES class exists and returns a new page object
+		*
+		* @access   public
+		* @param	array $data
+		* @return   object RED_PAGES
+		*/
 		public function page(array $data) : RED_PAGES
 		{
-			/** Display page class */
-			if (is_file(ADMPATH.'red-page.php'))
-				require_once(ADMPATH.'red-page.php');
-			else
-				exit(RED_DEBUG ? 'The red-page.php file was not found!' : '');
-			
+			self::include(ADMPATH.'red-page.php');
 			return new RED_PAGES($data, $this);
 		}
 
-		private function admin() : void
+		/**
+		* admin
+		* Loads the administrator class
+		*
+		* @access   private
+		* @return   object RED_ADMIN
+		*/
+		private function admin() : RED_ADMIN
 		{
-			if (is_file(ADMPATH.'red-admin.php'))
-			{
-				require_once(ADMPATH.'red-admin.php');
-				RED_ADMIN::init($this);
-			}
-			else
-			{
-				$this->page(['title' => 'Page not found']);
-			}
+			self::include(ADMPATH.'red-admin.php');
+			return RED_ADMIN::init($this);
 		}
 
+		/**
+		* forward
+		* Performs a redirection and saves information to the database
+		*
+		* @access   private
+		* @return   void
+		*/
 		private function forward() : void
 		{
 			self::https();
@@ -186,6 +222,13 @@
 			exit;	
 		}
 
+		/**
+		* parseLanguage
+		* Checks the current language of the site
+		*
+		* @access   public
+		* @return   string key($langs)
+		*/
 		public function parseLanguage() : string
 		{
 			$langs = array();
@@ -206,12 +249,14 @@
 				return key($langs);
 		}
 
-		private function parse_url() : void
-		{
-			$URI = explode("/", $_SERVER['REQUEST_URI']);
-			$this->page = $URI[2];
-		}
-
+		/**
+		* rand
+		* Generates a random string
+		*
+		* @access   public
+		* @param	int $length
+		* @return   string $randomString
+		*/
 		public static function rand(int $length) : string
 		{
 			$characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -220,6 +265,15 @@
 			return $randomString;
 		}
 
+		/**
+		* encrypt
+		* Encrypts data depending on the selected method, default password
+		*
+		* @access   public
+		* @param	string $string
+		* @param	string $type
+		* @return   string hash_hmac()
+		*/
 		public static function encrypt(string $string, string $type = 'password') : string
 		{
 			if($type == 'password')
@@ -236,6 +290,17 @@
 			}
 		}
 
+		/**
+		* compare_crypt
+		* Compares encrypted data with those in the database
+		*
+		* @access   public
+		* @param	string $input_string
+		* @param	string $db_string
+		* @param	string $type
+		* @param	bool   $plain
+		* @return	bool   true/false
+		*/
 		public static function compare_crypt(string $input_string, string $db_string, string $type = 'password', bool $plain = true) : bool
 		{
 			if($type == 'password')
@@ -261,7 +326,13 @@
 			}
 		}
 
-
+		/**
+		* is_admin
+		* Verifies that the user has administrator rights based on the session and database
+		*
+		* @access   public
+		* @return   bool   true/false
+		*/
 		public function is_admin() : bool
 		{
 			if($this->is_admin == NULL)
@@ -285,6 +356,13 @@
 				return FALSE;
 		}
 
+		/**
+		* is_admin
+		* Verifies that the user has administrator or manager rights based on the session and database
+		*
+		* @access   public
+		* @return   bool   true/false
+		*/
 		public function is_manager() : bool
 		{
 			if($this->is_manager == NULL)
@@ -308,12 +386,19 @@
 				return FALSE;
 		}
 
-		public function include($path) : object
+		/**
+		* include
+		* Loads the desired file
+		*
+		* @access   public
+		* @return   file content
+		*/
+		public function include($path) : int
 		{
-			if (is_file($path))
-				return require_once($path);
-			else
+			if (!is_file($path))
 				exit(RED_DEBUG ? 'The '.$path.' file was not found!' : '');
+			
+			return require_once($path);
 		}
 	}
 ?>
