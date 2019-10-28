@@ -56,6 +56,13 @@
 			return new RED_AJAX($RED);
 		}
 
+		/**
+		* __construct
+		* Verifies the permissions, correctness of the ajax request and checks the existence of the method
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function __construct(RED $RED)
 		{
 			$this->RED = $RED;
@@ -81,6 +88,13 @@
 			die; //Kill if something is wrong
 		}
 
+		/**
+		* verifyNonce
+		* Validates requested nonce
+		*
+		* @access   private
+		* @return   bool true/false
+		*/
 		private function verifyNonce() : bool
 		{
 			if(isset($_POST['nonce']))
@@ -92,6 +106,13 @@
 				return FALSE;
 		}
 
+		/**
+		* checkAction
+		* Checks whether the given ajax request exists
+		*
+		* @access   private
+		* @return   bool true/false
+		*/
 		private function checkAction() : bool
 		{
 			if(method_exists($this,$this->ACTION))
@@ -100,6 +121,14 @@
 				return FALSE;
 		}
 
+		/**
+		* checkPermission
+		* Checks whether the given ajax request exists
+		*
+		* @access   private
+		* @param	string $type ('manager' / 'administrator')
+		* @return   bool true/false
+		*/
 		private function checkPermission(string $type) : void
 		{
 			if($type == 'manager')

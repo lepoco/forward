@@ -35,6 +35,13 @@
 			return new RED_ADMIN($RED);
 		}
 
+		/**
+		* __construct
+		* Checks permissions and redirects to the website, or return ajax
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function __construct(RED $RED)
 		{
 			$this->RED = $RED;
@@ -92,12 +99,26 @@
 			}
 		}
 
+		/**
+		* ajax
+		* Returns a new instance of the RED_AJAX class
+		*
+		* @access   private
+		* @return   object RED_AJAX
+		*/
 		private function ajax() : RED_AJAX
 		{
 			$this->RED->include(ADMPATH.'red-ajax.php');
 			return RED_AJAX::init($this->RED);
 		}
 
+		/**
+		* isLoggedIn
+		* Checks whether the user is logged in correctly
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function isLoggedIn() : void
 		{
 			$this->LOGGED_IN = FALSE;
@@ -113,6 +134,13 @@
 			}
 		}
 
+		/**
+		* signout
+		* Destroys session, logs off user
+		*
+		* @access   public
+		* @return   void
+		*/
 		public function signout() : void
 		{
 			session_destroy();
