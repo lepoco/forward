@@ -26,6 +26,18 @@
 		private $is_admin;
 
 		/**
+		* init
+		* Initializes the class without instantiating it
+		*
+		* @access   public
+		* @return   object RED
+		*/
+		public static function init() : RED
+		{
+			return new RED();
+		}
+
+		/**
 		* __construct
 		* Registers the database, verifies the page id and redirect
 		*
@@ -34,6 +46,8 @@
 		*/
 		public function __construct()
 		{
+			self::decode_url();
+
 			self::database();
 
 			self::https();
@@ -63,6 +77,34 @@
 					self::forward();
 					break;
 			}
+		}
+
+		/**
+		* decode_url
+		* Analyzes and determines the current url
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function decode_url(): void
+		{
+			$DIR_URL = urldecode('/'.trim(str_replace(rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'),'',$_SERVER['REQUEST_URI']),'/'));
+			$DIR_URL = parse_url($DIR_URL);
+			$DIR_URL = explode( '/', $DIR_URL['path']);
+
+			if(!isset($DIR_URL[0], $DIR_URL[1]))
+				exit(RED_DEBUG ? $e : 'URL Parsing error');
+
+			if($DIR_URL[1] == '')
+				defined('RED_PAGE') or define('RED_PAGE', '_forward_home');
+			else if($DIR_URL[1] == RED_DASHBOARD)
+				defined('RED_PAGE') or define('RED_PAGE', '_forward_dashboard');
+			else
+				defined('RED_PAGE') or define('RED_PAGE', filter_var($DIR_URL[1], FILTER_SANITIZE_STRING));
+
+			if(RED_PAGE == '_forward_dashboard')
+				if(isset($DIR_URL[2]))
+					defined('RED_PAGE_DASHBOARD') or define('RED_PAGE_DASHBOARD', filter_var($DIR_URL[2], FILTER_SANITIZE_STRING));
 		}
 
 		/**

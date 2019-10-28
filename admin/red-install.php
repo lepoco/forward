@@ -175,7 +175,7 @@
 		{
 			$config = file_get_contents( ADMPATH . 'red-config-sample.php' );
 
-			$this->salt = self::salter(50);
+			$this->salt = self::salter(60);
 
 			//Salts
 			$config = str_replace(array(
@@ -184,8 +184,8 @@
 				'example_nonce_salt'
 			), array(
 				$this->salt,
-				self::salter(50),
-				self::salter(50)),
+				self::salter(60),
+				self::salter(60)),
 			$config);
 
 			//Cryptographic

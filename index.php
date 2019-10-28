@@ -9,14 +9,15 @@
  */
 	namespace Forward;
 
-	if (!defined('ABSPATH'))
-		define('ABSPATH', dirname( __FILE__ ).'/');
+	/** The name of the directory with Forward files */
+	define('ADMIN_PATH', 'admin');
 
-	if (!defined('ADMPATH'))
-		define('ADMPATH', ABSPATH.'admin/');
+	/** Main constants for all files */
+	define('ABSPATH', dirname( __FILE__ ).'/');
+	define('ADMPATH', ABSPATH.ADMIN_PATH.'/');
 
-	if (is_file(ADMPATH.'red-init.php'))
-		require_once(ADMPATH.'red-init.php');
-	else
+	/** Initialization file */
+	if (!is_file(ADMPATH.'red-init.php'))
 		exit('Fatal error');
+	require_once(ADMPATH.'red-init.php');
 ?>
