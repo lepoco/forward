@@ -22,12 +22,12 @@
 	<meta name="mobile-web-app-capable" content="no">
 	<meta name="apple-mobile-web-app-capable" content="no">
 	<meta name="msapplication-starturl" content="/">
-	<meta name="msapplication-TileImage" content="<?php echo $this->script_uri; ?>admin/img/forward-fav.png" />
-	<link rel="icon" href="<?php echo $this->script_uri; ?>admin/img/forward-fav.png" sizes="192x192" />
-	<link rel="apple-touch-icon-precomposed" href="<?php echo $this->script_uri; ?>admin/img/forward-fav.png" />
+	<meta name="msapplication-TileImage" content="<?php echo $this->script_uri; ?>media/img/forward-fav.png" />
+	<link rel="icon" href="<?php echo $this->script_uri; ?>media/img/forward-fav.png" sizes="192x192" />
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $this->script_uri; ?>media/img/forward-fav.png" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="<?php echo $this->script_uri; ?>admin/css/red.css">
+	<link rel="stylesheet" href="<?php echo $this->script_uri; ?>media/css/red.css">
 	<title>Forward | Install</title>
 	<style>
 		body {
@@ -51,9 +51,9 @@
 <section id="forward">
 	<div id="big-background">
 		<picture>
-			<source srcset="<?php echo $this->script_uri; ?>admin/img/bg.webp" type="image/webp">
-			<source srcset="<?php echo $this->script_uri; ?>admin/img/bg.jpeg" type="image/jpeg">
-			<img alt="This is my face" src="<?php echo $this->script_uri; ?>admin/img/bg.jpeg">
+			<source srcset="<?php echo $this->script_uri; ?>media/img/bg.webp" type="image/webp">
+			<source srcset="<?php echo $this->script_uri; ?>media/img/bg.jpeg" type="image/jpeg">
+			<img alt="This is my face" src="<?php echo $this->script_uri; ?>media/img/bg.jpeg">
 		</picture>
 	</div>
 	<section id="red-install">
@@ -61,9 +61,9 @@
 			<div class="row">
 				<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
 					<picture id="forward-logo">
-						<source srcset="<?php echo $this->script_uri; ?>admin/img/forward-logo-wt.webp" type="image/webp">
-						<source srcset="<?php echo $this->script_uri; ?>admin/img/forward-logo-wt.jpeg" type="image/jpeg">
-						<img alt="This is my face" src="<?php echo $this->script_uri; ?>admin/img/forward-logo-wt.jpeg">
+						<source srcset="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.webp" type="image/webp">
+						<source srcset="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.jpeg" type="image/jpeg">
+						<img alt="This is my face" src="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.jpeg">
 					</picture>
 				</div>
 				<div class="col-12 col-lg-6">
@@ -133,9 +133,7 @@
 		</div>
 	</section>
 </section>
-<script src="<?php echo $this->script_uri; ?>admin/js/jquery-3.4.1.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="<?php echo $this->script_uri; ?>media/js/jquery-3.4.1.js" crossorigin="anonymous"></script>
 <script>
 	jQuery('#install-forward').on('click', function(e){
 		e.preventDefault();

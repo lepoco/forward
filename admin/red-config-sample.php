@@ -40,7 +40,10 @@
 	/** WebName */
 	define('RED_NAME', 'Forward');
 
-	/** WebName */
+	/** Media slug */
+	define('RED_MEDIA', 'media');
+
+	/** Cockpit slug */
 	define('RED_DASHBOARD', 'dashboard');
 
 	/** Forward version */

@@ -17,9 +17,9 @@
 		<div class="row">
 			<div class="col-12 col-md-3">
 				<picture id="forward-logo">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.webp" type="image/webp">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.jpeg" type="image/jpeg">
-					<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/forward-logo-bk.jpeg">
+					<source srcset="<?php echo $this->home_url().RED_MEDIA; ?>/img/forward-logo-bk.webp" type="image/webp">
+					<source srcset="<?php echo $this->home_url().RED_MEDIA; ?>/img/forward-logo-bk.jpeg" type="image/jpeg">
+					<img alt="This is my face" src="<?php echo $this->home_url().RED_MEDIA; ?>/img/forward-logo-bk.jpeg">
 				</picture>
 				<hr>
 				<h2 class="display-4" style="font-size: 31px;margin: 0;">Forward</h2>
