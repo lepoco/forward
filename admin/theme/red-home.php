@@ -14,9 +14,9 @@
 ?>
 <div id="big-background">
 	<picture>
-		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.webp" type="image/webp">
-		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.jpeg" type="image/jpeg">
-		<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/bg.jpeg">
+		<source srcset="<?php echo $this->media_url(); ?>/img/bg.webp" type="image/webp">
+		<source srcset="<?php echo $this->media_url(); ?>/img/bg.jpeg" type="image/jpeg">
+		<img alt="Forward background" src="<?php echo $this->media_url(); ?>/img/bg.jpeg">
 	</picture>
 </div>
 <section id="red-home">
@@ -24,9 +24,9 @@
 		<div class="row">
 			<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
 				<picture id="forward-logo">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.webp" type="image/webp">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg" type="image/jpeg">
-					<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg">
+					<source srcset="<?php echo $this->media_url(); ?>/img/forward-logo-wt.webp" type="image/webp">
+					<source srcset="<?php echo $this->media_url(); ?>/img/forward-logo-wt.jpeg" type="image/jpeg">
+					<img alt="Forward logo" src="<?php echo $this->media_url(); ?>/img/forward-logo-wt.jpeg">
 				</picture>
 			</div>
 			<div class="col-12 col-lg-6">

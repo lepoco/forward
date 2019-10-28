@@ -22,6 +22,7 @@
 	{
 		private $title;
 		private $uri;
+		private $mediauri;
 
 		private $RED;
 
@@ -47,18 +48,7 @@
 				$page = '404';
 
 			if($page == '404')
-			{
-				if($this->DB['options']->get('redirect_404')->value)
-				{
-					$home_url = $this->DB['options']->get('redirect_404_url')->value;
-					if(!empty($home_url))
-					{
-						header('HTTP/1.1 301 Moved Permanently');
-						header('Location: ' . $home_url);
-						exit;
-					}
-				}
-			}
+				self::error404();
 
 			if(isset($data['title']))
 				$this->title = $data['title'];
@@ -69,6 +59,54 @@
 				require_once(ADMPATH.'theme/red-'.$page.'.php');
 			else
 				exit(RED_DEBUG ? 'Page '.$page.' file not found!' : '');
+		}
+
+		private function queue_scripts() : void
+		{
+			$scripts = array(
+				'/js/jquery-3.4.1.js',
+				'/js/popper.min.js',
+				'/js/bootstrap.min.js',
+				'/js/chartist.min.j'
+			);
+
+			foreach ($scripts as $script)
+				echo '<script src="'.self::media_url().$script.'"></script>';
+		}
+
+		private function queue_styles() : void
+		{
+			$styles = array(
+				'https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap',
+				self::media_url().'/css/bootstrap.min.css',
+				self::media_url().'/css/red.css',
+				self::media_url().'/css/chartist.css',
+				self::media_url().'/js/chartist.min.j'
+			);
+
+			foreach ($styles as $style)
+				echo '<link href="'.$style.'" rel="stylesheet">';
+		}
+
+		/**
+		* error404
+		* Displays a 404 error or performs redirects
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function error404() : void
+		{
+			if($this->RED->DB['options']->get('redirect_404')->value)
+			{
+				$home_url = $this->DB['options']->get('redirect_404_url')->value;
+				if(!empty($home_url))
+				{
+					header('HTTP/1.1 301 Moved Permanently');
+					header('Location: ' . $home_url);
+					exit;
+				}
+			}
 		}
 
 		/**
@@ -84,6 +122,14 @@
 				$this->uri = $this->RED->DB['options']->get('siteurl')->value;
 
 			return $this->uri;
+		}
+
+		private function media_url() : string
+		{
+			if($this->mediauri == null)
+				$this->mediauri = $this->RED->DB['options']->get('siteurl')->value.RED_MEDIA;
+
+			return $this->mediauri;
 		}
 
 		/**

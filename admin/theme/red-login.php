@@ -11,13 +11,16 @@
 	defined('ABSPATH') or die('No script kiddies please!');
 
 	$this->head();
+
+	$captcha_site = $this->RED->DB['options']->get('captcha_site')->value;
+	$captcha_secret = $this->RED->DB['options']->get('captcha_secret')->value;
 ?>
 
 <div id="big-background">
 	<picture>
-		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.webp" type="image/webp">
-		<source srcset="<?php echo $this->home_url(); ?>admin/img/bg.jpeg" type="image/jpeg">
-		<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/bg.jpeg">
+		<source srcset="<?php echo $this->home_url(); ?>media/img/bg.webp" type="image/webp">
+		<source srcset="<?php echo $this->home_url(); ?>media/img/bg.jpeg" type="image/jpeg">
+		<img alt="This is my face" src="<?php echo $this->home_url(); ?>media/img/bg.jpeg">
 	</picture>
 </div>
 <section id="red-login">
@@ -25,9 +28,9 @@
 		<div class="row">
 			<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
 				<picture id="forward-logo">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.webp" type="image/webp">
-					<source srcset="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg" type="image/jpeg">
-					<img alt="This is my face" src="<?php echo $this->home_url(); ?>admin/img/forward-logo-wt.jpeg">
+					<source srcset="<?php echo $this->home_url(); ?>media/img/forward-logo-wt.webp" type="image/webp">
+					<source srcset="<?php echo $this->home_url(); ?>media/img/forward-logo-wt.jpeg" type="image/jpeg">
+					<img alt="This is my face" src="<?php echo $this->home_url(); ?>media/img/forward-logo-wt.jpeg">
 				</picture>
 			</div>
 			<div class="col-12 col-lg-6">
@@ -38,6 +41,7 @@
 								<h1>Sign in</h1>
 								<input type="hidden" value="<?php echo RED::encrypt('ajax_sign_in_nonce', 'nonce'); ?>" name="nonce">
 								<input type="hidden" value="sign_in" name="action">
+								<?php echo !empty($captcha_site) && !empty($captcha_secret) ? '<div id="reCaptcha"></div>' : ''; ?>
 								<div class="form-group">
 									<label for="login">Login</label>
 									<input type="text" class="form-control" name="login" id="login" placeholder="Enter login/email">
@@ -58,6 +62,20 @@
 		</div>
 	</div>
 </section>
+<?php
+
+	
+
+	if(!empty($captcha_site) && !empty($captcha_secret))
+	{
+		echo '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCaptcha&render='.$captcha_site.'"></script>';
+		echo '<script>var onloadCaptcha = function(){console.log("Captcha loaded");grecaptcha.render("reCaptcha",{
+            "sitekey": "'.$captcha_site.'",
+            "callback": onSubmit
+        });}</script>';
+	}
+
+?>
 <script>
 	window.onload = function() {
 		jQuery('#button-form').on('click', function(e){

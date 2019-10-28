@@ -46,68 +46,76 @@
 		*/
 		public function __construct()
 		{
+			$HTTP = 'https://';
 			if (empty($_SERVER['HTTPS']))
 				$HTTP = 'http://';
-			else
-				$HTTP = 'https://';
 
 			self::check_files();
 			
 			$this->request_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-
-			$this->script_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].dirname($_SERVER["SCRIPT_NAME"]));
+			$this->script_uri = self::urlFix($HTTP.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']));
 
 			if(!isset($_POST['action']))
 				if($this->script_uri != $this->request_uri)
-					exit(header("Location: " . $this->script_uri));
+					exit(header('Location: ' . $this->script_uri));
 
 			if(isset($_POST['action']))
-			{
-
-				self::htaccess(
-					filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
-				);
-
-				/** Password hash type */
-				if(defined('PASSWORD_ARGON2ID'))
-					define('RED_ALGO', PASSWORD_ARGON2ID);
-				else if(defined('PASSWORD_ARGON2I'))
-					define('RED_ALGO', PASSWORD_ARGON2I);
-				else if(defined('PASSWORD_BCRYPT'))
-					define('RED_ALGO', PASSWORD_BCRYPT);
-				else if(defined('PASSWORD_DEFAULT'))
-					define('RED_ALGO', PASSWORD_DEFAULT);
-
-				self::config(
-					filter_var($_POST['usersDB'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['recordsDB'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['optionsDB'], FILTER_SANITIZE_STRING)
-				);
-
-				$this->dbpath = ADMPATH.'db/';
-
-				self::database(
-					filter_var($_POST['usersDB'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['recordsDB'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['optionsDB'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['defUser'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['defPassw'], FILTER_SANITIZE_STRING),
-					filter_var($_POST['defaultUrl'], FILTER_SANITIZE_URL)
-				);
-
-				exit('success');
-
-			}
+				self::do_install();
 			else
-			{
-				if (is_file(ADMPATH.'theme/red-install.php')) {
-					require_once(ADMPATH.'theme/red-install.php');
-				}
-				else
-				{
-					exit('Fatal error');
-				}
-			}
+				self::display_page();
+		}
+
+		/**
+		* do_install
+		* Performs the necessary installation steps
+		*
+		* @return void
+		*/
+		private function do_install() : void
+		{
+			self::htaccess(
+				filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
+			);
+
+			/** Password hash type */
+			if(defined('PASSWORD_ARGON2ID'))
+				define('RED_ALGO', PASSWORD_ARGON2ID);
+			else if(defined('PASSWORD_ARGON2I'))
+				define('RED_ALGO', PASSWORD_ARGON2I);
+			else if(defined('PASSWORD_BCRYPT'))
+				define('RED_ALGO', PASSWORD_BCRYPT);
+			else if(defined('PASSWORD_DEFAULT'))
+				define('RED_ALGO', PASSWORD_DEFAULT);
+
+			self::config(
+				filter_var($_POST['usersDB'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['recordsDB'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['optionsDB'], FILTER_SANITIZE_STRING)
+			);
+
+			$this->dbpath = ADMPATH.'db/';
+
+			self::database(
+				filter_var($_POST['usersDB'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['recordsDB'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['optionsDB'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['defUser'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['defPassw'], FILTER_SANITIZE_STRING),
+				filter_var($_POST['defaultUrl'], FILTER_SANITIZE_URL)
+			);
+
+			exit('success');
+		}
+
+		/**
+		* display_page
+		* Displays the installation page
+		*
+		* @return void
+		*/
+		private function display_page() : void
+		{
+			require_once(ADMPATH.'theme/red-install.php');
 		}
 
 		/**
@@ -118,6 +126,9 @@
 		*/
 		private function check_files() : void
 		{
+			if (!is_file(ADMPATH.'theme/red-install.php')) {
+				exit('File red-install.php.php does not exist. This file is required for installation.');
+
 			if (!is_file(ADMPATH.'red-config-sample.php'))
 				exit('File red-config-sample.php does not exist. This file is required for installation.');
 

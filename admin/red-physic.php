@@ -52,26 +52,28 @@
 
 			self::https();
 
+			self::page_redirect();
+		}
+
+		/**
+		* page_redirect
+		* Forward to page, 404 error, ajax or do forward
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function page_redirect() : void
+		{
 			switch (RED_PAGE)
 			{
+				case '404':
+					$this->page(['title' => 'Page not found']);
+					break;
 				case '_forward_dashboard':
 					self::admin();
 					break;
 				case '_forward_home':
-					if($this->DB['options']->get('redirect_home')->value)
-					{
-						$home_url = $this->DB['options']->get('redirect_home_url')->value;
-						if(!empty($home_url))
-						{
-							header('HTTP/1.1 301 Moved Permanently');
-							header('Location: ' . $home_url);
-							exit;
-						}
-					}
-					$this->page(['title' => 'Home page', 'page' => 'home']);
-					break;
-				case '404':
-					$this->page(['title' => 'Page not found']);
+					self::home();
 					break;
 				default:
 					self::forward();
@@ -163,6 +165,41 @@
 		}
 
 		/**
+		* admin
+		* Loads the administrator class
+		*
+		* @access   private
+		* @return   object RED_ADMIN
+		*/
+		private function admin() : RED_ADMIN
+		{
+			self::include(ADMPATH.'red-admin.php');
+			return RED_ADMIN::init($this);
+		}
+
+		/**
+		* home
+		* Displays the home page or performs redirects
+		*
+		* @access   private
+		* @return   object RED_ADMIN
+		*/
+		private function home() : void
+		{
+			if($this->DB['options']->get('redirect_home')->value)
+			{
+				$home_url = $this->DB['options']->get('redirect_home_url')->value;
+				if(!empty($home_url))
+				{
+					header('HTTP/1.1 301 Moved Permanently');
+					header('Location: ' . $home_url);
+					exit;
+				}
+			}
+			$this->page(['title' => 'Home page', 'page' => 'home']);
+		}
+
+		/**
 		* page
 		* Checks if the RED_PAGES class exists and returns a new page object
 		*
@@ -174,19 +211,6 @@
 		{
 			self::include(ADMPATH.'red-page.php');
 			return new RED_PAGES($data, $this);
-		}
-
-		/**
-		* admin
-		* Loads the administrator class
-		*
-		* @access   private
-		* @return   object RED_ADMIN
-		*/
-		private function admin() : RED_ADMIN
-		{
-			self::include(ADMPATH.'red-admin.php');
-			return RED_ADMIN::init($this);
 		}
 
 		/**

@@ -53,7 +53,7 @@
 		<picture>
 			<source srcset="<?php echo $this->script_uri; ?>media/img/bg.webp" type="image/webp">
 			<source srcset="<?php echo $this->script_uri; ?>media/img/bg.jpeg" type="image/jpeg">
-			<img alt="This is my face" src="<?php echo $this->script_uri; ?>media/img/bg.jpeg">
+			<img alt="Forward background" src="<?php echo $this->script_uri; ?>media/img/bg.jpeg">
 		</picture>
 	</div>
 	<section id="red-install">
@@ -63,7 +63,7 @@
 					<picture id="forward-logo">
 						<source srcset="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.webp" type="image/webp">
 						<source srcset="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.jpeg" type="image/jpeg">
-						<img alt="This is my face" src="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.jpeg">
+						<img alt="Forward logo" src="<?php echo $this->script_uri; ?>media/img/forward-logo-wt.jpeg">
 					</picture>
 				</div>
 				<div class="col-12 col-lg-6">
