@@ -50,42 +50,31 @@
 			if($page == '404')
 				self::error404();
 
+			if($page == 'home')
+				self::homepage();
+
 			if(isset($data['title']))
 				$this->title = $data['title'];
 			else
 				$this->title = NULL;
 
-			if (is_file(ADMPATH.'theme/red-'.$page.'.php'))
-				require_once(ADMPATH.'theme/red-'.$page.'.php');
+			self::print_page($page);
+		}
+
+		/**
+		* print_page
+		* Displays the selected page theme
+		*
+		* @access   private
+		* @param    string $name
+		* @return   void
+		*/
+		private function print_page(string $name) : void
+		{
+			if (is_file(ADMPATH.'theme/red-'.$name.'.php'))
+				require_once(ADMPATH.'theme/red-'.$name.'.php');
 			else
-				exit(RED_DEBUG ? 'Page '.$page.' file not found!' : '');
-		}
-
-		private function queue_scripts() : void
-		{
-			$scripts = array(
-				'/js/jquery-3.4.1.js',
-				'/js/popper.min.js',
-				'/js/bootstrap.min.js',
-				'/js/chartist.min.j'
-			);
-
-			foreach ($scripts as $script)
-				echo '<script src="'.self::media_url().$script.'"></script>';
-		}
-
-		private function queue_styles() : void
-		{
-			$styles = array(
-				'https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap',
-				self::media_url().'/css/bootstrap.min.css',
-				self::media_url().'/css/red.css',
-				self::media_url().'/css/chartist.css',
-				self::media_url().'/js/chartist.min.j'
-			);
-
-			foreach ($styles as $style)
-				echo '<link href="'.$style.'" rel="stylesheet">';
+				exit(RED_DEBUG ? 'Page '.$name.' file not found!' : '');
 		}
 
 		/**
@@ -99,7 +88,7 @@
 		{
 			if($this->RED->DB['options']->get('redirect_404')->value)
 			{
-				$home_url = $this->DB['options']->get('redirect_404_url')->value;
+				$home_url = $this->RED->DB['options']->get('redirect_404_url')->value;
 				if(!empty($home_url))
 				{
 					header('HTTP/1.1 301 Moved Permanently');
@@ -107,6 +96,29 @@
 					exit;
 				}
 			}
+			self::print_page('404');
+		}
+
+		/**
+		* home
+		* Displays the home page or performs redirects
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function homepage() : void
+		{
+			if($this->RED->DB['options']->get('redirect_home')->value)
+			{
+				$home_url = $this->RED->DB['options']->get('redirect_home_url')->value;
+				if(!empty($home_url))
+				{
+					header('HTTP/1.1 301 Moved Permanently');
+					header('Location: ' . $home_url);
+					exit;
+				}
+			}
+			self::print_page('home');
 		}
 
 		/**
@@ -157,7 +169,7 @@
 			if($this->LANG == NULL)
 			{
 				if($this->RED->DB['options']->get('language_type')->value == 1)
-					$lang = $this->RED->parseLanguage($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+					$lang = $this->RED->parse_language($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 				else
 					$lang = $this->RED->DB['options']->get('language_select')->value;
 				
@@ -219,6 +231,47 @@
 			$html .= '</ul></div></nav>';
 
 			echo $html;
+		}
+
+		/**
+		* queue_styles
+		* Prints all scripts
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function queue_scripts() : void
+		{
+			$scripts = array(
+				'/js/jquery-3.4.1.js',
+				'/js/popper.min.js',
+				'/js/bootstrap.min.js',
+				'/js/chartist.min.j'
+			);
+
+			foreach ($scripts as $script)
+				echo '<script src="'.self::media_url().$script.'"></script>';
+		}
+
+		/**
+		* queue_styles
+		* Prints all styles
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function queue_styles() : void
+		{
+			$styles = array(
+				'https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap',
+				self::media_url().'/css/bootstrap.min.css',
+				self::media_url().'/css/red.css',
+				self::media_url().'/css/chartist.css',
+				self::media_url().'/js/chartist.min.j'
+			);
+
+			foreach ($styles as $style)
+				echo '<link href="'.$style.'" rel="stylesheet">';
 		}
 
 		/**

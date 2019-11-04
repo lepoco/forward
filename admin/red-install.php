@@ -126,7 +126,7 @@
 		*/
 		private function check_files() : void
 		{
-			if (!is_file(ADMPATH.'theme/red-install.php')) {
+			if (!is_file(ADMPATH.'theme/red-install.php'))
 				exit('File red-install.php.php does not exist. This file is required for installation.');
 
 			if (!is_file(ADMPATH.'red-config-sample.php'))

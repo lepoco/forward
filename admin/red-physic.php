@@ -69,11 +69,11 @@
 				case '404':
 					$this->page(['title' => 'Page not found']);
 					break;
+				case '_forward_home':
+					$this->page(['title' => 'Home page', 'page' => 'home']);
 				case '_forward_dashboard':
 					self::admin();
 					break;
-				case '_forward_home':
-					self::home();
 					break;
 				default:
 					self::forward();
@@ -178,28 +178,6 @@
 		}
 
 		/**
-		* home
-		* Displays the home page or performs redirects
-		*
-		* @access   private
-		* @return   object RED_ADMIN
-		*/
-		private function home() : void
-		{
-			if($this->DB['options']->get('redirect_home')->value)
-			{
-				$home_url = $this->DB['options']->get('redirect_home_url')->value;
-				if(!empty($home_url))
-				{
-					header('HTTP/1.1 301 Moved Permanently');
-					header('Location: ' . $home_url);
-					exit;
-				}
-			}
-			$this->page(['title' => 'Home page', 'page' => 'home']);
-		}
-
-		/**
 		* page
 		* Checks if the RED_PAGES class exists and returns a new page object
 		*
@@ -230,7 +208,7 @@
 				$this->page(['title' => 'Page not found']);
 
 			/** Languages */
-			$lang = self::parseLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+			$lang = self::parse_language($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
 			if(is_array($record->locations))
 				if(array_key_exists($lang, $record->locations))
 					$record->locations[$lang] += 1;
@@ -288,13 +266,13 @@
 		}
 
 		/**
-		* parseLanguage
+		* parse_language
 		* Checks the current language of the site
 		*
 		* @access   public
 		* @return   string key($langs)
 		*/
-		public function parseLanguage() : string
+		public function parse_language() : string
 		{
 			$langs = array();
 			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), $matches, PREG_SET_ORDER);
