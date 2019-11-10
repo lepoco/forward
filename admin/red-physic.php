@@ -236,33 +236,65 @@
 				$record->stats[$time['key']][$time['day']] += 1;
 
 			/** Referrers */
-			if(!is_array($record->referrers))
-				$record->referrers = array();
+			$referrers = array();
+			if(is_array($record->referrers))
+				$referrers = $record->referrers;
 
 			if(isset($_SERVER['HTTP_REFERER']))
 			{
 				$ref = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
 
-				if(array_key_exists($ref, $record->referrers))
-					$record->referrers[$ref] += 1;
+				if(array_key_exists($ref, $referrers))
+					$referrers[$ref] += 1;
 				else
-					$record->referrers[$ref] += 1;
+					$referrers[$ref] += 1;
 			}
 			else
 			{
-				if(array_key_exists('direct', $record->referrers))
-					$record->referrers['direct'] += 1;
+				if(array_key_exists('direct', $referrers))
+					$referrers['direct'] += 1;
 				else
-					$record->referrers['direct'] += 1;
+					$referrers['direct'] += 1;
 			}
+
+			$record->referrers = $referrers;
 
 			/** Clicks */
 			$record->clicks = $record->clicks + 1;
 			$record->save();
 
+			$this->js_redirect($record->url);
+
 			//Redirect
-			header("Location: " . $record->url);
+			header('HTTP/1.1 301 Moved Permanently');
+			header('Location: ' . $record->url);
 			exit;	
+		}
+
+		/**
+		* js_redirect
+		* JavaScript redirection
+		*
+		* @access   private
+		* @param	string $url
+		* @return   void
+		*/
+		private function js_redirect(string $url) : void
+		{
+			if($this->DB['options']->get('js_redirect')->value)
+			{
+				$gtag = $this->DB['options']->get('gtag')->value;
+
+				if(!empty($gtag))
+				{
+					$html  = '<!DOCTYPE html><html><head><title>Forward Redirection</title></head><body>';
+					$html .= '<script async src="https://www.googletagmanager.com/gtag/js?id='.$gtag.'"></script>';
+					$html .= '<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "'.$gtag.'");</script>';
+					$html .= '<script defer="defer">window.onload=function(){setTimeout(function(){window.location.replace("'.$url.'");},'.$this->DB['options']->get('js_redirect_after').');};</script>';
+					$html .= '</body></html>';
+					exit($html);
+				}
+			}
 		}
 
 		/**
