@@ -246,7 +246,7 @@
 				'/js/jquery-3.4.1.js',
 				'/js/popper.min.js',
 				'/js/bootstrap.min.js',
-				'/js/chartist.min.j'
+				'/js/chartist.min.js'
 			);
 
 			foreach ($scripts as $script)
@@ -266,8 +266,7 @@
 				'https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap',
 				self::media_url().'/css/bootstrap.min.css',
 				self::media_url().'/css/red.css',
-				self::media_url().'/css/chartist.css',
-				self::media_url().'/js/chartist.min.j'
+				self::media_url().'/css/chartist.css'
 			);
 
 			foreach ($styles as $style)

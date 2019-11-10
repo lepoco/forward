@@ -247,16 +247,15 @@
 				if(array_key_exists($ref, $referrers))
 					$referrers[$ref] += 1;
 				else
-					$referrers[$ref] += 1;
+					$referrers[$ref] = 1;
 			}
 			else
 			{
 				if(array_key_exists('direct', $referrers))
 					$referrers['direct'] += 1;
 				else
-					$referrers['direct'] += 1;
+					$referrers['direct'] = 1;
 			}
-
 			$record->referrers = $referrers;
 
 			/** Clicks */
