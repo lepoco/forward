@@ -19,6 +19,8 @@
 	$total_clicks = 0;
 	$locations = array();
 	$referrers = array();
+	$top_referrer = $this->e('Unknown');
+	$top_lang = $this->e('Unknown');
 
 	/** Current date for printing the pie chart */
 	$date = array(
@@ -237,6 +239,11 @@
 <?php endif; ?>
 <script>
 window.onload = function() {
+
+	/** Record info */
+	var record_id = null;
+	var record_data = null;
+
 	/** Initial chart and changing charts content */
 	jQuery(function()
 	{
@@ -245,52 +252,51 @@ window.onload = function() {
 
 		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#delete-record-icon").attr("data-id",r),jQuery("#preview-record-url").html(u)}
 		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
-
 		var prev_record = jQuery('#first-record').data();
+		record_data = prev_record;
+		record_id = record_data.id;
 		display_record(prev_record.slug, prev_record.date, prev_record.url);
 		bar_chart_animate(prev_record.daily.split('/'));
 
 		jQuery('.links-card').on('click', function()
 		{
 			var data = jQuery(this).data();
+			record_data = data;
+			record_id = record_data.id;
 			display_record(data.slug, data.date, data.url);
 			bar_chart_animate(data.daily.split('/'));
 		});
 	});
 	<?php if ($this->RED->is_manager()): ?>
+
 	/** AJAX - Delete record */
-	jQuery(function(){
-		jQuery('#delete-record-icon').on('click', function(e){
-			e.preventDefault();
-			console.log(jQuery('#delete-record-icon').data());
+	jQuery('#delete-record-icon').on('click', function(e){
+		e.preventDefault();
+		jQuery('#delete-record-name').html(record_data.slug);
+		jQuery('#delete-record-confirm').attr('data-id', record_data.slug);
+		jQuery('#delete-record-modal').modal('show');
+	});
 
-			var data = jQuery('#delete-record-icon').data();
-
-			jQuery('#delete-record-name').html(data.id);
-			jQuery('#delete-record-confirm').attr('data-id', data.id);
-			jQuery('#delete-record-modal').modal('show');
-		});
-		jQuery('#delete-record-confirm').on('click', function(e){
-			e.preventDefault();
-			var data = jQuery(this).data();
-			jQuery.ajax({
-				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
-				type:'post',
-				data: 'action=remove_record&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.id,
-				success:function(e)
-				{
-					if(e == 'success'){
-
-					}
-					console.log(e);
-				},
-				fail:function(xhr, textStatus, errorThrown){
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(errorThrown);
-					jQuery('#add-alert').slideToggle();
+	jQuery('#delete-record-confirm').on('click', function(e){
+		e.preventDefault();
+		var data = record_data;
+		jQuery.ajax({
+			url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+			type:'post',
+			data: 'action=remove_record&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.slug,
+			success:function(e)
+			{
+				if(e == 's01'){
+					jQuery('#delete-record-modal').modal('hide');
 				}
-			});
+				console.log(e);
+			},
+			fail:function(xhr, textStatus, errorThrown){
+				console.log(xhr);
+				console.log(textStatus);
+				console.log(errorThrown);
+				jQuery('#add-alert').slideToggle();
+			}
 		});
 	});
 

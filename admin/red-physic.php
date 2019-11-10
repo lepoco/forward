@@ -15,7 +15,7 @@
 	* RED
 	*
 	* @author   Leszek Pomianowski <https://rdev.cc>
-	* @version  $Id: red-physic.php;RED,v beta 1.0 2019/10/27
+	* @version  $Id: red-physic.php;RED,v beta 1.0 2019/11/10
 	* @access   public
 	*/
 	class RED

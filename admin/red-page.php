@@ -136,6 +136,13 @@
 			return $this->uri;
 		}
 
+		/**
+		* media_url
+		* Returns the URL to the media folder
+		*
+		* @access   private
+		* @return   string mediauri
+		*/
 		private function media_url() : string
 		{
 			if($this->mediauri == null)
@@ -219,7 +226,7 @@
 				$page = 'dashboard';
 
 			$html = '<nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark">';
-			$html .= '<a class="navbar-brand" href="'.self::home_url().'dashboard"><picture id="forward-navbar-logo"><source srcset="'.self::home_url().'admin/img/forward-logo-wt.webp" type="image/webp"><source srcset="'.self::home_url().'admin/img/forward-logo-wt.png" type="image/png"><img alt="This is my face" src="'.self::home_url().'admin/img/forward-logo-wt.png"></picture></a>';
+			$html .= '<a class="navbar-brand" href="'.self::home_url().'dashboard"><picture id="forward-navbar-logo"><source srcset="'.self::media_url().'/img/forward-logo-wt.webp" type="image/webp"><source srcset="'.self::media_url().'/img/forward-logo-wt.png" type="image/png"><img alt="Forward logo" src="'.self::media_url().'/img/forward-logo-wt.png"></picture></a>';
 			$html .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forward-navbar" aria-controls="forward-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
 			$html .= '<div class="collapse navbar-collapse navbar-right" id="forward-navbar"><ul class="navbar-nav">';
 
