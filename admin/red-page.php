@@ -253,7 +253,8 @@
 				'/js/jquery-3.4.1.js',
 				'/js/popper.min.js',
 				'/js/bootstrap.min.js',
-				'/js/chartist.min.js'
+				'/js/chartist.min.js',
+				'/js/clipboard.min.js'
 			);
 
 			foreach ($scripts as $script)

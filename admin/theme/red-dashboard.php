@@ -47,6 +47,12 @@
 		<div class="row">
 			<div class="col-12 col-lg-3 col-no-gutters" id="records_list">
 				<div class="card links-header"><div class="card-body"><small><strong id="total_records_count"><?php echo count($records); ?></strong> <?php echo $this->e('total links'); ?></small></div></div>
+				<div id="links-copied" class="alert alert-success fade show" role="alert" style="display: none;margin: 0;border-radius: 0;">
+					<div>
+						<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#155724" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7M7.5,13.5L9,12L11,14L15.5,9.5L17,11L11,17L7.5,13.5Z" /></svg>
+						<small><?php echo $this->e('Link has been copied to your clipboard'); ?></small>
+					</div>
+				</div>
 				<?php $c = 0;
 				foreach ($records as $key => $record):
 
@@ -109,11 +115,11 @@
 					else
 						$top_referrer = key($referrers);
 					?>
-					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $record['url']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
-								<h2><a target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
+								<h2><a class="shorted-url" data-clipboard-text="<?php echo $record['url']; ?>" target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
 								<p><a target="_blank" rel="noopener" href="<?php echo $record['url'] ?>"><?php echo $preURL; ?></a></p>
 							</div>
 							<span><?php echo $record['clicks']; ?></span>
@@ -276,7 +282,6 @@ window.onload = function() {
 		jQuery('#delete-record-confirm').attr('data-id', record_data.slug);
 		jQuery('#delete-record-modal').modal('show');
 	});
-
 	jQuery('#delete-record-confirm').on('click', function(e){
 		e.preventDefault();
 		var data = record_data;
@@ -298,6 +303,30 @@ window.onload = function() {
 				jQuery('#add-alert').slideToggle();
 			}
 		});
+	});
+
+	/** Copy to clipboard **/
+	var clipboard1 = new ClipboardJS('.shorted-url');
+	var clipboard2 = new ClipboardJS('.links-card');
+
+	jQuery('.shorted-url').on('click', function(e)
+	{
+		e.preventDefault();
+	});
+
+	clipboard1.on('success', function(e) {
+		if(jQuery('#links-copied').is(':visible')){jQuery('#links-copied').slideToggle(400,function(){jQuery('#links-copied').hide();});}
+		jQuery('#links-copied').slideToggle();
+		window.setTimeout(function(){
+			jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
+		}, 3000);
+	});
+	clipboard2.on('success', function(e) {
+		if(jQuery('#links-copied').is(':visible')){jQuery('#links-copied').slideToggle(400,function(){jQuery('#links-copied').hide();});}
+		jQuery('#links-copied').slideToggle();
+		window.setTimeout(function(){
+			jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
+		}, 3000);
 	});
 
 	/** AJAX - Add new record */
