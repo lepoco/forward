@@ -290,7 +290,7 @@
 					$html  = '<!DOCTYPE html><html><head><title>Forward Redirection</title></head><body>';
 					$html .= '<script async src="https://www.googletagmanager.com/gtag/js?id='.$gtag.'"></script>';
 					$html .= '<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "'.$gtag.'");</script>';
-					$html .= '<script defer="defer">window.onload=function(){setTimeout(function(){window.location.replace("'.$url.'");},'.$this->DB['options']->get('js_redirect_after').');};</script>';
+					$html .= '<script defer="defer">window.onload=function(){setTimeout(function(){window.location.replace("'.$url.'");},'.$this->DB['options']->get('js_redirect_after')->value.');};</script>';
 					$html .= '</body></html>';
 					exit($html);
 				}
