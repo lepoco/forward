@@ -115,11 +115,11 @@
 					else
 						$top_referrer = key($referrers);
 					?>
-					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $record['url']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['__id']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
-								<h2><a class="shorted-url" data-clipboard-text="<?php echo $record['url']; ?>" target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
+								<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->home_url().$record['__id']; ?>" target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
 								<p><a target="_blank" rel="noopener" href="<?php echo $record['url'] ?>"><?php echo $preURL; ?></a></p>
 							</div>
 							<span><?php echo $record['clicks']; ?></span>
@@ -306,28 +306,20 @@ window.onload = function() {
 	});
 
 	/** Copy to clipboard **/
-	var clipboard1 = new ClipboardJS('.shorted-url');
-	var clipboard2 = new ClipboardJS('.links-card');
-
-	jQuery('.shorted-url').on('click', function(e)
-	{
-		e.preventDefault();
-	});
-
-	clipboard1.on('success', function(e) {
-		if(jQuery('#links-copied').is(':visible')){jQuery('#links-copied').slideToggle(400,function(){jQuery('#links-copied').hide();});}
-		jQuery('#links-copied').slideToggle();
-		window.setTimeout(function(){
-			jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
-		}, 3000);
-	});
-	clipboard2.on('success', function(e) {
-		if(jQuery('#links-copied').is(':visible')){jQuery('#links-copied').slideToggle(400,function(){jQuery('#links-copied').hide();});}
-		jQuery('#links-copied').slideToggle();
-		window.setTimeout(function(){
-			jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
-		}, 3000);
-	});
+	jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
+	function clipboard_alert(){
+		if(jQuery('#links-copied').is(':hidden'))
+		{
+			jQuery('#links-copied').slideToggle();
+			window.setTimeout(function(){
+				jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
+			}, 3000);
+		}
+	}
+	var clipboard_link = new ClipboardJS('.shorted-url');
+	var clipboard_card = new ClipboardJS('.links-card');
+	clipboard_link.on('success', function(e){clipboard_alert();});
+	clipboard_card.on('success', function(e){clipboard_alert();});
 
 	/** AJAX - Add new record */
 	jQuery(function()
