@@ -87,7 +87,7 @@
 			}
 			
 			jQuery.ajax({
-				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 				type:'post',
 				data:$("#login-form").serialize(),
 				success:function(e)

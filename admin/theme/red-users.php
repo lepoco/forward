@@ -136,7 +136,7 @@
 			if(jQuery('#alert-error').is(':visible')){jQuery('#alert-error').slideToggle(400,function(){jQuery('#add-alert').hide();});}
 			if(jQuery('#alert-success').is(':visible')){jQuery('#alert-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
 			jQuery.ajax({
-				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 				type:'post',
 				data:$("#add-user-form").serialize(),
 				success:function(e)

@@ -212,12 +212,12 @@
 		*/
 		private function menu() : void
 		{
-			$menu = array('dashboard' => array($this->e('Dashboard'), 'dashboard'));
+			$menu = array('dashboard' => array($this->e('Dashboard'), RED_DASHBOARD));
 
 			if($this->RED->is_admin())
 			{
-				$menu['users'] = array($this->e('Users'), 'dashboard/users');
-				$menu['settings'] = array($this->e('Settings'), 'dashboard/settings');
+				$menu['users'] = array($this->e('Users'), RED_DASHBOARD.'/users');
+				$menu['settings'] = array($this->e('Settings'), RED_DASHBOARD.'/settings');
 			}
 
 			if(defined('RED_PAGE_DASHBOARD'))
@@ -226,15 +226,15 @@
 				$page = 'dashboard';
 
 			$html = '<nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark">';
-			$html .= '<a class="navbar-brand" href="'.self::home_url().'dashboard"><picture id="forward-navbar-logo"><source srcset="'.self::media_url().'/img/forward-logo-wt.webp" type="image/webp"><source srcset="'.self::media_url().'/img/forward-logo-wt.png" type="image/png"><img alt="Forward logo" src="'.self::media_url().'/img/forward-logo-wt.png"></picture></a>';
+			$html .= '<a class="navbar-brand" href="'.self::home_url().RED_DASHBOARD.'"><picture id="forward-navbar-logo"><source srcset="'.self::media_url().'/img/forward-logo-wt.webp" type="image/webp"><source srcset="'.self::media_url().'/img/forward-logo-wt.png" type="image/png"><img alt="Forward logo" src="'.self::media_url().'/img/forward-logo-wt.png"></picture></a>';
 			$html .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forward-navbar" aria-controls="forward-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
 			$html .= '<div class="collapse navbar-collapse navbar-right" id="forward-navbar"><ul class="navbar-nav">';
 
 			foreach ($menu as $key => $value) {
 				$html .= '<li class="nav-item'.($page == $key ? ' active' : '').'"><a class="nav-link" href="'.self::home_url().$value[1].'">'.$value[0].'</a></li>';
 			}
-			$html .= '<li class="nav-item'.($page == 'about' ? ' active' : '').'"><a class="nav-link" href="'.self::home_url().'dashboard/about"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" /></svg></a></li>';
-			$html .= '<li class="nav-item"><a class="nav-link" href="'.self::home_url().'dashboard/signout"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M13,3H11V13H13V3M17.83,5.17L16.41,6.59C18.05,7.91 19,9.9 19,12A7,7 0 0,1 12,19C8.14,19 5,15.88 5,12C5,9.91 5.95,7.91 7.58,6.58L6.17,5.17C2.38,8.39 1.92,14.07 5.14,17.86C8.36,21.64 14.04,22.1 17.83,18.88C19.85,17.17 21,14.65 21,12C21,9.37 19.84,6.87 17.83,5.17Z" /></svg></a></li>';
+			$html .= '<li class="nav-item'.($page == 'about' ? ' active' : '').'"><a class="nav-link" href="'.self::home_url().RED_DASHBOARD.'/about"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" /></svg></a></li>';
+			$html .= '<li class="nav-item"><a class="nav-link" href="'.self::home_url().RED_DASHBOARD.'/signout"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M13,3H11V13H13V3M17.83,5.17L16.41,6.59C18.05,7.91 19,9.9 19,12A7,7 0 0,1 12,19C8.14,19 5,15.88 5,12C5,9.91 5.95,7.91 7.58,6.58L6.17,5.17C2.38,8.39 1.92,14.07 5.14,17.86C8.36,21.64 14.04,22.1 17.83,18.88C19.85,17.17 21,14.65 21,12C21,9.37 19.84,6.87 17.83,5.17Z" /></svg></a></li>';
 			$html .= '</ul></div></nav>';
 
 			echo $html;

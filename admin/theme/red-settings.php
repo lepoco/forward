@@ -273,7 +273,7 @@
 			if(jQuery('#alert-success').is(':visible')){jQuery('#alert-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
 
 			jQuery.ajax({
-				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 				type:'post',
 				data:$("#settings-form").serialize(),
 				success:function(e)

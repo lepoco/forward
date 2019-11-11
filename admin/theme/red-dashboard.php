@@ -358,7 +358,7 @@ window.onload = function() {
 		e.preventDefault();
 		var data = record_data;
 		jQuery.ajax({
-			url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+			url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 			type:'post',
 			data: 'action=remove_record&nonce=<?php echo RED::encrypt('ajax_remove_record_nonce', 'nonce'); ?>&record_id='+data.slug,
 			success:function(e)
@@ -401,7 +401,7 @@ window.onload = function() {
 			if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
 			if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
 			jQuery.ajax({
-				url: '<?php echo $this->home_url().'dashboard/ajax/'; ?>',
+				url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 				type:'post',
 				data:$("#add-record-form").serialize(),
 				success:function(e)
@@ -441,7 +441,7 @@ window.onload = function() {
 						}
 						else
 						{
-							error_text = string.error10;
+							error_text = strings.error10;
 						}
 
 						jQuery('#error_text').html(error_text);
