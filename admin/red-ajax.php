@@ -166,6 +166,10 @@
 
 			$record = $this->RED->DB['records']->get(strtolower($slug));
 
+			if(isset($record->url))
+				if(!empty($record->url))
+					exit(self::ERROR_ENTRY_EXISTS);
+
 			//if(!filter_var($_POST['forward-url'], FILTER_VALIDATE_URL))
 			//	exit(self::ERROR_INVALID_URL);
 			

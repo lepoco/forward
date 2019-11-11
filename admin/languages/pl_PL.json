@@ -110,6 +110,7 @@
 	"Username": "Nazwa użytkownika",
 	"Email address": "Adres email",
 	"Link has been copied to your clipboard": "Link został skopiowany do Twojego schowka",
+	"A record with this ID already exists!": "Rekord z podanym ID już istnieje!",
 	"Role": "Rola",
 	"Password": "Hasło",
 	"Confirm password": "Potwierdź hasło"

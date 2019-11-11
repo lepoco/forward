@@ -34,7 +34,7 @@
 	$rand = RED::rand(6);
 	$sucRand = true;
 	while ($sucRand) {
-		$slug = $this->RED->DB['records']->select('__id,url')->where('__id','=',$rand)->results();
+		$slug = $this->RED->DB['records']->select('__id,url')->where('__id','=',strtolower($rand))->results();
 		if(isset($slug[0]))
 			$rand = RED::rand(6);
 		else
@@ -362,6 +362,10 @@ window.onload = function() {
 						if(e == 'e07')
 						{
 							error_text = '<?php echo $this->e('You must provide a URL!'); ?>';
+						}
+						else if(e == 'e08')
+						{
+							error_text = '<?php echo $this->e('A record with this ID already exists!'); ?>';
 						}
 						else
 						{
