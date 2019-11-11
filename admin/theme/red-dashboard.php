@@ -107,6 +107,9 @@
 						case 'en-us':
 							$top_lang = $this->e('English');
 							break;
+						case 'pl-pl': case 'en-pl':
+							$top_lang = $this->e('Poland');
+							break;
 						default:
 							$top_lang = key($locations);
 							break;
@@ -272,7 +275,14 @@ var strings = {
 	referrers: '<?php echo $this->e('Referrers'); ?>',
 	locations: '<?php echo $this->e('Locations'); ?>',
 	direct: '<?php echo $this->e('Email, SMS, Direct'); ?>',
+	unknown: '<?php echo $this->e('Unknown'); ?>',
 	enus: '<?php echo $this->e('English'); ?>',
+	plpl: '<?php echo $this->e('Poland'); ?>',
+	enpl: '<?php echo $this->e('Poland'); ?>',
+	error1: '<?php echo $this->e('Something went wrong!'); ?>',
+	error7: '<?php echo $this->e('You must provide a URL!'); ?>',
+	error8: '<?php echo $this->e('A record with this ID already exists!'); ?>',
+	error10: '<?php echo $this->e('The URL you entered is not valid!'); ?>'
 };
 
 function __(string)
@@ -419,19 +429,19 @@ window.onload = function() {
 							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
 						}, 3000);
 					}else{
-						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
+						var error_text = strings.error1;
 
 						if(e == 'e07')
 						{
-							error_text = '<?php echo $this->e('You must provide a URL!'); ?>';
+							error_text = strings.error7;
 						}
 						else if(e == 'e08')
 						{
-							error_text = '<?php echo $this->e('A record with this ID already exists!'); ?>';
+							error_text = strings.error8;
 						}
 						else
 						{
-							error_text = '<?php echo $this->e('The URL you entered is not valid!'); ?>';
+							error_text = string.error10;
 						}
 
 						jQuery('#error_text').html(error_text);
