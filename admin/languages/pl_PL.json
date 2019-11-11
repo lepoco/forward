@@ -112,6 +112,8 @@
 	"Link has been copied to your clipboard": "Link został skopiowany do Twojego schowka",
 	"A record with this ID already exists!": "Rekord z podanym ID już istnieje!",
 	"Role": "Rola",
+	"Referrers": "Referenci",
+	"Locations": "Lokalizacje",
 	"Password": "Hasło",
 	"Confirm password": "Potwierdź hasło"
 }

@@ -69,6 +69,7 @@
 								$locations[$location] += $count;
 							else
 								$locations[$location] = $count;
+					/** Sort by most popular location */
 					if(count($locations) == 0)
 						$locations = array($this->e('Unknown') => 0);
 					arsort($locations);
@@ -80,6 +81,7 @@
 								$referrers[$referrer] += $count;
 							else
 								$referrers[$referrer] = $count;
+					/** Sort by most popular refferer */
 					if(count($referrers) == 0)
 						$referrers = array($this->e('Unknown') => 0);
 					arsort($referrers);
@@ -99,23 +101,36 @@
 					if(strlen($preURL) > 35)
 						$preURL = substr($preURL, 0, 35).'...';
 					
-
-					switch (key($locations)) {
+					/** Get the name of the most popular location */
+					switch (key($locations))
+					{
 						case 'en-us':
-						$top_lang = $this->e('English');
-						break;
-
+							$top_lang = $this->e('English');
+							break;
 						default:
-						$top_lang = key($locations);
-						break;
+							$top_lang = key($locations);
+							break;
 					}
 
+					/** Get the name of the most popular refferer */
 					if(key($referrers) == 'direct')
 						$top_referrer = $this->e('Email, SMS, Direct');
 					else
 						$top_referrer = key($referrers);
+
+					/** Refferers for display in HTML data */
+					$record_referrers = '';
+					if(is_array($record['referrers']))
+						foreach ($record['referrers'] as $key => $value)
+							$record_referrers .= (!empty($record_referrers) ? '.' : '').$key.'.'.$value;
+
+					/** Locations for display in HTML data */
+					$record_locations = '';
+					if(is_array($record['locations']))
+						foreach ($record['locations'] as $key => $value)
+							$record_locations .= (!empty($record_locations) ? '.' : '').$key.'.'.$value;
 					?>
-					<div class="card links-card links-card-<?php echo $record['name']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['name']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['name']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card links-card-<?php echo $record['name']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['name']; ?>" data-locations="<?php echo $record_locations; ?>" data-referrers="<?php echo $record_referrers; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['name']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
@@ -212,6 +227,14 @@
 									<div class="col-12 col-no-gutters" style="height: 220px;">
 										<div class="ct-chart ct-perfect-fourth red-chart" style="height: 220px;"></div>
 									</div>
+									<div class="col-12">
+										<div class="row">
+											<div id="record-referrers" class="col-12 col-md-6">
+											</div>
+											<div id="record-locations" class="col-12 col-md-6">
+											</div>
+										</div>
+									</div>
 									<div class="col-6 col-no-gutters">
 										<div class="pie-chart1 ct-perfect-fourth"></div>
 									</div>
@@ -244,6 +267,22 @@
 </div>
 <?php endif; ?>
 <script>
+
+var strings = {
+	referrers: '<?php echo $this->e('Referrers'); ?>',
+	locations: '<?php echo $this->e('Locations'); ?>',
+	direct: '<?php echo $this->e('Email, SMS, Direct'); ?>',
+	enus: '<?php echo $this->e('English'); ?>',
+};
+
+function __(string)
+{
+	if(string in strings)
+		return strings[string];
+	else
+		return string;
+}
+
 window.onload = function() {
 
 	/** Record info */
@@ -256,12 +295,35 @@ window.onload = function() {
 		var bar_chart_height = 200;
 		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
 
-		function display_record(r,e,u){jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#delete-record-icon").attr("data-id",r),jQuery("#preview-record-url").html(u)}
+		function display_record(r,e,u,x,y){
+			if(jQuery('#record-referrers').is(':visible')){
+				jQuery('#record-locations').slideToggle(400).hide();
+				jQuery('#record-referrers').slideToggle(400).hide();
+			}
+
+			if(x != ''){
+				x = x.split('.');
+				jQuery('#record-referrers').html('<strong>'+strings.referrers+'</strong><br/>');
+				for (var i = 0; i < x.length / 2 + 1; i+=2) {
+					jQuery('#record-referrers').append('<span>'+__(x[i])+': '+x[i+1]+'</span><br />');
+				}
+				jQuery('#record-referrers').delay(400).slideToggle(400);
+			}
+			if(y != ''){
+				y = y.split('.');
+				jQuery('#record-locations').html('<strong>'+strings.locations+'</strong><br/>');
+				for (var i = 0; i < y.length / 2 + 1; i+=2) {
+					jQuery('#record-locations').append('<span>'+__(y[i].replace(/-/g, ''))+': '+y[i+1]+'</span><br />');
+				}
+				jQuery('#record-locations').delay(400).slideToggle(400);
+			}
+
+			jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#delete-record-icon").attr("data-id",r),jQuery("#preview-record-url").html(u)}
 		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
 		var prev_record = jQuery('#first-record').data();
 		record_data = prev_record;
 		record_id = record_data.id;
-		display_record(prev_record.slug, prev_record.date, prev_record.url);
+		display_record(prev_record.slug, prev_record.date, prev_record.url, prev_record.referrers, prev_record.locations);
 		bar_chart_animate(prev_record.daily.split('/'));
 
 		jQuery('.links-card').on('click', function()
@@ -269,7 +331,7 @@ window.onload = function() {
 			var data = jQuery(this).data();
 			record_data = data;
 			record_id = record_data.id;
-			display_record(data.slug, data.date, data.url);
+			display_record(data.slug, data.date, data.url, data.referrers, data.locations);
 			bar_chart_animate(data.daily.split('/'));
 		});
 	});
