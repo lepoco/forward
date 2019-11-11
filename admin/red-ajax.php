@@ -184,7 +184,7 @@
 			if(!isset($_POST['record_id']))
 				exit(self::ERROR_MISSING_ARGUMENTS);
 
-			$record = $this->RED->DB['records']->get(strtolower(filter_var($_POST['record_id']), FILTER_SANITIZE_STRING));
+			$record = $this->RED->DB['records']->get(strtolower(filter_var($_POST['record_id'])), FILTER_SANITIZE_STRING);
 
 			if(empty($record->url))
 				exit(self::ERROR_ENTRY_DONT_EXISTS);

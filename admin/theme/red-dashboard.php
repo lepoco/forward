@@ -122,13 +122,13 @@
 					$record_referrers = '';
 					if(is_array($record['referrers']))
 						foreach ($record['referrers'] as $key => $value)
-							$record_referrers .= (!empty($record_referrers) ? '.' : '').$key.'.'.$value;
+							$record_referrers .= (!empty($record_referrers) ? '~' : '').$key.'~'.$value;
 
 					/** Locations for display in HTML data */
 					$record_locations = '';
 					if(is_array($record['locations']))
 						foreach ($record['locations'] as $key => $value)
-							$record_locations .= (!empty($record_locations) ? '.' : '').$key.'.'.$value;
+							$record_locations .= (!empty($record_locations) ? '~' : '').$key.'~'.$value;
 					?>
 					<div class="card links-card links-card-<?php echo $record['name']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['name']; ?>" data-locations="<?php echo $record_locations; ?>" data-referrers="<?php echo $record_referrers; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['name']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
@@ -302,7 +302,7 @@ window.onload = function() {
 			}
 
 			if(x != ''){
-				x = x.split('.');
+				x = x.split('~');
 				jQuery('#record-referrers').html('<strong>'+strings.referrers+'</strong><br/>');
 				for (var i = 0; i < x.length / 2 + 1; i+=2) {
 					jQuery('#record-referrers').append('<span>'+__(x[i])+': '+x[i+1]+'</span><br />');
@@ -310,7 +310,7 @@ window.onload = function() {
 				jQuery('#record-referrers').delay(400).slideToggle(400);
 			}
 			if(y != ''){
-				y = y.split('.');
+				y = y.split('~');
 				jQuery('#record-locations').html('<strong>'+strings.locations+'</strong><br/>');
 				for (var i = 0; i < y.length / 2 + 1; i+=2) {
 					jQuery('#record-locations').append('<span>'+__(y[i].replace(/-/g, ''))+': '+y[i+1]+'</span><br />');
