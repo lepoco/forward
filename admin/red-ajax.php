@@ -164,12 +164,12 @@
 			else
 				$slug = filter_var($_POST['forward-slug'], FILTER_SANITIZE_STRING);
 
-			$record = $this->RED->DB['records']->get($slug);
+			$record = $this->RED->DB['records']->get(strtolower($slug));
 
 			//if(!filter_var($_POST['forward-url'], FILTER_VALIDATE_URL))
 			//	exit(self::ERROR_INVALID_URL);
 			
-			$record->save(array('url' => $_POST['forward-url'], 'clicks' => 0));
+			$record->save(array('name' => $slug, 'url' => $_POST['forward-url'], 'clicks' => 0));
 			exit(self::CODE_SUCCESS);
 		}
 
@@ -180,7 +180,7 @@
 			if(!isset($_POST['record_id']))
 				exit(self::ERROR_MISSING_ARGUMENTS);
 
-			$record = $this->RED->DB['records']->get(filter_var($_POST['record_id'], FILTER_SANITIZE_STRING));
+			$record = $this->RED->DB['records']->get(strtolower(filter_var($_POST['record_id']), FILTER_SANITIZE_STRING));
 
 			if(empty($record->url))
 				exit(self::ERROR_ENTRY_DONT_EXISTS);

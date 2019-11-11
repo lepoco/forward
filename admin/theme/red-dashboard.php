@@ -13,7 +13,7 @@
 	$this->head(); $this->menu();
 
 	/** Essential database information */
-	$records = $this->RED->DB['records']->select('__id,__created_at,url,clicks,stats,referrers,locations')->orderBy('__created_at', 'DESC')->results();
+	$records = $this->RED->DB['records']->select('__id,__created_at,name,url,clicks,stats,referrers,locations')->orderBy('__created_at', 'DESC')->results();
 
 	/** Default values for the representation of general data */
 	$total_clicks = 0;
@@ -115,11 +115,11 @@
 					else
 						$top_referrer = key($referrers);
 					?>
-					<div class="card links-card links-card-<?php echo $record['__id']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['__id']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['__id']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
+					<div class="card links-card links-card-<?php echo $record['name']; ?>"<?php echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="<?php echo $this->home_url().$record['name']; ?>" data-daily="<?php echo $record['stats']; ?>" data-date="<?php echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="<?php echo $record['url']; ?>" data-slug="<?php echo $record['name']; ?>" data-clicks="<?php echo $record['clicks']; ?>">
 						<div class="card-body">
 							<div>
 								<small><?php echo date('Y-m-d', $record['__created_at']); ?></small>
-								<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->home_url().$record['__id']; ?>" target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['__id']; ?>">/<?php echo $record['__id']; ?></a></h2>
+								<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->home_url().$record['name']; ?>" target="_blank" rel="noopener" href="<?php echo $this->home_url().$record['name']; ?>">/<?php echo $record['name']; ?></a></h2>
 								<p><a target="_blank" rel="noopener" href="<?php echo $record['url'] ?>"><?php echo $preURL; ?></a></p>
 							</div>
 							<span><?php echo $record['clicks']; ?></span>

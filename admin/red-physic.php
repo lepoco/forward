@@ -202,7 +202,7 @@
 		{
 			self::https();
 			
-			$record = $this->DB['records']->get(RED_PAGE);
+			$record = $this->DB['records']->get(strtolower(RED_PAGE));
 
 			if($record->url == NULL)
 				$this->page(['title' => 'Page not found']);

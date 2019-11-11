@@ -285,46 +285,46 @@
 				'cache_expires'  => 1800
 			]);
 			
-			$option = $db->get('siteurl');
-			$option->save(['value' => $defUrl]);
+			$db_record = $db->get('siteurl');
+			$db_record->save(['value' => $defUrl]);
 
-			$option = $db->get('dashboard');
-			$option->save(['value' => $defUrl.'dashboard/']);
+			$db_record = $db->get('dashboard');
+			$db_record->save(['value' => $defUrl.'dashboard/']);
 
-			$option = $db->get('redirect_404');
-			$option->save(['value' => false]);
-			$option = $db->get('redirect_404_url');
-			$option->save(['value' => '']);
+			$db_record = $db->get('redirect_404');
+			$db_record->save(['value' => false]);
+			$db_record = $db->get('redirect_404_url');
+			$db_record->save(['value' => '']);
 
-			$option = $db->get('redirect_home');
-			$option->save(['value' => false]);
-			$option = $db->get('redirect_home_url');
-			$option->save(['value' => '']);
+			$db_record = $db->get('redirect_home');
+			$db_record->save(['value' => false]);
+			$db_record = $db->get('redirect_home_url');
+			$db_record->save(['value' => '']);
 
-			$option = $db->get('cache_redirects');
-			$option->save(['value' => true]);
+			$db_record = $db->get('cache_redirects');
+			$db_record->save(['value' => true]);
 
-			$option = $db->get('redirect_ssl');
-			$option->save(['value' => false]);
-			$option = $db->get('dashboard_ssl');
-			$option->save(['value' => false]);
+			$db_record = $db->get('redirect_ssl');
+			$db_record->save(['value' => false]);
+			$db_record = $db->get('dashboard_ssl');
+			$db_record->save(['value' => false]);
 
-			$option = $db->get('js_redirect');
-			$option->save(['value' => false]);
-			$option = $db->get('gtag');
-			$option->save(['value' => '']);
-			$option = $db->get('js_redirect_after');
-			$option->save(['value' => 0]);
+			$db_record = $db->get('js_redirect');
+			$db_record->save(['value' => false]);
+			$db_record = $db->get('gtag');
+			$db_record->save(['value' => '']);
+			$db_record = $db->get('js_redirect_after');
+			$db_record->save(['value' => 0]);
 
-			$option = $db->get('captcha_site');
-			$option->save(['value' => '']);
-			$option = $db->get('captcha_secret');
-			$option->save(['value' => '']);
+			$db_record = $db->get('captcha_site');
+			$db_record->save(['value' => '']);
+			$db_record = $db->get('captcha_secret');
+			$db_record->save(['value' => '']);
 
-			$option = $db->get('language_type');
-			$option->save(['value' => 1]);
-			$option = $db->get('language_select');
-			$option->save(['value' => 'en']);
+			$db_record = $db->get('language_type');
+			$db_record->save(['value' => 1]);
+			$db_record = $db->get('language_select');
+			$db_record->save(['value' => 'en']);
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$records,
@@ -334,19 +334,12 @@
 				'cache_expires'  => 1800
 			]);
 
-			$record = $db->get('EZK8H3');
-			$record->url = 'https://github.com/rapiddev/forward';
-			$record->clicks = 0;
-			$record->save();
-			$record = $db->get('QUBSE0');
-			$record->url = 'https://rdev.cc/';
-			$record->clicks = 0;
-			$record->save();
-			$record = $db->get('M6GMLO');
-			$record->url = 'https://4geek.co/';
-			$record->clicks = 0;
-			$record->save();
-
+			$db_record = $db->get('ezk8h3');
+			$db_record->save(['name' => 'EZK8H3', 'url' => 'https://github.com/rapiddev/forward', 'clicks' => 0]);
+			$db_record = $db->get('qubse0');
+			$db_record->save(['name' => 'QUBSE0', 'url' => 'https://rdev.cc/', 'clicks' => 0]);
+			$db_record = $db->get('m6gmlo');
+			$db_record->save(['name' => 'M6GMLO', 'url' => 'https://4geek.co/', 'clicks' => 0]);
 
 			$db = new \Filebase\Database([
 				'dir'            => $this->dbpath.$users,
@@ -354,11 +347,11 @@
 				'format'         => \Filebase\Format\Jdb::class
 			]);
 
-			$user = $db->get($defUser);
-			$user->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
-			$user->role = 'admin';
-			$user->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), RED_ALGO);
-			$user->save();
+			$db_record = $db->get($defUser);
+			$db_record->email = $defUser.'@'.$_SERVER['HTTP_HOST'];
+			$db_record->role = 'admin';
+			$db_record->password = password_hash(hash_hmac('sha256', $defPass, $this->salt), RED_ALGO);
+			$db_record->save();
 		}
 	}
 
