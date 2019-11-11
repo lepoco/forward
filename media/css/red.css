@@ -252,6 +252,19 @@ hr {
 	height: inherit;
 }
 
+#records_list::-webkit-scrollbar, #dashboard-box::-webkit-scrollbar {
+	width: 2px;
+	background-color: transparent;
+}
+
+#records_list::-webkit-scrollbar-track, #dashboard-box::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+#records_list::-webkit-scrollbar-thumb, #dashboard-box::-webkit-scrollbar-thumb {
+	background-color: rgba(0,0,0,.125);
+}
+
 .links-card, .links-header {
 	cursor: pointer;
 	border-radius: 0 !important;

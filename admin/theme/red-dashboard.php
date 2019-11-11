@@ -145,7 +145,7 @@
 					</div>
 				<?php endforeach ?>
 			</div>
-			<div class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;height: inherit;overflow: auto;">
+			<div id="dashboard-box" class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;height: inherit;overflow: auto;">
 				<div class="container-fluid">
 					<div class="row">
 						<?php if ($this->RED->is_manager()): ?>
