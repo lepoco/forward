@@ -69,7 +69,14 @@
 			$record = $this->DB['records']->get(strtolower(RED_PAGE));
 
 			if($record->url == NULL)
+			{
+				if ($this->DB['options']->get('dashboard_ssl')->value && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"))
+				{
+					header('HTTP/1.1 301 Moved Permanently');
+					exit(header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+				}
 				$this->page(['title' => 'Page not found']);
+			}
 
 			/** Languages */
 			$lang = self::parse_language($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
@@ -205,7 +212,9 @@
 				'options' => new \Filebase\Database([
 					'dir' => DB_PATH.DB_OPTIONS,
 					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
-					'format' => \Filebase\Format\Jdb::class
+					'format' => \Filebase\Format\Jdb::class,
+					'cache' => true,
+					'cache_expires' => 1800
 				]),
 				'records' => new \Filebase\Database([
 					'dir' => DB_PATH.DB_RECORDS,
