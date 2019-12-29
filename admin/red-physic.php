@@ -205,9 +205,7 @@
 				'options' => new \Filebase\Database([
 					'dir' => DB_PATH.DB_OPTIONS,
 					'backupLocation' => DB_PATH.DB_OPTIONS.'/backup',
-					'format' => \Filebase\Format\Jdb::class,
-					'cache' => true,
-					'cache_expires' => 1800
+					'format' => \Filebase\Format\Jdb::class
 				]),
 				'records' => new \Filebase\Database([
 					'dir' => DB_PATH.DB_RECORDS,
@@ -230,8 +228,8 @@
 		{
 			$force = false;
 
-			if(RED_PAGE == '_forward_dashboard')
-				if ($this->DB['options']->get('admin_ssl')->value)
+			if(RED_PAGE == '_forward_dashboard' || RED_PAGE == '_forward_home' || RED_PAGE == '404')
+				if ($this->DB['options']->get('dashboard_ssl')->value)
 					$force = true;
 			else
 				if ($this->DB['options']->get('redirect_ssl')->value)

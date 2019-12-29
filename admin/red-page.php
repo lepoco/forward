@@ -88,11 +88,11 @@
 		{
 			if($this->RED->DB['options']->get('redirect_404')->value)
 			{
-				$home_url = $this->RED->DB['options']->get('redirect_404_url')->value;
-				if(!empty($home_url))
+				$redirect_url = $this->RED->DB['options']->get('redirect_404_url')->value;
+				if(!empty($redirect_url))
 				{
 					header('HTTP/1.1 301 Moved Permanently');
-					header('Location: ' . $home_url);
+					header('Location: ' . $redirect_url);
 					exit;
 				}
 			}
@@ -110,22 +110,14 @@
 		{
 			if($this->RED->DB['options']->get('redirect_home')->value)
 			{
-				$home_url = $this->RED->DB['options']->get('redirect_home_url')->value;
-				if(!empty($home_url))
+				$redirect_url = $this->RED->DB['options']->get('redirect_home_url')->value;
+				if(!empty($redirect_url))
 				{
 					header('HTTP/1.1 301 Moved Permanently');
-					header('Location: ' . $home_url);
+					header('Location: ' . $redirect_url);
 					exit;
 				}
 			}
-
-			if ($this->RED->DB['options']->get('admin_ssl')->value && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off"))
-			{
-				header('HTTP/1.1 301 Moved Permanently');
-				header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-				exit;
-			}
-			
 			self::print_page('home');
 		}
 
