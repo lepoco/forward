@@ -375,6 +375,15 @@ hr {
 	padding-right: 0 !important;
 }
 
+.p-warning {
+	margin: 0;
+	color: #eb4334;
+}
+
+.p-warning > small {
+	font-weight: bold;
+}
+
 
 @media(max-width: 991px)
 {

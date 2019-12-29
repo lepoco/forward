@@ -217,18 +217,27 @@
 							<div class="form-group">
 								<label><?php echo $this->e('Dashboard path for URL'); ?></label>
 								<input disabled type="text" class="form-control" value="/<?php echo RED_DASHBOARD; ?>/">
+								<small>constant: <strong>RED_DASHBOARD</strong></small>
+							</div>
+							<div class="form-group">
+								<label><?php echo $this->e('Media path for URL'); ?></label>
+								<input disabled type="text" class="form-control" value="/<?php echo RED_MEDIA; ?>/">
+								<small>constant: <strong>RED_MEDIA</strong></small>
 							</div>
 							<div class="form-group">
 								<label><?php echo $this->e('Users database'); ?></label>
 								<input disabled type="text" class="form-control" value="<?php echo DB_USERS; ?>">
+								<small>constant: <strong>DB_USERS</strong></small>
 							</div>
 							<div class="form-group">
 								<label><?php echo $this->e('Options database'); ?></label>
 								<input disabled type="text" class="form-control" value="<?php echo DB_OPTIONS; ?>">
+								<small>constant: <strong>DB_OPTIONS</strong></small>
 							</div>
 							<div class="form-group">
 								<label><?php echo $this->e('Records database'); ?></label>
 								<input disabled type="text" class="form-control" value="<?php echo DB_RECORDS; ?>">
+								<small>constant: <strong>DB_RECORDS</strong></small>
 							</div>
 							<div class="form-group">
 								<label><?php echo $this->e('Cryptographic method for passwords'); ?></label>
@@ -250,7 +259,8 @@
 								}
 
 								?>">
-								<small><?php echo $this->e('Changing the cryptographic method will make all passwords stop working.'); ?></small>
+								<small>constant: <strong>RED_ALGO</strong></small>
+								<p class="p-warning"><small><?php echo $this->e('Changing the cryptographic method will make all passwords stop working.'); ?></small></p>
 							</div>
 							<hr>
 							<div class="form-group">
