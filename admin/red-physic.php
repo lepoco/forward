@@ -56,6 +56,90 @@
 		}
 
 		/**
+		* forward
+		* Performs a redirection and saves information to the database
+		*
+		* @access   private
+		* @return   void
+		*/
+		private function forward() : void
+		{
+			self::https();
+			
+			$record = $this->DB['records']->get(strtolower(RED_PAGE));
+
+			if($record->url == NULL)
+				$this->page(['title' => 'Page not found']);
+
+			/** Languages */
+			$lang = self::parse_language($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+			if(is_array($record->locations))
+				if(array_key_exists($lang, $record->locations))
+					$record->locations[$lang] += 1;
+				else
+					$record->locations[$lang] = 1;
+			else
+				$record->locations = array($lang => 1);
+
+			/** Daily stats */
+			$time = time();
+			$time = array(
+				'key' => date('Y-m',$time),
+				'day' => date('d',$time),
+			);
+			
+			if(!is_array($record->stats))
+				$record->stats = array();
+
+			if(!array_key_exists($time['key'], $record->stats))
+				$record->stats[$time['key']] = array();
+
+			if(!array_key_exists($time['day'], $record->stats[$time['key']]))
+				$record->stats[$time['key']][$time['day']] = 1;
+			else
+				$record->stats[$time['key']][$time['day']] += 1;
+
+			/** Referrers */
+			$referrers = array();
+			if(is_array($record->referrers))
+				$referrers = $record->referrers;
+
+			if(isset($_SERVER['HTTP_REFERER']))
+			{
+				$ref = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+
+				if(array_key_exists($ref, $referrers))
+					$referrers[$ref] += 1;
+				else
+					$referrers[$ref] = 1;
+			}
+			else
+			{
+				if(array_key_exists('direct', $referrers))
+					$referrers['direct'] += 1;
+				else
+					$referrers['direct'] = 1;
+			}
+			$record->referrers = $referrers;
+
+			/** Clicks */
+			$record->clicks = $record->clicks + 1;
+			$record->save();
+
+			$this->js_redirect($record->url);
+
+			//Redirect
+			header('Expires: on, 01 Jan 1970 00:00:00 GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Pragma: no-cache');
+			header('HTTP/1.1 301 Moved Permanently');
+			header('Location: ' . $record->url);
+			exit;	
+		}
+
+		/**
 		* page_redirect
 		* Forward to page, 404 error, ajax or do forward
 		*
@@ -189,90 +273,6 @@
 		{
 			self::include(ADMPATH.'red-page.php');
 			return new RED_PAGES($data, $this);
-		}
-
-		/**
-		* forward
-		* Performs a redirection and saves information to the database
-		*
-		* @access   private
-		* @return   void
-		*/
-		private function forward() : void
-		{
-			self::https();
-			
-			$record = $this->DB['records']->get(strtolower(RED_PAGE));
-
-			if($record->url == NULL)
-				$this->page(['title' => 'Page not found']);
-
-			/** Languages */
-			$lang = self::parse_language($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-			if(is_array($record->locations))
-				if(array_key_exists($lang, $record->locations))
-					$record->locations[$lang] += 1;
-				else
-					$record->locations[$lang] = 1;
-			else
-				$record->locations = array($lang => 1);
-
-			/** Daily stats */
-			$time = time();
-			$time = array(
-				'key' => date('Y-m',$time),
-				'day' => date('d',$time),
-			);
-			
-			if(!is_array($record->stats))
-				$record->stats = array();
-
-			if(!array_key_exists($time['key'], $record->stats))
-				$record->stats[$time['key']] = array();
-
-			if(!array_key_exists($time['day'], $record->stats[$time['key']]))
-				$record->stats[$time['key']][$time['day']] = 1;
-			else
-				$record->stats[$time['key']][$time['day']] += 1;
-
-			/** Referrers */
-			$referrers = array();
-			if(is_array($record->referrers))
-				$referrers = $record->referrers;
-
-			if(isset($_SERVER['HTTP_REFERER']))
-			{
-				$ref = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
-
-				if(array_key_exists($ref, $referrers))
-					$referrers[$ref] += 1;
-				else
-					$referrers[$ref] = 1;
-			}
-			else
-			{
-				if(array_key_exists('direct', $referrers))
-					$referrers['direct'] += 1;
-				else
-					$referrers['direct'] = 1;
-			}
-			$record->referrers = $referrers;
-
-			/** Clicks */
-			$record->clicks = $record->clicks + 1;
-			$record->save();
-
-			$this->js_redirect($record->url);
-
-			//Redirect
-			header('Expires: on, 01 Jan 1970 00:00:00 GMT');
-			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-			header('Cache-Control: no-store, no-cache, must-revalidate');
-			header('Cache-Control: post-check=0, pre-check=0', false);
-			header('Pragma: no-cache');
-			header('HTTP/1.1 301 Moved Permanently');
-			header('Location: ' . $record->url);
-			exit;	
 		}
 
 		/**

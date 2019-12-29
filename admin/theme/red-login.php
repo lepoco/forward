@@ -15,7 +15,6 @@
 	$captcha_site = $this->RED->DB['options']->get('captcha_site')->value;
 	$captcha_secret = $this->RED->DB['options']->get('captcha_secret')->value;
 ?>
-
 <div id="big-background">
 	<picture>
 		<source srcset="<?php echo $this->home_url(); ?>media/img/bg.webp" type="image/webp">
