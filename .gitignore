@@ -1,6 +1,6 @@
 #Ignore files
 admin/red-config.php
-/.htaccess
+.htaccess
 
 #Ignored folders
 admin/db/db_options

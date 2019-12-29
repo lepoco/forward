@@ -77,6 +77,10 @@
 				filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
 			);
 
+			self::db_htaccess(
+				filter_var($_POST['refFolder'], FILTER_SANITIZE_STRING)
+			);
+
 			/** Password hash type */
 			if(defined('PASSWORD_ARGON2ID'))
 				define('RED_ALGO', PASSWORD_ARGON2ID);
@@ -253,6 +257,21 @@
 			$htaccess .= "RewriteRule .* $dir/index.php [L]\n</IfModule>";
 
 			$path = ABSPATH.'.htaccess';
+			file_put_contents($path, $htaccess);
+		}
+
+		private function db_htaccess(string $dir = 'forward/') : void
+		{
+			if($dir == '/')
+				$dir = '';
+
+			$htaccess  = "";
+			$htaccess .= "Options All -Indexes\nIndexIgnore *\n\nErrorDocument 403 /\nErrorDocument 404 /\n\n";
+			$htaccess .= "<IfModule mod_rewrite.c>\n";
+			$htaccess .= "RewriteEngine On\nRewriteRule ^(\/?)$ - [F]\n";
+			$htaccess .= "RewriteRule .* $dir/index.php [L]\n</IfModule>";
+
+			$path = ABSPATH.'/'.ADMIN_PATH.'/db/.htaccess';
 			file_put_contents($path, $htaccess);
 		}
 

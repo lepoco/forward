@@ -1,8 +1,11 @@
-<Files "*.json">
-    Order Deny,Allow
-    Deny from all
-</Files>
-<Files "*jsdb.php">
-    Order Deny,Allow
-    Deny from all
-</Files>
+Options All -Indexes
+IndexIgnore *
+
+ErrorDocument 403 /
+ErrorDocument 404 /
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(\/?)$ - [F]
+RewriteRule .* /forward/index.php [L]
+</IfModule>
