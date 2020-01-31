@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019, RapidDev
+ * @copyright Copyright (c) 2019-2020, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -297,14 +297,14 @@
 					}
 					else
 					{
-						var error_text = '<?php echo $this->e('Something went wrong!'); ?>';
+						let error_text = '<?php echo $this->e('Something went wrong!'); ?>';
 						if(e == 'e_invalid_404')
 						{
-							var error_text = '<?php echo $this->e('The 404 page redirect URL is not valid!'); ?>';
+							let error_text = '<?php echo $this->e('The 404 page redirect URL is not valid!'); ?>';
 						}
 						else if(e == 'e_invalid_home')
 						{
-							var error_text = '<?php echo $this->e('The home page redirect URL is not valid!'); ?>';
+							let error_text = '<?php echo $this->e('The home page redirect URL is not valid!'); ?>';
 						}
 
 						jQuery('#error_text').text(error_text);

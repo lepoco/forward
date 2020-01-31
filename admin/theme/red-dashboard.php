@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019, RapidDev
+ * @copyright Copyright (c) 2019-2020, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -271,7 +271,7 @@
 <?php endif; ?>
 <script>
 
-var strings = {
+let strings = {
 	referrers: '<?php echo $this->e('Referrers'); ?>',
 	locations: '<?php echo $this->e('Locations'); ?>',
 	direct: '<?php echo $this->e('Email, SMS, Direct'); ?>',
@@ -296,14 +296,14 @@ function __(string)
 window.onload = function() {
 
 	/** Record info */
-	var record_id = null;
-	var record_data = null;
+	let record_id = null;
+	let record_data = null;
 
 	/** Initial chart and changing charts content */
 	jQuery(function()
 	{
-		var bar_chart_height = 200;
-		var bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
+		let bar_chart_height = 200;
+		let bar_chart_labels = [<?php for($i=1; $i <= $date['days']; $i++){echo ($i > 1 ? ', ': '').'\''.$i.'\'';} ?>];
 
 		function display_record(r,e,u,x,y){
 			if(jQuery('#record-referrers').is(':visible')){
@@ -314,7 +314,7 @@ window.onload = function() {
 			if(x != ''){
 				x = x.split('~');
 				jQuery('#record-referrers').html('<strong>'+strings.referrers+'</strong><br/>');
-				for (var i = 0; i < x.length / 2 + 1; i+=2) {
+				for (let i = 0; i < x.length / 2 + 1; i+=2) {
 					jQuery('#record-referrers').append('<span>'+__(x[i])+': '+x[i+1]+'</span><br />');
 				}
 				jQuery('#record-referrers').delay(400).slideToggle(400);
@@ -322,15 +322,15 @@ window.onload = function() {
 			if(y != ''){
 				y = y.split('~');
 				jQuery('#record-locations').html('<strong>'+strings.locations+'</strong><br/>');
-				for (var i = 0; i < y.length / 2 + 1; i+=2) {
+				for (let i = 0; i < y.length / 2 + 1; i+=2) {
 					jQuery('#record-locations').append('<span>'+__(y[i].replace(/-/g, ''))+': '+y[i+1]+'</span><br />');
 				}
 				jQuery('#record-locations').delay(400).slideToggle(400);
 			}
 
 			jQuery("#preview-record-slug").html("/"+r),jQuery("#preview-record-date").html(e),jQuery("#preview-record-url").attr("href",u),jQuery("#delete-record-icon").attr("data-id",r),jQuery("#preview-record-url").html(u)}
-		function bar_chart_animate(e){var t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){var t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
-		var prev_record = jQuery('#first-record').data();
+		function bar_chart_animate(e){let t=new Chartist.Bar(".ct-chart",{labels:bar_chart_labels,series:[e]},{height:bar_chart_height,axisX:{position:"start"},axisY:{position:"end"}}),a=0;t.on("created",function(){a=0}),t.on("draw",function(e){if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){let t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})}
+		let prev_record = jQuery('#first-record').data();
 		record_data = prev_record;
 		record_id = record_data.id;
 		display_record(prev_record.slug, prev_record.date, prev_record.url, prev_record.referrers, prev_record.locations);
@@ -338,7 +338,7 @@ window.onload = function() {
 
 		jQuery('.links-card').on('click', function()
 		{
-			var data = jQuery(this).data();
+			let data = jQuery(this).data();
 			record_data = data;
 			record_id = record_data.id;
 			display_record(data.slug, data.date, data.url, data.referrers, data.locations);
@@ -356,7 +356,7 @@ window.onload = function() {
 	});
 	jQuery('#delete-record-confirm').on('click', function(e){
 		e.preventDefault();
-		var data = record_data;
+		let data = record_data;
 		jQuery.ajax({
 			url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 			type:'post',
@@ -388,8 +388,8 @@ window.onload = function() {
 			}, 3000);
 		}
 	}
-	var clipboard_link = new ClipboardJS('.shorted-url');
-	var clipboard_card = new ClipboardJS('.links-card');
+	let clipboard_link = new ClipboardJS('.shorted-url');
+	let clipboard_card = new ClipboardJS('.links-card');
 	clipboard_link.on('success', function(e){clipboard_alert();});
 	clipboard_card.on('success', function(e){clipboard_alert();});
 
@@ -403,7 +403,7 @@ window.onload = function() {
 			jQuery.ajax({
 				url: '<?php echo $this->home_url().RED_DASHBOARD.'/ajax/'; ?>',
 				type:'post',
-				data:$("#add-record-form").serialize(),
+				data:jQuery("#add-record-form").serialize(),
 				success:function(e)
 				{
 					if(e == 's01')
@@ -413,15 +413,15 @@ window.onload = function() {
 						jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
 
 
-						var slug = jQuery('#forward-slug').val();
+						let slug = jQuery('#forward-slug').val();
 						if(slug == '')
 						{
 							slug = jQuery('#randValue').val();
 						}
-						var url = '<?php echo $this->home_url(); ?>'+slug;
-						var target = jQuery('#forward-url').val();
-						var target_shorted = jQuery('#forward-url').val();
-						var date = '<?php echo date('Y-m-d', time()) ?>';
+						let url = '<?php echo $this->home_url(); ?>'+slug;
+						let target = jQuery('#forward-url').val();
+						let target_shorted = jQuery('#forward-url').val();
+						let date = '<?php echo date('Y-m-d', time()) ?>';
 
 						jQuery("#records_list div:first").after('<div class="card links-card"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
 
@@ -429,7 +429,7 @@ window.onload = function() {
 							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
 						}, 3000);
 					}else{
-						var error_text = strings.error1;
+						let error_text = strings.error1;
 
 						if(e == 'e07')
 						{

@@ -59,7 +59,7 @@
 				<div class="collapse" id="collapseLicense">
 					<div class="card card-body">
 						<small>
-							Copyright (c) 2019 RapidDev
+							Copyright (c) 2019-2020 RapidDev
 							<br>
 							Leszek Pomianowski
 							<br>

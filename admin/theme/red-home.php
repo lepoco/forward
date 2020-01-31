@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019, RapidDev
+ * @copyright Copyright (c) 2019-2020, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	<div id="home-footer">
-		Copyright © 2019 RapidDev | MIT License
+		Copyright © 2019-<?php echo date('Y'); ?> RapidDev | MIT License
 		<br>
 		<?php echo $this->e('Background image'); ?>: <i>Joyston Judah</i>
 		<br>
