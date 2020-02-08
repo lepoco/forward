@@ -36,7 +36,7 @@
 <body>
 	<canvas id="noise" style="z-index:100;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.05;"></canvas>
 	<h1><?php echo self::title(); ?></h1>
-	<p>You will be redirected in a few seconds...</p>
+	<p><?php echo $this->e('You will be redirected in a few seconds...'); ?></p>
 	<br>
 	<a href="<?php echo $this->VIEW_DATA['url']; ?>"><?php echo $this->VIEW_DATA['url']; ?></a>
 	<script>
