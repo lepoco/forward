@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019, RapidDev
+ * @copyright Copyright (c) 2019-2020, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -15,7 +15,7 @@
 	* RED
 	*
 	* @author   Leszek Pomianowski <https://rdev.cc>
-	* @version  $Id: red-physic.php;RED,v beta 1.0 2019/11/10
+	* @version  $Id: red-model.php;RED,v beta 1.0 2020/02/08
 	* @access   public
 	*/
 	class RED
@@ -133,7 +133,7 @@
 			$record->clicks = $record->clicks + 1;
 			$record->save();
 
-			$this->js_redirect($record->url);
+			$this->js_forward($record->url);
 
 			//Redirect
 			header('Expires: on, 01 Jan 1970 00:00:00 GMT');
@@ -144,6 +144,41 @@
 			header('HTTP/1.1 301 Moved Permanently');
 			header('Location: ' . $record->url);
 			exit;	
+		}
+
+		/**
+		* js_forward
+		* JavaScript redirection
+		*
+		* @access   private
+		* @param	string $url
+		* @return   void
+		*/
+		private function js_forward(string $url) : void
+		{
+			if($this->DB['options']->get('js_redirect')->value)
+			{
+				$gtag = $this->DB['options']->get('gtag')->value;
+
+				if(!empty($gtag))
+				{
+					header('Expires: on, 01 Jan 1970 00:00:00 GMT');
+					header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+					header('Cache-Control: no-store, no-cache, must-revalidate');
+					header('Cache-Control: post-check=0, pre-check=0', false);
+					header('Pragma: no-cache');
+
+					$this->page([
+						'title' => 'Forward redirect',
+						'page' => 'jsredirect',
+						'view_data' => array(
+							'url' => $url,
+							'gtag' => $gtag
+						)
+					]);
+					exit;
+				}
+			}
 		}
 
 		/**
@@ -276,36 +311,10 @@
 		* @param	array $data
 		* @return   object RED_PAGES
 		*/
-		public function page(array $data) : RED_PAGES
+		public function page(array $data) : RED_VIEW
 		{
-			self::include(ADMPATH.'red-page.php');
-			return new RED_PAGES($data, $this);
-		}
-
-		/**
-		* js_redirect
-		* JavaScript redirection
-		*
-		* @access   private
-		* @param	string $url
-		* @return   void
-		*/
-		private function js_redirect(string $url) : void
-		{
-			if($this->DB['options']->get('js_redirect')->value)
-			{
-				$gtag = $this->DB['options']->get('gtag')->value;
-
-				if(!empty($gtag))
-				{
-					$html  = '<!DOCTYPE html><html><head><title>Forward Redirection</title></head><body>';
-					$html .= '<script async src="https://www.googletagmanager.com/gtag/js?id='.$gtag.'"></script>';
-					$html .= '<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "'.$gtag.'");</script>';
-					$html .= '<script defer="defer">window.onload=function(){setTimeout(function(){window.location.replace("'.$url.'");},'.$this->DB['options']->get('js_redirect_after')->value.');};</script>';
-					$html .= '</body></html>';
-					exit($html);
-				}
-			}
+			self::include(ADMPATH.'red-view.php');
+			return new RED_VIEW($data, $this);
 		}
 
 		/**

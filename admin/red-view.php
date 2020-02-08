@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019, RapidDev
+ * @copyright Copyright (c) 2019-2020, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -12,13 +12,13 @@
 
 	/**
 	*
-	* RED_PAGES
+	* RED_VIEW
 	*
 	* @author   Leszek Pomianowski <https://rdev.cc>
-	* @version  $Id: red-page.php;RED_PAGES,v beta 1.0 2019/10/27
+	* @version  $Id: red-view.php;RED_VIEW,v beta 1.0 2020/02/08
 	* @access   public
 	*/
-	class RED_PAGES
+	class RED_VIEW
 	{
 		private $title;
 		private $uri;
@@ -28,6 +28,8 @@
 
 		private $LANG;
 		private $LANG_ARR;
+
+		private $VIEW_DATA;
 
 		/**
 		* __construct
@@ -57,6 +59,9 @@
 				$this->title = $data['title'];
 			else
 				$this->title = NULL;
+
+			if(isset($data['view_data']))
+				$this->VIEW_DATA = $data['view_data'];
 
 			self::print_page($page);
 		}

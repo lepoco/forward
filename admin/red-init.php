@@ -23,9 +23,9 @@
 	require_once(ADMPATH.'db/red-db.php');
 
 	/** Main class */
-	if (!is_file(ADMPATH.'red-physic.php'))
-		exit(RED_DEBUG ? 'The red-physic.php file was not found!' : '');
-	require_once(ADMPATH.'red-physic.php');
+	if (!is_file(ADMPATH.'red-model.php'))
+		exit(RED_DEBUG ? 'The red-model.php file was not found!' : '');
+	require_once(ADMPATH.'red-model.php');
 
 	/** Start Forward */
 	RED::init();
