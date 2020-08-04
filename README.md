@@ -19,12 +19,6 @@ Simple intuitive interface modeled on Adobe and Bit.ly websites.
 <br/><br/>
 ![Options](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-3.png?raw=true)
 
-## Database
-The database is stored in the Flat-File format. That is, data was saved on the server in files.
-Thanks to this you don't need MySQL or other expensive server like SQL. This solution is super fast and sufficient for Forward needs.
-
-This wonderful solution was created by [Timothy Marois](https://github.com/tmarois/Filebase)
-
 ## Security
 Forward uses a number of security features. User passwords are encrypted via SHA256 and Argon 2.
 The session has a generated token, saved in the database, which is verified each time.
@@ -39,7 +33,6 @@ Each Ajax query is verified by the SHA1 encrypted Nonce.
 - [x] Fast link management system
 - [x] Automatic installation
 - [x] Animated charts
-- [x] A Flat-File database. You don't need MySQL!
 - [x] Administration panel
 - [x] User roles
 - [x] Global statistics
@@ -55,7 +48,6 @@ Just press "Install". It's easy: D
 - [x] Polish
 
 ### Third party solutions
-- Filebase by the Timothy Marois<br/>[https://github.com/tmarois/Filebase](https://github.com/tmarois/Filebase)
 - Chartist.js by the Gion Kunz<br/>[https://github.com/gionkunz/chartist-js](https://github.com/gionkunz/chartist-js)
 - Bootstrap by the Bootstrap team<br/>[https://getbootstrap.com/](https://getbootstrap.com/)
 - jQuery by the jQuery Foundation<br/>[https://jquery.org/](https://jquery.org/)
