@@ -1,8 +1,5 @@
 #Ignore files
-admin/red-config.php
 .htaccess
+app/config.php
 
 #Ignored folders
-admin/db/db_options
-admin/db/db_records
-admin/db/db_users

@@ -1,0 +1,225 @@
+/*!
+ * Forward 2.0.0 (https://github.com/rapiddev/Forward)
+ * Copyright 2018-2020 RapidDev
+ * Licensed under MIT (https://github.com/rapiddev/Forward/blob/master/LICENSE)
+ */
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body {
+	display: initial;
+	margin: 0;
+	min-height: 100%;
+}
+
+#forward {
+	min-height: 100%;
+}
+
+.page-install > #forward,
+.page-home > #forward,
+.page-login > #forward {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#big-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#big-background img {
+	z-index: -1;
+	position: fixed;
+	width: 100%;
+	min-height: 100%;
+	filter: brightness(50%);
+	object-fit: cover;
+}
+
+.navbar-brand > picture {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navbar-brand > picture > img {
+	max-width: 100%;
+	width: 140px;
+}
+
+.card-button {
+	border-top-right-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+}
+
+.forward-logo img {
+	width: 100%;
+	max-width: 300px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.home-card h1, .login-card h1 {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.home-card .card, .login-card .card, #add-new-card .card {
+	min-width: 100%;
+	border: none !important;
+}
+
+.home-card a, .login-card button, #add-new-card button {
+	border-radius: 0 !important;
+	border-bottom-right-radius: .25rem !important;
+	border-bottom-left-radius: .25rem !important;
+}
+
+.splash-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 10px;
+	width: 100%;
+	color: #aaa;
+	font-size: 10px;
+	font-weight: 200;
+}
+
+.github {
+	display: flex;
+	color: #fff;
+	justify-content: center;
+	align-items: center;
+	font-weight: 200;
+	font-size: 15px;
+}
+
+.github svg {
+	margin-right: 10px;
+}
+
+.github p {
+	margin: 0;
+}
+
+.input-group-addon {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group-addon > a {
+	display: flex;
+	color: #495057;
+}
+
+.navbar {
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.navbar > div {
+	padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+@media(min-width: 992px)
+{
+
+}
+
+@media(max-width: 991px)
+{
+	.navbar-separator {
+		display: none !important;
+	}
+}
+
+.navbar-separator > div {
+	margin-left: 10px;
+	margin-right: 20px;
+	height: 100%;
+	border-left: 1px solid rgba(255,255,255,.55);
+}
+
+.btn-create-new {
+	height: 100%;
+	border-radius: 0px;
+}
+
+.input-search-records {
+	border-radius: 0px;
+	height: 100%;
+	background: transparent;
+	color: rgba(255,255,255,.55);
+}
+
+.user-dropdown {
+	border: 1px solid rgba(255,255,255,.55);
+	background: transparent;
+	max-width: 100%;
+	width: 200px;
+	line-height: 13px;
+	height: 100%;
+}
+
+.user-dropdown > .dropdown-toggle {
+	display: inline-block;
+    height: 100%;
+    width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.user-dropdown > .dropdown-toggle > div {
+	display: flex;
+	width: calc(100% - 15px);
+	float: left;
+	padding: 5px 10px;
+}
+
+.user-dropdown > .dropdown-toggle > div > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-dropdown svg {
+	margin-right: 10px;
+}
+
+.user-dropdown small {
+	font-size: 10px;
+}
+
+.user-dropdown > .dropdown-toggle::after {
+	vertical-align: 0;
+	margin: auto;
+	margin-top: 16px;
+}
+
+.user-dropdown > .dropdown-menu.show {
+	min-width: 200px !important;
+}
