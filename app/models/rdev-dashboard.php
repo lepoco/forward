@@ -26,9 +26,12 @@
 
 		private $new_record = '';
 
+		private $last_visitors = array();
+
 		protected function Init() : void
 		{
 			$this->GetRecords();
+			$this->GetLastVisitors();
 		}
 
 		private function GetRecords() : void
@@ -38,6 +41,16 @@
 			if( !empty( $query ) )
 			{
 				$this->records = $query;
+			}
+		}
+
+		private function GetLastVisitors() : void
+		{
+			$query = $this->Forward->Database->query( "SELECT visitor_origin, visitor_language FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 100" )->fetchAll();
+			
+			if( !empty( $query ) )
+			{
+				$this->last_visitors = $query;
 			}
 		}
 
@@ -57,12 +70,65 @@
 
 		public function TopReferrer() : string
 		{
-			return 'YouTube';
+			$origins = array(
+				'Direct' => 0,
+				'Facebook' => 0,
+				'YouTube' => 0
+			);
+
+			foreach ( $this->last_visitors as $visitor )
+			{
+				if(  trim( $visitor['visitor_origin'] ) === '' )
+				{
+					$origins['Direct']++;
+					continue;
+				}
+
+				$origin = strtolower( $visitor['visitor_origin'] );
+
+				if( strpos($origin, 'youtube'))
+				{
+					$origins['YouTube']++;
+				}
+			}
+
+			arsort( $origins );
+
+			return key( $origins );
 		}
 
 		public function TopLanguage() : string
 		{
-			return 'English';
+			$languages = array(
+				'Polish' => 0,
+				'English' => 0
+			);
+
+			foreach ( $this->last_visitors as $visitor )
+			{
+				$code = substr( strtolower( $visitor['visitor_language'] ), 0, 2);
+
+				switch ( $code )
+				{
+					case 'pl':
+						$languages['Polish']++;
+						break;
+					case 'en':
+						$languages['English']++;
+						break;
+					
+					default:
+						if( isset( $languages[ $code ] ) )
+							$languages[ $code ]++;
+						else
+							$languages[ $code ] = 1;
+						break;
+				}
+			}
+
+			arsort( $languages );
+
+			return key( $languages );
 		}
 
 		public function Records() : array

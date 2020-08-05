@@ -25,7 +25,7 @@
 								</div>
 							</div>
 <?php $c = 0; foreach ($this->Records() as $record): $c++; ?>
-							<div class="card links-card links-card-hp <?php echo ($c == 1 ? ' id="first-record"':''); ?>" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">
+							<div class="card links-card" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">
 								<div class="card-body">
 									<div>
 										<small><?php echo $record['record_created']; ?></small>

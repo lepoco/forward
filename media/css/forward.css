@@ -263,6 +263,10 @@ body {
 	padding: 0;
 }
 
+.links-card a {
+	text-decoration: none !important;
+}
+
 .links-card h2 {
 	font-size: 22px;
 	font-weight: 700;
