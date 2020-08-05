@@ -86,6 +86,10 @@
 					$this->Forward->LoadModel( 'dashboard', 'Dashboard' );
 					break;
 
+				case 'settings':
+					$this->Forward->LoadModel( 'settings', 'Settings' );
+					break;
+
 				case 'about':
 					$this->Forward->LoadModel( 'about', 'About' );
 					break;
