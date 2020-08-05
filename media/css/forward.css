@@ -68,6 +68,11 @@ body {
 	width: 140px;
 }
 
+.navbar .dropdown-menu.show {
+	left: auto;
+	right: 0;
+}
+
 .card-button {
 	border-top-right-radius: 0 !important;
 	border-top-left-radius: 0 !important;
