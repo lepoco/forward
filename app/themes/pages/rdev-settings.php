@@ -44,13 +44,17 @@
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('URLs'); ?></h2>
 									<div class="form-group">
 										<label for="site_url"><?php echo $this->_e('Main website URL'); ?></label>
-										<input type="text" class="form-control" name="site_url" id="site_url" placeholder="<?php echo $this->Forward->Options->Get('siteurl'); ?>" value="<?php echo $this->Forward->Options->Get('siteurl'); ?>">
+										<input type="text" class="form-control" name="site_url" id="site_url" placeholder="<?php echo $this->Forward->Options->Get('base_url'); ?>" value="<?php echo $this->Forward->Options->Get('base_url'); ?>">
+										<small><span class="uppercase"><strong><?php echo $this->_e('Attention'); ?>!</strong></span><br/><?php echo $this->_e('Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.') ?></small>
 									</div>
 									<div class="form-group">
 										<label for="dashboard_url"><?php echo $this->_e('Dashboard URL'); ?></label>
 										<input type="text" class="form-control" name="dashboard_url" id="dashboard_url" placeholder="<?php echo $this->Forward->Options->Get('dashboard'); ?>" value="<?php echo $this->Forward->Options->Get('dashboard'); ?>">
 									</div>
-									<small><span class="uppercase"><strong><?php echo $this->_e('Attention'); ?>!</strong></span><br/><?php echo $this->_e('Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.') ?></small>
+									<div class="form-group">
+										<label for="input_login_url"><?php echo $this->_e('Login URL'); ?></label>
+										<input type="text" class="form-control" name="input_login_url" id="input_login_url" placeholder="<?php echo $this->Forward->Options->Get('login'); ?>" value="<?php echo $this->Forward->Options->Get('login'); ?>">
+									</div>
 								</div>
 								<div class="tab-pane fade" id="v-pills-redirects" role="tabpanel" aria-labelledby="v-pills-redirects-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Redirects'); ?></h2>
@@ -210,62 +214,43 @@
 								<div class="tab-pane fade" id="v-pills-miscellaneous" role="tabpanel" aria-labelledby="v-pills-miscellaneous-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Miscellaneous'); ?></h2>
 									<p>
-										<?php echo sprintf($this->_e('You can change these options only in the %s file'), '<strong>red-config.php</strong>'); ?>
+										<?php echo sprintf($this->__('You can change these options only in the %s file'), '<strong>config.php</strong>'); ?>
 										<br>
-										<small><?php $p = str_replace('\\','/',trim(ADMPATH.'red-config.php')); echo $p; ?></small>
+										<small><?php echo str_replace( '\\', '/', trim( APPPATH . 'config.php' ) ); ?></small>
 									</p>
 									<div class="form-group">
-										<label><?php echo $this->_e('Dashboard path for URL'); ?></label>
-										<input disabled type="text" class="form-control" value="/<?php echo RED_DASHBOARD; ?>/">
-										<small>constant: <strong>RED_DASHBOARD</strong></small>
-									</div>
-									<div class="form-group">
-										<label><?php echo $this->_e('Media path for URL'); ?></label>
-										<input disabled type="text" class="form-control" value="/<?php echo RED_MEDIA; ?>/">
-										<small>constant: <strong>RED_MEDIA</strong></small>
-									</div>
-									<div class="form-group">
-										<label><?php echo $this->_e('Users database'); ?></label>
-										<input disabled type="text" class="form-control" value="<?php echo DB_USERS; ?>">
-										<small>constant: <strong>DB_USERS</strong></small>
-									</div>
-									<div class="form-group">
-										<label><?php echo $this->_e('Options database'); ?></label>
-										<input disabled type="text" class="form-control" value="<?php echo DB_OPTIONS; ?>">
-										<small>constant: <strong>DB_OPTIONS</strong></small>
-									</div>
-									<div class="form-group">
-										<label><?php echo $this->_e('Records database'); ?></label>
-										<input disabled type="text" class="form-control" value="<?php echo DB_RECORDS; ?>">
-										<small>constant: <strong>DB_RECORDS</strong></small>
+										<label><?php echo $this->_e('Database name'); ?></label>
+										<input disabled type="text" class="form-control" value="<?php echo FORWARD_DB_NAME; ?>">
+										<small>constant: <strong>FORWARD_DB_NAME</strong></small>
 									</div>
 									<div class="form-group">
 										<label><?php echo $this->_e('Cryptographic method for passwords'); ?></label>
 										<input disabled type="text" class="form-control" value="<?php
-										switch(RED_ALGO)
+										
+										switch(FORWARD_ALGO)
 										{
-									case 1: //PASSWORD_BCRYPT
-									echo 'CRYPT_BLOWFISH algorithm to create the hash';
-									break;
-									case 2: //PASSWORD_ARGON2I
-									echo 'Argon2i hashing algorithm to create the hash';
-									break;
-									case 3: //PASSWORD_ARGON2ID
-									echo 'Argon2id hashing algorithm to create the hash';
-									break;
-									default: //PASSWORD_DEFAULT
-									echo 'DEFAULT - bcrypt algorithm (default as of PHP 5.5.0)';
-									break;
-								}
+											case '2y': //PASSWORD_BCRYPT
+											echo 'CRYPT_BLOWFISH algorithm to create the hash';
+											break;
+											case 'argon2i': //PASSWORD_ARGON2I
+											echo 'Argon2i hashing algorithm to create the hash';
+											break;
+											case 'argon2id': //PASSWORD_ARGON2ID
+											echo 'Argon2id hashing algorithm to create the hash';
+											break;
+											default: //PASSWORD_DEFAULT
+											echo 'DEFAULT - bcrypt algorithm (default as of PHP 5.5.0)';
+											break;
+										}
 
-								?>">
-								<small>constant: <strong>RED_ALGO</strong></small>
+										?>">
+								<small>constant: <strong>FORWARD_ALGO</strong></small>
 								<p class="p-warning"><small><?php echo $this->_e('Changing the cryptographic method will make all passwords stop working.'); ?></small></p>
 							</div>
 							<hr>
 							<div class="form-group">
 								<label><?php echo $this->_e('Debugging'); ?></label>
-								<input disabled type="text" class="form-control" value="<?php echo (RED_DEBUG ? $this->_e('Enabled') : $this->_e('Disabled')); ?>">
+								<input disabled type="text" class="form-control" value="<?php echo (FORWARD_DEBUG ? $this->_e('Enabled') : $this->_e('Disabled')); ?>">
 								<small><?php echo $this->_e('Remember to turn off debugging if you have stopped testing the page.'); ?></small>
 							</div>
 						</div>

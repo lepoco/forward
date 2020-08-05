@@ -217,7 +217,7 @@
 			$config .= "\n\t/** Passowrd salt */\n\tdefine( 'PASSWORD_SALT', '" . Crypter::DeepSalter(50) . "' );";
 			$config .= "\n\t/** Nonce salt */\n\tdefine( 'NONCE_SALT', '" . Crypter::DeepSalter(50) . "' );";
 
-			$config .= "\n\n\t/** Debugging */\n\tdefine( 'FORWARD_DEBUG', FALSE );";
+			$config .= "\n\n\t/** Debugging */\n\tdefine( 'FORWARD_DEBUG', false );";
 
 			$config .= "\n\n?>\n";
 

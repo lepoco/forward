@@ -43,7 +43,7 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><a class="dropdown-item" href="<?php echo $dashboard . 'settings/'; ?>">Settings</a></li>
-									<li><a class="dropdown-item" href="<?php echo $dashboard . 'settings/'; ?>">Tools</a></li>
+									<li><a class="dropdown-item" href="<?php echo $dashboard . 'tools/'; ?>">Tools</a></li>
 									<li><a class="dropdown-item" href="<?php echo $dashboard . 'user/list/'; ?>">Users</a></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" href="<?php echo $dashboard . 'about/'; ?>">About</a></li>
