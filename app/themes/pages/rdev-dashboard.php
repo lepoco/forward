@@ -30,7 +30,7 @@
 									<div>
 										<small><?php echo $record['record_created']; ?></small>
 										<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->baseurl . $record['record_display_name']; ?>" target="_blank" rel="noopener" href="<?php echo $this->baseurl . $record['record_display_name']; ?>">/<?php echo $record['record_display_name']; ?></a></h2>
-										<p><a target="_blank" rel="noopener" href="<?php echo $record['record_url'] ?>"><?php echo $this->ShortUrl($record['record_url']); ?></a></p>
+										<p><a target="_blank" rel="noopener" class="overflow-url" href="<?php echo $record['record_url'] ?>"><?php echo $record['record_url']; ?></a></p>
 									</div>
 									<span><?php echo $record['record_clicks']; ?></span>
 								</div>

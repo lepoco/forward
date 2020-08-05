@@ -250,6 +250,15 @@ body {
 	background: #fff;
 }
 
+.overflow-url {
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+    max-width: 100%;
+    display: block;
+}
+
 .links-card, .links-header {
 	cursor: pointer;
 	border-radius: 0 !important;

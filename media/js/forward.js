@@ -4,8 +4,6 @@
   * Licensed under MIT (https://github.com/rapiddev/Forward/blob/master/LICENSE)
   */
 
-
-
 	//Custom forEach for Array
 	Array.prototype.forEach||(Array.prototype.forEach=function(r){var t=this.length;if("function"!=typeof r)throw new TypeError;for(var o=arguments[1],h=0;h<t;h++)h in this&&r.call(o,this[h],h,this)});
 
@@ -238,7 +236,8 @@
 							let url = forward.baseurl + slug;
 							let target = jQuery('#input-record-url').val();
 							let target_shorted = jQuery('#input-record-url').val();
-							let date = Date.now();
+							let date = new Date();
+							date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);;
 
 							jQuery("#records_list div:first").after('<div class="card links-card"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
 
