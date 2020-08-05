@@ -21,6 +21,7 @@
 	class Ajax
 	{
 		/** ERROR CODES */
+		private const ERROR_UNKNOWN                  = 'e00';
 		private const ERROR_MISSING_ACTION           = 'e01';
 		private const ERROR_MISSING_NONCE            = 'e02';
 		private const ERROR_INVALID_NONCE            = 'e03';
@@ -95,9 +96,7 @@
 			else
 				$this->{$this->action}();
 
-			//End ajax query
-			$this->Forward->Session->Close();
-			exit;
+			$this->Finish();
 		}
 
 		/**
@@ -148,18 +147,44 @@
 				return true;
 		}
 
+		/**
+		* Finish
+		* End ajax script
+		*
+		* @access   private
+		* @return	bool
+		*/
+		private function Finish( $code = null )
+		{
+			$this->Forward->Session->Close();
+
+			if( $code == null )
+				echo ERROR_UNKNOWN;
+			else
+				echo $code;
+
+			exit;
+		}
+
 
 		/**
 			Ajax methods
 		*/
 
+		/**
+		* sign_in
+		* The action is triggered on login
+		*
+		* @access   private
+		* @return	void
+		*/
 		private function sign_in() : void
 		{
 			if( !isset( $_POST['login'], $_POST['password'] ) )
-				exit(self::ERROR_MISSING_ARGUMENTS);
+				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
 
 			if( empty( $_POST['login'] ) || empty( $_POST['password'] ) )
-				exit(self::ERROR_ENTRY_DONT_EXISTS);
+				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
 
 			$login = filter_var( $_POST['login'], FILTER_SANITIZE_STRING );
 			$password = filter_var( $_POST['password'], FILTER_SANITIZE_STRING );
@@ -170,14 +195,55 @@
 				$user = $this->Forward->User->GetByEmail( $login );
 			
 			if( empty( $user ))
-				exit(self::ERROR_ENTRY_DONT_EXISTS);
+				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
 
 			if( !Crypter::Compare( $password, $user['user_password'], 'password' ) )
-				exit(self::ERROR_ENTRY_DONT_EXISTS);
+				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
 
 			$this->Forward->User->LogIn( $user );
 
-			echo self::CODE_SUCCESS;
+			$this->Finish( self::CODE_SUCCESS );
+		}
+
+		/**
+		* sign_in
+		* The action is triggered on adding record
+		*
+		* @access   private
+		* @return	void
+		*/
+		private function add_record() : void
+		{
+			if( !$this->Forward->User->IsManager() )
+				$this->Finish( self::ERROR_INSUFFICIENT_PERMISSIONS );
+
+			if(!isset(
+				$_POST[ 'input-record-url' ],
+				$_POST[ 'input-record-slug' ],
+				$_POST[ 'input-rand-value' ]
+			))
+				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
+
+			if( trim( $_POST[ 'input-record-url' ] ) == '' || trim( $_POST[ 'input-rand-value' ] ) == '' )
+				$this->Finish( self::ERROR_EMPTY_ARGUMENTS );
+			
+			if( trim( $_POST[ 'input-record-slug' ] ) != '' && $_POST[ 'input-record-slug' ] != $_POST[ 'input-rand-value' ])
+				$slug = filter_var( $_POST[ 'input-record-slug' ], FILTER_SANITIZE_STRING );
+			else
+				$slug = filter_var( $_POST[ 'input-rand-value' ], FILTER_SANITIZE_STRING );
+
+			$query = $this->Forward->Database->query( "SELECT record_id FROM forward_records WHERE record_name = ?", strtolower( $slug ) )->fetchAll();
+			if( !empty( $query ) )
+				$this->Finish( self::ERROR_ENTRY_EXISTS );
+
+			$query = $this->Forward->Database->query(
+				"INSERT INTO forward_records (record_name, record_display_name, record_url) VALUES (?,?,?)",
+				strtolower( $slug ),
+				$slug,
+				filter_var( $_POST[ 'input-record-url' ], FILTER_SANITIZE_STRING )
+			);
+
+			$this->Finish( self::CODE_SUCCESS );
 		}
 	}
 ?>

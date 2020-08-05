@@ -50,17 +50,17 @@
 											</div>
 											<form id="add-record-form" action="<?php echo $this->AjaxGateway(); ?>">
 												<input type="hidden" value="add_record" name="action">
-												<input type="hidden" value="<?php echo $this->AjaxNonce( 'sign_in' ); ?>" name="nonce">
-												<input type="hidden" value="hp echo $rand; ?>" id="randValue" name="randValue">
+												<input type="hidden" value="<?php echo $this->AjaxNonce( 'add_record' ); ?>" name="nonce">
+												<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-rand-value" name="input-rand-value">
 												<div class="row">
 													<div class="col-8 col-lg-3">
 														<div class="form-group">
-															<input type="text" id="forward-url" name="forward-url" class="form-control" placeholder="https://">
+															<input type="text" id="input-record-url" name="input-record-url" class="form-control" placeholder="https://">
 														</div>
 													</div>
 													<div class="col-4 col-lg-3 col-no-gutters">
 														<div class="form-group">
-															<input type="text" id="forward-slug" name="forward-slug" class="form-control" placeholder="<?php echo $this->NewRecord(); ?>" value="<?php echo $this->NewRecord(); ?>">
+															<input type="text" id="input-record-slug" name="input-record-slug" class="form-control" placeholder="<?php echo $this->NewRecord(); ?>" value="<?php echo $this->NewRecord(); ?>">
 														</div>
 													</div>
 													<div class="col-12 col-lg-3">

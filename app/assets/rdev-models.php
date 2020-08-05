@@ -144,7 +144,12 @@
 					$this->GetView();
 		}
 
-		protected function _e( $text )
+		protected function __( $text = '' )
+		{
+			return $this->Forward->Translator->__( $text );
+		}
+
+		protected function _e( $text = '' )
 		{
 			return $this->Forward->Translator->_e( $text );
 		}
@@ -233,7 +238,7 @@
 				array( 'https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js', 'sha512-TZlMGFY9xKj38t/5m2FzJ+RM/aD5alMHDe26p0mYUMoCF5G7ibfHUQILq0qQPV3wlsnCwL+TPRNK4vIWGLOkUQ==', '4.4.2' ),
 				array( 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js', 'sha512-hDWGyh+Iy4Mr9AHOzUP2+Y0iVPn/BwxxaoSleEjH/i1o4EVTF/sh0/A1Syii8PWOae+uPr+T/KHwynoebSuAhw==', '2.0.6' ),
 				array( 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js' , 'sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==', '0.11.4' ),
-				array( $this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION )
+				array( $this->baseurl . 'media/js/forward.js', '', FORWARD_VERSION )
 			);
 		}
 

@@ -36,7 +36,7 @@
 
 		private function GetRecords() : void
 		{
-			$query = $this->Forward->Database->query( "SELECT * FROM forward_records" )->fetchAll();
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_records ORDER BY record_id DESC" )->fetchAll();
 			
 			if( !empty( $query ) )
 			{
@@ -154,6 +154,17 @@
 				$this->new_record = strtoupper( Crypter::BaseSalter(6) );
 
 			return $this->new_record;
+		}
+
+		public function Header()
+		{
+			$html  = '<script type="text/javascript" nonce="' . $this->js_nonce . '">let translator = {';
+			$html .= 'e1: "'.$this->__('Something went wrong!').'",';
+			$html .= 'e7: "'.$this->__('You must provide a URL!').'",';
+			$html .= 'e8: "'.$this->__('A record with this ID already exists!').'",';
+			$html .= 'e10: "'.$this->__('The URL you entered is not valid!').'",';
+
+			echo $html . '};</script>';
 		}
 	}
 

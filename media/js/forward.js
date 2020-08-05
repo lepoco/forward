@@ -26,6 +26,33 @@
 	function console_log(message, color="#fff"){console.log("%cForward: "+"%c"+message, "color:#dc3545;font-weight: bold;", "color: "+color);}
 	console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2020 RapidDev\nhttps://rdev.cc/\n==============================");
 
+	//Translator
+	function __T(text)
+	{
+		if(typeof translator == 'undefined')
+		{
+			return text;
+		}
+		else
+		{
+			if(translator.length == 0)
+			{
+				return text;
+			}
+			else
+			{
+				if( text in translator )
+				{
+					return translator[ text ];
+				}
+				else
+				{
+					return text;
+				}
+			}
+		}
+	}
+
 	//On DOM loaded, veryfiy and run
 	document.addEventListener('DOMContentLoaded', function()
 	{
@@ -182,6 +209,83 @@
 		let clipboard_card = new ClipboardJS('.links-card');
 		clipboard_link.on('success', function(e){clipboard_alert();});
 		clipboard_card.on('success', function(e){clipboard_alert();});
+
+		jQuery(function()
+		{
+			function AjaxAddRecord()
+			{
+				if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
+				if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
+				
+				jQuery.ajax({
+					url: forward.ajax,
+					type:'post',
+					data:jQuery("#add-record-form").serialize(),
+					success:function(e)
+					{
+						if(e == 's01')
+						{
+							jQuery('#add-success').slideToggle();
+
+							jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
+
+
+							let slug = jQuery('#input-record-slug').val();
+							if(slug == '')
+							{
+								slug = jQuery('#input-rand-value').val();
+							}
+							let url = forward.baseurl + slug;
+							let target = jQuery('#input-record-url').val();
+							let target_shorted = jQuery('#input-record-url').val();
+							let date = Date.now();
+
+							jQuery("#records_list div:first").after('<div class="card links-card"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
+
+							window.setTimeout(function(){
+								jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
+							}, 3000);
+						}
+						else
+						{
+							
+							let error_text = __T('e1');
+
+							if(e == 'e07')
+							{
+								error_text = __T('e7');
+							}
+							else if(e == 'e08')
+							{
+								error_text = __T('e8');
+							}
+							else if(e == 'e10')
+							{
+								error_text = __T('e10');
+							}
+
+							jQuery('#error_text').html(error_text);
+							jQuery('#add-alert').slideToggle();
+						}
+						console.log(e);
+					},
+					fail:function(xhr, textStatus, errorThrown){
+						console.log(xhr);
+						console.log(textStatus);
+						console.log(errorThrown);
+						jQuery('#add-alert').slideToggle();
+					}
+				});
+			}
+			jQuery('#add-record-form').on('submit', function(e){
+				e.preventDefault();
+				AjaxAddRecord();
+			});
+			jQuery('#add-record-send').on('click', function(e) {
+				e.preventDefault();
+				AjaxAddRecord();
+			});
+		});
 	}
 
 	function PageLogin()
