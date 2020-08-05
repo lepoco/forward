@@ -168,20 +168,20 @@
 		console_log( 'The functions for page Dashboard have been loaded.' );
 
 		/** Copy to clipboard **/
-	jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
-	function clipboard_alert(){
-		if(jQuery('#links-copied').is(':hidden'))
-		{
-			jQuery('#links-copied').slideToggle();
-			window.setTimeout(function(){
-				jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
-			}, 3000);
+		jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
+		function clipboard_alert(){
+			if(jQuery('#links-copied').is(':hidden'))
+			{
+				jQuery('#links-copied').slideToggle();
+				window.setTimeout(function(){
+					jQuery('#links-copied').slideToggle(400, function(){jQuery('#links-copied').hide();});
+				}, 3000);
+			}
 		}
-	}
-	let clipboard_link = new ClipboardJS('.shorted-url');
-	let clipboard_card = new ClipboardJS('.links-card');
-	clipboard_link.on('success', function(e){clipboard_alert();});
-	clipboard_card.on('success', function(e){clipboard_alert();});
+		let clipboard_link = new ClipboardJS('.shorted-url');
+		let clipboard_card = new ClipboardJS('.links-card');
+		clipboard_link.on('success', function(e){clipboard_alert();});
+		clipboard_card.on('success', function(e){clipboard_alert();});
 	}
 
 	function PageLogin()

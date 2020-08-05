@@ -309,6 +309,11 @@ body {
 }
 
 .stats-header {
+	width: 200px;
+	max-width: 100%;
+}
+
+.stats-header > div {
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
@@ -316,11 +321,8 @@ body {
 }
 
 .stats-header svg {
-	width: 40px;
-    height: 40px;
-    border: 1px solid #444;
-    border-radius: 30px;
-    padding: 5px;
+	width: 30px;
+    height: 30px;
     fill: #444;
 	margin-right: 15px;
 }
