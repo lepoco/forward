@@ -55,6 +55,16 @@
 			return $this->total_clicks;
 		}
 
+		public function TopReferrer() : string
+		{
+			return 'YouTube';
+		}
+
+		public function TopLanguage() : string
+		{
+			return 'English';
+		}
+
 		public function Records() : array
 		{
 			return $this->records;

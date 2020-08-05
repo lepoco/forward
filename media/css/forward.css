@@ -36,6 +36,10 @@ body {
 	align-items: center;
 }
 
+.page-dashboard > #forward {
+	background-color: #f8f9fa;
+}
+
 #big-background {
 	position: absolute;
 	top: 0;
@@ -234,7 +238,11 @@ body {
 }
 
 #red-dashboard {
-	background-color: #f8f9fa;
+	
+}
+
+#records_list {
+	background: #fff;
 }
 
 .links-card, .links-header {
