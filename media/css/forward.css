@@ -15,6 +15,15 @@ body {
 	min-height: 100%;
 }
 
+.row-no-gutter {
+	--bs-gutter-x: 2rem;
+}
+
+.col-no-gutters {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
 #forward {
 	min-height: 100%;
 }
@@ -224,6 +233,10 @@ body {
 	min-width: 200px !important;
 }
 
+#red-dashboard {
+	background-color: #f8f9fa;
+}
+
 .links-card, .links-header {
 	cursor: pointer;
 	border-radius: 0 !important;
@@ -281,4 +294,56 @@ body {
 	display: flex;
 	align-items: center;
     justify-content: flex-end;
+}
+
+.stats-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.stats-header svg {
+	width: 40px;
+    height: 40px;
+    border: 1px solid #444;
+    border-radius: 30px;
+    padding: 5px;
+    fill: #444;
+	margin-right: 15px;
+}
+
+.stats-header h1 {
+	font-size: 20px;
+	margin: 0;
+}
+
+.stats-header p {
+	margin: 0;
+	opacity: .55;
+	font-size: 11px;
+}
+
+.remove-record {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#delete-record-icon > svg {
+	border: 1px solid rgba(0,0,0,.4);
+	padding: 5px;
+	fill: rgba(0,0,0,.4);
+	border-radius: 150px;
+	width: 40px;
+	height: 40px;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+#delete-record-icon:hover > svg {
+	border-color: rgba(0,0,0,.8);
+	fill: rgba(0,0,0,.8);
 }

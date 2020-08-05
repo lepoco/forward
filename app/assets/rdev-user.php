@@ -191,6 +191,48 @@
 			$query = $this->Forward->Database->query( "SELECT user_id, user_name, user_password, user_role, user_token FROM forward_users WHERE user_email = ?", $email )->fetchArray();
 			return $query;
 		}
+
+		/**
+		* IsAdmin
+		* Is current user admin
+		*
+		* @param	bool
+		* @access   public
+		*/
+		public function IsAdmin() : bool
+		{
+			if( $this->User == null )
+				$this->GetUser( $this->id );
+
+			if( isset($_SESSION['r']) )
+			{
+				if( $this->User['user_role'] == $_SESSION['r'] && $this->User['user_role'] == 'admin' )
+					return true;
+			}
+
+			return false;
+		}
+
+		/**
+		* IsManager
+		* Is current user admin or manager
+		*
+		* @param	bool
+		* @access   public
+		*/
+		public function IsManager() : bool
+		{
+			if( $this->IsAdmin() )
+				return true;
+
+			if( isset($_SESSION['r']) )
+			{
+				if( $this->User['user_role'] == $_SESSION['r'] && $this->User['user_role'] == 'manager' )
+					return true;
+			}
+
+			return false;
+		}
 	}
 
 ?>

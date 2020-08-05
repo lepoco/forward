@@ -22,7 +22,9 @@
 	{
 		private $records = array();
 
-		private $total_clicks;
+		private $total_clicks = -1;
+
+		private $new_record = '';
 
 		protected function Init() : void
 		{
@@ -41,14 +43,16 @@
 
 		public function TotalClicks() : int
 		{
-			if( $total_clicks == null )
+			if( $this->total_clicks == -1 )
 			{
-				$total_clicks = 0;
+				$this->total_clicks = 0;
 				foreach ( $this->records as $record )
 				{
-					$total_clicks += $record['record_clicks'];
+					$this->total_clicks += $record['record_clicks'];
 				}
 			}
+
+			return $this->total_clicks;
 		}
 
 		public function Records() : array
@@ -66,6 +70,14 @@
 			{
 				return $url;
 			}
+		}
+
+		public function NewRecord()
+		{
+			if( $this->new_record == '')
+				$this->new_record = strtoupper( Crypter::BaseSalter(6) );
+
+			return $this->new_record;
 		}
 	}
 
