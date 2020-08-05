@@ -17,23 +17,25 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12 col-lg-3 col-no-gutters" id="records_list">
-							<div class="card links-header"><div class="card-body"><small><strong id="total_records_count">hp echo count($records); ?></strong> hp echo $this->e('total links'); ?></small></div></div>
+							<div class="card links-header"><div class="card-body"><small><strong id="total_records_count"><?php echo count($this->Records()); ?> </strong><?php echo $this->_e('total links'); ?></small></div></div>
 							<div id="links-copied" class="alert alert-success fade show" role="alert" style="display: none;margin: 0;border-radius: 0;">
 								<div>
 									<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#155724" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7M7.5,13.5L9,12L11,14L15.5,9.5L17,11L11,17L7.5,13.5Z" /></svg>
-									<small>hp echo $this->e('Link has been copied to your clipboard'); ?></small>
+									<small><?php echo $this->_e('Link has been copied to your clipboard'); ?></small>
 								</div>
 							</div>
-							<div class="card links-card links-card-hp echo $record['name']; ?>"hp echo ($c == 1 ? ' id="first-record"':''); ?> data-clipboard-text="hp echo $this->home_url().$record['name']; ?>" data-locations="hp echo $record_locations; ?>" data-referrers="hp echo $record_referrers; ?>" data-daily="hp echo $record['stats']; ?>" data-date="hp echo date('Y-m-d H:i', $record['__created_at']); ?>" data-url="hp echo $record['url']; ?>" data-slug="hp echo $record['name']; ?>" data-clicks="hp echo $record['clicks']; ?>">
+<?php $c = 0; foreach ($this->Records() as $record): $c++; ?>
+							<div class="card links-card links-card-hp <?php echo ($c == 1 ? ' id="first-record"':''); ?>" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">
 								<div class="card-body">
 									<div>
-										<small>hp echo date('Y-m-d', $record['__created_at']); ?></small>
-										<h2><a class="shorted-url" data-clipboard-text="hp echo $this->home_url().$record['name']; ?>" target="_blank" rel="noopener" href="hp echo $this->home_url().$record['name']; ?>">/hp echo $record['name']; ?></a></h2>
-										<p><a target="_blank" rel="noopener" href="hp echo $record['url'] ?>">hp echo $preURL; ?></a></p>
+										<small><?php echo $record['record_created']; ?></small>
+										<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->baseurl . $record['record_display_name']; ?>" target="_blank" rel="noopener" href="<?php echo $this->baseurl . $record['record_display_name']; ?>">/<?php echo $record['record_display_name']; ?></a></h2>
+										<p><a target="_blank" rel="noopener" href="<?php echo $record['record_url'] ?>"><?php echo $this->ShortUrl($record['record_url']); ?></a></p>
 									</div>
-									<span>hp echo $record['clicks']; ?></span>
+									<span><?php echo $record['record_clicks']; ?></span>
 								</div>
 							</div>
+<?php endforeach; ?>
 						</div>
 						<div id="dashboard-box" class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;height: inherit;overflow: auto;">
 							<div class="container-fluid">

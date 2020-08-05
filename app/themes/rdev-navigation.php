@@ -27,13 +27,6 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto"></ul>
 			<ul class="navbar-nav ml-auto">
-				<li style="margin-right: 10px;">
-					<input class="form-control input-search-records mr-5" type="search" placeholder="Search" aria-label="Search">
-				</li>
-				<li style="margin-right: 10px;">
-					<button class="btn btn-primary btn-create-new" type="submit">Create new</button>
-				</li>
-				<li class="navbar-separator"><div></div></li>
 				<li class="nav-item dropdown user-dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div>
