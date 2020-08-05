@@ -125,6 +125,9 @@
 			$this->GetStyles();
 			$this->GetScripts();
 
+			if( method_exists( $this, 'Init' ) )
+				$this->Init();
+
 			if($_GET != NULL)
 				if( method_exists( $this, 'Get' ) )
 					$this->Get();
