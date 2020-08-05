@@ -10,6 +10,8 @@
 	namespace Forward;
 	defined('ABSPATH') or die('No script kiddies please!');
 
+	use DateTime;
+
 	$this->GetHeader();
 	$this->GetNavigation();
 ?>
@@ -25,10 +27,10 @@
 								</div>
 							</div>
 <?php $c = 0; foreach ($this->Records() as $record): $c++; ?>
-							<div class="card links-card" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">
+							<div class="card links-card" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>" data-id="<?php echo $record['record_id']; ?>">
 								<div class="card-body">
 									<div>
-										<small><?php echo $record['record_created']; ?></small>
+										<small><?php echo (new DateTime($record['record_created']))->format('Y-m-d'); ?></small>
 										<h2><a class="shorted-url" data-clipboard-text="<?php echo $this->baseurl . $record['record_display_name']; ?>" target="_blank" rel="noopener" href="<?php echo $this->baseurl . $record['record_display_name']; ?>">/<?php echo $record['record_display_name']; ?></a></h2>
 										<p><a target="_blank" rel="noopener" class="overflow-url" href="<?php echo $record['record_url'] ?>"><?php echo $record['record_url']; ?></a></p>
 									</div>

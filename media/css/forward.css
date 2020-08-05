@@ -36,8 +36,13 @@ body {
 	align-items: center;
 }
 
-.page-dashboard > #forward {
+.page-dashboard > #forward,
+.page-about > #forward {
 	background-color: #f8f9fa;
+}
+
+.page-about > #forward > .container {
+	padding-top: 40px;
 }
 
 #big-background {
