@@ -113,18 +113,18 @@
 			);
 
 
-			var_dump($_SERVER['HTTP_USER_AGENT']);
+			//var_dump($_SERVER['HTTP_USER_AGENT']);
 
-			$user_agent = 'Mozilla/5.0 (PlayStation 4 3.11) AppleWebKit/537.73 (KHTML, like Gecko)';
-			var_dump($user_agent);
+			//$user_agent = 'Mozilla/5.0 (PlayStation 4 3.11) AppleWebKit/537.73 (KHTML, like Gecko)';
+			//var_dump($user_agent);
 
 			foreach ( $os_array as $regex => $value )
 				if ( preg_match( $regex, $user_agent ) )
 					$os_platform = $value;
 
 
-			var_dump($os_platform);
-			exit;
+			//var_dump($os_platform);
+			//exit;
 
 			$this->platform = $os_platform;
 		}
