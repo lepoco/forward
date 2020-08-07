@@ -109,6 +109,7 @@
 				'/playstation vita/i'   =>  'playstation_vita',
 				'/playstation 4/i'      =>  'playstation_4',
 				'/playstation 5/i'      =>  'playstation_5',
+				'/nexus player/i'       =>  'google_nexus_player',
 				'/webos/i'              =>  'mobile'
 			);
 
