@@ -27,12 +27,28 @@ CREATE TABLE IF NOT EXISTS forward_records (
 	record_created DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+-- Statistics visitors origins
+CREATE TABLE IF NOT EXISTS forward_statistics_origins (
+	origin_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	origin_name VARCHAR(32)
+) CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT IGNORE INTO forward_statistics_origins (origin_name) VALUES
+('direct'),
+('www.google.com'),
+('www.youtube.com'),
+('m.youtube.com'),
+('www.facebook.com'),
+('m.facebook.com'),
+('lm.facebook.com'),
+('l.facebook.com');
+
 -- Statistics visitors languages
 CREATE TABLE IF NOT EXISTS forward_statistics_languages (
 	language_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	language_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES
+INSERT IGNORE INTO forward_statistics_languages (language_name) VALUES
+('unknown'),
 ('en'),
 ('en-us'),
 ('en-gb');
@@ -43,6 +59,7 @@ CREATE TABLE IF NOT EXISTS forward_statistics_platforms (
 	platform_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
 INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES
+('Unknown'),
 ('Windows 10'),
 ('Windows 8.1'),
 ('Windows 8'),
@@ -73,6 +90,7 @@ CREATE TABLE IF NOT EXISTS forward_statistics_agents (
 	agent_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
 INSERT IGNORE INTO forward_statistics_agents (agent_name) VALUES
+('Unknown'),
 ('Lynx'),
 ('Edge'),
 ('Chrome'),
@@ -94,8 +112,9 @@ CREATE TABLE IF NOT EXISTS forward_statistics_visitors (
 	CONSTRAINT fk_agent_id FOREIGN KEY (visitor_agent_id) REFERENCES forward_statistics_agents(agent_id),
 	visitor_language_id INT(6) UNSIGNED NOT NULL,
 	CONSTRAINT fk_language_id FOREIGN KEY (visitor_language_id) REFERENCES forward_statistics_languages(language_id),
+	visitor_origin_id INT(6) UNSIGNED NOT NULL,
+	CONSTRAINT fk_origin_id FOREIGN KEY (visitor_origin_id) REFERENCES forward_statistics_origins(origin_id),
 	visitor_ip VARCHAR(128),
-	visitor_origin LONGTEXT,
 	visitor_visits INT(20) DEFAULT 1,
 	visitor_date DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;

@@ -46,11 +46,16 @@
 
 		private function GetLastVisitors() : void
 		{
-			$query = $this->Forward->Database->query( "SELECT visitor_origin, visitor_language FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 100" )->fetchAll();
+			$records = $this->Forward->Database->query( "SELECT visitor_origin_id, visitor_language_id FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 100" )->fetchAll();
+
+
 			
-			if( !empty( $query ) )
+			if( !empty( $records ) )
 			{
-				$this->last_visitors = $query;
+				$languages = $this->Forward->Database->query( "SELECT * FROM forward_statistics_languages" )->fetchAll();
+				$origins = $this->Forward->Database->query( "SELECT * FROM forward_statistics_origins" )->fetchAll();
+
+				$this->last_visitors = $records;
 			}
 		}
 

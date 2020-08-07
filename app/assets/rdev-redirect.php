@@ -214,6 +214,144 @@
 		}
 
 		/**
+		* GetOriginId
+		* Language id from database by name
+		*
+		* @access   private
+		* @param 	string $name
+		*/
+		private function GetOriginId( $name ) : int
+		{
+			$query = $this->Forward->Database->query( "SELECT origin_id FROM forward_statistics_origins WHERE origin_name = ?", $name )->fetchArray();
+
+			if($query == null)
+			{
+				$query = $this->Forward->Database->query( "INSERT INTO forward_statistics_origins (origin_name) VALUES (?)", $name );
+				return $query->lastInsertID();
+			}
+			else
+			{
+				return filter_var( $query[ 'origin_id' ], FILTER_VALIDATE_INT );
+			}
+		}
+
+		/**
+		* GetLanguageId
+		* Language id from database by name
+		*
+		* @access   private
+		* @param 	string $name
+		*/
+		private function GetLanguageId( $name ) : int
+		{
+			$query = $this->Forward->Database->query( "SELECT language_id FROM forward_statistics_languages WHERE language_name = ?", $name )->fetchArray();
+
+			if($query == null)
+			{
+				$query = $this->Forward->Database->query( "INSERT INTO forward_statistics_languages (language_name) VALUES (?)", $name );
+				return $query->lastInsertID();
+			}
+			else
+			{
+				return filter_var( $query[ 'language_id' ], FILTER_VALIDATE_INT );
+			}
+		}
+
+		/**
+		* GetAgentId
+		* Paltform id from database by name
+		*
+		* @access   private
+		* @param 	string $name
+		*/
+		private function GetAgentId( $name ) : int
+		{
+			switch ( $name ) {
+				case 'Unknown':
+					return 1;
+				case 'Lynx':
+					return 2;
+				case 'Edge':
+					return 3;
+				case 'Chrome':
+					return 4;
+				case 'Safari':
+					return 5;
+				case 'IE':
+					return 6;
+				case 'Gecko':
+					return 7;
+				case 'Opera':
+					return 8;
+				case 'NS4':
+					return 9;
+				case 'iPhone':
+					return 10;
+			}
+		}
+
+		/**
+		* GetPlatformId
+		* Paltform id from database by name
+		*
+		* @access   private
+		* @param 	string $name
+		*/
+		private function GetPlatformId( $name ) : int
+		{
+			switch ( $name ) {
+				case 'Unknown':
+					return 1;
+				case 'Windows 10':
+					return 2;
+				case 'Windows 8.1':
+					return 3;
+				case 'Windows 8':
+					return 4;
+				case 'Windows 7':
+					return 5;
+				case 'Windows Vista':
+					return 6;
+				case 'Windows Server 2003/XP x64':
+					return 7;
+				case 'Windows XP':
+					return 8;
+				case 'Windows XP':
+					return 9;
+				case 'Windows 2000':
+					return 10;
+				case 'Windows ME':
+					return 11;
+				case 'Windows 98':
+					return 12;
+				case 'Windows 95':
+					return 13;
+				case 'Windows 3.11':
+					return 14;
+				case 'Mac OS X':
+					return 15;
+				case 'Mac OS 9':
+					return 16;
+				case 'Linux':
+					return 17;
+				case 'Ubuntu':
+					return 18;
+				case 'iPhone':
+					return 19;
+				case 'iPod':
+					return 20;
+				case 'iPad':
+					return 21;
+				case 'Android':
+					return 22;
+				case 'BlackBerry':
+					return 23;
+				case 'Mobile':
+					return 24;
+			}
+		}
+
+		/**
 		* AddVisitor
 		* Add current visitor to statistics database
 		*
@@ -224,13 +362,13 @@
 			$agent = new Agent();
 
 			$query = $this->Forward->Database->query(
-				"INSERT INTO forward_statistics_visitors (record_id, visitor_ip, visitor_origin, visitor_language, visitor_agent, visitor_platform) VALUES (?,?,?,?,?,?)",
+				"INSERT INTO forward_statistics_visitors (record_id, visitor_ip, visitor_origin_id, visitor_language_id, visitor_agent_id, visitor_platform_id) VALUES (?,?,?,?,?,?)",
 				$this->id,
 				$this->ParseIP(),
-				$this->ParseReferrer(),
-				$this->ParseLanguage(),
-				$agent->GetAgent(),
-				$agent->GetPlatform()
+				$this->GetOriginId( $this->ParseReferrer() ),
+				$this->GetLanguageId( $this->ParseLanguage() ),
+				$this->GetAgentId( $agent->GetAgent() ),
+				$this->GetPlatformId( $agent->GetPlatform() )
 			);
 		}
 
