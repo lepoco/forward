@@ -18,7 +18,7 @@
 				<input type="hidden" value="<?php echo $this->AjaxNonce( 'save_settings' ); ?>" name="nonce">
 				<div class="container">
 					<div class="row">
-						<div class="col-12 col-md-3" style="margin-bottom: 50px;">
+						<div class="col-12 col-lg-3" style="margin-bottom: 50px;">
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								<a class="nav-link active" id="v-pills-main-tab" data-toggle="pill" href="#v-pills-main" role="tab" aria-controls="v-pills-main" aria-selected="true"><?php echo $this->_e('Main'); ?></a>
 								<a class="nav-link" id="v-pills-redirects-tab" data-toggle="pill" href="#v-pills-redirects" role="tab" aria-controls="v-pills-redirects" aria-selected="false"><?php echo $this->_e('Redirects'); ?></a>
@@ -29,10 +29,8 @@
 								<a class="nav-link" id="v-pills-languages-tab" data-toggle="pill" href="#v-pills-languages" role="tab" aria-controls="v-pills-languages" aria-selected="false"><?php echo $this->_e('Languages'); ?></a>
 								<a class="nav-link" id="v-pills-miscellaneous-tab" data-toggle="pill" href="#v-pills-miscellaneous" role="tab" aria-controls="v-pills-miscellaneous" aria-selected="false"><?php echo $this->_e('Miscellaneous'); ?></a>
 							</div>
-							<hr>
-							<button id="save-settings" type="submit" class="btn btn-block btn-outline-dark"><?php echo $this->_e('Save settings'); ?></button>
 						</div>
-						<div class="col-12 col-md-9">
+						<div class="col-12 col-lg-9">
 							<div id="alert-error" class="alert alert-danger fade show" role="alert" style="display: none;">
 								<strong><?php echo $this->_e('Holy guacamole!'); ?></strong> <span id="error_text"><?php echo $this->_e('Something went wrong!'); ?></span>
 							</div>
@@ -255,6 +253,10 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="col-12 col-lg-3">
+					<hr>
+					<button id="save-settings" type="submit" class="btn btn-block btn-outline-dark"><?php echo $this->_e('Save settings'); ?></button>
 				</div>
 			</div>
 		</div>

@@ -27,22 +27,78 @@ CREATE TABLE IF NOT EXISTS forward_records (
 	record_created DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+-- Statistics visitors languages
+CREATE TABLE IF NOT EXISTS forward_statistics_languages (
+	language_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	language_name VARCHAR(32)
+) CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES
+('en'),
+('en-us'),
+('en-gb');
+
+-- Statistics visitors platforms
+CREATE TABLE IF NOT EXISTS forward_statistics_platforms (
+	platform_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	platform_name VARCHAR(32)
+) CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES
+('Windows 10'),
+('Windows 8.1'),
+('Windows 8'),
+('Windows 7'),
+('Windows Vista'),
+('Windows Server 2003/XP x64'),
+('Windows XP'),
+('Windows XP'),
+('Windows 2000'),
+('Windows ME'),
+('Windows 98'),
+('Windows 95'),
+('Windows 3.11'),
+('Mac OS X'),
+('Mac OS 9'),
+('Linux'),
+('Ubuntu'),
+('iPhone'),
+('iPod'),
+('iPad'),
+('Android'),
+('BlackBerry'),
+('Mobile');
+
+-- Statistics visitors agents
+CREATE TABLE IF NOT EXISTS forward_statistics_agents (
+	agent_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	agent_name VARCHAR(32)
+) CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT IGNORE INTO forward_statistics_agents (agent_name) VALUES
+('Lynx'),
+('Edge'),
+('Chrome'),
+('Safari'),
+('IE'),
+('Gecko'),
+('Opera'),
+('NS4'),
+('iPhone');
+
 -- Statistics visitors table
 CREATE TABLE IF NOT EXISTS forward_statistics_visitors (
 	visitor_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	record_id INT(6) UNSIGNED NOT NULL,
 	CONSTRAINT fk_record_id FOREIGN KEY (record_id) REFERENCES forward_records(record_id),
+	visitor_platform_id INT(6) UNSIGNED NOT NULL,
+	CONSTRAINT fk_platform_id FOREIGN KEY (visitor_platform_id) REFERENCES forward_statistics_platforms(platform_id),
+	visitor_agent_id INT(6) UNSIGNED NOT NULL,
+	CONSTRAINT fk_agent_id FOREIGN KEY (visitor_agent_id) REFERENCES forward_statistics_agents(agent_id),
+	visitor_language_id INT(6) UNSIGNED NOT NULL,
+	CONSTRAINT fk_language_id FOREIGN KEY (visitor_language_id) REFERENCES forward_statistics_languages(language_id),
 	visitor_ip VARCHAR(128),
 	visitor_origin LONGTEXT,
-	visitor_language VARCHAR(128),
-	visitor_agent VARCHAR(128),
-	visitor_platform VARCHAR(128),
 	visitor_visits INT(20) DEFAULT 1,
 	visitor_date DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-
--- Statistics master table
---
 
 -- Users table
 CREATE TABLE IF NOT EXISTS forward_users (

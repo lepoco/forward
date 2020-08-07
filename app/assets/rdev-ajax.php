@@ -154,14 +154,17 @@
 		* @access   private
 		* @return	bool
 		*/
-		private function Finish( $code = null )
+		private function Finish( $text = null, $json = false )
 		{
 			$this->Forward->Session->Close();
 
-			if( $code == null )
+			if( $text == null )
 				echo ERROR_UNKNOWN;
 			else
-				echo $code;
+				if( $json )
+					echo json_encode( $text, JSON_UNESCAPED_UNICODE );
+				else
+					echo $text;
 
 			exit;
 		}
@@ -217,11 +220,11 @@
 			if( !$this->Forward->User->IsManager() )
 				$this->Finish( self::ERROR_INSUFFICIENT_PERMISSIONS );
 
-			if(!isset(
+			if( !isset(
 				$_POST[ 'input-record-url' ],
 				$_POST[ 'input-record-slug' ],
 				$_POST[ 'input-rand-value' ]
-			))
+			) )
 				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
 
 			if( trim( $_POST[ 'input-record-url' ] ) == '' || trim( $_POST[ 'input-rand-value' ] ) == '' )
@@ -244,6 +247,68 @@
 			);
 
 			$this->Finish( self::CODE_SUCCESS );
+		}
+
+		/**
+		* get_record_data
+		* A list of record information
+		*
+		* @access   private
+		* @return	void
+		*/
+		private function get_record_data() : void
+		{
+
+
+			if( !isset( $_POST[ 'input_record_id' ] ) )
+				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
+
+			if( trim( $_POST[ 'input_record_id' ] ) == '' )
+				$this->Finish( self::ERROR_EMPTY_ARGUMENTS );
+
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST[ 'input_record_id' ], FILTER_VALIDATE_INT ) )->fetchAll();
+			if( empty( $query ) )
+				$this->Finish( self::ERROR_ENTRY_EXISTS );
+
+			$data = array(
+				'status' => 'success',
+				'language' => array(),
+				'agent' => array(),
+				'origin' => array(),
+				'platform' => array(),
+				'dates' => array()
+			);
+
+			foreach ( $query as $visitor )
+			{
+				$time = strtotime( $visitor['visitor_date'] );
+				if( isset( $data['dates'][$time] ) )
+					$data['dates'][$time]++;
+				else
+					$data['dates'][$time] = 1;
+
+				if( isset( $data[ 'agent' ][ $visitor[ 'visitor_agent' ] ] ) )
+					$data[ 'agent' ][ $visitor[ 'visitor_agent' ] ]++;
+				else
+					$data[ 'agent' ][ $visitor[ 'visitor_agent' ] ] = 1;
+
+				if( isset( $data[ 'platform' ][ $visitor[ 'visitor_platform' ] ] ) )
+					$data[ 'platform' ][ $visitor[ 'visitor_platform' ] ]++;
+				else
+					$data[ 'platform' ][ $visitor[ 'visitor_platform' ] ] = 1;
+
+				if( isset( $data[ 'language' ][ $visitor[ 'visitor_language' ] ] ) )
+					$data[ 'language' ][ $visitor[ 'visitor_language' ] ]++;
+				else
+					$data[ 'language' ][ $visitor[ 'visitor_language' ] ] = 1;
+
+				if( isset( $data[ 'origin' ][ $visitor[ 'visitor_origin' ] ] ) )
+					$data[ 'origin' ][ $visitor[ 'visitor_origin' ] ]++;
+				else
+					$data[ 'origin' ][ $visitor[ 'visitor_origin' ] ] = 1;
+			}
+
+			$this->Finish( $data, true );
 		}
 	}
 ?>

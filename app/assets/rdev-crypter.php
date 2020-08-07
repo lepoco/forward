@@ -33,11 +33,11 @@
 		public static function Encrypt(string $text, string $type = 'password') : string
 		{
 			if($type == 'password')
-				return password_hash( hash_hmac( 'sha256', $text, PASSWORD_SALT ), FORWARD_ALGO );
+				return (defined( 'FORWARD_ALGO' ) ? password_hash( hash_hmac( 'sha256', $text, PASSWORD_SALT ), FORWARD_ALGO ) : '' );
 			else if($type == 'nonce')
-				return hash_hmac('sha1', $text, NONCE_SALT);
+				return (defined( 'NONCE_SALT' ) ? hash_hmac('sha1', $text, NONCE_SALT) : '' );
 			else if($type == 'token')
-				return hash_hmac('sha256', $text, SESSION_SALT);
+				return (defined( 'SESSION_SALT' ) ? hash_hmac('sha256', $text, SESSION_SALT) : '' );
 		}
 
 		/**

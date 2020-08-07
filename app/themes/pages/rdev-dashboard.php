@@ -15,7 +15,7 @@
 	$this->GetHeader();
 	$this->GetNavigation();
 ?>
-			<div id="red-dashboard" class="block-page distance-navbar">
+			<div id="rdev-dashboard" class="block-page distance-navbar">
 				<div class="container-fluid">
 					<div class="row row-no-gutter">
 						<div class="col-12 col-lg-3 col-no-gutters" id="records_list">

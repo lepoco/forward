@@ -173,18 +173,6 @@ body {
     padding-left: 2rem;
 }
 
-@media(min-width: 992px)
-{
-
-}
-
-@media(max-width: 991px)
-{
-	.navbar-separator {
-		display: none !important;
-	}
-}
-
 .navbar-separator > div {
 	margin-left: 10px;
 	margin-right: 20px;
@@ -252,7 +240,7 @@ body {
 	min-width: 200px !important;
 }
 
-#red-dashboard {
+#rdev-dashboard {
 	
 }
 
@@ -384,4 +372,36 @@ body {
 #delete-record-icon:hover > svg {
 	border-color: rgba(0,0,0,.8);
 	fill: rgba(0,0,0,.8);
+}
+
+@media(min-width: 992px)
+{
+	.page-dashboard > #forward {
+		position: fixed;
+		display: inherit;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100vw;
+		height: 100vh;
+	}
+
+	.page-dashboard > #forward .row,
+	.page-dashboard > #forward .container-fluid,
+	.page-dashboard > #forward #rdev-dashboard {
+		height: inherit;
+	}
+
+	#records_list {
+		overflow: auto;
+		height: inherit;
+	}
+}
+
+@media(max-width: 991px)
+{
+	.navbar-separator {
+		display: none !important;
+	}
 }

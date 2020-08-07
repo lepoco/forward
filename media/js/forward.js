@@ -55,7 +55,15 @@
 	document.addEventListener('DOMContentLoaded', function()
 	{
 		if(forward.usernonce != jQuery('head').attr('user-nonce'))
+		{
+			console.log(forward);
+			if(forward.page == 'install')
+			{
+				themeFunctions();
+			}
+
 			throw new Error('User nonce compliance not detected.!');
+		}
 
 		console_log( 'JavaScript loaded successfully' );
 		console_log( 'Base url: ' + forward.baseurl  );
@@ -192,8 +200,35 @@
 	{
 		console_log( 'The functions for page Dashboard have been loaded.' );
 
+		//Ctrl click
+		let ctrl_click = false;
+		jQuery( document ).keydown( function( event )
+		{
+			//17 ctrl
+			//18 alt
+			//16 shift
+			if( event.which == 17 )
+				ctrl_click = true;
+		} );
+
+		jQuery( document ).keyup( function()
+		{
+			ctrl_click = false;
+		} );
+
 		/** Copy to clipboard **/
 		jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
+		jQuery('.links-card').on('click', function(e){
+			e.preventDefault();
+
+			if(ctrl_click)
+			{
+				console_log('Links card pressed with ctrl button.');
+				//clipboard_alert();
+			}
+
+		});
+
 		function clipboard_alert(){
 			if(jQuery('#links-copied').is(':hidden'))
 			{
@@ -210,6 +245,44 @@
 
 		jQuery(function()
 		{
+
+			function AjaxRecordData(rid)
+			{
+				let record_id = rid;
+
+				jQuery.ajax({
+					url: forward.ajax,
+					type:'post',
+					data: {
+						action: 'get_record_data',
+						nonce: forward.getrecord,
+						input_record_id: record_id
+					},
+					success: function( e )
+					{
+						if( jsonParse( e ) )
+						{
+							let result = JSON.parse(e);
+
+							console.log(result);
+						}
+						else
+						{
+							
+						}
+						console.log(e);
+					},
+					fail:function(xhr, textStatus, errorThrown)
+					{
+						console.log(xhr);
+						console.log(textStatus);
+						console.log(errorThrown);
+					}
+				});
+			}
+
+			AjaxRecordData('1');
+
 			function AjaxAddRecord()
 			{
 				if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
