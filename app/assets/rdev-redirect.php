@@ -222,6 +222,9 @@
 		*/
 		private function GetOriginId( $name ) : int
 		{
+			if( trim( $name ) == '')
+				return 1;
+			
 			$query = $this->Forward->Database->query( "SELECT origin_id FROM forward_statistics_origins WHERE origin_name = ?", $name )->fetchArray();
 
 			if($query == null)
@@ -244,6 +247,9 @@
 		*/
 		private function GetLanguageId( $name ) : int
 		{
+			if( trim( $name ) == '')
+				return 1;
+
 			$query = $this->Forward->Database->query( "SELECT language_id FROM forward_statistics_languages WHERE language_name = ?", $name )->fetchArray();
 
 			if($query == null)
@@ -267,6 +273,7 @@
 		private function GetAgentId( $name ) : int
 		{
 			switch ( $name ) {
+				case '':
 				case 'Unknown':
 					return 1;
 				case 'Lynx':
@@ -300,6 +307,7 @@
 		private function GetPlatformId( $name ) : int
 		{
 			switch ( $name ) {
+				case '':
 				case 'Unknown':
 					return 1;
 				case 'Windows 10':
