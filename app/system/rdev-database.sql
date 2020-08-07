@@ -32,74 +32,28 @@ CREATE TABLE IF NOT EXISTS forward_statistics_origins (
 	origin_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	origin_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-INSERT IGNORE INTO forward_statistics_origins (origin_name) VALUES
-('direct'),
-('www.google.com'),
-('www.youtube.com'),
-('m.youtube.com'),
-('www.facebook.com'),
-('m.facebook.com'),
-('lm.facebook.com'),
-('l.facebook.com');
+INSERT IGNORE INTO forward_statistics_origins (origin_name) VALUES ('direct');
 
 -- Statistics visitors languages
 CREATE TABLE IF NOT EXISTS forward_statistics_languages (
 	language_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	language_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-INSERT IGNORE INTO forward_statistics_languages (language_name) VALUES
-('unknown'),
-('en'),
-('en-us'),
-('en-gb');
+INSERT IGNORE INTO forward_statistics_languages (language_name) VALUES ('unknown');
 
 -- Statistics visitors platforms
 CREATE TABLE IF NOT EXISTS forward_statistics_platforms (
 	platform_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	platform_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES
-('Unknown'),
-('Windows 10'),
-('Windows 8.1'),
-('Windows 8'),
-('Windows 7'),
-('Windows Vista'),
-('Windows Server 2003/XP x64'),
-('Windows XP'),
-('Windows XP'),
-('Windows 2000'),
-('Windows ME'),
-('Windows 98'),
-('Windows 95'),
-('Windows 3.11'),
-('Mac OS X'),
-('Mac OS 9'),
-('Linux'),
-('Ubuntu'),
-('iPhone'),
-('iPod'),
-('iPad'),
-('Android'),
-('BlackBerry'),
-('Mobile');
+INSERT IGNORE INTO forward_statistics_platforms (platform_name) VALUES ('unknown');
 
 -- Statistics visitors agents
 CREATE TABLE IF NOT EXISTS forward_statistics_agents (
 	agent_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	agent_name VARCHAR(32)
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
-INSERT IGNORE INTO forward_statistics_agents (agent_name) VALUES
-('Unknown'),
-('Lynx'),
-('Edge'),
-('Chrome'),
-('Safari'),
-('IE'),
-('Gecko'),
-('Opera'),
-('NS4'),
-('iPhone');
+INSERT IGNORE INTO forward_statistics_agents (agent_name) VALUES ('unknown');
 
 -- Statistics visitors table
 CREATE TABLE IF NOT EXISTS forward_statistics_visitors (

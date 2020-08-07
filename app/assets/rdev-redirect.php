@@ -224,7 +224,7 @@
 		{
 			if( trim( $name ) == '')
 				return 1;
-			
+
 			$query = $this->Forward->Database->query( "SELECT origin_id FROM forward_statistics_origins WHERE origin_name = ?", $name )->fetchArray();
 
 			if($query == null)
@@ -272,28 +272,19 @@
 		*/
 		private function GetAgentId( $name ) : int
 		{
-			switch ( $name ) {
-				case '':
-				case 'Unknown':
-					return 1;
-				case 'Lynx':
-					return 2;
-				case 'Edge':
-					return 3;
-				case 'Chrome':
-					return 4;
-				case 'Safari':
-					return 5;
-				case 'IE':
-					return 6;
-				case 'Gecko':
-					return 7;
-				case 'Opera':
-					return 8;
-				case 'NS4':
-					return 9;
-				case 'iPhone':
-					return 10;
+			if( trim( $name ) == '')
+				return 1;
+
+			$query = $this->Forward->Database->query( "SELECT agent_id FROM forward_statistics_agents WHERE agent_name = ?", $name )->fetchArray();
+
+			if($query == null)
+			{
+				$query = $this->Forward->Database->query( "INSERT INTO forward_statistics_agents (agent_name) VALUES (?)", $name );
+				return $query->lastInsertID();
+			}
+			else
+			{
+				return filter_var( $query[ 'agent_id' ], FILTER_VALIDATE_INT );
 			}
 		}
 
@@ -306,56 +297,19 @@
 		*/
 		private function GetPlatformId( $name ) : int
 		{
-			switch ( $name ) {
-				case '':
-				case 'Unknown':
-					return 1;
-				case 'Windows 10':
-					return 2;
-				case 'Windows 8.1':
-					return 3;
-				case 'Windows 8':
-					return 4;
-				case 'Windows 7':
-					return 5;
-				case 'Windows Vista':
-					return 6;
-				case 'Windows Server 2003/XP x64':
-					return 7;
-				case 'Windows XP':
-					return 8;
-				case 'Windows XP':
-					return 9;
-				case 'Windows 2000':
-					return 10;
-				case 'Windows ME':
-					return 11;
-				case 'Windows 98':
-					return 12;
-				case 'Windows 95':
-					return 13;
-				case 'Windows 3.11':
-					return 14;
-				case 'Mac OS X':
-					return 15;
-				case 'Mac OS 9':
-					return 16;
-				case 'Linux':
-					return 17;
-				case 'Ubuntu':
-					return 18;
-				case 'iPhone':
-					return 19;
-				case 'iPod':
-					return 20;
-				case 'iPad':
-					return 21;
-				case 'Android':
-					return 22;
-				case 'BlackBerry':
-					return 23;
-				case 'Mobile':
-					return 24;
+			if( trim( $name ) == '')
+				return 1;
+
+			$query = $this->Forward->Database->query( "SELECT platform_id FROM forward_statistics_platforms WHERE platform_name = ?", $name )->fetchArray();
+
+			if($query == null)
+			{
+				$query = $this->Forward->Database->query( "INSERT INTO forward_statistics_platforms (platform_name) VALUES (?)", $name );
+				return $query->lastInsertID();
+			}
+			else
+			{
+				return filter_var( $query[ 'platform_id' ], FILTER_VALIDATE_INT );
 			}
 		}
 
