@@ -20,13 +20,13 @@
 	*/
 	class Model extends Models
 	{
-		private $records = array();
+		private int $total_clicks = -1;
 
-		private $total_clicks = -1;
+		private string $new_record = '';
 
-		private $new_record = '';
+		private array $last_visitors = array();
 
-		private $last_visitors = array();
+		private array $records = array();
 
 		protected function Init() : void
 		{
@@ -147,7 +147,7 @@
 			}
 		}
 
-		public function NewRecord()
+		public function NewRecord() : string
 		{
 			if( $this->new_record == '')
 				$this->new_record = strtoupper( Crypter::BaseSalter(6) );
