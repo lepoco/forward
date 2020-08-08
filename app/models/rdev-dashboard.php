@@ -75,65 +75,56 @@
 
 		public function TopReferrer() : string
 		{
-			$origins = array(
-				'Direct' => 0,
-				'Facebook' => 0,
-				'YouTube' => 0
-			);
+			$origins = array();
+			$origin = "Unknown";
 
 			foreach ( $this->last_visitors as $visitor )
-			{
-				if(  trim( $visitor['visitor_origin'] ) === '' )
-				{
-					$origins['Direct']++;
-					continue;
-				}
-
-				$origin = strtolower( $visitor['visitor_origin'] );
-
-				if( strpos($origin, 'youtube'))
-				{
-					$origins['YouTube']++;
-				}
-			}
+				if( isset( $origins[ $visitor[ 'visitor_origin_id' ] ] ) )
+					$origins[ $visitor[ 'visitor_origin_id' ] ]++;
+				else
+					$origins[ $visitor[ 'visitor_origin_id' ] ] = 1;
 
 			arsort( $origins );
 
-			return key( $origins );
+			$query = $this->Forward->Database->query( "SELECT origin_name FROM forward_statistics_origins WHERE origin_id = ?", key( $origins ) )->fetchArray();
+
+			if( !empty( $query ) )
+				switch ( $query[ 'origin_name' ]  )
+				{
+					case 'direct':
+						$origin = "SMS/Direct";
+						break;
+					case 'www.youtube.com':
+						$origin = "YouTube";
+						break;
+				}
+
+			return $origin;
 		}
 
 		public function TopLanguage() : string
 		{
-			$languages = array(
-				'Polish' => 0,
-				'English' => 0
-			);
+			$languages = array();
+			$language = "Unknown";
 
 			foreach ( $this->last_visitors as $visitor )
-			{
-				$code = substr( strtolower( $visitor['visitor_language'] ), 0, 2);
-
-				switch ( $code )
-				{
-					case 'pl':
-						$languages['Polish']++;
-						break;
-					case 'en':
-						$languages['English']++;
-						break;
-					
-					default:
-						if( isset( $languages[ $code ] ) )
-							$languages[ $code ]++;
-						else
-							$languages[ $code ] = 1;
-						break;
-				}
-			}
+				if( isset( $languages[ $visitor[ 'visitor_language_id' ] ] ) )
+					$languages[ $visitor[ 'visitor_language_id' ] ]++;
+				else
+					$languages[ $visitor[ 'visitor_language_id' ] ] = 1;
 
 			arsort( $languages );
+			$query = $this->Forward->Database->query( "SELECT language_name FROM forward_statistics_languages WHERE language_id = ?", key( $languages ) )->fetchArray();
 
-			return key( $languages );
+			if( !empty( $query ) )
+				switch ( substr( strtolower( $query[ 'language_name' ] ), 0, 2) )
+				{
+					case 'pl':
+						$language = "Polish";
+						break;
+				}
+
+			return $language;
 		}
 
 		public function Records() : array
