@@ -10,11 +10,11 @@
 	namespace Forward;
 
 	/** Verify PHP version */
-	if (version_compare($ver = PHP_VERSION, $req = '7.2.27', '<'))
-		exit(sprintf('You are running PHP %s, but Radiograph needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+	if ( version_compare( $ver = PHP_VERSION, $req = '7.0.11', '<' ) )
+		exit( sprintf( 'You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req ) );
 
 	/** Define timezone */
-	date_default_timezone_set('UTC');
+	date_default_timezone_set( 'UTC' );
 
 	/** Forward version */
 	define( 'FORWARD_VERSION', '2.0.0' );
