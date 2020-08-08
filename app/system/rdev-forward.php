@@ -26,7 +26,7 @@
 		 * @var Uri
 		 * @access public
 		 */
-		public $Path;
+		public \Forward\Uri $Path;
 
 		/**
 		 * Information about the session from the Session class
@@ -34,7 +34,7 @@
 		 * @var Session
 		 * @access public
 		 */
-		public $Session;
+		public \Forward\Session $Session;
 
 		/**
 		 * Class for translating text strings
@@ -42,7 +42,7 @@
 		 * @var Translator
 		 * @access public
 		 */
-		public $Translator;
+		public \Forward\Translator $Translator;
 
 		/**
 		 * A global class that stores options
@@ -50,7 +50,7 @@
 		 * @var Options
 		 * @access public
 		 */
-		public $Options;
+		public \Forward\Options $Options;
 
 		/**
 		 * A set of user management tools
@@ -58,7 +58,7 @@
 		 * @var User
 		 * @access public
 		 */
-		public $User;
+		public \Forward\User $User;
 
 		/**
 		 * Master database instance, requires config.php
@@ -66,7 +66,7 @@
 		 * @var Database
 		 * @access public
 		 */
-		public $Database;
+		public \Forward\Database $Database;
 
 		/**
 		* __construct
@@ -94,8 +94,8 @@
 						$this->LoadModel( 'home', 'Create your own link shortener' );
 						break;
 
-					case $this->Options->Get('dashboard', 'dashboard'):
-					case $this->Options->Get('login', 'login'):
+					case $this->Options->Get( 'dashboard', 'dashboard' ):
+					case $this->Options->Get( 'login', 'login' ):
 						new Dashboard( $this );
 						break;
 
@@ -226,19 +226,19 @@
 		* @access   private
 		* @return   void
 		*/
-		public function LoadModel( $name, $displayname = null )
+		public function LoadModel( string $name, string $displayname = null )
 		{
 			if ( is_file( APPPATH . "/models/rdev-$name.php" ) )
 			{
 				require_once APPPATH . "/models/rdev-$name.php";
-				(new Model( $this, $name, $displayname ))->Print();
+				( new Model( $this, $name, $displayname ) )->Print();
 			}
 			else
 			{
 				if( is_file( APPPATH . "/themes/pages/rdev-$name.php" ) )
 				{
 					//Display the page without additional logic
-					(new Models( $this, $name, $displayname ))->Print();
+					( new Models( $this, $name, $displayname ) )->Print();
 				}
 				else
 				{
@@ -255,7 +255,7 @@
 		* @access   public
 		* @return   html (error message)
 		*/
-		public function Error($message, $kill = false)
+		public function Error( string $message, bool $kill = false )
 		{
 			$r_message = '<br/><strong>Forward Error</strong><br/><br/><i>' . date('Y-m-d h:i:s a', time()) . '</i><br/>';
 
@@ -276,7 +276,7 @@
 				echo $r_message . $message . '<br/><i>Configuration file does not exist...</i>';
 			}
 
-			if($kill)
+			if( $kill )
 				exit;
 		}
 	}
