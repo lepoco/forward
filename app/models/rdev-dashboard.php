@@ -36,7 +36,7 @@
 
 		private function GetRecords() : void
 		{
-			$query = $this->Forward->Database->query( "SELECT * FROM forward_records ORDER BY record_id DESC" )->fetchAll();
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_records WHERE record_active = true ORDER BY record_id DESC" )->fetchAll();
 			
 			if( !empty( $query ) )
 			{
@@ -76,7 +76,7 @@
 		public function TopReferrer() : string
 		{
 			$origins = array();
-			$origin = "Unknown";
+			$origin = $this->__( 'Unknown' );
 
 			foreach ( $this->last_visitors as $visitor )
 				if( isset( $origins[ $visitor[ 'visitor_origin_id' ] ] ) )
@@ -92,10 +92,10 @@
 				switch ( $query[ 'origin_name' ]  )
 				{
 					case 'direct':
-						$origin = "SMS/Direct";
+						$origin = $this->__( 'Email, SMS, Direct' );
 						break;
 					case 'www.youtube.com':
-						$origin = "YouTube";
+						$origin = 'YouTube';
 						break;
 				}
 
@@ -105,7 +105,7 @@
 		public function TopLanguage() : string
 		{
 			$languages = array();
-			$language = "Unknown";
+			$language = $origin = $this->__( 'Unknown' );
 
 			foreach ( $this->last_visitors as $visitor )
 				if( isset( $languages[ $visitor[ 'visitor_language_id' ] ] ) )
@@ -119,8 +119,11 @@
 			if( !empty( $query ) )
 				switch ( substr( strtolower( $query[ 'language_name' ] ), 0, 2) )
 				{
+					case 'en':
+						$language = $this->__( 'English' );
+						break;
 					case 'pl':
-						$language = "Polish";
+						$language = $this->__( 'Polish' );
 						break;
 				}
 

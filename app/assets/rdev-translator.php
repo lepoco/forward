@@ -25,7 +25,7 @@
 
 		private $strings_array = array();
 
-		public function SetLocale($locale, $domain = 'forward') : void
+		public function SetLocale( string $locale, string $domain = 'forward' ) : void
 		{
 			$this->locale = $locale;
 			$this->domain = $domain;

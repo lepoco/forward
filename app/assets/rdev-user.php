@@ -52,7 +52,7 @@
 		*
 		* @access   public
 		*/
-		public function __construct($parent)
+		public function __construct( Forward &$parent )
 		{
 			$this->Forward = $parent;
 		}
@@ -64,7 +64,7 @@
 		* @param	array $user
 		* @access   public
 		*/
-		public function LogIn( $user ) : void
+		public function LogIn( array $user ) : void
 		{
 			$token = Crypter::Encrypt(Crypter::DeepSalter(30), 'token');
 
@@ -155,7 +155,7 @@
 		* @param	int $id
 		* @access   public
 		*/
-		private function GetUser( $id )
+		private function GetUser( int $id )
 		{
 			$query = $this->Forward->Database->query( "SELECT * FROM forward_users WHERE user_id = ?", $id )->fetchArray();
 
@@ -173,7 +173,7 @@
 		* @param	string $username
 		* @access   public
 		*/
-		public function GetByName( $username )
+		public function GetByName( string $username )
 		{
 			$query = $this->Forward->Database->query( "SELECT user_id, user_email, user_password, user_role, user_token FROM forward_users WHERE user_name = ?", $username )->fetchArray();
 			return $query;
@@ -186,7 +186,7 @@
 		* @param	string $username
 		* @access   public
 		*/
-		public function GetByEmail( $email )
+		public function GetByEmail( string $email )
 		{
 			$query = $this->Forward->Database->query( "SELECT user_id, user_name, user_password, user_role, user_token FROM forward_users WHERE user_email = ?", $email )->fetchArray();
 			return $query;

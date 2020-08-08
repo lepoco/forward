@@ -109,7 +109,7 @@
 		* @param	string $name
 		* @param	string $displayname
 		*/
-		public function __construct($parent, $name, $displayname)
+		public function __construct( Forward &$parent, string $name, string $displayname )
 		{
 			$this->Forward = $parent;
 

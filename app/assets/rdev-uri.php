@@ -81,7 +81,7 @@
 		* @access   public
 		* @return   string
 		*/
-		public function Redirect( $url ) : void
+		public function Redirect( string $url ) : void
 		{
 			header( 'Expires: on, 01 Jan 1970 00:00:00 GMT' );
 			header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
@@ -100,7 +100,7 @@
 		* @access   public
 		* @return   string
 		*/
-		public function GetLevel( $lvl ) : string
+		public function GetLevel( int $lvl ) : string
 		{
 			if( isset( $this->trace[ $lvl + 1 ] ) )
 				return $this->trace[ $lvl + 1 ];
@@ -133,7 +133,7 @@
 		* @param	string $p
 		* @return   string $p
 		*/
-		private static function UrlFix(string $p) : string
+		private static function UrlFix( string $p ) : string
 		{
 			$p = str_replace( '\\', '/', trim( $p ) );
 			return ( substr( $p, -1 ) != '/' ) ? $p .= '/' : $p;

@@ -71,7 +71,7 @@
 		*
 		* @access   public
 		*/
-		public function __construct( $parent )
+		public function __construct( Forward &$parent )
 		{
 			$this->Forward = $parent;
 
@@ -250,6 +250,40 @@
 		}
 
 		/**
+		* remove_record
+		* Remove selected record
+		*
+		* @access   private
+		* @return	void
+		*/
+		private function remove_record()
+		{
+			if( !isset( $_POST[ 'input_record_id' ] ) )
+				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
+
+			if( trim( $_POST[ 'input_record_id' ] ) == '' )
+				$this->Finish( self::ERROR_EMPTY_ARGUMENTS );
+
+			if( !$this->Forward->User->IsManager() )
+				$this->Finish( self::ERROR_INSUFFICIENT_PERMISSIONS );
+
+			$query = $this->Forward->Database->query(
+				"SELECT record_name FROM forward_records WHERE record_id = ?",
+				filter_var( $_POST[ 'input_record_id' ], FILTER_VALIDATE_INT )
+			)->fetchAll();
+
+			if( empty( $query ) )
+				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
+
+			$query = $this->Forward->Database->query(
+				"UPDATE forward_records SET record_active = false WHERE record_id = ?",
+				filter_var( $_POST[ 'input_record_id' ], FILTER_VALIDATE_INT )
+			);
+
+			$this->Finish( $data, true );
+		}
+
+		/**
 		* get_record_data
 		* A list of record information
 		*
@@ -258,8 +292,6 @@
 		*/
 		private function get_record_data() : void
 		{
-
-
 			if( !isset( $_POST[ 'input_record_id' ] ) )
 				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
 
@@ -268,7 +300,7 @@
 
 			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST[ 'input_record_id' ], FILTER_VALIDATE_INT ) )->fetchAll();
 			if( empty( $query ) )
-				$this->Finish( self::ERROR_ENTRY_EXISTS );
+				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
 
 			$data = array(
 				'status' => 'success',
