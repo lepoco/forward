@@ -58,7 +58,7 @@
 
 		private function GetLastVisitors() : void
 		{
-			$records = $this->Forward->Database->query( "SELECT visitor_origin_id, visitor_language_id FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 200" )->fetchAll();
+			$records = $this->Forward->Database->query( "SELECT visitor_origin_id, visitor_language_id FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT ?", $this->Forward->Options->Get( 'latest_visitors_limit', 200 ) )->fetchAll();
 
 			if( !empty( $records ) )
 			{
@@ -107,6 +107,9 @@
 					case 'www.youtube.com':
 						$origin = 'YouTube';
 						break;
+					default:
+						$origin = $query[ 'origin_name' ];
+						break;
 				}
 
 			return $origin;
@@ -134,6 +137,9 @@
 						break;
 					case 'pl':
 						$language = $this->__( 'Polish' );
+						break;
+					default:
+						$language = $query[ 'language_name' ];
 						break;
 				}
 
