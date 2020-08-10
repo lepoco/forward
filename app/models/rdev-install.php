@@ -282,20 +282,28 @@
 				"('site_description', 'Create your own link shortener'),  " .
 				"('dashboard', 'dashboard'),  " .
 				"('login', 'login'),  " .
+				"('timezone', 'UTC'), " .
 				"('date_format', 'j F Y'), " .
 				"('time_format', 'H:i'), " .
+				"('record_date_format', 'j F Y'), " 
 				"('charset', 'UTF8'), " .
 				"('dashboard_links', '30'), " .
 				"('dashboard_sort', 'date'), " .
-				"('timezone', 'UTC'), " .
 				"('cache', 'false'), " .
+				"('dashboard_language', 'en_US'),  " .
+				"('dashboard_language_mode', '1'),  " .
 				"('dashboard_captcha', 'false'), " .
 				"('dashboard_captcha_public', ''), " .
 				"('dashboard_captcha_secret', ''), " .
 				"('force_dashboard_ssl', 'false'), " .
-				"('store_ip_addresses', 'true'), " .
 				"('force_redirect_ssl', 'false'), " .
+				"('store_ip_addresses', 'true'), " .
 				"('non_existent_record', 'error404'), " .
+				"('redirect_404', 'false'), " .
+				"('redirect_404_direction', ''), " .
+				"('redirect_home', 'false'), " .
+				"('redirect_home_direction', ''), " .
+				"('google_analytics', '2000'), " .
 				"('js_redirect_after', '2000'), " .
 				"('js_redirect', 'false')"
 			);
