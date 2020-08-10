@@ -20,6 +20,8 @@
 		}
 	}
 
+	console.log(visitor_data);
+
 	//Fancy logging
 	function console_log(message, color="#fff"){console.log("%cForward: "+"%c"+message, "color:#dc3545;font-weight: bold;", "color: "+color);}
 	console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2020 RapidDev\nhttps://rdev.cc/\n==============================");

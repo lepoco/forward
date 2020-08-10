@@ -49,7 +49,25 @@
 		<script type="application/ld+json" nonce="<?php echo $this->js_nonce; ?>">
 			{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"<?php echo $this->baseurl; ?>#website","url":"<?php echo $this->baseurl; ?>","name":"Forward","description":"<?php $this->_e('Create your own link shortener'); ?>.","inLanguage":"pl-PL"},{"@type":"ImageObject","@id":"<?php echo $this->baseurl; ?>#primaryimage","inLanguage":"pl-PL","url":"<?php echo $this->GetImage('forward-fav-256.png') ?>","width":256,"height":256,"caption":"Forward"},{"@type":"WebPage","@id":"<?php echo $this->baseurl; ?>#webpage","url":"<?php echo $this->baseurl; ?>","name":"Forward - Link shortener","isPartOf":{"@id":"<?php echo $this->baseurl; ?>#website"},"primaryImageOfPage":{"@id":"<?php echo $this->baseurl; ?>#primaryimage"},"datePublished":"<?php echo date(DATE_ATOM); ?>","dateModified":"<?php echo date(DATE_ATOM); ?>","description":"<?php $this->_e('Create your own link shortener'); ?>.","inLanguage":"<?php echo $this->Forward->Translator->locale; ?>","potentialAction":[{"@type":"ReadAction","target":["<?php echo $this->baseurl; ?>"]}]}]}
 		</script>
-		<script type="text/javascript" nonce="<?php echo $this->js_nonce; ?>">let forward = {pagenow: '<?php echo $this->name; ?>', usernonce: '<?php echo $this->body_nonce; ?>', baseurl: '<?php echo $this->baseurl; ?>', version: '<?php echo FORWARD_VERSION; ?>', ajax: '<?php echo ($this->name != 'home' ? $this->AjaxGateway() : ''); ?>', getrecord: '<?php echo $this->AjaxNonce( 'get_record_data' ) ?>'};</script>
+		<script type="text/javascript" nonce="<?php echo $this->js_nonce; ?>">
+			let forward = {pagenow: '<?php echo $this->name; ?>', usernonce: '<?php echo $this->body_nonce; ?>', baseurl: '<?php echo $this->baseurl; ?>', version: '<?php echo FORWARD_VERSION; ?>', ajax: '<?php echo ($this->name != 'home' ? $this->AjaxGateway() : ''); ?>', getrecord: '<?php echo $this->AjaxNonce( 'get_record_data' ) ?>'};</script>
+<?php if( $this->Forward->User->IsLoggedIn() && $this->name != 'home' ): ?>
+		<script type="text/javascript" nonce="<?php echo $this->js_nonce; ?>">
+			let visitor_data = {languages: {<?php $c = 0; foreach ($this->GetLanguages() as $key => $lang) {
+				$c++;
+				echo ($c > 1 ? ', ' : '') . $key . ': "' . $lang . '"';
+			} ?>}, origins: {<?php $c = 0; foreach ($this->GetOrigins() as $key => $origin) {
+				$c++;
+				echo ($c > 1 ? ', ' : '') . $key . ': "' . $origin . '"';
+			} ?>}, platforms: {<?php $c = 0; foreach ($this->GetPlatforms() as $key => $platform) {
+				$c++;
+				echo ($c > 1 ? ', ' : '') . $key . ': "' . $platform . '"';
+			} ?>}, agents: {<?php $c = 0; foreach ($this->GetAgents() as $key => $agent) {
+				$c++;
+				echo ($c > 1 ? ', ' : '') . $key . ': "' . $agent . '"';
+			} ?>}};
+		</script>
+<?php endif; ?>
 <?php if( method_exists( $this, 'Header' ) ) { $this->Header(); } ?>
 	</head>
 	<body class="<?php echo 'page-' . $this->name; ?>">

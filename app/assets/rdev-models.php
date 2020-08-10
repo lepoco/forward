@@ -249,6 +249,78 @@
 			//Kill script :(
 			exit;
 		}
+
+		public function GetLanguages() : array
+		{
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_languages" )->fetchAll();
+
+			if( !empty( $query ) )
+			{
+				$languages = array();
+				foreach ( $query as $lang )
+				{
+					$languages[ $lang[ 'language_id' ] ] = $lang[ 'language_name' ];
+				}
+
+				return $languages;
+			}
+
+			return array();
+		}
+
+		public function GetOrigins() : array
+		{
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_origins" )->fetchAll();
+
+			if( !empty( $query ) )
+			{
+				$origins = array();
+				foreach ( $query as $origin )
+				{
+					$origins[ $origin[ 'origin_id' ] ] = $origin[ 'origin_name' ];
+				}
+
+				return $origins;
+			}
+
+			return array();
+		}
+
+		public function GetPlatforms() : array
+		{
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_platforms" )->fetchAll();
+
+			if( !empty( $query ) )
+			{
+				$platforms = array();
+				foreach ( $query as $platform )
+				{
+					$platforms[ $platform[ 'platform_id' ] ] = $platform[ 'platform_name' ];
+				}
+
+				return $platforms;
+			}
+
+			return array();
+		}
+
+		public function GetAgents() : array
+		{
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_statistics_agents" )->fetchAll();
+
+			if( !empty( $query ) )
+			{
+				$agents = array();
+				foreach ( $query as $agent )
+				{
+					$agents[ $agent[ 'agent_id' ] ] = $agent[ 'agent_name' ];
+				}
+
+				return $agents;
+			}
+
+			return array();
+		}
 	}
 
 ?>
