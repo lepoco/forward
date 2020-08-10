@@ -157,7 +157,7 @@
 
 		public function Header()
 		{
-			$html  = "\t\t" . '<script type="text/javascript" nonce="' . $this->js_nonce . '">const translator = {';
+			$html  = "\t\t" . '<script type="text/javascript" nonce="' . $this->js_nonce . '">let translator = {';
 			$html .= 'e1: "'.$this->__('Something went wrong!').'",';
 			$html .= 'e7: "'.$this->__('You must provide a URL!').'",';
 			$html .= 'e8: "'.$this->__('A record with this ID already exists!').'",';

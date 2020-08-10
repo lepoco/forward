@@ -319,25 +319,25 @@
 				else
 					$data['dates'][$time] = 1;
 
-				if( isset( $data[ 'agent' ][ $visitor[ 'visitor_agent' ] ] ) )
-					$data[ 'agent' ][ $visitor[ 'visitor_agent' ] ]++;
+				if( isset( $data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ] ) )
+					$data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ]++;
 				else
-					$data[ 'agent' ][ $visitor[ 'visitor_agent' ] ] = 1;
+					$data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ] = 1;
 
-				if( isset( $data[ 'platform' ][ $visitor[ 'visitor_platform' ] ] ) )
-					$data[ 'platform' ][ $visitor[ 'visitor_platform' ] ]++;
+				if( isset( $data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ] ) )
+					$data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ]++;
 				else
-					$data[ 'platform' ][ $visitor[ 'visitor_platform' ] ] = 1;
+					$data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ] = 1;
 
-				if( isset( $data[ 'language' ][ $visitor[ 'visitor_language' ] ] ) )
-					$data[ 'language' ][ $visitor[ 'visitor_language' ] ]++;
+				if( isset( $data[ 'language' ][ $visitor[ 'visitor_language_id' ] ] ) )
+					$data[ 'language' ][ $visitor[ 'visitor_language_id' ] ]++;
 				else
-					$data[ 'language' ][ $visitor[ 'visitor_language' ] ] = 1;
+					$data[ 'language' ][ $visitor[ 'visitor_language_id' ] ] = 1;
 
-				if( isset( $data[ 'origin' ][ $visitor[ 'visitor_origin' ] ] ) )
-					$data[ 'origin' ][ $visitor[ 'visitor_origin' ] ]++;
+				if( isset( $data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ] ) )
+					$data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ]++;
 				else
-					$data[ 'origin' ][ $visitor[ 'visitor_origin' ] ] = 1;
+					$data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ] = 1;
 			}
 
 			$this->Finish( $data, true );
