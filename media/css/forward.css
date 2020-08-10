@@ -142,20 +142,20 @@ body {
 
 .input-group-addon {
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .5rem .75rem;
-    margin-bottom: 0;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.25;
-    color: #495057;
-    text-align: center;
-    background-color: #e9ecef;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+	justify-content: center;
+	align-items: center;
+	padding: .5rem .75rem;
+	margin-bottom: 0;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.25;
+	color: #495057;
+	text-align: center;
+	background-color: #e9ecef;
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: .25rem;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 .input-group-addon > a {
@@ -170,7 +170,7 @@ body {
 
 .navbar > div {
 	padding-right: 2rem;
-    padding-left: 2rem;
+	padding-left: 2rem;
 }
 
 .navbar-separator > div {
@@ -203,8 +203,8 @@ body {
 
 .user-dropdown > .dropdown-toggle {
 	display: inline-block;
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 	margin: 0 !important;
 	padding: 0 !important;
 }
@@ -248,13 +248,23 @@ body {
 	background: #fff;
 }
 
+#preview-record-url {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 100%;
+	max-width: 100%;
+	display: block;
+}
+
+
 .overflow-url {
 	text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 200px;
-    max-width: 100%;
-    display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 200px;
+	max-width: 100%;
+	display: block;
 }
 
 .links-card, .links-header {
@@ -299,8 +309,8 @@ body {
 
 .links-card > .card-body, .links-header > .card-body {
 	display: flex;
-    justify-content: space-between;
-    align-items: center;
+	justify-content: space-between;
+	align-items: center;
 	padding: 0.75rem !important;
 }
 
@@ -317,7 +327,7 @@ body {
 .td-buttons {
 	display: flex;
 	align-items: center;
-    justify-content: flex-end;
+	justify-content: flex-end;
 }
 
 .stats-header {
@@ -334,8 +344,8 @@ body {
 
 .stats-header svg {
 	width: 30px;
-    height: 30px;
-    fill: #444;
+	height: 30px;
+	fill: #444;
 	margin-right: 15px;
 }
 

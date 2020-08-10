@@ -287,6 +287,7 @@
 				"('time_format', 'H:i'), " .
 				"('record_date_format', 'j F Y'), " 
 				"('charset', 'UTF8'), " .
+				"('latest_visitors_limit', '200'), " .
 				"('dashboard_links', '30'), " .
 				"('dashboard_sort', 'date'), " .
 				"('cache', 'false'), " .

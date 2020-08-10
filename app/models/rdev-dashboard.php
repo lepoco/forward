@@ -28,28 +28,38 @@
 
 		private array $records = array();
 
+		private array $translator;
+
 		protected function Init() : void
 		{
 			$this->GetRecords();
 			$this->GetLastVisitors();
+
+			$this->translator = array(
+				'e1'  => $this->__('Something went wrong!'),
+				'e7'  => $this->__('You must provide a URL!'),
+				'e8'  => $this->__('A record with this ID already exists!'),
+				'e10' => $this->__('The URL you entered is not valid!')
+			);
 		}
 
 		private function GetRecords() : void
 		{
-			$query = $this->Forward->Database->query( "SELECT * FROM forward_records WHERE record_active = true ORDER BY record_id DESC" )->fetchAll();
-			
-			if( !empty( $query ) )
+			if( empty( $this->records ))
 			{
-				$this->records = $query;
+				$query = $this->Forward->Database->query( "SELECT * FROM forward_records WHERE record_active = true ORDER BY record_id DESC" )->fetchAll();
+			
+				if( !empty( $query ) )
+				{
+					$this->records = $query;
+				}
 			}
 		}
 
 		private function GetLastVisitors() : void
 		{
-			$records = $this->Forward->Database->query( "SELECT visitor_origin_id, visitor_language_id FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 100" )->fetchAll();
+			$records = $this->Forward->Database->query( "SELECT visitor_origin_id, visitor_language_id FROM forward_statistics_visitors ORDER BY visitor_id DESC LIMIT 200" )->fetchAll();
 
-
-			
 			if( !empty( $records ) )
 			{
 				$languages = $this->Forward->Database->query( "SELECT * FROM forward_statistics_languages" )->fetchAll();
@@ -157,13 +167,26 @@
 
 		public function Header()
 		{
-			$html  = "\t\t" . '<script type="text/javascript" nonce="' . $this->js_nonce . '">let translator = {';
-			$html .= 'e1: "'.$this->__('Something went wrong!').'",';
-			$html .= 'e7: "'.$this->__('You must provide a URL!').'",';
-			$html .= 'e8: "'.$this->__('A record with this ID already exists!').'",';
-			$html .= 'e10: "'.$this->__('The URL you entered is not valid!').'",';
+			//Translator
+			$html  = "\t\t" . "<script type=\"text/javascript\" nonce=\"$this->js_nonce\">" . PHP_EOL . "\t\t\t" . 'let translator = {';
+			$c = 0;
+			foreach ( $this->translator as $key => $value )
+			{
+				$c++;
+				$html .= ($c > 1 ? ' ,' : '') . $key . ': "' . $value . '"';
+			}
+			$html .= '};';
 
-			echo $html . '};</script>' . PHP_EOL;
+			//Records
+			$html .= PHP_EOL . "\t\t\t" . 'let records = {'; $c = 0;
+			foreach ( $this->records as $r )
+			{
+				$c++;
+				$html .= PHP_EOL . ($c > 1 ? ', ' : '') . $r['record_id'] . ': [' . $r['record_author'] . ',"' . $r['record_name'] . '","' . $r['record_display_name'] . '","' . $r['record_url'] . '","' . $r['record_updated'] . '","' . $r['record_created'] . '"]';
+			}
+			$html .= '};';
+
+			echo $html . PHP_EOL . "\t\t</script>" . PHP_EOL;
 		}
 	}
 

@@ -20,8 +20,6 @@
 		}
 	}
 
-	console.log(visitor_data);
-
 	//Fancy logging
 	function console_log(message, color="#fff"){console.log("%cForward: "+"%c"+message, "color:#dc3545;font-weight: bold;", "color: "+color);}
 	console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2020 RapidDev\nhttps://rdev.cc/\n==============================");
@@ -218,10 +216,30 @@
 			ctrl_click = false;
 		} );
 
+		function FillRecordData( record )
+		{
+			console.log(record);
+
+			let date = new Date( record[5] );
+			date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+			jQuery( '#preview-record-date' ).html( date );
+			jQuery( '#preview-record-slug' ).html( '/' + record[2] );
+			jQuery( '#preview-record-url' ).html( record[3] );
+			jQuery( '#preview-record-url' ).attr( 'href',  record[3] );
+		}
+
 		/** Copy to clipboard **/
 		jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
 		jQuery('.links-card').on('click', function(e){
 			e.preventDefault();
+
+			if( jQuery(this).data()['id'] in records )
+			{
+				console.log(records);
+				FillRecordData( records[ jQuery(this).data()['id'] ] );
+			}
+			
 
 			if(ctrl_click)
 			{
@@ -282,8 +300,6 @@
 					}
 				});
 			}
-
-			AjaxRecordData('1');
 
 			function AjaxAddRecord()
 			{
@@ -360,6 +376,15 @@
 				AjaxAddRecord();
 			});
 		});
+
+		if( Object.keys( records ).length > 0 )
+		{
+			FillRecordData( records[ Object.keys( records ).length ] );
+		}
+		
+		//console.log(visitor_data);
+		//console.log(records);
+		//AjaxRecordData('3');
 	}
 
 	function PageLogin()

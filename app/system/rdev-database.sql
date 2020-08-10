@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS forward_statistics_visitors (
 	visitor_visits INT(20) DEFAULT 1,
 	visitor_date DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- DATE_FORMAT(CURRENT_TIMESTAMP, '%Y-%m-%d %H:%i:00')
 
 -- Users table
 CREATE TABLE IF NOT EXISTS forward_users (
