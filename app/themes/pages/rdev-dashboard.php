@@ -118,7 +118,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-12">
+									<div class="col-12" style="margin:0;">
 										<hr>
 									</div>
 									<div class="col-12">
@@ -136,6 +136,48 @@
 <?php endif; ?>
 											</div>
 											<div class="row">
+												<div class="col-12 col-lg-6 pie-container">
+													<div class="row">
+														<div class="col-12">
+															<p class="pie-header">browsers</p>
+														</div>
+														<div class="col-12 col-lg-6 col-no-gutters">
+															<div class="pie-browsers ct-pie-hover ct-perfect-fourth"></div>
+														</div>
+														<div class="col-12 col-lg-6">
+															<ul class="">
+																<li class="pie-browser-label-a">Label 1</li>
+																<li class="pie-browser-label-b">Label 2</li>
+																<li class="pie-browser-label-c">Label 3</li>
+																<li class="pie-browser-label-d">Label 4</li>
+																<li class="pie-browser-label-e">Label 5</li>
+																<li class="pie-browser-label-f">Label 6</li>
+																<li class="pie-browser-label-g">Label 7</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<div class="col-12 col-lg-6 pie-container">
+													<div class="row">
+														<div class="col-12">
+															<p class="pie-header">platforms</p>
+														</div>
+														<div class="col-12 col-lg-6 col-no-gutters">
+															<div class="pie-platforms ct-pie-hover ct-perfect-fourth"></div>
+														</div>
+														<div class="col-12 col-lg-6">
+															<ul class="">
+																<li class="pie-platform-label-1">Label 1</li>
+																<li class="pie-platform-label-2">Label 2</li>
+																<li class="pie-platform-label-3">Label 3</li>
+																<li class="pie-platform-label-4">Label 4</li>
+																<li class="pie-platform-label-5">Label 5</li>
+																<li class="pie-platform-label-6">Label 6</li>
+																<li class="pie-platform-label-7">Label 7</li>
+															</ul>
+														</div>
+													</div>
+												</div>
 												<div class="col-12 col-no-gutters" style="height: 220px;">
 													<div class="ct-chart ct-perfect-fourth red-chart" style="height: 220px;"></div>
 												</div>
@@ -146,12 +188,6 @@
 														<div id="record-locations" class="col-12 col-md-6">
 														</div>
 													</div>
-												</div>
-												<div class="col-6 col-no-gutters">
-													<div class="pie-chart1 ct-perfect-fourth"></div>
-												</div>
-												<div class="col-6 col-no-gutters">
-													<div class="pie-chart2 ct-perfect-fourth"></div>
 												</div>
 											</div>
 										</div>

@@ -360,6 +360,100 @@ body {
 	font-size: 11px;
 }
 
+.pie-header {
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+	font-weight: bold;
+	opacity: .35;
+	font-size: 14px;
+}
+
+.pie-container {
+	margin-top: 30px;
+}
+
+.pie-container ul {
+	list-style-type: none;
+}
+
+.pie-container ul > li {
+	opacity: .15;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.pie-container ul > li.li-hover {
+	opacity: 1;
+}
+
+.ct-pie-hover .ct-series {
+	opacity: 0.5;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.ct-pie-hover .ct-series.ct-hover {
+	opacity: 1;
+}
+
+.pie-platforms .ct-series > path {
+
+}
+
+.ct-pie-hover .ct-series.ct-hover > path {
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+	stroke-width: 65px !important;
+}
+
+.ct-series-a > .ct-slice-donut {
+	stroke: #00ffea;
+}
+.ct-series-b > .ct-slice-donut {
+	stroke: #00edda;
+}
+.ct-series-c > .ct-slice-donut {
+	stroke: #00cfbe;
+}
+.ct-series-d > .ct-slice-donut {
+	stroke: #00b3a4;
+}
+.ct-series-e > .ct-slice-donut {
+	stroke: #00998c;
+}
+.ct-series-f > .ct-slice-donut {
+	stroke: #00b3a4;
+}
+.ct-series-g > .ct-slice-donut {
+	stroke: #00cfbe;
+}
+.ct-series-h > .ct-slice-donut {
+	stroke: #00edda;
+}
+.ct-series-i > .ct-slice-donut {
+	stroke: #00ffea;
+}
+.ct-series-j > .ct-slice-donut {
+	stroke: #00edda;
+}
+.ct-series-k > .ct-slice-donut {
+	stroke: #00cfbe;
+}
+.ct-series-l > .ct-slice-donut {
+	stroke: #00b3a4;
+}
+.ct-series-m > .ct-slice-donut {
+	stroke: #00998c;
+}
+
 .remove-record {
 	display: flex;
 	justify-content: flex-end;

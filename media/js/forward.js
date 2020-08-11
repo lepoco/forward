@@ -5,7 +5,7 @@
   */
 
 	//Custom forEach for Array
-	Array.prototype.forEach||(Array.prototype.forEach=function(r){var t=this.length;if("function"!=typeof r)throw new TypeError;for(var o=arguments[1],h=0;h<t;h++)h in this&&r.call(o,this[h],h,this)});
+	Array.prototype.forEach||(Array.prototype.forEach=function(r){let t=this.length;if("function"!=typeof r)throw new TypeError;for(let o=arguments[1],h=0;h<t;h++)h in this&&r.call(o,this[h],h,this)});
 
 	//JSON Verify
 	function jsonParse(string)
@@ -200,6 +200,15 @@
 	{
 		console_log( 'The functions for page Dashboard have been loaded.' );
 
+		//Adjust dashboard height
+		console.log('rdev-dashboard', jQuery('#rdev-dashboard').outerHeight());
+		console.log('forward', jQuery('#forward').outerHeight());
+		console.log('navbar', jQuery('nav').outerHeight());
+
+		//Adjust dashboard height
+		if( jQuery('html').height() > 992 )
+			jQuery('#rdev-dashboard').css( 'height', jQuery('#forward').outerHeight() - jQuery('.navbar').outerHeight() + 'px' );
+
 		//Ctrl click
 		let ctrl_click = false;
 		jQuery( document ).keydown( function( event )
@@ -215,19 +224,6 @@
 		{
 			ctrl_click = false;
 		} );
-
-		function FillRecordData( record )
-		{
-			console.log(record);
-
-			let date = new Date( record[5] );
-			date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-
-			jQuery( '#preview-record-date' ).html( date );
-			jQuery( '#preview-record-slug' ).html( '/' + record[2] );
-			jQuery( '#preview-record-url' ).html( record[3] );
-			jQuery( '#preview-record-url' ).attr( 'href',  record[3] );
-		}
 
 		/** Copy to clipboard **/
 		jQuery('.shorted-url').on('click', function(e){e.preventDefault();});
@@ -263,44 +259,151 @@
 		clipboard_link.on('success', function(e){clipboard_alert();});
 		clipboard_card.on('success', function(e){clipboard_alert();});
 
+		function AjaxRecordData(rid)
+		{
+			let record_id = rid;
+
+			jQuery.ajax({
+				url: forward.ajax,
+				type:'post',
+				data: {
+					action: 'get_record_data',
+					nonce: forward.getrecord,
+					input_record_id: record_id
+				},
+				success: function( e )
+				{
+					if( jsonParse( e ) )
+					{
+						let result = JSON.parse(e);
+
+						console.log(result);
+					}
+					else
+					{
+						
+					}
+					console.log(e);
+				},
+				fail:function(xhr, textStatus, errorThrown)
+				{
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(errorThrown);
+				}
+			});
+		}
+
+		function FillCharts()
+		{
+			let letterbox = [
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
+			];
+
+			let data = {
+				series: [5, 3, 4]
+			};
+
+			let sum = function(a, b) { return a + b };
+
+			new Chartist.Pie('.pie-browsers', data, {
+				labelInterpolationFnc: function(value) {
+					return Math.round(value / data.series.reduce(sum) * 100) + '%';
+				}
+			});
+
+			//Platforms pie
+			let chart = new Chartist.Pie('.pie-platforms', {
+				series: [10, 20, 50, 20, 5, 50, 15]
+			}, {
+				donut: true,
+				showLabel: false
+			});
+
+			chart.on('created', function(bar) {
+				jQuery('.pie-platforms .ct-series').on('mouseover', function()
+				{
+					jQuery(this).addClass('ct-hover');
+					jQuery('.pie-platform-label-1').addClass('li-hover');
+
+					$(this).each(function() {
+						$.each(this.attributes,function(i,a){
+							console.log(i,a.name,a.value)
+						})
+					})
+
+					jQuery('#tooltip').html('<b>Selected Value: </b>' + jQuery(this).attr('ct:value'));
+				});
+
+				jQuery('.pie-platforms .ct-series').on('mouseout', function()
+				{
+					jQuery(this).removeClass('ct-hover');
+					jQuery('.pie-platform-label-1').removeClass('li-hover');
+				});
+			});
+
+			chart.on('draw', function(data) {
+				if(data.type === 'slice') {
+					// Get the total path length in order to use for dash array animation
+					let pathLength = data.element._node.getTotalLength();
+
+					// Set a dasharray that matches the path length as prerequisite to animate dashoffset
+					data.element.attr({
+						'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+					});
+
+					// Create animation definition while also assigning an ID to the animation for later sync usage
+					let animationDefinition = {
+						'stroke-dashoffset': {
+							id: 'anim' + data.index,
+							dur: 500,
+							from: -pathLength + 'px',
+							to:  '0px',
+							easing: Chartist.Svg.Easing.easeOutQuint,
+						// We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+						fill: 'freeze'
+					}
+				};
+
+					// If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+					if(data.index !== 0) {
+						animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+					}
+
+					// We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+					data.element.attr({
+						'stroke-dashoffset': -pathLength + 'px'
+					});
+
+					// We can't use guided mode as the animations need to rely on setting begin manually
+					// See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+					data.element.animate(animationDefinition, false);
+				}
+			});
+		}
+
+		function FillRecordData( record )
+		{
+			console.log(record);
+
+			let date = new Date( record[6] );
+			date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+			jQuery( '#preview-record-date' ).html( date );
+			jQuery( '#preview-record-slug' ).html( '/' + record[3] );
+			jQuery( '#preview-record-url' ).html( record[4] );
+			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
+
+
+			AjaxRecordData( record[0] );
+			//console.log(visitor_data);
+			//console.log(records);
+			
+			FillCharts();
+		}
+
 		jQuery(function()
 		{
-
-			function AjaxRecordData(rid)
-			{
-				let record_id = rid;
-
-				jQuery.ajax({
-					url: forward.ajax,
-					type:'post',
-					data: {
-						action: 'get_record_data',
-						nonce: forward.getrecord,
-						input_record_id: record_id
-					},
-					success: function( e )
-					{
-						if( jsonParse( e ) )
-						{
-							let result = JSON.parse(e);
-
-							console.log(result);
-						}
-						else
-						{
-							
-						}
-						console.log(e);
-					},
-					fail:function(xhr, textStatus, errorThrown)
-					{
-						console.log(xhr);
-						console.log(textStatus);
-						console.log(errorThrown);
-					}
-				});
-			}
-
 			function AjaxAddRecord()
 			{
 				if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
@@ -381,10 +484,6 @@
 		{
 			FillRecordData( records[ Object.keys( records ).length ] );
 		}
-		
-		//console.log(visitor_data);
-		//console.log(records);
-		//AjaxRecordData('3');
 	}
 
 	function PageLogin()

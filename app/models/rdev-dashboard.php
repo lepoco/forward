@@ -191,7 +191,7 @@
 			foreach ( $this->records as $r )
 			{
 				$c++;
-				$html .= PHP_EOL . ($c > 1 ? ', ' : '') . $r['record_id'] . ': [' . $r['record_author'] . ',"' . $r['record_name'] . '","' . $r['record_display_name'] . '","' . $r['record_url'] . '","' . $r['record_updated'] . '","' . $r['record_created'] . '"]';
+				$html .= PHP_EOL . ($c > 1 ? ', ' : '') . $r['record_id'] . ': [' . $r['record_id'] . ',' . $r['record_author'] . ',"' . $r['record_name'] . '","' . $r['record_display_name'] . '","' . $r['record_url'] . '","' . $r['record_updated'] . '","' . $r['record_created'] . '"]';
 			}
 			$html .= '};';
 
