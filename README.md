@@ -52,6 +52,7 @@ Just press "Install". It's easy: D
 - Bootstrap by the Bootstrap team<br/>[https://getbootstrap.com/](https://getbootstrap.com/)
 - jQuery by the jQuery Foundation<br/>[https://jquery.org/](https://jquery.org/)
 - Clipboard.js by the Zeno Rocha<br/>[https://github.com/zenorocha/clipboard.js/](https://github.com/zenorocha/clipboard.js/)
+- Browser.php by Chris Schuld<br/>[https://github.com/cbschuld/Browser.php](https://github.com/cbschuld/Browser.php)
 - Material Design Icons by the Google and other creators | Maintained by Austin Andrews<br/>[https://materialdesignicons.com/](https://materialdesignicons.com/)
 - Picture of mountains by the Joyston Judah<br/>[https://www.pexels.com/@joyston-judah-331625](https://www.pexels.com/@joyston-judah-331625)
 - Questrial font by the Joe Prince<br/>[https://fonts.google.com/specimen/Questrial](https://fonts.google.com/specimen/Questrial)

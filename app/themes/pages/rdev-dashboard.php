@@ -145,15 +145,7 @@
 															<div class="pie-browsers pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
 														</div>
 														<div class="col-12 col-lg-6">
-															<ul class="pie-browsers-labels">
-																<li class="pie-browsers-label-a">Label 1</li>
-																<li class="pie-browsers-label-b">Label 2</li>
-																<li class="pie-browsers-label-c">Label 3</li>
-																<li class="pie-browsers-label-d">Label 4</li>
-																<li class="pie-browsers-label-e">Label 5</li>
-																<li class="pie-browsers-label-f">Label 6</li>
-																<li class="pie-browsers-label-g">Label 7</li>
-															</ul>
+															<ul class="pie-browsers-labels"></ul>
 														</div>
 													</div>
 												</div>
@@ -166,15 +158,7 @@
 															<div class="pie-platforms pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
 														</div>
 														<div class="col-12 col-lg-6">
-															<ul class="pie-platforms-labels">
-																<li class="pie-platforms-label-a">Label 1</li>
-																<li class="pie-platforms-label-b">Label 2</li>
-																<li class="pie-platforms-label-c">Label 3</li>
-																<li class="pie-platforms-label-d">Label 4</li>
-																<li class="pie-platforms-label-e">Label 5</li>
-																<li class="pie-platforms-label-f">Label 6</li>
-																<li class="pie-platforms-label-g">Label 7</li>
-															</ul>
+															<ul class="pie-platforms-labels"></ul>
 														</div>
 													</div>
 												</div>

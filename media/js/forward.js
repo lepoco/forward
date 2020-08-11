@@ -75,6 +75,34 @@
 		themeFunctions();
 	});
 
+	function PlatformTranslator( name )
+	{
+		switch( name )
+		{
+			case 'windows':
+				return 'Windows (?)';
+			case 'windows_10':
+				return 'Windows 10';
+			default:
+				return name;
+		}
+	}
+
+	function AgentTranslator( name )
+	{
+		switch( name )
+		{
+			case 'chrome':
+				return 'Google Chrome';
+			case 'edge':
+				return 'MS Edge';
+			case 'internet_explorer':
+				return 'MS Internet Explorer';
+			default:
+				return name;
+		}
+	}
+
 	function themeFunctions()
 	{
 		jQuery("#show_hide_password a").on('click', function(event) {
@@ -273,11 +301,6 @@
 						let result = JSON.parse(e);
 						ondone( result );
 					}
-					else
-					{
-						
-					}
-					//console.log(e);
 				},
 				fail:function(xhr, textStatus, errorThrown)
 				{
@@ -425,7 +448,7 @@
 				let agents_values = [];
 				for (var i = 0; i < agents_keys.length; i++)
 				{
-					agents_names.push( visitor_data.agents[ agents_keys[i] ] );
+					agents_names.push( AgentTranslator( visitor_data.agents[ agents_keys[i] ] ) );
 					agents_values.push( e.agents[ agents_keys[i] ] );
 				}
 
@@ -434,7 +457,7 @@
 				let platforms_values = [];
 				for (var i = 0; i < platforms_keys.length; i++)
 				{
-					platforms_names.push( visitor_data.platforms[ platforms_keys[i] ] );
+					platforms_names.push( PlatformTranslator( visitor_data.platforms[ platforms_keys[i] ] ) );
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );
 				}
 

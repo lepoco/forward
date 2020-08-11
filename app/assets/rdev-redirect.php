@@ -329,7 +329,7 @@
 				$this->ParseIP(),
 				$this->GetOriginId( $this->ParseReferrer() ),
 				$this->GetLanguageId( $this->ParseLanguage() ),
-				$this->GetAgentId( $agent->GetAgent() ),
+				$this->GetAgentId( $agent->GetBrowser() ),
 				$this->GetPlatformId( $agent->GetPlatform() )
 			);
 		}
