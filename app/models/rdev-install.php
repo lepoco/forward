@@ -234,7 +234,7 @@
 		* @param	array $args
 		* @return   void
 		*/
-		private function BuildTables($database, $args) : void
+		private function BuildTables( $database, $args ) : void
 		{
 			$database->set_charset('utf8');
 
@@ -285,7 +285,7 @@
 				"('timezone', 'UTC'), " .
 				"('date_format', 'j F Y'), " .
 				"('time_format', 'H:i'), " .
-				"('record_date_format', 'j F Y'), " 
+				"('record_date_format', 'j F Y'), " .
 				"('charset', 'UTF8'), " .
 				"('latest_visitors_limit', '200'), " .
 				"('dashboard_links', '30'), " .

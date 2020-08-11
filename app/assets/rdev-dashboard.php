@@ -58,7 +58,7 @@
 		*
 		* @access   public
 		*/
-		public function __construct(  Forward &$parent )
+		public function __construct( Forward &$parent )
 		{
 			$this->Forward = $parent;
 

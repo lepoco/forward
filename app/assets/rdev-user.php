@@ -157,12 +157,15 @@
 		*/
 		private function GetUser( int $id )
 		{
-			$query = $this->Forward->Database->query( "SELECT * FROM forward_users WHERE user_id = ?", $id )->fetchArray();
-
-			if($query != null)
+			if( $this->Forward->Database != null )
 			{
-				$this->id = $query['user_id'];
-				$this->User = $query;
+				$query = $this->Forward->Database->query( "SELECT * FROM forward_users WHERE user_id = ?", $id )->fetchArray();
+
+				if($query != null)
+				{
+					$this->id = $query['user_id'];
+					$this->User = $query;
+				}
 			}
 		}
 

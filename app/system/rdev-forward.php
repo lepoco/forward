@@ -26,7 +26,7 @@
 		 * @var Uri
 		 * @access public
 		 */
-		public \Forward\Uri $Path;
+		public $Path;
 
 		/**
 		 * Information about the session from the Session class
@@ -34,7 +34,7 @@
 		 * @var Session
 		 * @access public
 		 */
-		public \Forward\Session $Session;
+		public $Session;
 
 		/**
 		 * Class for translating text strings
@@ -42,7 +42,7 @@
 		 * @var Translator
 		 * @access public
 		 */
-		public \Forward\Translator $Translator;
+		public $Translator;
 
 		/**
 		 * A global class that stores options
@@ -50,7 +50,7 @@
 		 * @var Options
 		 * @access public
 		 */
-		public \Forward\Options $Options;
+		public $Options;
 
 		/**
 		 * A set of user management tools
@@ -58,7 +58,7 @@
 		 * @var User
 		 * @access public
 		 */
-		public \Forward\User $User;
+		public $User;
 
 		/**
 		 * Master database instance, requires config.php
@@ -66,7 +66,7 @@
 		 * @var Database
 		 * @access public
 		 */
-		public \Forward\Database $Database;
+		public $Database;
 
 		/**
 		* __construct

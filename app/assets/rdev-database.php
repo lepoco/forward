@@ -45,7 +45,7 @@
 		 * @var boolean
 		 * @access protected
 		 */
-		protected $show_errors = TRUE;
+		protected $show_errors = false;
 
 		/**
 		 * Current query
@@ -53,7 +53,7 @@
 		 * @var object
 		 * @access protected
 		 */
-		protected $query_closed = TRUE;
+		protected $query_closed = true;
 
 		/**
 		 * Current query
@@ -71,12 +71,16 @@
 		*/
 		public function __construct()
 		{
-			$this->connection = new Mysqli(FORWARD_DB_HOST, FORWARD_DB_USER, FORWARD_DB_PASS, FORWARD_DB_NAME);
-			
-			if ($this->connection->connect_error)
-				$this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
+			if( defined( 'FORWARD_DEBUG' ) )
+				if( FORWARD_DEBUG )
+					$this->show_errors = true;
 
-			$this->connection->set_charset('utf8');
+			$this->connection = new Mysqli( FORWARD_DB_HOST, FORWARD_DB_USER, FORWARD_DB_PASS, FORWARD_DB_NAME );
+			
+			if ( $this->connection->connect_error )
+				$this->error( 'Failed to connect to MySQL - ' . $this->connection->connect_error );
+
+			$this->connection->set_charset( 'utf8' );
 		}
 
 		/**
@@ -88,49 +92,49 @@
 		* @param	func_num_args (optional)
 		* @return   object Database
 		*/
-		public function query($query) : Database
+		public function query( $query ) : Database
 		{
-			if (!$this->query_closed)
+			if ( !$this->query_closed )
 				$this->query->close();
 
-			if ($this->query = $this->connection->prepare($query))
+			if ( $this->query = $this->connection->prepare( $query ) )
 			{
 				if (func_num_args() > 1)
 				{
 					$x = func_get_args();
-					$args = array_slice($x, 1);
+					$args = array_slice( $x, 1 );
 					$types = '';
 					$args_ref = array();
-					foreach ($args as $k => &$arg)
+					foreach ( $args as $k => &$arg )
 					{
-						if (is_array($args[$k]))
+						if ( is_array( $args[ $k ] ) )
 						{
-							foreach ($args[$k] as $j => &$a)
+							foreach ( $args[ $k ] as $j => &$a )
 							{
-								$types .= $this->_gettype($args[$k][$j]);
+								$types .= $this->_gettype( $args[ $k ][ $j ] );
 								$args_ref[] = &$a;
 							}
 						}
 						else
 						{
-							$types .= $this->_gettype($args[$k]);
+							$types .= $this->_gettype( $args[ $k ] );
 							$args_ref[] = &$arg;
 						}
 					}
-					array_unshift($args_ref, $types);
-					call_user_func_array(array($this->query, 'bind_param'), $args_ref);
+					array_unshift( $args_ref, $types );
+					call_user_func_array( array( $this->query, 'bind_param' ), $args_ref );
 				}
 				$this->query->execute();
 
 				if ($this->query->errno)
-					$this->error('Unable to process MySQL query (check your params) - ' . $this->query->error);
+					$this->error( 'Unable to process MySQL query (check your params) - ' . $this->query->error );
 
-				$this->query_closed = FALSE;
+				$this->query_closed = false;
 				$this->query_count++;
 			}
 			else
 			{
-				$this->error('Unable to prepare MySQL statement (check your syntax) - ' . $this->connection->error);
+				$this->error( 'Unable to prepare MySQL statement (check your syntax) - ' . $this->connection->error );
 			}
 			return $this;
 		}
@@ -151,18 +155,18 @@
 			while ($field = $meta->fetch_field())
 				$params[] = &$row[$field->name];
 
-			call_user_func_array(array($this->query, 'bind_result'), $params);
+			call_user_func_array( array( $this->query, 'bind_result' ), $params );
 			$result = array();
-			while ($this->query->fetch())
+			while ( $this->query->fetch() )
 			{
 				$r = array();
-				foreach ($row as $key => $val)
+				foreach ( $row as $key => $val )
 					$r[$key] = $val;
 
 				$result[] = $r;
 			}
 			$this->query->close();
-			$this->query_closed = TRUE;
+			$this->query_closed = true;
 			return $result;
 		}
 
@@ -181,14 +185,14 @@
 			while ($field = $meta->fetch_field())
 				$params[] = &$row[$field->name];
 
-			call_user_func_array(array($this->query, 'bind_result'), $params);
+			call_user_func_array( array( $this->query, 'bind_result' ), $params );
 			$result = array();
-			while ($this->query->fetch())
-				foreach ($row as $key => $val)
-					$result[$key] = $val;
+			while ( $this->query->fetch() )
+				foreach ( $row as $key => $val )
+					$result[ $key ] = $val;
 
 			$this->query->close();
-			$this->query_closed = TRUE;
+			$this->query_closed = true;
 			return $result;
 		}
 
@@ -236,10 +240,10 @@
 		* @access   public
 		* @return   string "error" (kills the script)
 		*/
-		public function error(string $error) : void
+		public function error( string $error ) : void
 		{
-			if ($this->show_errors)
-				exit($error);
+			if ( $this->show_errors )
+				exit( $error );
 		}
 
 		/**
@@ -262,11 +266,11 @@
 		* @param	$var
 		* @return   string $type
 		*/
-		private function _gettype($var) : string
+		private function _gettype( $var ) : string
 		{
-			if (is_string($var)) return 's';
-			if (is_float($var)) return 'd';
-			if (is_int($var)) return 'i';
+			if ( is_string( $var) ) return 's';
+			if ( is_float( $var) ) return 'd';
+			if ( is_int( $var) ) return 'i';
 			return 'b';
 		}
 	}
