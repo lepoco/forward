@@ -201,11 +201,6 @@
 		console_log( 'The functions for page Dashboard have been loaded.' );
 
 		//Adjust dashboard height
-		console.log('rdev-dashboard', jQuery('#rdev-dashboard').outerHeight());
-		console.log('forward', jQuery('#forward').outerHeight());
-		console.log('navbar', jQuery('nav').outerHeight());
-
-		//Adjust dashboard height
 		if( jQuery('html').height() > 992 )
 			jQuery('#rdev-dashboard').css( 'height', jQuery('#forward').outerHeight() - jQuery('.navbar').outerHeight() + 'px' );
 
@@ -259,7 +254,7 @@
 		clipboard_link.on('success', function(e){clipboard_alert();});
 		clipboard_card.on('success', function(e){clipboard_alert();});
 
-		function AjaxRecordData(rid)
+		function AjaxRecordData( rid, ondone )
 		{
 			let record_id = rid;
 
@@ -276,14 +271,13 @@
 					if( jsonParse( e ) )
 					{
 						let result = JSON.parse(e);
-
-						console.log(result);
+						ondone( result );
 					}
 					else
 					{
 						
 					}
-					console.log(e);
+					//console.log(e);
 				},
 				fail:function(xhr, textStatus, errorThrown)
 				{
@@ -294,65 +288,50 @@
 			});
 		}
 
-		function FillCharts()
+		function FillCharts( bn, bv, pn, pv )
 		{
 			let letterbox = [
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
 			];
 
-			let data = {
-				series: [5, 3, 4]
-			};
+			console.log(bn);
+			console.log(bv);
+			console.log(pn);
+			console.log(pv);
 
-			let sum = function(a, b) { return a + b };
+			//Browsers labels
+			jQuery('.pie-browsers-labels').empty();
+			for (var i = 0; i < bn.length; i++)
+			{
+				jQuery('.pie-browsers-labels').append('<li class="pie-browsers-label-' + letterbox[i] + '">' + bn[i] + '</li>');
+			}
 
-			new Chartist.Pie('.pie-browsers', data, {
-				labelInterpolationFnc: function(value) {
-					return Math.round(value / data.series.reduce(sum) * 100) + '%';
-				}
-			});
-
-			//Platforms pie
-			let chart = new Chartist.Pie('.pie-platforms', {
-				series: [10, 20, 50, 20, 5, 50, 15]
+			//Browsers pie
+			let browsers_chart = new Chartist.Pie('.pie-browsers', {
+				series: bv
 			}, {
 				donut: true,
 				showLabel: false
 			});
-
-			chart.on('created', function(bar) {
-				jQuery('.pie-platforms .ct-series').on('mouseover', function()
+			browsers_chart.on('created', function(bar) {
+				jQuery('.pie-browsers .ct-series').on('mouseover', function()
 				{
+					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
 					jQuery(this).addClass('ct-hover');
-					jQuery('.pie-platform-label-1').addClass('li-hover');
-
-					$(this).each(function() {
-						$.each(this.attributes,function(i,a){
-							console.log(i,a.name,a.value)
-						})
-					})
-
-					jQuery('#tooltip').html('<b>Selected Value: </b>' + jQuery(this).attr('ct:value'));
+					jQuery('.pie-browsers-label-' + current_series).addClass('li-hover');
 				});
-
-				jQuery('.pie-platforms .ct-series').on('mouseout', function()
+				jQuery('.pie-browsers .ct-series').on('mouseout', function()
 				{
-					jQuery(this).removeClass('ct-hover');
-					jQuery('.pie-platform-label-1').removeClass('li-hover');
+					jQuery('.pie-browsers .ct-series').removeClass('ct-hover');
+					jQuery('.pie-browsers-labels > li').removeClass('li-hover');
 				});
 			});
-
-			chart.on('draw', function(data) {
+			browsers_chart.on('draw', function(data) {
 				if(data.type === 'slice') {
-					// Get the total path length in order to use for dash array animation
 					let pathLength = data.element._node.getTotalLength();
-
-					// Set a dasharray that matches the path length as prerequisite to animate dashoffset
 					data.element.attr({
 						'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
 					});
-
-					// Create animation definition while also assigning an ID to the animation for later sync usage
 					let animationDefinition = {
 						'stroke-dashoffset': {
 							id: 'anim' + data.index,
@@ -360,24 +339,68 @@
 							from: -pathLength + 'px',
 							to:  '0px',
 							easing: Chartist.Svg.Easing.easeOutQuint,
-						// We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
 						fill: 'freeze'
 					}
 				};
+				if(data.index !== 0) {
+					animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+				}
+				data.element.attr({
+					'stroke-dashoffset': -pathLength + 'px'
+				});
+				data.element.animate(animationDefinition, false);
+				}
+			});
 
-					// If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-					if(data.index !== 0) {
-						animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
-					}
-
-					// We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+			//Platforms labels
+			jQuery('.pie-platforms-labels').empty();
+			for (var i = 0; i < pn.length; i++)
+			{
+				jQuery('.pie-platforms-labels').append('<li class="pie-platforms-label-' + letterbox[i] + '">' + pn[i] + '</li>');
+			}
+			//Platforms pie
+			let platforms_chart = new Chartist.Pie('.pie-platforms', {
+				series: pv
+			}, {
+				donut: true,
+				showLabel: false
+			});
+			platforms_chart.on('created', function( bar ) {
+				jQuery('.pie-platforms .ct-series').on('mouseover', function()
+				{
+					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
+					jQuery(this).addClass('ct-hover');
+					jQuery('.pie-platforms-label-' + current_series).addClass('li-hover');
+				});
+				jQuery('.pie-platforms .ct-series').on('mouseout', function()
+				{
+					jQuery('.pie-platforms .ct-series').removeClass('ct-hover');
+					jQuery('.pie-platforms-labels > li').removeClass('li-hover');
+				});
+			});
+			platforms_chart.on('draw', function(data) {
+				if(data.type === 'slice') {
+					let pathLength = data.element._node.getTotalLength();
 					data.element.attr({
-						'stroke-dashoffset': -pathLength + 'px'
+						'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
 					});
-
-					// We can't use guided mode as the animations need to rely on setting begin manually
-					// See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
-					data.element.animate(animationDefinition, false);
+					let animationDefinition = {
+						'stroke-dashoffset': {
+							id: 'anim' + data.index,
+							dur: 500,
+							from: -pathLength + 'px',
+							to:  '0px',
+							easing: Chartist.Svg.Easing.easeOutQuint,
+						fill: 'freeze'
+					}
+				};
+				if(data.index !== 0) {
+					animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+				}
+				data.element.attr({
+					'stroke-dashoffset': -pathLength + 'px'
+				});
+				data.element.animate(animationDefinition, false);
 				}
 			});
 		}
@@ -395,11 +418,28 @@
 			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
 
 
-			AjaxRecordData( record[0] );
-			//console.log(visitor_data);
-			//console.log(records);
-			
-			FillCharts();
+			AjaxRecordData( record[0], function(e)
+			{
+				let agents_keys = Object.keys( e.agents );
+				let agents_names = [];
+				let agents_values = [];
+				for (var i = 0; i < agents_keys.length; i++)
+				{
+					agents_names.push( visitor_data.agents[ agents_keys[i] ] );
+					agents_values.push( e.agents[ agents_keys[i] ] );
+				}
+
+				let platforms_keys = Object.keys( e.platforms );
+				let platforms_names = [];
+				let platforms_values = [];
+				for (var i = 0; i < platforms_keys.length; i++)
+				{
+					platforms_names.push( visitor_data.platforms[ platforms_keys[i] ] );
+					platforms_values.push( e.platforms[ platforms_keys[i] ] );
+				}
+
+				FillCharts( agents_names, agents_values, platforms_names, platforms_values);
+			} );
 		}
 
 		jQuery(function()

@@ -26,6 +26,7 @@ body {
 
 #forward {
 	min-height: 100%;
+	height: 100%;
 }
 
 .page-install > #forward,
@@ -414,43 +415,43 @@ body {
 	stroke-width: 65px !important;
 }
 
-.ct-series-a > .ct-slice-donut {
+.pie-color-blue .ct-series-a > .ct-slice-donut {
 	stroke: #00ffea;
 }
-.ct-series-b > .ct-slice-donut {
+.pie-color-blue .ct-series-b > .ct-slice-donut {
 	stroke: #00edda;
 }
-.ct-series-c > .ct-slice-donut {
+.pie-color-blue .ct-series-c > .ct-slice-donut {
 	stroke: #00cfbe;
 }
-.ct-series-d > .ct-slice-donut {
+.pie-color-blue .ct-series-d > .ct-slice-donut {
 	stroke: #00b3a4;
 }
-.ct-series-e > .ct-slice-donut {
+.pie-color-blue .ct-series-e > .ct-slice-donut {
 	stroke: #00998c;
 }
-.ct-series-f > .ct-slice-donut {
+.pie-color-blue .ct-series-f > .ct-slice-donut {
 	stroke: #00b3a4;
 }
-.ct-series-g > .ct-slice-donut {
+.pie-color-blue .ct-series-g > .ct-slice-donut {
 	stroke: #00cfbe;
 }
-.ct-series-h > .ct-slice-donut {
+.pie-color-blue .ct-series-h > .ct-slice-donut {
 	stroke: #00edda;
 }
-.ct-series-i > .ct-slice-donut {
+.pie-color-blue .ct-series-i > .ct-slice-donut {
 	stroke: #00ffea;
 }
-.ct-series-j > .ct-slice-donut {
+.pie-color-blue .ct-series-j > .ct-slice-donut {
 	stroke: #00edda;
 }
-.ct-series-k > .ct-slice-donut {
+.pie-color-blue .ct-series-k > .ct-slice-donut {
 	stroke: #00cfbe;
 }
-.ct-series-l > .ct-slice-donut {
+.pie-color-blue .ct-series-l > .ct-slice-donut {
 	stroke: #00b3a4;
 }
-.ct-series-m > .ct-slice-donut {
+.pie-color-blue .ct-series-m > .ct-slice-donut {
 	stroke: #00998c;
 }
 

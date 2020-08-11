@@ -304,10 +304,10 @@
 
 			$data = array(
 				'status' => 'success',
-				'language' => array(),
-				'agent' => array(),
-				'origin' => array(),
-				'platform' => array(),
+				'languages' => array(),
+				'agents' => array(),
+				'origins' => array(),
+				'platforms' => array(),
 				'dates' => array()
 			);
 
@@ -319,25 +319,25 @@
 				else
 					$data['dates'][$time] = 1;
 
-				if( isset( $data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ] ) )
-					$data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ]++;
+				if( isset( $data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ] ) )
+					$data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ]++;
 				else
-					$data[ 'agent' ][ $visitor[ 'visitor_agent_id' ] ] = 1;
+					$data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ] = 1;
 
-				if( isset( $data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ] ) )
-					$data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ]++;
+				if( isset( $data[ 'platforms' ][ $visitor[ 'visitor_platform_id' ] ] ) )
+					$data[ 'platforms' ][ $visitor[ 'visitor_platform_id' ] ]++;
 				else
-					$data[ 'platform' ][ $visitor[ 'visitor_platform_id' ] ] = 1;
+					$data[ 'platforms' ][ $visitor[ 'visitor_platform_id' ] ] = 1;
 
-				if( isset( $data[ 'language' ][ $visitor[ 'visitor_language_id' ] ] ) )
-					$data[ 'language' ][ $visitor[ 'visitor_language_id' ] ]++;
+				if( isset( $data[ 'languages' ][ $visitor[ 'visitor_language_id' ] ] ) )
+					$data[ 'languages' ][ $visitor[ 'visitor_language_id' ] ]++;
 				else
-					$data[ 'language' ][ $visitor[ 'visitor_language_id' ] ] = 1;
+					$data[ 'languages' ][ $visitor[ 'visitor_language_id' ] ] = 1;
 
-				if( isset( $data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ] ) )
-					$data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ]++;
+				if( isset( $data[ 'origins' ][ $visitor[ 'visitor_origin_id' ] ] ) )
+					$data[ 'origins' ][ $visitor[ 'visitor_origin_id' ] ]++;
 				else
-					$data[ 'origin' ][ $visitor[ 'visitor_origin_id' ] ] = 1;
+					$data[ 'origins' ][ $visitor[ 'visitor_origin_id' ] ] = 1;
 			}
 
 			$this->Finish( $data, true );

@@ -71,4 +71,4 @@
 <?php if( method_exists( $this, 'Header' ) ) { $this->Header(); } ?>
 	</head>
 	<body class="<?php echo 'page-' . $this->name; ?>">
-		<section id="forward">
+		<section id="forward" style="height: 100%;">

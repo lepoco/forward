@@ -142,17 +142,17 @@
 															<p class="pie-header">browsers</p>
 														</div>
 														<div class="col-12 col-lg-6 col-no-gutters">
-															<div class="pie-browsers ct-pie-hover ct-perfect-fourth"></div>
+															<div class="pie-browsers pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
 														</div>
 														<div class="col-12 col-lg-6">
-															<ul class="">
-																<li class="pie-browser-label-a">Label 1</li>
-																<li class="pie-browser-label-b">Label 2</li>
-																<li class="pie-browser-label-c">Label 3</li>
-																<li class="pie-browser-label-d">Label 4</li>
-																<li class="pie-browser-label-e">Label 5</li>
-																<li class="pie-browser-label-f">Label 6</li>
-																<li class="pie-browser-label-g">Label 7</li>
+															<ul class="pie-browsers-labels">
+																<li class="pie-browsers-label-a">Label 1</li>
+																<li class="pie-browsers-label-b">Label 2</li>
+																<li class="pie-browsers-label-c">Label 3</li>
+																<li class="pie-browsers-label-d">Label 4</li>
+																<li class="pie-browsers-label-e">Label 5</li>
+																<li class="pie-browsers-label-f">Label 6</li>
+																<li class="pie-browsers-label-g">Label 7</li>
 															</ul>
 														</div>
 													</div>
@@ -163,17 +163,17 @@
 															<p class="pie-header">platforms</p>
 														</div>
 														<div class="col-12 col-lg-6 col-no-gutters">
-															<div class="pie-platforms ct-pie-hover ct-perfect-fourth"></div>
+															<div class="pie-platforms pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
 														</div>
 														<div class="col-12 col-lg-6">
-															<ul class="">
-																<li class="pie-platform-label-1">Label 1</li>
-																<li class="pie-platform-label-2">Label 2</li>
-																<li class="pie-platform-label-3">Label 3</li>
-																<li class="pie-platform-label-4">Label 4</li>
-																<li class="pie-platform-label-5">Label 5</li>
-																<li class="pie-platform-label-6">Label 6</li>
-																<li class="pie-platform-label-7">Label 7</li>
+															<ul class="pie-platforms-labels">
+																<li class="pie-platforms-label-a">Label 1</li>
+																<li class="pie-platforms-label-b">Label 2</li>
+																<li class="pie-platforms-label-c">Label 3</li>
+																<li class="pie-platforms-label-d">Label 4</li>
+																<li class="pie-platforms-label-e">Label 5</li>
+																<li class="pie-platforms-label-f">Label 6</li>
+																<li class="pie-platforms-label-g">Label 7</li>
 															</ul>
 														</div>
 													</div>
