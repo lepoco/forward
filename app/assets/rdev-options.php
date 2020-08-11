@@ -94,7 +94,7 @@
 		{
 			if( isset( $this->options[ $name ] ) )
 			{
-				return ($raw ? $this->options[ $name ] : $this->ParseType( $this->options[ $name ] ) );
+				return ( $raw ? $this->options[ $name ] : $this->ParseType( $this->options[ $name ] ) );
 			}
 			else
 			{
@@ -110,7 +110,22 @@
 		*/
 		private function ParseType( $option )
 		{
-			return $option;
+			if( $option === 'true')
+			{
+				return true;
+			}
+			else if( $option === 'false' )
+			{
+				return false;
+			}
+			else if( is_int( $option ) )
+			{
+				return intval( $option );
+			}
+			else
+			{
+				return $option;
+			}
 		}
 	}
 ?>

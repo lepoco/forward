@@ -107,6 +107,9 @@
 					case 'www.youtube.com':
 						$origin = 'YouTube';
 						break;
+					case 'www.facebook.com':
+						$origin = 'Facebook';
+						break;
 					default:
 						$origin = $query[ 'origin_name' ];
 						break;

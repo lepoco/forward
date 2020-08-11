@@ -76,6 +76,11 @@
 					$this->RedirectTo();
 			}
 
+			if( trim( $this->Forward->Path->GetLevel( 2 ) ) != '' && $this->subpage != 'users' )
+			{
+				$this->Forward->LoadModel( '404', 'Page not found' );
+			}
+
 			switch ($this->subpage)
 			{
 				case 'ajax':
@@ -88,6 +93,17 @@
 
 				case 'settings':
 					$this->Forward->LoadModel( 'settings', 'Settings' );
+					break;
+
+				case 'users':
+					if( $this->Forward->Path->GetLevel( 2 ) == 'profile' )
+						$this->Forward->LoadModel( 'user-profile', 'Profile' );
+					else if( $this->Forward->Path->GetLevel( 2 ) == 'add' )
+						$this->Forward->LoadModel( 'user-add', 'Add user' );
+					else if( trim( $this->Forward->Path->GetLevel( 2 ) ) == '' )
+						$this->Forward->LoadModel( 'users', 'Users' );
+					else
+						$this->Forward->LoadModel( '404', 'Page not found' );
 					break;
 
 				case 'about':

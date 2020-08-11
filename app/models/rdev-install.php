@@ -291,6 +291,7 @@
 				"('dashboard_links', '30'), " .
 				"('dashboard_sort', 'date'), " .
 				"('cache', 'false'), " .
+				"('dashboard_gzip', 'false'),  " .
 				"('dashboard_language', 'en_US'),  " .
 				"('dashboard_language_mode', '1'),  " .
 				"('dashboard_captcha', 'false'), " .
