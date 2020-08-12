@@ -176,7 +176,6 @@
 		private function InitTranslator() : void
 		{
 			$this->Translator = new Translator();
-			$this->Translator->Init();
 		}
 
 		/**

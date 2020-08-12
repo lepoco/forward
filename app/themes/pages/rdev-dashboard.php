@@ -187,7 +187,7 @@
 													</div>
 												</div>
 												<div class="col-12 col-no-gutters" style="height: 220px;">
-													<div class="ct-chart ct-perfect-fourth red-chart" style="height: 220px;"></div>
+													<div class="bar-color-blue ct-chart ct-perfect-fourth" style="height: 220px;"></div>
 												</div>
 												<div class="col-12">
 													<div class="row">
@@ -196,6 +196,9 @@
 														<div id="record-locations" class="col-12 col-md-6">
 														</div>
 													</div>
+												</div>
+												<div class="col-12">
+													<span class="stats-data-info">data in utc</span>
 												</div>
 											</div>
 										</div>

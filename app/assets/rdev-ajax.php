@@ -309,16 +309,18 @@
 				'agents' => array(),
 				'origins' => array(),
 				'platforms' => array(),
-				'dates' => array()
+				'days' => array()
 			);
+
+			$days_in_month = cal_days_in_month( CAL_GREGORIAN, (int)date( 'm', time() ), (int)date( 'Y', time() ) );
+			for ( $i = 0; $i < $days_in_month; $i++ )
+			{ 
+				$data[ 'days' ][ $i ] = 0;
+			}
 
 			foreach ( $query as $visitor )
 			{
-				$time = strtotime( $visitor['visitor_date'] );
-				if( isset( $data['dates'][$time] ) )
-					$data['dates'][$time]++;
-				else
-					$data['dates'][$time] = 1;
+				$data['days'][(int)date( 'd', strtotime( $visitor['visitor_date'] ))]++;
 
 				if( isset( $data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ] ) )
 					$data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ]++;

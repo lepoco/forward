@@ -196,6 +196,24 @@
 			}
 			$html .= '};';
 
+			//Current date for printing the pie chart
+			$date = array(
+				'y' => date('Y', time()),
+				'm' => date('m', time()),
+				'd' => date('d', time())
+			);
+			$date['days'] = cal_days_in_month(CAL_GREGORIAN, (int)$date['m'], (int)$date['y']);
+
+			$html .= PHP_EOL . "\t\t\tlet bar_chart_height = 200;";
+			$html .= PHP_EOL . "\t\t\tlet bar_chart_labels = [";
+
+			for( $i=1; $i <= $date['days']; $i++ )
+			{
+				$html .= ($i > 1 ? ', ': '').'\''.$i.'\'';
+			}
+
+			$html .= '];';
+
 			echo $html . PHP_EOL . "\t\t</script>" . PHP_EOL;
 		}
 	}

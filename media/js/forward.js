@@ -459,7 +459,8 @@
 					}
 					else
 					{
-						FillCharts( [], [], [], [] );
+						fillCharts( [], [], [], [] );
+						barChartAnimate([]);
 					}
 				},
 				fail:function(xhr, textStatus, errorThrown)
@@ -471,8 +472,29 @@
 			});
 		}
 
+		function barChartAnimate( days )
+		{
+			let t = new Chartist.Bar(".ct-chart",{
+				labels: bar_chart_labels,
+				series: [days]
+			},{
+				height:bar_chart_height,
+				axisX:{position:"start"},
+				axisY:{position:"end"}}
+			);
+
+			let a = 0;
+
+			t.on("created", function(){
+				a=0
+			});
+
+			t.on("draw", function(e){
+				if(a++,"label"===e.type&&"x"===e.axis.units.pos)e.element.animate({y:{begin:10*a,dur:500,from:e.y-100,to:e.y,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("label"===e.type&&"y"===e.axis.units.pos)e.element.animate({x:{begin:10*a,dur:500,from:e.x+100,to:e.x,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("bar"===e.type)e.element.animate({y1:{begin:10*a,dur:500,from:0,to:e.y1,easing:"easeOutQuart"},opacity:{begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"}});else if("grid"===e.type){let t={begin:10*a,dur:500,from:e[e.axis.units.pos+"1"]-30,to:e[e.axis.units.pos+"1"],easing:"easeOutQuart"},i={begin:10*a,dur:500,from:e[e.axis.units.pos+"2"]-100,to:e[e.axis.units.pos+"2"],easing:"easeOutQuart"},n={};n[e.axis.units.pos+"1"]=t,n[e.axis.units.pos+"2"]=i,n.opacity={begin:10*a,dur:500,from:0,to:1,easing:"easeOutQuart"},e.element.animate(n)}})
+		}
+
 		/** Fill charts with passed data **/
-		function FillCharts( agents_names, agents_values, platforms_names, platforms_values )
+		function fillCharts( agents_names, agents_values, platforms_names, platforms_values )
 		{
 			let letterbox = [
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
@@ -639,7 +661,9 @@
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );
 				}
 
-				FillCharts( agents_names, agents_values, platforms_names, platforms_values);
+
+				barChartAnimate( e.days );
+				fillCharts( agents_names, agents_values, platforms_names, platforms_values);
 			} );
 		}
 
@@ -672,7 +696,7 @@
 						let date = new Date();
 						date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);;
 
-						jQuery("#records_list div:nth-child(2)").after('<div class="card links-card" data-clipboard-text="'+url+'"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
+						jQuery("#records_list div:nth-child(2)").after('<div class="card links-card" data-clipboard-text="'+url+'"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" class="overflow-url" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
 
 						window.setTimeout(function(){
 							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
@@ -750,7 +774,7 @@
 				success: function( e )
 				{
 					console.log(e);
-					
+
 					if( e == 's01' )
 					{
 						if(jQuery( '.record-' + record_id).is(':visible'))

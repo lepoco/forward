@@ -167,12 +167,16 @@
 		}
 
 		protected function SetLanguage()
-		{
-			if( $this->Forward->Options->Get('dashboard_language_mode', 1 ) == 2 )
+		{	
+			// 1 - auto, browser
+			// 2 - auto, geo
+			// 3 - permanently
+			if( $this->Forward->Options->Get('dashboard_language_mode', 1 ) == 3 )
 			{
 				$this->Forward->Translator->SetLocale( $this->Forward->Options->Get('dashboard_language', 'en_US' ) );
-				$this->Forward->Translator->Init();
 			}
+			
+			$this->Forward->Translator->Init();
 		}
 
 		protected function BuildNonces()

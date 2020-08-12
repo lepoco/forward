@@ -383,6 +383,17 @@ body {
 	font-size: 11px;
 }
 
+.stats-data-info {
+	display: block;
+	text-align: right;
+	width: 100%;
+	text-transform: uppercase;
+	font-weight: 700;
+	opacity: 0.4;
+	font-size: 9px;
+	letter-spacing: 2px;
+}
+
 .pie-header {
 	margin: 0;
 	margin-bottom: 5px;
@@ -485,6 +496,11 @@ body {
 	stroke: #00998c;
 }
 
+.bar-color-blue.ct-chart .ct-bar {
+	stroke: #00cfbe !important;
+	stroke-width: 20px;
+}
+
 .remove-record {
 	display: flex;
 	justify-content: flex-end;
@@ -542,5 +558,8 @@ body {
 	#add-record-form input, #add-record-form button {
 		width: 100%;
 		margin-bottom: 15px;
+	}
+	.bar-color-blue.ct-chart .ct-bar {
+		stroke-width: 5px !important;
 	}
 }

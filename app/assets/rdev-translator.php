@@ -23,6 +23,11 @@
 		public $locale;
 		public $domain;
 
+		private $locales = array(
+			'en_US',
+			'pl_PL',
+			'de_DE'
+		);
 		private $strings_array = array();
 
 		public function SetLocale( string $locale, string $domain = 'forward' ) : void
@@ -35,6 +40,14 @@
 		{
 			if( $this->locale == NULL )
 				$this->SetLanguage();
+
+			//Final check if language exists
+			$present = false;
+			foreach ($this->locales as $locale)
+				if( $this->locale == $locale )
+					$present = true;
+			if( !$present )
+				$this->locale = 'en_US';
 
 			if( file_exists( APPPATH . '/languages/' . $this->locale.'.json' ) )
 				if( self::IsValid( APPPATH . '/languages/' . $this->locale.'.json' ) )
