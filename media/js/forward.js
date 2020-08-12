@@ -230,7 +230,10 @@
 
 		//Adjust dashboard height
 		if( jQuery('html').height() > 992 )
+		{
+			jQuery('body').css('display', 'initial');
 			jQuery('#rdev-dashboard').css( 'height', jQuery('#forward').outerHeight() - jQuery('.navbar').outerHeight() + 'px' );
+		}
 
 		//Ctrl click
 		let ctrl_click = false;
