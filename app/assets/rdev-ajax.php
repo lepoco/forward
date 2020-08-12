@@ -312,15 +312,21 @@
 				'days' => array()
 			);
 
-			$days_in_month = cal_days_in_month( CAL_GREGORIAN, (int)date( 'm', time() ), (int)date( 'Y', time() ) );
-			for ( $i = 0; $i < $days_in_month; $i++ )
+			$current_date = array(
+				'y' => (int)date( 'Y', time() ),
+				'm' => (int)date( 'm', time() ),
+				'days' => cal_days_in_month( CAL_GREGORIAN, (int)date( 'm', time() ), (int)date( 'Y', time() ) )
+			);
+			for ( $i = 0; $i < $current_date['days']; $i++ )
 			{ 
 				$data[ 'days' ][ $i ] = 0;
 			}
 
 			foreach ( $query as $visitor )
-			{
-				$data['days'][(int)date( 'd', strtotime( $visitor['visitor_date'] ))]++;
+			{	
+				$record_time = strtotime( $visitor['visitor_date'] );
+				if( (int)date( 'Y', $record_time ) == $current_date['y'] && (int)date( 'm', $record_time ) == $current_date['m'] )
+					$data[ 'days' ][ (int)date( 'd', $record_time ) ]++;
 
 				if( isset( $data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ] ) )
 					$data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ]++;

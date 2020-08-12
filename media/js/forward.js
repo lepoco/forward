@@ -184,6 +184,15 @@
 	}
 
 	/**
+	* isMobile
+	* Are we in mobile mode
+	*/
+	function isMobile()
+	{
+		return ( jQuery('html').height() < 992 );
+	}
+
+	/**
 	* show_hide_password
 	* Hides or shows the password in the supported form field
 	*/
@@ -384,7 +393,7 @@
 		consoleLog( 'The functions for page Dashboard have been loaded.' );
 
 		/** Adjust dashboard height for desktop page **/
-		if( jQuery('html').height() > 992 )
+		if( !isMobile() )
 		{
 			jQuery('body').css('display', 'initial');
 			jQuery('#rdev-dashboard').css( 'height', jQuery('#forward').outerHeight() - jQuery('.navbar').outerHeight() + 'px' );
@@ -459,7 +468,7 @@
 					}
 					else
 					{
-						fillCharts( [], [], [], [] );
+						fillCharts( [''], [0.1], [''], [0.1] );
 						barChartAnimate([]);
 					}
 				},
@@ -474,13 +483,24 @@
 
 		function barChartAnimate( days )
 		{
+			let is_mobile = isMobile();
+
 			let t = new Chartist.Bar(".ct-chart",{
 				labels: bar_chart_labels,
 				series: [days]
 			},{
 				height:bar_chart_height,
-				axisX:{position:"start"},
-				axisY:{position:"end"}}
+				axisX: {
+					position: 'start',
+					labelInterpolationFnc: function skipLabels(value, index)
+					{
+						if( is_mobile )
+							return index % 3  === 0 ? value : null;
+						else
+							return value;
+					}
+				},
+				axisY:{position:'end'}}
 			);
 
 			let a = 0;
@@ -520,7 +540,10 @@
 					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
 					jQuery(this).addClass('ct-hover');
 					jQuery('.pie-browsers-label-' + current_series).addClass('li-hover');
-					jQuery('#pie-browsers-count').html( jQuery(this).children('path').attr('ct:value') );
+
+					let value = jQuery(this).children('path').attr('ct:value');
+					if( value != 0.1)
+						jQuery('#pie-browsers-count').html( value );
 				});
 				jQuery('.pie-browsers .ct-series').on('mouseout', function()
 				{
@@ -574,7 +597,10 @@
 					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
 					jQuery(this).addClass('ct-hover');
 					jQuery('.pie-platforms-label-' + current_series).addClass('li-hover');
-					jQuery('#pie-platforms-count').html( jQuery(this).children('path').attr('ct:value') );
+					
+					let value = jQuery(this).children('path').attr('ct:value');
+					if( value != 0.1)
+						jQuery('#pie-platforms-count').html( value );
 				});
 				jQuery('.pie-platforms .ct-series').on('mouseout', function()
 				{
@@ -619,6 +645,7 @@
 				return '';
 			}
 			record = records [ record ];
+			console.log( record );
 
 			let date = new Date( record[6] );
 			date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
@@ -643,6 +670,8 @@
 
 			ajaxRecordData( record[0], function(e)
 			{
+				console.log(e);
+				
 				let agents_keys = Object.keys( e.agents );
 				let agents_names = [];
 				let agents_values = [];
