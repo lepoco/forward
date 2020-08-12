@@ -539,4 +539,8 @@ body {
 	.navbar-separator {
 		display: none !important;
 	}
+	#add-record-form input, #add-record-form button {
+		width: 100%;
+		margin-bottom: 15px;
+	}
 }
