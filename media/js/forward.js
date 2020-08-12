@@ -432,8 +432,10 @@
 		}
 		let clipboard_link = new ClipboardJS('.shorted-url');
 		let clipboard_card = new ClipboardJS('.links-card');
+		let clipboard_button = new ClipboardJS('#preview-record-copy > button');
 		clipboard_link.on('success', function(e){clipboardAlert();});
 		clipboard_card.on('success', function(e){clipboardAlert();});
+		clipboard_button.on('success', function(e){clipboardAlert();});
 
 		/** Get record data via ajax **/
 		function ajaxRecordData( rid, ondone )
@@ -595,7 +597,7 @@
 			jQuery( '#preview-record-slug' ).html( '/' + record[3] );
 			jQuery( '#preview-record-url' ).html( record[4] );
 			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
-			jQuery( '#preview-record-copy > button' ).attr( 'data-clipboard-text',  record[4] );
+			jQuery( '#preview-record-copy > button' ).attr( 'data-clipboard-text',  forward.baseurl + record[3] );
 			jQuery( '#preview-record-copy > button' ).attr( 'data-record-id',  record[0] );
 			jQuery( '#preview-record-share > button' ).attr( 'data-record-url',  record[4] );
 			jQuery( '#preview-record-delete > button' ).attr( 'data-record-id',  record[0] );
@@ -633,82 +635,79 @@
 			} );
 		}
 
-		jQuery(function()
+		function ajaxAddRecord()
 		{
-			function AjaxAddRecord()
-			{
-				if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
-				if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
-				
-				jQuery.ajax({
-					url: forward.ajax,
-					type:'post',
-					data:jQuery("#add-record-form").serialize(),
-					success:function(e)
+			if(jQuery('#add-alert').is(':visible')){jQuery('#add-alert').slideToggle(400,function(){jQuery('#add-alert').hide();});}
+			if(jQuery('#add-success').is(':visible')){jQuery('#add-success').slideToggle(400,function(){jQuery('#add-success').hide();});}
+			
+			jQuery.ajax({
+				url: forward.ajax,
+				type:'post',
+				data:jQuery("#add-record-form").serialize(),
+				success:function(e)
+				{
+					if(e == 's01')
 					{
-						if(e == 's01')
+						jQuery('#add-success').slideToggle();
+
+						jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
+
+
+						let slug = jQuery('#input-record-slug').val();
+						if(slug == '')
 						{
-							jQuery('#add-success').slideToggle();
-
-							jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
-
-
-							let slug = jQuery('#input-record-slug').val();
-							if(slug == '')
-							{
-								slug = jQuery('#input-rand-value').val();
-							}
-							let url = forward.baseurl + slug;
-							let target = jQuery('#input-record-url').val();
-							let target_shorted = jQuery('#input-record-url').val();
-							let date = new Date();
-							date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);;
-
-							jQuery("#records_list div:nth-child(2)").after('<div class="card links-card" data-clipboard-text="'+url+'"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
-
-							window.setTimeout(function(){
-								jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
-							}, 3000);
+							slug = jQuery('#input-rand-value').val();
 						}
-						else
+						let url = forward.baseurl + slug;
+						let target = jQuery('#input-record-url').val();
+						let target_shorted = jQuery('#input-record-url').val();
+						let date = new Date();
+						date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);;
+
+						jQuery("#records_list div:nth-child(2)").after('<div class="card links-card" data-clipboard-text="'+url+'"><div class="card-body"><div><small>'+date+'</small><h2><a target="_blank" rel="noopener" href="'+url+'">/'+slug+'</a></h2><p><a target="_blank" rel="noopener" href="'+target_shorted+'">'+target+'...</a></p></div><span>0</span></div></div>');;
+
+						window.setTimeout(function(){
+							jQuery('#add-success').slideToggle(400, function(){jQuery('#add-success').hide();});
+						}, 3000);
+					}
+					else
+					{
+						
+						let error_text = __T('e1');
+
+						if(e == 'e07')
 						{
-							
-							let error_text = __T('e1');
-
-							if(e == 'e07')
-							{
-								error_text = __T('e7');
-							}
-							else if(e == 'e08')
-							{
-								error_text = __T('e8');
-							}
-							else if(e == 'e10')
-							{
-								error_text = __T('e10');
-							}
-
-							jQuery('#error_text').html(error_text);
-							jQuery('#add-alert').slideToggle();
+							error_text = __T('e7');
 						}
-						console.log(e);
-					},
-					fail:function(xhr, textStatus, errorThrown){
-						console.log(xhr);
-						console.log(textStatus);
-						console.log(errorThrown);
+						else if(e == 'e08')
+						{
+							error_text = __T('e8');
+						}
+						else if(e == 'e10')
+						{
+							error_text = __T('e10');
+						}
+
+						jQuery('#error_text').html(error_text);
 						jQuery('#add-alert').slideToggle();
 					}
-				});
-			}
-			jQuery('#add-record-form').on('submit', function(e){
-				e.preventDefault();
-				AjaxAddRecord();
+					console.log(e);
+				},
+				fail:function(xhr, textStatus, errorThrown){
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(errorThrown);
+					jQuery('#add-alert').slideToggle();
+				}
 			});
-			jQuery('#add-record-send').on('click', function(e) {
-				e.preventDefault();
-				AjaxAddRecord();
-			});
+		}
+		jQuery('#add-record-form').on('submit', function(e){
+			e.preventDefault();
+			ajaxAddRecord();
+		});
+		jQuery('#add-record-send').on('click', function(e) {
+			e.preventDefault();
+			ajaxAddRecord();
 		});
 
 		jQuery('#delete-selected-record').on('click', function(e){
@@ -728,7 +727,8 @@
 			}
 		});
 
-		jQuery('#confirm-delete-record').on('click', function(e){
+		jQuery('#confirm-delete-record').on('click', function(e)
+		{
 			let record_id = jQuery(this).data('recordId');
 
 			jQuery.ajax({
