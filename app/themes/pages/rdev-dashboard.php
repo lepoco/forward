@@ -27,7 +27,7 @@
 								</div>
 							</div>
 <?php $c = 0; foreach ($this->Records() as $record): $c++; ?>
-							<div class="card links-card" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>" data-id="<?php echo $record['record_id']; ?>">
+							<div class="card links-card record-<?php echo $record['record_id']; ?>" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>" data-id="<?php echo $record['record_id']; ?>">
 								<div class="card-body">
 									<div>
 										<small><?php echo (new DateTime($record['record_created']))->format('Y-m-d'); ?></small>
@@ -124,15 +124,29 @@
 									<div class="col-12">
 										<div id="single-record">
 											<div class="row">
-												<div class="col-10 col-md-11">
+												<div class="col-12">
 													<p class="record-shortdata">created <span id="preview-record-date"></span> | <a href="#" id="preview-record-user"></a></p>
 													<h2 id="preview-record-slug"></h2>
 													<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
 												</div>
+												<div class="col-12 record-buttons">
+													<ul class="list-inline" style="margin-top:15px;">
+														<li class="list-inline-item" id="preview-record-copy"><button class="btn btn-outline-warning">COPY</button></li>
+														<li class="list-inline-item" id="preview-record-share"><button class="btn btn-outline-warning">SHARE</button></li>
 <?php if ($this->Forward->User->IsManager()): ?>
-													<div class="col-2 col-md-1 remove-record">
-														<a href="#" id="delete-record-icon"><svg viewBox="0 0 24 24"><path d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19M8,19H16V12.2L10.46,9H8V19Z" /></svg></a>
+														<li class="list-inline-item" id="preview-record-delete"><button id="delete-selected-record" class="btn btn-outline-warning">DELETE</button></li>
+<?php endif; ?>
+													</ul>
+												</div>
+<?php if ($this->Forward->User->IsManager()): ?>
+												<div class="col-12">
+													<div id="delete-record-alert" class="alert alert-danger" role="alert" style="display: none;">
+														<h4 class="alert-heading">Warning!</h4>
+														<p>Are you sure you want to delete selected record? If yes, the record will be hidden, but its data will be kept. It will only be recovered by editing the database.</p>
+														<hr>
+														<button id="confirm-delete-record" class="btn btn-outline-danger">Delete record</button> <button id="cancel-delete-record" class="btn btn-outline-secondary">Cancel</button>
 													</div>
+												</div>
 <?php endif; ?>
 											</div>
 											<div class="row">

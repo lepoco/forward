@@ -310,9 +310,9 @@
 				"('js_redirect', 'false')"
 			);
 
-			$q1 = Crypter::BaseSalter(6);
-			$q2 = Crypter::BaseSalter(6);
-			$q3 = Crypter::BaseSalter(6);
+			$q1 = Crypter::BaseSalter(5);
+			$q2 = Crypter::BaseSalter(5);
+			$q3 = Crypter::BaseSalter(5);
 
 			$database->query("INSERT IGNORE INTO forward_records (record_name, record_display_name, record_url) VALUES " . 
 				"('" . strtolower( $q1 ) . "', '" . strtoupper( $q1 ) . "', 'https://github.com/rapiddev/Forward'), " .

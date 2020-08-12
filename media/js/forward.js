@@ -4,30 +4,60 @@
   * Licensed under MIT (https://github.com/rapiddev/Forward/blob/master/LICENSE)
   */
 
-	//Custom forEach for Array
+	/**
+	* Array.prototype.forEach
+	* Lets use foreach
+	*/
 	Array.prototype.forEach||(Array.prototype.forEach=function(r){let t=this.length;if("function"!=typeof r)throw new TypeError;for(let o=arguments[1],h=0;h<t;h++)h in this&&r.call(o,this[h],h,this)});
 
-	//JSON Verify
-	function jsonParse(string)
-	{
-		if(/^[\],:{}\s]*$/.test(string.replace(/\\["\\\/bfnrtu]/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,"")))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+	/**
+	* jsonParse
+	* Verifies that a text string can be represented as json
+	*/
+	function jsonParse(string){if(string==''){return false;}if(/^[\],:{}\s]*$/.test(string.replace(/\\["\\\/bfnrtu]/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,""))){return true;}else{return false;}}
 
-	//Fancy logging
-	function console_log(message, color="#fff"){console.log("%cForward: "+"%c"+message, "color:#dc3545;font-weight: bold;", "color: "+color);}
+	/**
+	* consoleLog
+	* Adds a nice way to display logs
+	*/
+	function consoleLog(message, color="#fff"){console.log("%cForward: "+"%c"+message, "color:#dc3545;font-weight: bold;", "color: "+color);}
 	console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2020 RapidDev\nhttps://rdev.cc/\n==============================");
 
-	//Translator
-	function __T(text)
+	/**
+	* DOMContentLoaded
+	* The function starts when all resources are loaded
+	*/
+	document.addEventListener('DOMContentLoaded', function()
 	{
-		if(typeof translator == 'undefined')
+		if(forward.usernonce != jQuery('head').attr('user-nonce'))
+		{
+			console.log(forward);
+			if(forward.page == 'install')
+			{
+				themeFunctions();
+			}
+
+			throw new Error('User nonce compliance not detected.!');
+		}
+
+		consoleLog( 'JavaScript loaded successfully' );
+		consoleLog( 'Base url: ' + forward.baseurl  );
+		if(forward.pagenow != 'home')
+			consoleLog( 'Ajax gate: ' + forward.ajax  );
+		consoleLog( 'Page now: ' + forward.pagenow  );
+		consoleLog( 'Nonce: ' + forward.usernonce  );
+
+		themeFunctions();
+	});
+
+
+	/**
+	* __T
+	* Translates the text string if it exists in the translator object
+	*/
+	function __T( text )
+	{
+		if( typeof translator == 'undefined' )
 		{
 			return text;
 		}
@@ -51,49 +81,97 @@
 		}
 	}
 
-	//On DOM loaded, veryfiy and run
-	document.addEventListener('DOMContentLoaded', function()
-	{
-		if(forward.usernonce != jQuery('head').attr('user-nonce'))
-		{
-			console.log(forward);
-			if(forward.page == 'install')
-			{
-				themeFunctions();
-			}
-
-			throw new Error('User nonce compliance not detected.!');
-		}
-
-		console_log( 'JavaScript loaded successfully' );
-		console_log( 'Base url: ' + forward.baseurl  );
-		if(forward.pagenow != 'home')
-			console_log( 'Ajax gate: ' + forward.ajax  );
-		console_log( 'Page now: ' + forward.pagenow  );
-		console_log( 'Nonce: ' + forward.usernonce  );
-
-		themeFunctions();
-	});
-
-	function PlatformTranslator( name )
+	/**
+	* platformTranslator
+	* Translate platform code from database into nicer name
+	*/
+	function platformTranslator( name )
 	{
 		switch( name )
 		{
-			case 'windows':
-				return 'Windows (?)';
+			case __T('unknown'):
+				return 'Unknown';
 			case 'windows_10':
 				return 'Windows 10';
+			case 'windows_81':
+				return 'Windows 8.1';
+			case 'windows_8':
+				return 'Windows 8';
+			case 'windows_7':
+				return 'Windows 7';
+			case 'windows_vista':
+				return 'Windows Vista';
+			case 'windows_xp':
+				return 'Windows XP';
+			case 'windows':
+				return 'Windows (?)';
+			case 'windows_ce':
+				return 'Windows CE';
+			case 'apple':
+				return 'Apple iMac / MacBook';
+			case 'linux':
+				return 'Linux';
+			case 'os_2':
+				return 'OS/2';
+			case 'beos':
+				return 'BeOS';
+			case 'iphone':
+				return 'Apple iPhone';
+			case 'ipod':
+				return 'Apple iPod';
+			case 'ipad':
+				return 'Apple iPad';
+			case 'apple_tv':
+				return 'Apple TV';
+			case 'blackberry':
+				return 'BlackBerry';
+			case 'nokia':
+				return 'Nokia';
+			case 'freebsd':
+				return 'FreeBSD';
+			case 'openbsd':
+				return 'OpenBSD';
+			case 'netbsd':
+				return 'NetBSD';
+			case 'sunos':
+				return 'SunOS';
+			case 'opensolaris':
+				return 'Open Solaris';
 			case 'android':
 				return 'Android';
+			case 'sony_playstation':
+				return 'Sony PlayStation';
+			case 'roku':
+				return 'Roku';
+			case 'terminal':
+				return 'Terminal';
+			case 'fire_os':
+				return 'Fire OS';
+			case 'smart_tv':
+				return 'Smart TV';
+			case 'chrome_os':
+				return 'Chrome OS';
+			case 'java_android':
+				return 'Java / Android';
+			case 'postman':
+				return 'Postman';
+			case 'iframely':
+				return 'iFramely';
 			default:
 				return name;
 		}
 	}
 
-	function AgentTranslator( name )
+	/**
+	* agentTranslator
+	* Translate browser code from database into nicer name
+	*/
+	function agentTranslator( name )
 	{
 		switch( name )
 		{
+			case __T('unknown'):
+				return 'Unknown';
 			case 'chrome':
 				return 'Google Chrome';
 			case 'edge':
@@ -105,40 +183,57 @@
 		}
 	}
 
+	/**
+	* show_hide_password
+	* Hides or shows the password in the supported form field
+	*/
+	jQuery('#show_hide_password a').on('click', function(event)
+	{
+		event.preventDefault();
+
+		if(jQuery('#show_hide_password input').attr("type") == "text")
+		{
+			jQuery('#show_hide_password input').attr('type', 'password');
+		}
+		else if(jQuery('#show_hide_password input').attr("type") == "password")
+		{
+			jQuery('#show_hide_password input').attr('type', 'text');
+		}
+	});
+
+	/**
+	* themeFunctions
+	* Triggers the functions of the selected page
+	*/
 	function themeFunctions()
 	{
-		jQuery("#show_hide_password a").on('click', function(event) {
-			event.preventDefault();
-			if(jQuery('#show_hide_password input').attr("type") == "text"){
-				jQuery('#show_hide_password input').attr('type', 'password');
-			}else if(jQuery('#show_hide_password input').attr("type") == "password"){
-				jQuery('#show_hide_password input').attr('type', 'text');
-			}
-		});
-
-		console_log( 'The main functions of the theme have loaded correctly.' );
+		consoleLog( 'The main functions of the theme have loaded correctly.' );
 
 		if(forward.pagenow == 'install')
 		{
-			PageInstall();
+			pageInstall();
 		}
 		else if(forward.pagenow == 'dashboard')
 		{
-			PageDashboard();
+			pageDashboard();
 		}
 		else if(forward.pagenow == 'login')
 		{
-			PageLogin();
+			pageLogin();
 		}
 		else
 		{
-			console_log( 'This page has no special functions.' );
+			consoleLog( 'This page has no special functions.' );
 		}
 	}
 
-	function PageInstall()
+	/**
+	* pageInstall
+	* Features for the Install page
+	*/
+	function pageInstall()
 	{
-		console_log( 'The functions for page Install have been loaded.' );
+		consoleLog( 'The functions for page Install have been loaded.' );
 		jQuery("#input_user_password").on("change paste keyup",function()
 		{
 			let e=jQuery(this).val(),s=zxcvbn(e);""!==e?jQuery(".def_password--strength").html("Strength: <strong>"+{0:"Worst ☹",1:"Bad ☹",2:"Weak ☹",3:"Good 🙃",4:"Strong 🙂"}[s.score]+"</strong><br/><span class='feedback'>"+s.feedback.warning+" "+s.feedback.suggestions+"</span"):jQuery(".def_password--strength").html("")
@@ -226,18 +321,76 @@
 		});
 	}
 
-	function PageDashboard()
+	/**
+	* pageLogin
+	* Features for the Login page
+	*/
+	function pageLogin()
 	{
-		console_log( 'The functions for page Dashboard have been loaded.' );
+		consoleLog( 'The functions for page Login have been loaded.' );
 
-		//Adjust dashboard height
+		jQuery("#passsword").on("change paste keyup",function()
+		{
+			let e=jQuery(this).val(),s=zxcvbn(e);""!==e?jQuery(".def_password--strength").html("Strength: <strong>"+{0:"Worst ☹",1:"Bad ☹",2:"Weak ☹",3:"Good 🙃",4:"Strong 🙂"}[s.score]+"</strong><br/><span class='feedback'>"+s.feedback.warning+" "+s.feedback.suggestions+"</span"):jQuery(".def_password--strength").html("")
+		});
+
+		jQuery('#button-form').on('click', function(e)
+		{
+			e.preventDefault();
+			LoginQuery();
+		});
+
+		jQuery('#login-form').on('submit', function(e)
+		{
+			e.preventDefault();
+			LoginQuery();
+		});
+
+		function LoginQuery()
+		{
+			if(jQuery('#login-alert').is(':visible'))
+			{
+				jQuery('#login-alert').slideToggle();
+			}
+
+			jQuery.ajax({
+				url: forward.ajax,
+				type: 'post',
+				data: jQuery("#login-form").serialize(),
+				success: function(e)
+				{
+					if(e == 's01')
+					{
+						location.reload();
+					}
+					else
+					{
+						jQuery('#login-alert').slideToggle();
+					}
+				},
+				fail:function(xhr, textStatus, errorThrown){
+					jQuery('#login-alert').slideToggle();
+				}
+			});
+		}
+	}
+
+	/**
+	* pageDashboard
+	* Features for the Dashboard page
+	*/
+	function pageDashboard()
+	{
+		consoleLog( 'The functions for page Dashboard have been loaded.' );
+
+		/** Adjust dashboard height for desktop page **/
 		if( jQuery('html').height() > 992 )
 		{
 			jQuery('body').css('display', 'initial');
 			jQuery('#rdev-dashboard').css( 'height', jQuery('#forward').outerHeight() - jQuery('.navbar').outerHeight() + 'px' );
 		}
 
-		//Ctrl click
+		/** CTRL pressed **/
 		let ctrl_click = false;
 		jQuery( document ).keydown( function( event )
 		{
@@ -247,7 +400,6 @@
 			if( event.which == 17 )
 				ctrl_click = true;
 		} );
-
 		jQuery( document ).keyup( function()
 		{
 			ctrl_click = false;
@@ -261,19 +413,15 @@
 			if( jQuery(this).data()['id'] in records )
 			{
 				console.log(records);
-				FillRecordData( records[ jQuery(this).data()['id'] ] );
+				fillRecordData( jQuery(this).data()['id'] );
 			}
-			
-
 			if(ctrl_click)
 			{
-				console_log('Links card pressed with ctrl button.');
-				//clipboard_alert();
+				consoleLog('Links card pressed with ctrl button.');
+				//clipboardAlert();
 			}
-
 		});
-
-		function clipboard_alert(){
+		function clipboardAlert(){
 			if(jQuery('#links-copied').is(':hidden'))
 			{
 				jQuery('#links-copied').slideToggle();
@@ -284,13 +432,13 @@
 		}
 		let clipboard_link = new ClipboardJS('.shorted-url');
 		let clipboard_card = new ClipboardJS('.links-card');
-		clipboard_link.on('success', function(e){clipboard_alert();});
-		clipboard_card.on('success', function(e){clipboard_alert();});
+		clipboard_link.on('success', function(e){clipboardAlert();});
+		clipboard_card.on('success', function(e){clipboardAlert();});
 
-		function AjaxRecordData( rid, ondone )
+		/** Get record data via ajax **/
+		function ajaxRecordData( rid, ondone )
 		{
 			let record_id = rid;
-
 			jQuery.ajax({
 				url: forward.ajax,
 				type:'post',
@@ -301,6 +449,7 @@
 				},
 				success: function( e )
 				{
+					console.log(e);
 					if( jsonParse( e ) )
 					{
 						let result = JSON.parse(e);
@@ -316,27 +465,23 @@
 			});
 		}
 
-		function FillCharts( bn, bv, pn, pv )
+		/** Fill charts with passed data **/
+		function FillCharts( agents_names, agents_values, platforms_names, platforms_values )
 		{
 			let letterbox = [
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
 			];
 
-			console.log(bn);
-			console.log(bv);
-			console.log(pn);
-			console.log(pv);
-
 			//Browsers labels
 			jQuery('.pie-browsers-labels').empty();
-			for (var i = 0; i < bn.length; i++)
+			for (var i = 0; i < agents_names.length; i++)
 			{
-				jQuery('.pie-browsers-labels').append('<li class="pie-browsers-label-' + letterbox[i] + '">' + bn[i] + '</li>');
+				jQuery('.pie-browsers-labels').append('<li class="pie-browsers-label-' + letterbox[i] + '">' + agents_names[i] + '</li>');
 			}
 
 			//Browsers pie
 			let browsers_chart = new Chartist.Pie('.pie-browsers', {
-				series: bv
+				series: agents_values
 			}, {
 				donut: true,
 				showLabel: false
@@ -382,13 +527,13 @@
 
 			//Platforms labels
 			jQuery('.pie-platforms-labels').empty();
-			for (var i = 0; i < pn.length; i++)
+			for (var i = 0; i < platforms_names.length; i++)
 			{
-				jQuery('.pie-platforms-labels').append('<li class="pie-platforms-label-' + letterbox[i] + '">' + pn[i] + '</li>');
+				jQuery('.pie-platforms-labels').append('<li class="pie-platforms-label-' + letterbox[i] + '">' + platforms_names[i] + '</li>');
 			}
 			//Platforms pie
 			let platforms_chart = new Chartist.Pie('.pie-platforms', {
-				series: pv
+				series: platforms_values
 			}, {
 				donut: true,
 				showLabel: false
@@ -432,10 +577,16 @@
 				}
 			});
 		}
-
-		function FillRecordData( record )
+		
+		/** Populate the record data based on the data **/
+		function fillRecordData( record )
 		{
-			console.log(record);
+			if( !(record in records) )
+			{
+				console.log('fillRecordData, - the specified record [' + record + '] does not exist in the object \'let records\'');
+				return '';
+			}
+			record = records [ record ];
 
 			let date = new Date( record[6] );
 			date = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
@@ -444,6 +595,11 @@
 			jQuery( '#preview-record-slug' ).html( '/' + record[3] );
 			jQuery( '#preview-record-url' ).html( record[4] );
 			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
+			jQuery( '#preview-record-copy > button' ).attr( 'data-clipboard-text',  record[4] );
+			jQuery( '#preview-record-copy > button' ).attr( 'data-record-id',  record[0] );
+			jQuery( '#preview-record-share > button' ).attr( 'data-record-url',  record[4] );
+			jQuery( '#preview-record-delete > button' ).attr( 'data-record-id',  record[0] );
+			jQuery( '#confirm-delete-record' ).attr( 'data-record-id',  record[0] );
 			jQuery( '#preview-record-user' ).attr( 'href',  forward.baseurl + 'users/' + record[1] );
 			for (let i = 0; i < users.length; i++)
 			{
@@ -453,14 +609,14 @@
 				}
 			}
 
-			AjaxRecordData( record[0], function(e)
+			ajaxRecordData( record[0], function(e)
 			{
 				let agents_keys = Object.keys( e.agents );
 				let agents_names = [];
 				let agents_values = [];
 				for (let i = 0; i < agents_keys.length; i++)
 				{
-					agents_names.push( AgentTranslator( visitor_data.agents[ agents_keys[i] ] ) );
+					agents_names.push( agentTranslator( visitor_data.agents[ agents_keys[i] ] ) );
 					agents_values.push( e.agents[ agents_keys[i] ] );
 				}
 
@@ -469,7 +625,7 @@
 				let platforms_values = [];
 				for (let i = 0; i < platforms_keys.length; i++)
 				{
-					platforms_names.push( PlatformTranslator( visitor_data.platforms[ platforms_keys[i] ] ) );
+					platforms_names.push( platformTranslator( visitor_data.platforms[ platforms_keys[i] ] ) );
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );
 				}
 
@@ -555,58 +711,69 @@
 			});
 		});
 
-		if( Object.keys( records ).length > 0 )
-		{
-			FillRecordData( records[ Object.keys( records ).length ] );
-		}
-	}
-
-	function PageLogin()
-	{
-		console_log( 'The functions for page Login have been loaded.' );
-
-		jQuery("#passsword").on("change paste keyup",function()
-		{
-			let e=jQuery(this).val(),s=zxcvbn(e);""!==e?jQuery(".def_password--strength").html("Strength: <strong>"+{0:"Worst ☹",1:"Bad ☹",2:"Weak ☹",3:"Good 🙃",4:"Strong 🙂"}[s.score]+"</strong><br/><span class='feedback'>"+s.feedback.warning+" "+s.feedback.suggestions+"</span"):jQuery(".def_password--strength").html("")
-		});
-
-		jQuery('#button-form').on('click', function(e){
+		jQuery('#delete-selected-record').on('click', function(e){
 			e.preventDefault();
-			LoginQuery();
-		});
-
-		jQuery('#login-form').on('submit', function(e){
-			e.preventDefault();
-			LoginQuery();
-		});
-
-		function LoginQuery()
-		{
-			if(jQuery('#login-alert').is(':visible'))
+			if(jQuery('#delete-record-alert').is(':hidden'))
 			{
-				jQuery('#login-alert').slideToggle();
+				jQuery('#delete-record-alert').slideToggle();
 			}
+		});
+
+		jQuery('#cancel-delete-record').on('click', function(e){
+			e.preventDefault();
+
+			if(jQuery('#delete-record-alert').is(':visible'))
+			{
+				jQuery('#delete-record-alert').slideToggle();
+			}
+		});
+
+		jQuery('#confirm-delete-record').on('click', function(e){
+			let record_id = jQuery(this).data('recordId');
 
 			jQuery.ajax({
 				url: forward.ajax,
-				type: 'post',
-				data: jQuery("#login-form").serialize(),
-				success: function(e)
+				type:'post',
+				data: {
+					action: 'remove_record',
+					nonce: forward.removerecord,
+					input_record_id: record_id
+				},
+				success: function( e )
 				{
-					console.log(e);
+					if( e == 's01' )
+					{
+						if(jQuery( '.record-' + record_id).is(':visible'))
+						{
+							jQuery( '.record-' + record_id).slideToggle(400, function()
+							{
+								jQuery( '.record-' + record_id).remove();
 
-					if(e == 's01')
-					{
-						location.reload();
-					}
-					else
-					{
-						jQuery('#login-alert').slideToggle();
+								let prev_record = jQuery("#records_list div:nth-child(3)").attr('class').split(' ')[2];
+
+								console.log( records[ parseInt( prev_record.substr(7) ) ] );
+
+								fillRecordData( parseInt( prev_record.substr(7) ) );
+							});
+						}
+
+						if(jQuery('#delete-record-alert').is(':visible'))
+						{
+							jQuery('#delete-record-alert').slideToggle();
+						}
 					}
 				},
-				fail:function(xhr, textStatus, errorThrown){
-					jQuery('#login-alert').slideToggle();
+				fail:function(xhr, textStatus, errorThrown)
+				{
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(errorThrown);
 				}
 			});
+		});
+
+		if( Object.keys( records ).length > 0 )
+		{
+			fillRecordData( Object.keys( records )[ Object.keys( records ).length - 1 ] );
 		}
 	}

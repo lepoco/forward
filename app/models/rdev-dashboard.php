@@ -36,10 +36,11 @@
 			$this->GetLastVisitors();
 
 			$this->translator = array(
-				'e1'  => $this->__('Something went wrong!'),
-				'e7'  => $this->__('You must provide a URL!'),
-				'e8'  => $this->__('A record with this ID already exists!'),
-				'e10' => $this->__('The URL you entered is not valid!')
+				'unknown' => $this->__('Unknown'),
+				'e1'      => $this->__('Something went wrong!'),
+				'e7'      => $this->__('You must provide a URL!'),
+				'e8'      => $this->__('A record with this ID already exists!'),
+				'e10'     => $this->__('The URL you entered is not valid!')
 			);
 		}
 
@@ -169,7 +170,7 @@
 		public function NewRecord() : string
 		{
 			if( $this->new_record == '')
-				$this->new_record = strtoupper( Crypter::BaseSalter(6) );
+				$this->new_record = strtoupper( Crypter::BaseSalter(5) );
 
 			return $this->new_record;
 		}

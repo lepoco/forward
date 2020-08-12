@@ -280,7 +280,7 @@
 				filter_var( $_POST[ 'input_record_id' ], FILTER_VALIDATE_INT )
 			);
 
-			$this->Finish( $data, true );
+			$this->Finish( self::CODE_SUCCESS );
 		}
 
 		/**

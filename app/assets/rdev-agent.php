@@ -149,7 +149,7 @@
 		const PLATFORM_ROKU = 'roku';
 		const PLATFORM_APPLE_TV = 'apple_tv';
 		const PLATFORM_TERMINAL = 'terminal';
-		const PLATFORM_FIRE_OS = 'fire_is';
+		const PLATFORM_FIRE_OS = 'fire_os';
 		const PLATFORM_SMART_TV = 'smart_tv';
 		const PLATFORM_CHROME_OS = 'chrome_os';
 		const PLATFORM_JAVA_ANDROID = 'java_android'; //Java/Android
