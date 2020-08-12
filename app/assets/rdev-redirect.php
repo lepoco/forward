@@ -133,17 +133,40 @@
 		{
 			if( $this->Forward->Options->Get( 'store_ip_addresses', true ) )
 			{
-				if ( !empty( $_SERVER['HTTP_CLIENT_IP'] ) )
+				if ( isset( $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] ) )
 				{
-					return $_SERVER['HTTP_CLIENT_IP'];
+					$_SERVER['REMOTE_ADDR'] = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
+					$_SERVER['HTTP_CLIENT_IP'] = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
 				}
-				elseif ( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) )
+
+				$client = @$_SERVER['HTTP_CLIENT_IP'];
+				$remote = $_SERVER['REMOTE_ADDR'];
+
+				$forward = '';
+				if( array_key_exists( 'HTTP_X_FORWARDED_FOR', $_SERVER ) && !empty( $_SERVER[ 'HTTP_X_FORWARDED_FOR' ] ) )
 				{
-					return $_SERVER['HTTP_X_FORWARDED_FOR'];
+					if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',')>0)
+					{
+						$addr = explode( ",", $_SERVER[ 'HTTP_X_FORWARDED_FOR' ] );
+						$forward = trim($addr[0]);
+					}
+					else
+					{
+						$forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+					}
+				}
+
+				if( filter_var( $client, FILTER_VALIDATE_IP ) )
+				{
+					return $client;
+				}
+				elseif( filter_var( $forward, FILTER_VALIDATE_IP ) )
+				{
+					return $forward;
 				}
 				else
 				{
-					return ( !empty( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '' );
+					return $remote;
 				}
 			}
 			else

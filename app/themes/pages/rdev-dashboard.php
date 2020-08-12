@@ -39,7 +39,7 @@
 							</div>
 <?php endforeach; ?>
 						</div>
-						<div id="dashboard-box" class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;height: inherit;overflow: auto;">
+						<div id="dashboard-box" class="col-12 col-lg-9" style="padding-top:32px;padding-bottom:15px;min-height: 100%;height: inherit; overflow: auto;">
 							<div class="container-fluid">
 								<div class="row">
 <?php if ($this->Forward->User->IsManager()): ?>
@@ -195,6 +195,22 @@
 														</div>
 														<div id="record-locations" class="col-12 col-md-6">
 														</div>
+													</div>
+												</div>
+												<div class="col-12">
+													<div class="overflow-auto" style="height: 150px;">
+														<table class="table table-sm">
+															<thead>
+																<tr>
+																	<th scope="col">#</th>
+																	<th scope="col">IP</th>
+																	<th scope="col">Lookup</th>
+																</tr>
+															</thead>
+															<tbody id="records-ip-list">
+																
+															</tbody>
+														</table>
 													</div>
 												</div>
 												<div class="col-12">

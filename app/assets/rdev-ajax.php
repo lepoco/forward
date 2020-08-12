@@ -309,7 +309,8 @@
 				'agents' => array(),
 				'origins' => array(),
 				'platforms' => array(),
-				'days' => array()
+				'days' => array(),
+				'ip' => array()
 			);
 
 			$current_date = array(
@@ -327,6 +328,11 @@
 				$record_time = strtotime( $visitor['visitor_date'] );
 				if( (int)date( 'Y', $record_time ) == $current_date['y'] && (int)date( 'm', $record_time ) == $current_date['m'] )
 					$data[ 'days' ][ (int)date( 'd', $record_time ) ]++;
+
+				if( isset( $data[ 'ip' ][ $visitor[ 'visitor_ip' ] ] ) )
+					$data[ 'ip' ][ $visitor[ 'visitor_ip' ] ]++;
+				else
+					$data[ 'ip' ][ $visitor[ 'visitor_ip' ] ] = 1;
 
 				if( isset( $data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ] ) )
 					$data[ 'agents' ][ $visitor[ 'visitor_agent_id' ] ]++;

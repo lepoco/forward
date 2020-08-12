@@ -481,6 +481,32 @@
 			});
 		}
 
+		function iPLookup( ip, id )
+		{
+			if('geoip' in forward)
+			{
+				let construct = 'json/';
+
+				jQuery.getJSON( forward.geoip + construct + ip, function( data )
+				{
+					console.log(data);
+					/*var items = [];
+
+					jQuery.each( data, function( key, val ) {
+						items.push( "<li id='" + key + "'>" + val + "</li>" );
+					});
+
+					jQuery( "<ul/>", {
+						"class": "my-new-list",
+						html: items.join( "" )
+					}).appendTo( "body" );*/
+				});
+			}
+			
+
+			//ip-lookup-' + id + '
+		}
+
 		function barChartAnimate( days )
 		{
 			let is_mobile = isMobile();
@@ -671,7 +697,7 @@
 			ajaxRecordData( record[0], function(e)
 			{
 				console.log(e);
-				
+
 				let agents_keys = Object.keys( e.agents );
 				let agents_names = [];
 				let agents_values = [];
@@ -688,6 +714,18 @@
 				{
 					platforms_names.push( platformTranslator( visitor_data.platforms[ platforms_keys[i] ] ) );
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );
+				}
+
+				let ips = Object.keys( e.ip );
+
+				//http://ip-api.com/json/31.60.145.130
+				for (var i = 0; i < ips.length; i++)
+				{
+					if( ips[ i ] != '' )
+					{
+						iPLookup( ips[i], i );
+						jQuery('#records-ip-list').append('<tr><th scope="row">'+( i + 1 )+'</th><td>' + ips[i] + '</td><td class="ip-lookup-' + i + '">---</td></tr>');
+					}
 				}
 
 

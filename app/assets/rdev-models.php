@@ -101,6 +101,14 @@
 		protected $body_nonce;
 
 		/**
+		 * Site address for ip location
+		 *
+		 * @var string
+		 * @access protected
+		 */
+		protected $geoip = '';
+
+		/**
 		* __construct
 		* Class constructor
 		*
@@ -116,6 +124,8 @@
 			$this->name = $name;
 			$this->displayname = $displayname;
 			$this->themes = APPPATH . 'themes/';
+
+			$this->SetGeoIP();
 
 			$this->SetLanguage();
 
@@ -164,6 +174,11 @@
 		protected function AjaxNonce( $name )
 		{
 			return Crypter::Encrypt( 'ajax_' . $name . '_nonce', 'nonce' );
+		}
+
+		protected function SetGeoIP()
+		{
+			$this->geoip = ' https://freegeoip.app/';
 		}
 
 		protected function SetLanguage()
