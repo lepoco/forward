@@ -125,7 +125,7 @@
 										<div id="single-record">
 											<div class="row">
 												<div class="col-10 col-md-11">
-													<p class="record-shortdata">created <span id="preview-record-date"></span> | Leszek Pomian</p>
+													<p class="record-shortdata">created <span id="preview-record-date"></span> | <a href="#" id="preview-record-user"></a></p>
 													<h2 id="preview-record-slug"></h2>
 													<span><a id="preview-record-url" href="#" target="_blank" rel="noopener"></a></span>
 												</div>

@@ -444,6 +444,8 @@
 			jQuery( '#preview-record-slug' ).html( '/' + record[3] );
 			jQuery( '#preview-record-url' ).html( record[4] );
 			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
+			jQuery( '#preview-record-user' ).attr( 'href',  forward.baseurl + 'users/' + record[1] );
+			jQuery( '#preview-record-user' ).html( record[1] );
 
 
 			AjaxRecordData( record[0], function(e)
