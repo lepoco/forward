@@ -83,6 +83,8 @@
 				return 'Windows (?)';
 			case 'windows_10':
 				return 'Windows 10';
+			case 'android':
+				return 'Android';
 			default:
 				return name;
 		}

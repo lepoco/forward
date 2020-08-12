@@ -8,6 +8,7 @@ Forward is a simple PHP-based tool with which you can shorten links and collect 
 With the help of Forward you can collect information about:
 - The number of clicks on the link
 - The language of the browser the user has
+- Browser and platform detection
 - Where the click comes from (e.g., Facebook / YouTube)
 
 ## Dashboard
