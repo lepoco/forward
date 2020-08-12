@@ -321,6 +321,18 @@
 
 			return array();
 		}
+
+		public function GetUsers() : array
+		{
+			$query = $this->Forward->Database->query( "SELECT * FROM forward_users" )->fetchAll();
+
+			if( !empty( $query ) )
+			{
+				return $query;
+			}
+
+			return array();
+		}
 	}
 
 ?>

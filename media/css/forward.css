@@ -338,6 +338,15 @@ body {
 	font-size: 12px;
 }
 
+.record-shortdata a {
+	color: #61b3de;
+	text-decoration: none;
+}
+
+.record-shortdata a:hover {
+	opacity: 0.5;
+}
+
 .stats-header {
 	width: 200px;
 	max-width: 100%;

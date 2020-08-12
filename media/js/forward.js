@@ -445,15 +445,20 @@
 			jQuery( '#preview-record-url' ).html( record[4] );
 			jQuery( '#preview-record-url' ).attr( 'href',  record[4] );
 			jQuery( '#preview-record-user' ).attr( 'href',  forward.baseurl + 'users/' + record[1] );
-			jQuery( '#preview-record-user' ).html( record[1] );
-
+			for (let i = 0; i < users.length; i++)
+			{
+				if( users[i][0] == record[1] )
+				{
+					jQuery( '#preview-record-user' ).html( users[i][1] );
+				}
+			}
 
 			AjaxRecordData( record[0], function(e)
 			{
 				let agents_keys = Object.keys( e.agents );
 				let agents_names = [];
 				let agents_values = [];
-				for (var i = 0; i < agents_keys.length; i++)
+				for (let i = 0; i < agents_keys.length; i++)
 				{
 					agents_names.push( AgentTranslator( visitor_data.agents[ agents_keys[i] ] ) );
 					agents_values.push( e.agents[ agents_keys[i] ] );
@@ -462,7 +467,7 @@
 				let platforms_keys = Object.keys( e.platforms );
 				let platforms_names = [];
 				let platforms_values = [];
-				for (var i = 0; i < platforms_keys.length; i++)
+				for (let i = 0; i < platforms_keys.length; i++)
 				{
 					platforms_names.push( PlatformTranslator( visitor_data.platforms[ platforms_keys[i] ] ) );
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );

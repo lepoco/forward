@@ -66,6 +66,10 @@
 				$c++;
 				echo ($c > 1 ? ', ' : '') . $key . ': "' . $agent . '"';
 			} ?>}};
+			let users = [<?php $c = 0; foreach ( $this->GetUsers() as $user ) {
+				$c++;
+				echo ( $c > 1 ? ', [' : '[' ) . $user['user_id'] . ', "' . $user['user_display_name'] . '", "' . $user['user_email'] . '"]';
+			} ?>];
 		</script>
 <?php endif; ?>
 <?php if( method_exists( $this, 'Header' ) ) { $this->Header(); } ?>
