@@ -749,6 +749,8 @@
 				},
 				success: function( e )
 				{
+					console.log(e);
+					
 					if( e == 's01' )
 					{
 						if(jQuery( '.record-' + record_id).is(':visible'))

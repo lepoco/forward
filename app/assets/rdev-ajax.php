@@ -270,13 +270,14 @@
 			$query = $this->Forward->Database->query(
 				"SELECT record_name FROM forward_records WHERE record_id = ?",
 				filter_var( $_POST[ 'input_record_id' ], FILTER_VALIDATE_INT )
-			)->fetchAll();
+			)->fetchArray();
 
 			if( empty( $query ) )
 				$this->Finish( self::ERROR_ENTRY_DONT_EXISTS );
 
 			$query = $this->Forward->Database->query(
-				"UPDATE forward_records SET record_active = false WHERE record_id = ?",
+				"UPDATE forward_records SET record_active = false, record_name = ? WHERE record_id = ?",
+				'archieved_' . time() . '_' . $query['record_name'],
 				filter_var( $_POST[ 'input_record_id' ], FILTER_VALIDATE_INT )
 			);
 
