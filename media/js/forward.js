@@ -457,6 +457,10 @@
 						let result = JSON.parse(e);
 						ondone( result );
 					}
+					else
+					{
+						FillCharts( [], [], [], [] );
+					}
 				},
 				fail:function(xhr, textStatus, errorThrown)
 				{
@@ -494,11 +498,13 @@
 					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
 					jQuery(this).addClass('ct-hover');
 					jQuery('.pie-browsers-label-' + current_series).addClass('li-hover');
+					jQuery('#pie-browsers-count').html( jQuery(this).children('path').attr('ct:value') );
 				});
 				jQuery('.pie-browsers .ct-series').on('mouseout', function()
 				{
 					jQuery('.pie-browsers .ct-series').removeClass('ct-hover');
 					jQuery('.pie-browsers-labels > li').removeClass('li-hover');
+					jQuery('#pie-browsers-count').empty();
 				});
 			});
 			browsers_chart.on('draw', function(data) {
@@ -546,11 +552,13 @@
 					let current_series = ( jQuery(this).attr('class').split(' ')[1] ).substr(10);
 					jQuery(this).addClass('ct-hover');
 					jQuery('.pie-platforms-label-' + current_series).addClass('li-hover');
+					jQuery('#pie-platforms-count').html( jQuery(this).children('path').attr('ct:value') );
 				});
 				jQuery('.pie-platforms .ct-series').on('mouseout', function()
 				{
 					jQuery('.pie-platforms .ct-series').removeClass('ct-hover');
 					jQuery('.pie-platforms-labels > li').removeClass('li-hover');
+					jQuery('#pie-platforms-count').empty();
 				});
 			});
 			platforms_chart.on('draw', function(data) {

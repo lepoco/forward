@@ -117,6 +117,8 @@
 			$this->displayname = $displayname;
 			$this->themes = APPPATH . 'themes/';
 
+			$this->SetLanguage();
+
 			$this->BuildNonces();
 
 			$this->SetBaseUrl();
@@ -162,6 +164,15 @@
 		protected function AjaxNonce( $name )
 		{
 			return Crypter::Encrypt( 'ajax_' . $name . '_nonce', 'nonce' );
+		}
+
+		protected function SetLanguage()
+		{
+			if( $this->Forward->Options->Get('dashboard_language_mode', 1 ) == 2 )
+			{
+				$this->Forward->Translator->SetLocale( $this->Forward->Options->Get('dashboard_language', 'en_US' ) );
+				$this->Forward->Translator->Init();
+			}
 		}
 
 		protected function BuildNonces()

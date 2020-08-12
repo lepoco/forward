@@ -34,7 +34,7 @@
 		public function Init() : void
 		{
 			if( $this->locale == NULL )
-				$this->ParseLanguage();
+				$this->SetLanguage();
 
 			if( file_exists( APPPATH . '/languages/' . $this->locale.'.json' ) )
 				if( self::IsValid( APPPATH . '/languages/' . $this->locale.'.json' ) )
@@ -46,9 +46,44 @@
 			return true;
 		}
 
-		private function ParseLanguage() : void
+		private function SetLanguage() : void
 		{
-			$this->locale = "pl_PL";
+			if( $this->locale == null )
+			{
+				$this->locale = $this->ParseLanguage();
+
+				switch ( substr( strtolower( $this->locale ), 0, 2) )
+				{
+					case 'pl':
+						$this->locale = 'pl_PL';
+						break;
+					
+					default:
+						$this->locale = 'en_US';
+						break;
+				}
+			}
+		}
+
+		private function ParseLanguage() : string
+		{
+			$lang = '';
+			$langs = array();
+
+			preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), $matches, PREG_SET_ORDER);
+			foreach($matches as $match)
+			{
+				list($a, $b) = explode('-', $match[1]) + array('', '');
+				$value = isset($match[2]) ? (float) $match[2] : 1.0;
+				$langs[$match[1]] = $value;
+
+			}
+			arsort($langs);
+
+			if( count( $langs ) == 0 )
+				return 'en_US';
+			else
+				return key($langs);
 		}
 
 		public function __($text)

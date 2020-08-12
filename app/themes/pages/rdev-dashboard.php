@@ -156,7 +156,12 @@
 															<p class="pie-header">browsers</p>
 														</div>
 														<div class="col-12 col-lg-6 col-no-gutters">
-															<div class="pie-browsers pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
+															<div style="position: relative">
+																<div>
+																	<div class="pie-browsers pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
+																</div>
+																<span id="pie-browsers-count"></span>
+															</div>
 														</div>
 														<div class="col-12 col-lg-6">
 															<ul class="pie-browsers-labels"></ul>
@@ -169,7 +174,12 @@
 															<p class="pie-header">platforms</p>
 														</div>
 														<div class="col-12 col-lg-6 col-no-gutters">
-															<div class="pie-platforms pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
+															<div style="position: relative">
+																<div>
+																	<div class="pie-platforms pie-color-blue ct-pie-hover ct-perfect-fourth"></div>
+																</div>
+																<span id="pie-platforms-count"></span>
+															</div>
 														</div>
 														<div class="col-12 col-lg-6">
 															<ul class="pie-platforms-labels"></ul>
