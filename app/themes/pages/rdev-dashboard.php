@@ -186,6 +186,36 @@
 														</div>
 													</div>
 												</div>
+												<div class="col-12 col-lg-6 bar-container" style="height: 250px;">
+													<div class="row">
+														<div class="col-12">
+															<p class="bar-header">origins</p>
+														</div>
+														<div class="col-12 col-no-gutters">
+															<div style="position: relative">
+																<div>
+																	<div class="bar-origins bar-color-blue ct-bar-hover ct-perfect-fourth"></div>
+																</div>
+																<span id="bar-origins-count"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-12 col-lg-6 bar-container" style="height: 250px;">
+													<div class="row">
+														<div class="col-12">
+															<p class="bar-header">languages</p>
+														</div>
+														<div class="col-12 col-no-gutters">
+															<div style="position: relative">
+																<div>
+																	<div class="bar-languages bar-color-blue ct-bar-hover ct-perfect-fourth"></div>
+																</div>
+																<span id="bar-languages-count"></span>
+															</div>
+														</div>
+													</div>
+												</div>
 												<div class="col-12 col-no-gutters" style="height: 220px;">
 													<div class="bar-color-blue ct-chart ct-perfect-fourth" style="height: 220px;"></div>
 												</div>

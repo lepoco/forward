@@ -515,6 +515,7 @@
 				labels: bar_chart_labels,
 				series: [days]
 			},{
+				fullWidth: true,
 				height:bar_chart_height,
 				axisX: {
 					position: 'start',
@@ -540,7 +541,7 @@
 		}
 
 		/** Fill charts with passed data **/
-		function fillCharts( agents_names, agents_values, platforms_names, platforms_values )
+		function fillCharts( agents_names, agents_values, platforms_names, platforms_values, languages_names, languages_values, origins_names, origins_values )
 		{
 			let letterbox = [
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
@@ -557,6 +558,7 @@
 			let browsers_chart = new Chartist.Pie('.pie-browsers', {
 				series: agents_values
 			}, {
+				fullWidth: true,
 				donut: true,
 				showLabel: false
 			});
@@ -614,6 +616,7 @@
 			let platforms_chart = new Chartist.Pie('.pie-platforms', {
 				series: platforms_values
 			}, {
+				fullWidth: true,
 				donut: true,
 				showLabel: false
 			});
@@ -659,6 +662,81 @@
 				});
 				data.element.animate(animationDefinition, false);
 				}
+			});
+
+
+			//Origins
+			let origins_chart = new Chartist.Bar('.bar-origins',
+			{
+				labels: origins_names,
+				series: [ origins_values ]
+			},
+			{
+				height: 250,
+				fullWidth: true,
+				seriesBarDistance: 0,
+				reverseData: true,
+				horizontalBars: true,
+				axisX: {
+					onlyInteger: true
+				},
+				axisY: {
+					showGrid: false,
+	    			showLabel: false
+				},
+				plugins: [
+					Chartist.plugins.ctBarLabels({
+						position: {
+							x: function (data)
+							{
+								return data.x1 + 10
+							}
+						},
+						labelOffset: {
+							y: 7
+						},
+						labelInterpolationFnc: function ( text ) {
+							return text; //visible text
+						}
+					}, origins_names)
+				]
+			});
+
+			//Languages
+			let languages_chart = new Chartist.Bar('.bar-languages',
+			{
+				labels: languages_names,
+				series: [ languages_values ]
+			},
+			{
+				height: 250,
+				fullWidth: true,
+				seriesBarDistance: 0,
+				reverseData: true,
+				horizontalBars: true,
+				axisX: {
+					onlyInteger: true
+				},
+				axisY: {
+					showGrid: false,
+	    			showLabel: false //for a while
+				},
+				plugins: [
+					Chartist.plugins.ctBarLabels({
+						position: {
+							x: function (data)
+							{
+								return data.x1 + 10
+							}
+						},
+						labelOffset: {
+							y: 7
+						},
+						labelInterpolationFnc: function ( text ) {
+							return text; //visible text
+						}
+					}, languages_names)
+				]
 			});
 		}
 		
@@ -716,6 +794,24 @@
 					platforms_values.push( e.platforms[ platforms_keys[i] ] );
 				}
 
+				let languages_keys = Object.keys( e.languages );
+				let languages_names = [];
+				let languages_values = [];
+				for (let i = 0; i < languages_keys.length; i++)
+				{
+					languages_names.push( platformTranslator( visitor_data.languages[ languages_keys[i] ] ) );
+					languages_values.push( e.languages[ languages_keys[i] ] );
+				}
+
+				let origins_keys = Object.keys( e.origins );
+				let origins_names = [];
+				let origins_values = [];
+				for (let i = 0; i < origins_keys.length; i++)
+				{
+					origins_names.push( platformTranslator( visitor_data.origins[ origins_keys[i] ] ) );
+					origins_values.push( e.origins[ origins_keys[i] ] );
+				}
+
 				let ips = Object.keys( e.ip );
 
 				//http://ip-api.com/json/31.60.145.130
@@ -730,7 +826,7 @@
 
 
 				barChartAnimate( e.days );
-				fillCharts( agents_names, agents_values, platforms_names, platforms_values);
+				fillCharts( agents_names, agents_values, platforms_names, platforms_values, languages_names, languages_values, origins_names, origins_values);
 			} );
 		}
 
@@ -878,3 +974,30 @@
 			fillRecordData( Object.keys( records )[ Object.keys( records ).length - 1 ] );
 		}
 	}
+
+
+	/**
+	 * A simple Chartist plugin to put labels on top of bar charts.
+	 *
+	 * Copyright (c) 2015 Yorkshire Interactive (yorkshireinteractive.com)
+	 * Modified by RapidDev Leszek Pomianowski (rdev.cc)
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:
+	 * 
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 * 
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 */
+	!function(n,t,e){"use strict";var l={labelClass:"ct-bar-label",labelInterpolationFnc:e.noop,labelOffset:{x:0,y:0},position:{x:null,y:null}};e.plugins=e.plugins||{},e.plugins.ctBarLabels=function(n,t){var o=(n=e.extend({},l,n)).position.x||function(t){return(t.x1+t.x2)/2+n.labelOffset.x},a=n.position.y||function(t){return(t.y1+t.y2)/2+n.labelOffset.y};return function(l){l instanceof e.Bar&&(l.on("draw",function(e){"bar"===e.type&&e.group.elem("text",{x:o(e),y:a(e),style:"text-anchor: start"},n.labelClass + " ct-bar-label-"+e.index).text(n.labelInterpolationFnc(t[e.index]))}))}}}(window,document,Chartist);
