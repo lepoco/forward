@@ -11,6 +11,45 @@
 	Array.prototype.forEach||(Array.prototype.forEach=function(r){let t=this.length;if("function"!=typeof r)throw new TypeError;for(let o=arguments[1],h=0;h<t;h++)h in this&&r.call(o,this[h],h,this)});
 
 	/**
+	* escapeHtml
+	* Credit: https://stackoverflow.com/a/4835406
+	*/
+	function escapeHtml(text) {
+		let map = {
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+			'"': "&quot;",
+			"'": "&#039;"
+		};
+
+		return text.replace(/[&<>"']/g, function (m) {
+			return map[m];
+		});
+	}
+
+	/**
+	* Helper function for converting Objects to Arrays after sorting the keys
+	* Credit: PiHole
+	*/
+	function objectToArray( obj ) {
+		let arr = [];
+		let idx = [];
+		let keys = Object.keys(obj);
+
+		keys.sort(function (a, b) {
+			return a - b;
+		});
+
+		for (let i = 0; i < keys.length; i++) {
+			arr.push(obj[keys[i]]);
+			idx.push(keys[i]);
+		}
+
+		return [idx, arr];
+	}
+
+	/**
 	* jsonParse
 	* Verifies that a text string can be represented as json
 	*/
@@ -490,7 +529,7 @@
 				jQuery.getJSON( forward.geoip + construct + ip, function( data )
 				{
 					console.log(data);
-					/*var items = [];
+					/*let items = [];
 
 					jQuery.each( data, function( key, val ) {
 						items.push( "<li id='" + key + "'>" + val + "</li>" );
@@ -549,7 +588,7 @@
 
 			//Browsers labels
 			jQuery('.pie-browsers-labels').empty();
-			for (var i = 0; i < agents_names.length; i++)
+			for (let i = 0; i < agents_names.length; i++)
 			{
 				jQuery('.pie-browsers-labels').append('<li class="pie-browsers-label-' + letterbox[i] + '">' + agents_names[i] + '</li>');
 			}
@@ -608,7 +647,7 @@
 
 			//Platforms labels
 			jQuery('.pie-platforms-labels').empty();
-			for (var i = 0; i < platforms_names.length; i++)
+			for (let i = 0; i < platforms_names.length; i++)
 			{
 				jQuery('.pie-platforms-labels').append('<li class="pie-platforms-label-' + letterbox[i] + '">' + platforms_names[i] + '</li>');
 			}
@@ -815,7 +854,7 @@
 				let ips = Object.keys( e.ip );
 
 				//http://ip-api.com/json/31.60.145.130
-				for (var i = 0; i < ips.length; i++)
+				for (let i = 0; i < ips.length; i++)
 				{
 					if( ips[ i ] != '' )
 					{
@@ -978,6 +1017,7 @@
 
 	/**
 	 * A simple Chartist plugin to put labels on top of bar charts.
+	 * https://github.com/yorkshireinteractive/chartist-bar-labels
 	 *
 	 * Copyright (c) 2015 Yorkshire Interactive (yorkshireinteractive.com)
 	 * Modified by RapidDev Leszek Pomianowski (rdev.cc)
@@ -1000,4 +1040,4 @@
 	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	 * THE SOFTWARE.
 	 */
-	!function(n,t,e){"use strict";var l={labelClass:"ct-bar-label",labelInterpolationFnc:e.noop,labelOffset:{x:0,y:0},position:{x:null,y:null}};e.plugins=e.plugins||{},e.plugins.ctBarLabels=function(n,t){var o=(n=e.extend({},l,n)).position.x||function(t){return(t.x1+t.x2)/2+n.labelOffset.x},a=n.position.y||function(t){return(t.y1+t.y2)/2+n.labelOffset.y};return function(l){l instanceof e.Bar&&(l.on("draw",function(e){"bar"===e.type&&e.group.elem("text",{x:o(e),y:a(e),style:"text-anchor: start"},n.labelClass + " ct-bar-label-"+e.index).text(n.labelInterpolationFnc(t[e.index]))}))}}}(window,document,Chartist);
+	!function(n,t,e){"use strict";let l={labelClass:"ct-bar-label",labelInterpolationFnc:e.noop,labelOffset:{x:0,y:0},position:{x:null,y:null}};e.plugins=e.plugins||{},e.plugins.ctBarLabels=function(n,t){let o=(n=e.extend({},l,n)).position.x||function(t){return(t.x1+t.x2)/2+n.labelOffset.x},a=n.position.y||function(t){return(t.y1+t.y2)/2+n.labelOffset.y};return function(l){l instanceof e.Bar&&(l.on("draw",function(e){"bar"===e.type&&e.group.elem("text",{x:o(e),y:a(e),style:"text-anchor: start"},n.labelClass + " ct-bar-label-"+e.index).text(n.labelInterpolationFnc(t[e.index]))}))}}}(window,document,Chartist);

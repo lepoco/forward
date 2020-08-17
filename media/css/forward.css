@@ -85,6 +85,21 @@ body {
 	right: 0;
 }
 
+@media (min-width: 992px)
+{
+	.nav-link-icon {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.nav-link-icon > svg {
+	height: 15px;
+	width: 15px;
+	margin-right: 5px;
+}
+
 .card-button {
 	border-top-right-radius: 0 !important;
 	border-top-left-radius: 0 !important;

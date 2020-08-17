@@ -45,6 +45,7 @@
 		private static $pages = array(
 			'__dashboard__',
 			'ajax',
+			'statistics',
 			'signout',
 			'users',
 			'settings',
@@ -89,6 +90,10 @@
 
 				case '__dashboard__':
 					$this->Forward->LoadModel( 'dashboard', 'Dashboard' );
+					break;
+
+				case 'statistics':
+					$this->Forward->LoadModel( 'statistics', 'Statistics' );
 					break;
 
 				case 'settings':
