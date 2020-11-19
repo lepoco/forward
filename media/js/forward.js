@@ -213,6 +213,36 @@ function agentTranslator(name) {
     }
 }
 
+function originTranslator(name) {
+    switch (name) {
+        case __T('unknown'):
+            return 'Unknown';
+        case 'direct':
+            return 'Email / SMS / Direct';
+        case 'www.facebook.com':
+            return 'Facebook';
+        case 'www.youtube.com':
+            return 'YouTube';
+        default:
+            return name;
+    }
+}
+
+function languageTranslator(name) {
+    switch (name) {
+        case __T('en-us'):
+            return 'English (United States)';
+        case 'en-gb':
+            return 'English (United Kingdom)';
+        case 'www.facebook.com':
+            return 'Facebook';
+        case 'www.youtube.com':
+            return 'YouTube';
+        default:
+            return name;
+    }
+}
+
 /**
  * isMobile
  * Are we in mobile mode
@@ -765,7 +795,7 @@ function pageDashboard() {
             let languages_names = [];
             let languages_values = [];
             for (let i = 0; i < languages_keys.length; i++) {
-                languages_names.push(platformTranslator(visitor_data.languages[languages_keys[i]]));
+                languages_names.push(languageTranslator(visitor_data.languages[languages_keys[i]]));
                 languages_values.push(e.languages[languages_keys[i]]);
             }
 
@@ -773,7 +803,7 @@ function pageDashboard() {
             let origins_names = [];
             let origins_values = [];
             for (let i = 0; i < origins_keys.length; i++) {
-                origins_names.push(platformTranslator(visitor_data.origins[origins_keys[i]]));
+                origins_names.push(originTranslator(visitor_data.origins[origins_keys[i]]));
                 origins_values.push(e.origins[origins_keys[i]]);
             }
 

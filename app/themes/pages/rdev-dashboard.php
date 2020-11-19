@@ -73,7 +73,7 @@
 										</div>
 <?php endif; ?>
 									<div class="col-12" style="margin-top:32px;">
-										<ul class="list-inline">
+										<ul class="dashboard-list list-inline">
 											<li class="list-inline-item">
 												<div class="stats-header">
 													<div>
