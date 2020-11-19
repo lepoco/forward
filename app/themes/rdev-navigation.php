@@ -37,6 +37,7 @@
 									<?php $this->_e('Dashboard'); ?>
 								</a>
 							</li>
+							<?php /*
 							<li class="nav-item">
 								<a class="nav-link nav-link-icon<?php echo $this->name == 'statistics' ? ' active' : '' ?>" href="<?php echo $dashboard . 'statistics/'; ?>">
 									<!--
@@ -48,6 +49,7 @@
 									<?php $this->_e('Statistics'); ?>
 								</a>
 							</li>
+							*/ ?>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle nav-link-icon<?php echo $this->name == 'settings' ? ' active' : '' ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
 									<!--
