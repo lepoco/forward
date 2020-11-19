@@ -255,7 +255,7 @@
 			$this->styles = array(
 				array( 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css', 'sha512-weZatQD41YXNCVn3Bvl2y1iAZqtH/Y+MlAQUwovog1iwj8cbSEpQMeErMnDp9CBlqIo0oxOcOF8GUEoOZYD4Zg==', '5.0.0-alpha1' ),
 				array( 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css', 'sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg==', '0.11.4'),
-				array( $this->baseurl . 'media/css/forward.css', '', FORWARD_VERSION )
+				array( $this->baseurl . 'media/css/forward.min.css', '', FORWARD_VERSION )
 			);
 		}
 
