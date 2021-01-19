@@ -78,10 +78,22 @@
 		*/
 		public function Update( $name, $value )
 		{
+			$query = null;
+
 			if( $this->database != null )
 			{
-
+				if( isset( $this->options[ $name ] ) )
+				{
+					if($this->options[ $name ] != $value)
+						$query = $this->database->query( "UPDATE forward_options SET option_value = ? WHERE option_name = ?", $value, $name );
+				}
+				else
+				{
+					$query = $this->database->query( "INSERT INTO forward_options (option_value, option_name) VALUES (?,?)", $value, $name );
+				}
 			}
+
+			$this->options[ $name ] = $value;
 		}
 
 		/**

@@ -357,4 +357,52 @@
 
 			$this->Finish( $data, true );
 		}
+
+		/**
+		* save_settings
+		* Update settings in database
+		*
+		* @access   private
+		* @return	void
+		*/
+		private function save_settings() : void
+		{
+			if( !isset(
+				$_POST[ 'site_url' ],
+				$_POST[ 'dashboard_url' ],
+				$_POST[ 'input_login_url' ],
+				$_POST[ 'redirect_404' ],
+				$_POST[ 'redirect_404_direction' ],
+				$_POST[ 'redirect_home' ],
+				$_POST[ 'redirect_home_direction' ],
+				$_POST[ 'cache' ],
+				$_POST[ 'dashboard_captcha_public' ],
+				$_POST[ 'dashboard_captcha_secret' ],
+				$_POST[ 'force_redirect_ssl' ],
+				$_POST[ 'force_dashboard_ssl' ],
+				$_POST[ 'js_redirect' ],
+				$_POST[ 'google_analytics' ],
+				$_POST[ 'js_redirect_after' ],
+				$_POST[ 'language_type' ],
+				$_POST[ 'language_select' ]
+			) )
+				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
+
+			if( trim( $_POST[ 'site_url' ] ) == '' ||
+			    trim( $_POST[ 'dashboard_url' ] ) == '' ||
+				trim( $_POST[ 'input_login_url' ] ) == '' )
+				$this->Finish( self::ERROR_EMPTY_ARGUMENTS );
+
+			if( !$this->Forward->User->IsAdmin() )
+				$this->Finish( self::ERROR_INSUFFICIENT_PERMISSIONS );
+
+			var_dump($_POST);
+			
+			//Update all
+			$this->Forward->Options->Update( 'base_url', filter_var( $_POST['site_url'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'base_url', filter_var( $_POST['site_url'], FILTER_SANITIZE_STRING ) );
+
+
+			$this->Finish( self::CODE_SUCCESS );
+		}
 	}
