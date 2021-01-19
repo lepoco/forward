@@ -368,40 +368,61 @@
 		private function save_settings() : void
 		{
 			if( !isset(
-				$_POST[ 'site_url' ],
-				$_POST[ 'dashboard_url' ],
+				$_POST[ 'input_base_url' ],
+				$_POST[ 'input_dashboard_url' ],
 				$_POST[ 'input_login_url' ],
-				$_POST[ 'redirect_404' ],
-				$_POST[ 'redirect_404_direction' ],
-				$_POST[ 'redirect_home' ],
-				$_POST[ 'redirect_home_direction' ],
-				$_POST[ 'cache' ],
-				$_POST[ 'dashboard_captcha_public' ],
-				$_POST[ 'dashboard_captcha_secret' ],
-				$_POST[ 'force_redirect_ssl' ],
-				$_POST[ 'force_dashboard_ssl' ],
-				$_POST[ 'js_redirect' ],
-				$_POST[ 'google_analytics' ],
-				$_POST[ 'js_redirect_after' ],
-				$_POST[ 'language_type' ],
-				$_POST[ 'language_select' ]
+				$_POST[ 'input_redirect_404' ],
+				$_POST[ 'input_redirect_404_direction' ],
+				$_POST[ 'input_redirect_home' ],
+				$_POST[ 'input_redirect_home_direction' ],
+				$_POST[ 'input_cache' ],
+				$_POST[ 'input_dashboard_captcha_public' ],
+				$_POST[ 'input_dashboard_captcha_secret' ],
+				$_POST[ 'input_force_redirect_ssl' ],
+				$_POST[ 'input_force_dashboard_ssl' ],
+				$_POST[ 'input_js_redirect' ],
+				$_POST[ 'input_js_redirect_after' ],
+				$_POST[ 'input_google_analytics' ],
+				$_POST[ 'input_language_type' ],
+				$_POST[ 'input_language_select' ]
 			) )
 				$this->Finish( self::ERROR_MISSING_ARGUMENTS );
 
-			if( trim( $_POST[ 'site_url' ] ) == '' ||
-			    trim( $_POST[ 'dashboard_url' ] ) == '' ||
+			if( trim( $_POST[ 'input_base_url' ] ) == '' ||
+				trim( $_POST[ 'input_dashboard_url' ] ) == '' ||
 				trim( $_POST[ 'input_login_url' ] ) == '' )
 				$this->Finish( self::ERROR_EMPTY_ARGUMENTS );
 
 			if( !$this->Forward->User->IsAdmin() )
 				$this->Finish( self::ERROR_INSUFFICIENT_PERMISSIONS );
 
-			var_dump($_POST);
-			
 			//Update all
-			$this->Forward->Options->Update( 'base_url', filter_var( $_POST['site_url'], FILTER_SANITIZE_STRING ) );
-			$this->Forward->Options->Update( 'base_url', filter_var( $_POST['site_url'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'base_url', filter_var( $_POST['input_base_url'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'dashboard', filter_var( $_POST['input_dashboard_url'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'login', filter_var( $_POST['input_login_url'], FILTER_SANITIZE_STRING ) );
+			
+			$this->Forward->Options->Update( 'redirect_404', $_POST[ 'input_redirect_404' ] === "1" );
+			$this->Forward->Options->Update( 'redirect_404_direction', filter_var( $_POST['input_redirect_404_direction'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'redirect_home', $_POST[ 'input_redirect_home' ] === "1" );
+			$this->Forward->Options->Update( 'redirect_home_direction', filter_var( $_POST['input_redirect_home_direction'], FILTER_SANITIZE_STRING ) );
+			
+			$this->Forward->Options->Update( 'cache', $_POST[ 'input_cache' ] === "1" );
 
+			$this->Forward->Options->Update( 'dashboard_captcha_public', filter_var( $_POST['input_dashboard_captcha_public'], FILTER_SANITIZE_STRING ) );
+			$this->Forward->Options->Update( 'dashboard_captcha_secret', filter_var( $_POST['input_dashboard_captcha_secret'], FILTER_SANITIZE_STRING ) );
+
+			$this->Forward->Options->Update( 'force_redirect_ssl', $_POST[ 'input_force_redirect_ssl' ] === "1" );
+			$this->Forward->Options->Update( 'force_dashboard_ssl', $_POST[ 'input_force_dashboard_ssl' ] === "1" );
+
+			$this->Forward->Options->Update( 'js_redirect', $_POST[ 'input_js_redirect' ] === "1" );
+
+			$this->Forward->Options->Update( 'js_redirect_after', filter_var( intval($_POST[ 'input_js_redirect_after' ]), FILTER_VALIDATE_INT ) );
+
+			$this->Forward->Options->Update( 'google_analytics', filter_var( $_POST['input_google_analytics'], FILTER_SANITIZE_STRING ) );
+
+			$this->Forward->Options->Update( 'dashboard_language_mode', filter_var( intval($_POST[ 'input_language_type' ]), FILTER_VALIDATE_INT ) );
+
+			$this->Forward->Options->Update( 'dashboard_language', filter_var( $_POST['input_language_select'], FILTER_SANITIZE_STRING ) );
 
 			$this->Finish( self::CODE_SUCCESS );
 		}

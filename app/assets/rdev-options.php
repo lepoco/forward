@@ -85,11 +85,11 @@
 				if( isset( $this->options[ $name ] ) )
 				{
 					if($this->options[ $name ] != $value)
-						$query = $this->database->query( "UPDATE forward_options SET option_value = ? WHERE option_name = ?", $value, $name );
+						$query = $this->database->query( "UPDATE forward_options SET option_value = ? WHERE option_name = ?", $this->SerializeType($value), $name );
 				}
 				else
 				{
-					$query = $this->database->query( "INSERT INTO forward_options (option_value, option_name) VALUES (?,?)", $value, $name );
+					$query = $this->database->query( "INSERT INTO forward_options (option_value, option_name) VALUES (?,?)", $this->SerializeType($value), $name );
 				}
 			}
 
@@ -106,7 +106,7 @@
 		{
 			if( isset( $this->options[ $name ] ) )
 			{
-				return ( $raw ? $this->options[ $name ] : $this->ParseType( $this->options[ $name ] ) );
+				return ( $raw ? $this->options[ $name ] : $this->DeserializeType( $this->options[ $name ] ) );
 			}
 			else
 			{
@@ -115,12 +115,12 @@
 		}
 
 		/**
-		* ParseType
+		* DeserializeType
 		* Returns parsed option to selected data type
 		*
 		* @access   public
 		*/
-		private function ParseType( $option )
+		private function DeserializeType( $option )
 		{
 			if( $option === 'true')
 			{
@@ -133,6 +133,28 @@
 			else if( is_int( $option ) )
 			{
 				return intval( $option );
+			}
+			else
+			{
+				return $option;
+			}
+		}
+
+		/**
+		* SerializeType
+		* Returns serialized option to db format
+		*
+		* @access   public
+		*/
+		private function SerializeType( $option )
+		{
+			if( $option === true)
+			{
+				return 'true';
+			}
+			else if( $option === false )
+			{
+				return 'false';
 			}
 			else
 			{

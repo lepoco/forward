@@ -41,13 +41,13 @@
 								<div class="tab-pane fade show active" id="v-pills-main" role="tabpanel" aria-labelledby="v-pills-main-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('URLs'); ?></h2>
 									<div class="form-group">
-										<label for="site_url"><?php echo $this->_e('Main website URL'); ?></label>
-										<input type="text" class="form-control" name="site_url" id="site_url" placeholder="<?php echo $this->Forward->Options->Get('base_url'); ?>" value="<?php echo $this->Forward->Options->Get('base_url'); ?>">
+										<label for="input_base_url"><?php echo $this->_e('Main website URL'); ?></label>
+										<input type="text" class="form-control" name="input_base_url" id="input_base_url" placeholder="<?php echo $this->Forward->Options->Get('base_url'); ?>" value="<?php echo $this->Forward->Options->Get('base_url'); ?>">
 										<small><span class="uppercase"><strong><?php echo $this->_e('Attention'); ?>!</strong></span><br/><?php echo $this->_e('Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.') ?></small>
 									</div>
 									<div class="form-group">
-										<label for="dashboard_url"><?php echo $this->_e('Dashboard URL'); ?></label>
-										<input type="text" class="form-control" name="dashboard_url" id="dashboard_url" placeholder="<?php echo $this->Forward->Options->Get('dashboard'); ?>" value="<?php echo $this->Forward->Options->Get('dashboard'); ?>">
+										<label for="input_dashboard_url"><?php echo $this->_e('Dashboard URL'); ?></label>
+										<input type="text" class="form-control" name="input_dashboard_url" id="input_dashboard_url" placeholder="<?php echo $this->Forward->Options->Get('dashboard'); ?>" value="<?php echo $this->Forward->Options->Get('dashboard'); ?>">
 									</div>
 									<div class="form-group">
 										<label for="input_login_url"><?php echo $this->_e('Login URL'); ?></label>
@@ -57,8 +57,8 @@
 								<div class="tab-pane fade" id="v-pills-redirects" role="tabpanel" aria-labelledby="v-pills-redirects-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Redirects'); ?></h2>
 									<div class="form-group">
-										<label for="redirect_404"><?php echo $this->_e('Redirect 404 page'); ?></label>
-										<select class="form-control" id="redirect_404" name="redirect_404">
+										<label for="input_redirect_404"><?php echo $this->_e('Redirect 404 page'); ?></label>
+										<select class="form-control" id="input_redirect_404" name="input_redirect_404">
 											<?php
 											$option = $this->Forward->Options->Get('redirect_404');
 											?>
@@ -67,13 +67,13 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="redirect_404_direction"><?php echo $this->_e('URL to which redirect error 404'); ?></label>
-										<input type="text" class="form-control" id="redirect_404_direction" name="redirect_404_direction" placeholder="https://" value="<?php echo $this->Forward->Options->Get('redirect_404_direction'); ?>">
+										<label for="input_redirect_404_direction"><?php echo $this->_e('URL to which redirect error 404'); ?></label>
+										<input type="text" class="form-control" id="input_redirect_404_direction" name="input_redirect_404_direction" placeholder="https://" value="<?php echo $this->Forward->Options->Get('redirect_404_direction'); ?>">
 									</div>
 									<hr>
 									<div class="form-group">
-										<label for="redirect_home"><?php echo $this->_e('Redirect Home page'); ?></label>
-										<select class="form-control" id="redirect_home" name="redirect_home">
+										<label for="input_redirect_home"><?php echo $this->_e('Redirect Home page'); ?></label>
+										<select class="form-control" id="input_redirect_home" name="input_redirect_home">
 											<?php
 											$option = $this->Forward->Options->Get('redirect_home');
 											?>
@@ -82,15 +82,15 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="redirect_home_direction"><?php echo $this->_e('URL to which redirect home page'); ?></label>
-										<input type="text" class="form-control" name="redirect_home_direction" id="redirect_home_direction" placeholder="https://" value="<?php echo $this->Forward->Options->Get('redirect_home_direction'); ?>">
+										<label for="input_redirect_home_direction"><?php echo $this->_e('URL to which redirect home page'); ?></label>
+										<input type="text" class="form-control" name="input_redirect_home_direction" id="input_redirect_home_direction" placeholder="https://" value="<?php echo $this->Forward->Options->Get('redirect_home_direction'); ?>">
 									</div>
 								</div>
 								<div class="tab-pane fade" id="v-pills-cache" role="tabpanel" aria-labelledby="v-pills-cache-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Cache') ?></h2>
 									<div class="form-group">
-										<label for="cache"><?php echo $this->_e('Enable Cache for records database'); ?></label>
-										<select class="form-control" id="cache" name="cache">
+										<label for="input_cache"><?php echo $this->_e('Enable Cache for records database'); ?></label>
+										<select class="form-control" id="input_cache" name="input_cache">
 											<?php
 											$option = $this->Forward->Options->Get('cache');
 											?>
@@ -102,12 +102,12 @@
 								<div class="tab-pane fade" id="v-pills-captcha" role="tabpanel" aria-labelledby="v-pills-captcha-tab">
 									<h2 class="display-4" style="font-size: 26px;">Google ReCaptcha V3</h2>
 									<div class="form-group">
-										<label for="dashboard_captcha_public"><?php echo $this->_e('ReCaptcha site key'); ?></label>
-										<input type="text" class="form-control" id="dashboard_captcha_public" name="dashboard_captcha_public" value="<?php echo $this->Forward->Options->Get('dashboard_captcha_public'); ?>" placeholder="<?php echo $this->_e('eg.:'); ?> 9Lb5ib4UACCCCM8mXw2nit90d-7vCcLd1LjQHWXn">
+										<label for="input_dashboard_captcha_public"><?php echo $this->_e('ReCaptcha site key'); ?></label>
+										<input type="text" class="form-control" id="input_dashboard_captcha_public" name="input_dashboard_captcha_public" value="<?php echo $this->Forward->Options->Get('dashboard_captcha_public'); ?>" placeholder="<?php echo $this->_e('eg.:'); ?> 9Lb5ib4UACCCCM8mXw2nit90d-7vCcLd1LjQHWXn">
 									</div>
 									<div class="form-group">
-										<label for="dashboard_captcha_secret"><?php echo $this->_e('ReCaptcha secret key'); ?></label>
-										<input type="text" class="form-control" id="dashboard_captcha_secret" name="dashboard_captcha_secret" placeholder="<?php echo $this->_e('eg.:'); ?> 9Lb5ib4UACCCCM8mXIAKcfHTbL7M3d-xHSWTyz-Q" value="<?php echo $this->Forward->Options->Get('dashboard_captcha_secret'); ?>">
+										<label for="input_dashboard_captcha_secret"><?php echo $this->_e('ReCaptcha secret key'); ?></label>
+										<input type="text" class="form-control" id="input_dashboard_captcha_secret" name="input_dashboard_captcha_secret" placeholder="<?php echo $this->_e('eg.:'); ?> 9Lb5ib4UACCCCM8mXIAKcfHTbL7M3d-xHSWTyz-Q" value="<?php echo $this->Forward->Options->Get('dashboard_captcha_secret'); ?>">
 									</div>
 									<small>
 										<?php echo sprintf($this->_e('You can enable %s for admin panel login.'), '<a href="https://www.google.com/recaptcha/admin/create" target="_blank" rel="noopener">Google ReCaptcha V3</a>'); ?>
@@ -118,8 +118,8 @@
 								<div class="tab-pane fade" id="v-pills-encryption" role="tabpanel" aria-labelledby="v-pills-encryption-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Connection encryption'); ?></h2>
 									<div class="form-group">
-										<label for="force_redirect_ssl"><?php echo $this->_e('Force SSL connection for redirects'); ?></label>
-										<select class="form-control" name="force_redirect_ssl" id="force_redirect_ssl">
+										<label for="input_force_redirect_ssl"><?php echo $this->_e('Force SSL connection for redirects'); ?></label>
+										<select class="form-control" name="input_force_redirect_ssl" id="input_force_redirect_ssl">
 											<?php
 											$option = $this->Forward->Options->Get('force_redirect_ssl');
 											?>
@@ -128,8 +128,8 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="force_dashboard_ssl"><?php echo $this->_e('Force SSL connection for dashboard'); ?></label>
-										<select class="form-control" name="force_dashboard_ssl" id="force_dashboard_ssl">
+										<label for="input_force_dashboard_ssl"><?php echo $this->_e('Force SSL connection for dashboard'); ?></label>
+										<select class="form-control" name="input_force_dashboard_ssl" id="input_force_dashboard_ssl">
 											<?php
 											$option = $this->Forward->Options->Get('force_dashboard_ssl');
 											?>
@@ -150,8 +150,8 @@
 								<div class="tab-pane fade" id="v-pills-analytics" role="tabpanel" aria-labelledby="v-pills-analytics-tab">
 									<h2 class="display-4" style="font-size: 26px;">Google Analytics</h2>
 									<div class="form-group">
-										<label for="js_redirect"><?php echo $this->_e('JS Redirection'); ?></label>
-										<select class="form-control" id="js_redirect" name="js_redirect">
+										<label for="input_js_redirect"><?php echo $this->_e('JS Redirection'); ?></label>
+										<select class="form-control" id="input_js_redirect" name="input_js_redirect">
 											<?php
 											$option = $this->Forward->Options->Get('js_redirect');
 											?>
@@ -160,12 +160,12 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="google_analytics"><?php echo $this->_e('Tracking Code (gtag)'); ?></label>
-										<input type="text" class="form-control" id="google_analytics" name="google_analytics" placeholder="<?php echo $this->_e('eg.:'); ?> UA-111112222-2" value="<?php echo $this->Forward->Options->Get('google_analytics'); ?>">
+										<label for="input_google_analytics"><?php echo $this->_e('Tracking Code (gtag)'); ?></label>
+										<input type="text" class="form-control" id="input_google_analytics" name="input_google_analytics" placeholder="<?php echo $this->_e('eg.:'); ?> UA-111112222-2" value="<?php echo $this->Forward->Options->Get('google_analytics'); ?>">
 									</div>
 									<div class="form-group">
-										<label for="js_redirect_after"><?php echo $this->_e('Redirect after:'); ?></label>
-										<select class="form-control" name="js_redirect_after" id="js_redirect_after">
+										<label for="input_js_redirect_after"><?php echo $this->_e('Redirect after:'); ?></label>
+										<select class="form-control" name="input_js_redirect_after" id="input_js_redirect_after">
 											<?php
 											$option = $this->Forward->Options->Get('js_redirect_after');
 											?>
@@ -187,10 +187,11 @@
 								<div class="tab-pane fade" id="v-pills-languages" role="tabpanel" aria-labelledby="v-pills-languages-tab">
 									<h2 class="display-4" style="font-size: 26px;"><?php echo $this->_e('Languages'); ?></h2>
 									<div class="form-group">
-										<label for="language_type"><?php echo $this->_e('Choose how languages are detected'); ?></label>
-										<select class="form-control" id="language_type" name="language_type">
+										<label for="input_language_type"><?php echo $this->_e('Choose how languages are detected'); ?></label>
+										<?php var_dump($this->Forward->Options->Get('dashboard_language_mode')); ?>
+										<select class="form-control" id="input_language_type" name="input_language_type">
 											<?php
-											$option = $this->Forward->Options->Get('language_type');
+											$option = $this->Forward->Options->Get('dashboard_language_mode');
 											?>
 											<option value="1"<?php echo $option==1 ? ' selected="selected"' : ""; ?>><?php echo $this->_e('Automatically (browser)'); ?></option>
 											<option disabled value="2"<?php echo $option==2 ? ' selected="selected"' : ""; ?>><?php echo $this->_e('Automatically (geolocation)'); ?></option>
@@ -198,14 +199,14 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="language_select"><?php echo $this->_e('Statically defined language'); ?></label>
-										<select class="form-control" id="language_select" name="language_select">
+										<label for="input_language_select"><?php echo $this->_e('Statically defined language'); ?></label>
+										<select class="form-control" id="input_language_select" name="input_language_select">
 											<?php
-											$option = $this->Forward->Options->Get('language_select');
+											$option = $this->Forward->Options->Get('dashboard_language');
 											?>
-											<option value="en"<?php echo $option=='en' ? ' selected="selected"' : ""; ?>>English</option>
-											<option value="pl"<?php echo $option=='pl' ? ' selected="selected"' : ""; ?>>Polski</option>
-											<option value="de"<?php echo $option=='de' ? ' selected="selected"' : ""; ?>>Deutsch</option>
+											<option value="en_US"<?php echo $option=='en_US' ? ' selected="selected"' : ""; ?>>English</option>
+											<option value="pl_PL"<?php echo $option=='pl_PL' ? ' selected="selected"' : ""; ?>>Polski</option>
+											<option value="de_DE"<?php echo $option=='de_DE' ? ' selected="selected"' : ""; ?>>Deutsch</option>
 										</select>
 									</div>
 								</div>
