@@ -31,5 +31,3 @@
 		exit('Fatal error');
 
 	require_once APPPATH . 'system/rdev-init.php' ;
-
-?>

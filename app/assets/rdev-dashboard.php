@@ -176,4 +176,3 @@
 				$this->Forward->LoadModel( '404', 'Page not found' );
 		}
 	}
-?>

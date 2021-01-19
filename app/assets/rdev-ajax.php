@@ -358,4 +358,3 @@
 			$this->Finish( $data, true );
 		}
 	}
-?>

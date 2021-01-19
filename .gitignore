@@ -3,3 +3,4 @@
 app/config.php
 
 #Ignored folders
+.vscode/*

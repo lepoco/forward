@@ -14,4 +14,3 @@
 
 	/* Start Forward CMS */
 	(new Forward());
-?>

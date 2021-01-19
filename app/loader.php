@@ -52,4 +52,3 @@
 
 	/** Forward */
 	require_once APPPATH . 'system/' . 'rdev-forward.php';
-?>

@@ -217,5 +217,3 @@
 			echo $html . PHP_EOL . "\t\t</script>" . PHP_EOL;
 		}
 	}
-
-?>

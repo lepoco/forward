@@ -237,5 +237,3 @@
 			return false;
 		}
 	}
-
-?>
