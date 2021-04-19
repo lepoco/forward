@@ -204,7 +204,7 @@
 		{
 
 			$config  = "";
-			$config .= "<?php\n/**\n * @package Forward\n *\n * @author RapidDev\n * @copyright Copyright (c) 2019-2021, RapidDev\n * @link https://www.rdev.cc/forward\n * @license https://opensource.org/licenses/MIT\n */\n\tnamespace Forward;\n\tdefined('ABSPATH') or die('No script kiddies please!');";
+			$config .= "<?php\n/**\n * @package Forward\n *\n * @author RapidDev\n * @copyright Copyright (c) 2019-" . date('Y') . ", RapidDev\n * @link https://www.rdev.cc/forward\n * @license https://opensource.org/licenses/MIT\n */\n\tnamespace Forward;\n\tdefined('ABSPATH') or die('No script kiddies please!');";
 
 			$config .= "\n\n\t/** Passwords hash type */\n\tdefine( 'FORWARD_ALGO', " . $this->SetAlgo() . " );";
 
@@ -237,7 +237,7 @@
 		{
 			$database->set_charset('utf8');
 
-			$dbFile = file( APPPATH . 'system/rdev-database.sql' );
+			$dbFile = file( APPPATH . 'code/rdev-database.sql' );
 			$queryLine = '';
 
 			// Loop through each line
@@ -312,11 +312,13 @@
 			$q1 = Crypter::BaseSalter(5);
 			$q2 = Crypter::BaseSalter(5);
 			$q3 = Crypter::BaseSalter(5);
+			$q4 = Crypter::BaseSalter(5);
 
 			$database->query("INSERT IGNORE INTO forward_records (record_name, record_display_name, record_url) VALUES " . 
 				"('" . strtolower( $q1 ) . "', '" . strtoupper( $q1 ) . "', 'https://github.com/rapiddev/Forward'), " .
 				"('" . strtolower( $q2 ) . "', '" . strtoupper( $q2 ) . "', 'https://rdev.cc/'),  " .
-				"('" . strtolower( $q3 ) . "', '" . strtoupper( $q3 ) . "', 'https://4geek.co/')"
+				"('" . strtolower( $q3 ) . "', '" . strtoupper( $q2 ) . "', 'https://lepo.co/'),  " .
+				"('" . strtolower( $q4 ) . "', '" . strtoupper( $q3 ) . "', 'https://4geek.co/')"
 			);
 
 			//Binded
