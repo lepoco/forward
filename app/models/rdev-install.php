@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019-2020, RapidDev
+ * @copyright Copyright (c) 2019-2021, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -204,7 +204,7 @@
 		{
 
 			$config  = "";
-			$config .= "<?php\n/**\n * @package Forward\n *\n * @author RapidDev\n * @copyright Copyright (c) 2019-2020, RapidDev\n * @link https://www.rdev.cc/forward\n * @license https://opensource.org/licenses/MIT\n */\n\tnamespace Forward;\n\tdefined('ABSPATH') or die('No script kiddies please!');";
+			$config .= "<?php\n/**\n * @package Forward\n *\n * @author RapidDev\n * @copyright Copyright (c) 2019-2021, RapidDev\n * @link https://www.rdev.cc/forward\n * @license https://opensource.org/licenses/MIT\n */\n\tnamespace Forward;\n\tdefined('ABSPATH') or die('No script kiddies please!');";
 
 			$config .= "\n\n\t/** Passwords hash type */\n\tdefine( 'FORWARD_ALGO', " . $this->SetAlgo() . " );";
 
@@ -218,8 +218,7 @@
 			$config .= "\n\t/** Nonce salt */\n\tdefine( 'NONCE_SALT', '" . Crypter::DeepSalter(50) . "' );";
 
 			$config .= "\n\n\t/** Debugging */\n\tdefine( 'FORWARD_DEBUG', false );";
-
-			$config .= "\n\n?>\n";
+			$config .= "\n";
 
 			$path = APPPATH . 'config.php';
 			file_put_contents( $path, $config );

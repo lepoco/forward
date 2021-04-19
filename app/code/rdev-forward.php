@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019-2020, RapidDev
+ * @copyright Copyright (c) 2019-2021, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -254,7 +254,7 @@
 		* @access   public
 		* @return   html (error message)
 		*/
-		public function Error( string $message, bool $kill = false )
+		public function Error( string $message, bool $suspend = false )
 		{
 			$r_message = '<br/><strong>Forward Error</strong><br/><br/><i>' . date('Y-m-d h:i:s a', time()) . '</i><br/>';
 
@@ -275,7 +275,7 @@
 				echo $r_message . $message . '<br/><i>Configuration file does not exist...</i>';
 			}
 
-			if( $kill )
+			if( $suspend )
 				exit;
 		}
 	}

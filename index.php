@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019-2020, RapidDev
+ * @copyright Copyright (c) 2019-2021, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -17,7 +17,7 @@
 	date_default_timezone_set( 'UTC' );
 
 	/** Forward version */
-	define( 'FORWARD_VERSION', '2.0.0' );
+	define( 'FORWARD_VERSION', '2.0.2' );
 
 	/** The name of the directory with Forward files */
 	define( 'APP_FOLDER', 'app' );
@@ -27,7 +27,7 @@
 	define( 'APPPATH', ABSPATH . APP_FOLDER . '/' );
 
 	/** Initialization file */
-	if ( !is_file( APPPATH . 'system/rdev-init.php' ) )
+	if ( !is_file( APPPATH . 'loader.php' ) )
 		exit('Fatal error');
 
-	require_once APPPATH . 'system/rdev-init.php' ;
+	require_once APPPATH . 'loader.php' ;

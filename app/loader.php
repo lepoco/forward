@@ -3,7 +3,7 @@
  * @package Forward
  *
  * @author RapidDev
- * @copyright Copyright (c) 2019-2020, RapidDev
+ * @copyright Copyright (c) 2019-2021, RapidDev
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
@@ -15,40 +15,43 @@
 		require_once APPPATH . 'config.php';
 
 	/** Uri */
-	require_once APPPATH . 'assets/' . 'rdev-uri.php';
+	require_once APPPATH . 'code/core/' . 'rdev-uri.php';
 
 	/** Session manager */
-	require_once APPPATH . 'assets/' . 'rdev-session.php';
+	require_once APPPATH . 'code/core/' . 'rdev-session.php';
 
 	/** Crypter */
-	require_once APPPATH . 'assets/' . 'rdev-crypter.php';
+	require_once APPPATH . 'code/core/' . 'rdev-crypter.php';
 
 	/** String translator */
-	require_once APPPATH . 'assets/' . 'rdev-translator.php';
+	require_once APPPATH . 'code/core/' . 'rdev-translator.php';
 
 	/** Database */
-	require_once APPPATH . 'assets/' . 'rdev-database.php';
+	require_once APPPATH . 'code/core/' . 'rdev-database.php';
 
 	/** User Agent */
-	require_once APPPATH . 'assets/' . 'rdev-agent.php';
+	require_once APPPATH . 'code/core/' . 'rdev-agent.php';
 
 	/** Ajax parser */
-	require_once APPPATH . 'assets/' . 'rdev-ajax.php';
+	require_once APPPATH . 'code/core/' . 'rdev-ajax.php';
 
 	/** Options parser */
-	require_once APPPATH . 'assets/' . 'rdev-options.php';
+	require_once APPPATH . 'code/core/' . 'rdev-options.php';
 
 	/** Page models */
-	require_once APPPATH . 'assets/' . 'rdev-models.php';
+	require_once APPPATH . 'code/core/' . 'rdev-models.php';
 
 	/** User */
-	require_once APPPATH . 'assets/' . 'rdev-user.php';
+	require_once APPPATH . 'code/core/' . 'rdev-user.php';
 
 	/** Redirect */
-	require_once APPPATH . 'assets/' . 'rdev-redirect.php';
+	require_once APPPATH . 'code/core/' . 'rdev-redirect.php';
 
 	/** Dashboard */
-	require_once APPPATH . 'assets/' . 'rdev-dashboard.php';
+	require_once APPPATH . 'code/core/' . 'rdev-dashboard.php';
 
 	/** Forward */
-	require_once APPPATH . 'system/' . 'rdev-forward.php';
+	require_once APPPATH . 'code/' . 'rdev-forward.php';
+	
+	/* Start Forward CMS */
+	(new Forward());
