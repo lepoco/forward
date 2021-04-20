@@ -51,6 +51,7 @@ class Dashboard
 		'statistics',
 		'signout',
 		'users',
+		'api',
 		'settings',
 		'about',
 		'login'
@@ -92,6 +93,10 @@ class Dashboard
 
 			case 'statistics':
 				$this->Forward->LoadModel('statistics', 'Statistics');
+				break;
+
+			case 'api':
+				$this->Forward->LoadModel('api', 'JSON API');
 				break;
 
 			case 'settings':
