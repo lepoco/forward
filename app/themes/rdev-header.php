@@ -45,7 +45,9 @@
 		<meta property="og:site_name" content="Forward" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="<?php echo $this->baseurl; ?>" />
-		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; base-uri <?php echo $this->baseurl; ?>; default-src <?php echo $this->baseurl; ?> <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>cdnjs.cloudflare.com <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>fonts.googleapis.com<?php echo $this->geoip; ?> 'unsafe-inline'; child-src 'none'; font-src *.googleapis.com; img-src <?php echo $this->baseurl; ?> 'self' data:; script-src 'nonce-<?php echo $this->js_nonce; ?>' 'unsafe-inline' <?php echo $this->baseurl; ?> <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>*.cloudflare.com">
+<?php /* CONTENT SECURITY POLICY
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; base-uri <?php echo $this->baseurl; ?>; default-src <?php echo $this->baseurl; ?> <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>cdn.jsdelivr.net <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>fonts.googleapis.com<?php echo $this->geoip; ?> 'unsafe-inline'; child-src 'none'; font-src *.googleapis.com; img-src <?php echo $this->baseurl; ?> 'self' data:; script-src 'nonce-<?php echo $this->js_nonce; ?>' 'unsafe-inline' <?php echo $this->baseurl; ?> <?php echo ($this->Forward->Path->ssl ? 'https://' : 'http://') ?>*.cloudflare.com">
+*/ ?>
 		<script type="application/ld+json" nonce="<?php echo $this->js_nonce; ?>">
 			{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"<?php echo $this->baseurl; ?>#website","url":"<?php echo $this->baseurl; ?>","name":"Forward","description":"<?php $this->_e('Create your own link shortener'); ?>.","inLanguage":"pl-PL"},{"@type":"ImageObject","@id":"<?php echo $this->baseurl; ?>#primaryimage","inLanguage":"pl-PL","url":"<?php echo $this->GetImage('forward-fav-256.png') ?>","width":256,"height":256,"caption":"Forward"},{"@type":"WebPage","@id":"<?php echo $this->baseurl; ?>#webpage","url":"<?php echo $this->baseurl; ?>","name":"Forward - Link shortener","isPartOf":{"@id":"<?php echo $this->baseurl; ?>#website"},"primaryImageOfPage":{"@id":"<?php echo $this->baseurl; ?>#primaryimage"},"datePublished":"<?php echo date(DATE_ATOM); ?>","dateModified":"<?php echo date(DATE_ATOM); ?>","description":"<?php $this->_e('Create your own link shortener'); ?>.","inLanguage":"<?php echo $this->Forward->Translator->locale; ?>","potentialAction":[{"@type":"ReadAction","target":["<?php echo $this->baseurl; ?>"]}]}]}
 		</script>
@@ -71,7 +73,7 @@
 			} ?>];
 <?php endif; ?>
 		</script>
-<?php if( method_exists( $this, 'Header' ) ) { $this->Header(); } ?>
+		<?php if( method_exists( $this, 'Header' ) ) { $this->Header(); } ?>
 	</head>
-	<body class="<?php echo 'page-' . $this->name; ?>">
+	<body  id="forward-app" class="<?php echo 'page-' . $this->name; ?> dark-theme">
 		<section id="forward" style="height: 100%;">

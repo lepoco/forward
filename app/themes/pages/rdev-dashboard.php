@@ -133,10 +133,18 @@
 													<ul class="list-inline" style="margin-top:15px;">
 														<li class="list-inline-item" id="preview-record-copy"><button class="btn btn-outline-warning">COPY</button></li>
 														<li class="list-inline-item" id="preview-record-share"><button class="btn btn-outline-warning">SHARE</button></li>
+														<li class="list-inline-item" id="preview-record-qrcode"><button class="btn btn-outline-warning">QR CODE</button></li>
 <?php if ($this->Forward->User->IsManager()): ?>
-														<li class="list-inline-item" id="preview-record-delete"><button id="delete-selected-record" class="btn btn-outline-warning">DELETE</button></li>
+														<li class="list-inline-item" id="preview-record-delete"><button class="btn btn-outline-warning">DELETE</button></li>
 <?php endif; ?>
 													</ul>
+												</div>
+												<div class="col-12">
+													<div id="qrcode-record-alert" class="alert alert-light" role="alert" style="display: none;">
+														<canvas id="qrcode-record-image"></canvas>
+														<hr>
+														<button id="close-qrcode-record" class="btn btn-outline-secondary">Close</button>
+													</div>
 												</div>
 <?php if ($this->Forward->User->IsManager()): ?>
 												<div class="col-12">

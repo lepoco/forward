@@ -1,6 +1,6 @@
 /*!
- * Forward 2.0.0 (https://github.com/rapiddev/Forward)
- * Copyright 2018-2020 RapidDev
+ * Forward 2.0.2 (https://github.com/rapiddev/Forward)
+ * Copyright 2018-2021 RapidDev
  * Licensed under MIT (https://github.com/rapiddev/Forward/blob/master/LICENSE)
  */
 
@@ -60,7 +60,17 @@ function jsonParse(string) { if (string == '') { return false; } if (/^[\],:{}\s
  * Adds a nice way to display logs
  */
 function consoleLog(message, color = "#fff") { console.log("%cForward: " + "%c" + message, "color:#dc3545;font-weight: bold;", "color: " + color); }
-console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2020 RapidDev\nhttps://rdev.cc/\n==============================");
+console.log("==============================\nForward \nversion: " + forward.version + "\nCopyright © 2019-2021 RapidDev\nhttps://rdev.cc/\n==============================");
+
+/**
+ * Vue.js
+ */
+let app = new Vue({
+    el: '#forward-app',
+    data: {
+        title: 'Forward'
+    }
+})
 
 /**
  * DOMContentLoaded
@@ -763,6 +773,7 @@ function pageDashboard() {
         jQuery('#preview-record-copy > button').attr('data-clipboard-text', forward.baseurl + record[3]);
         jQuery('#preview-record-copy > button').attr('data-record-id', record[0]);
         jQuery('#preview-record-share > button').attr('data-record-url', record[4]);
+        jQuery('#preview-record-qrcode > button').attr('data-record-url', record[4]);
         jQuery('#preview-record-delete > button').attr('data-record-id', record[0]);
         jQuery('#confirm-delete-record').attr('data-record-id', record[0]);
         jQuery('#preview-record-user').attr('href', forward.baseurl + 'users/' + record[1]);
@@ -887,7 +898,26 @@ function pageDashboard() {
         ajaxAddRecord();
     });
 
-    jQuery('#delete-selected-record').on('click', function(e) {
+    jQuery('#preview-record-qrcode > button').on('click', function(e) {
+        e.preventDefault();
+
+        QRCode.toCanvas(document.getElementById('qrcode-record-image'), jQuery(this).data()['recordUrl'], function(error) {
+            if (error) console.error(error)
+                //console.log('success!');
+        })
+        if (jQuery('#qrcode-record-alert').is(':hidden')) {
+            jQuery('#qrcode-record-alert').slideToggle();
+        }
+    });
+
+    jQuery('#close-qrcode-record').on('click', function(e) {
+        e.preventDefault();
+        if (jQuery('#qrcode-record-alert').is(':visible')) {
+            jQuery('#qrcode-record-alert').slideToggle();
+        }
+    });
+
+    jQuery('#preview-record-delete > button').on('click', function(e) {
         e.preventDefault();
         if (jQuery('#delete-record-alert').is(':hidden')) {
             jQuery('#delete-record-alert').slideToggle();

@@ -12,7 +12,7 @@
 ?>
 		</section>
 	<?php foreach ($this->scripts as $script): ?>
-	<script type="text/javascript" src="<?php echo $script[0] . (isset($script[2]) ? '?ver=' . $script[2] : '') ?>" integrity="<?php echo $script[1]; ?>" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="<?php echo $script[0] . (isset($script[2]) ? '?ver=' . $script[2] : '') ?>"<?php echo (!empty($script[1]) ? ' integrity="' . $script[1] . '"' : ''); ?> crossorigin="anonymous"></script>
 	<?php endforeach ?>
 <?php if( method_exists( $this, 'Footer' ) ) { $this->Footer(); } ?>
 </body>

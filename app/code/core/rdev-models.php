@@ -246,15 +246,15 @@
 			$this->prefetch = array(
 				'//ogp.me',
 				'//schema.org',
-				'//cdnjs.cloudflare.com'
+				'//cdn.jsdelivr.net'
 			);
 		}
 
 		protected function GetStyles()
 		{
 			$this->styles = array(
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css', 'sha512-weZatQD41YXNCVn3Bvl2y1iAZqtH/Y+MlAQUwovog1iwj8cbSEpQMeErMnDp9CBlqIo0oxOcOF8GUEoOZYD4Zg==', '5.0.0-alpha1' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css', 'sha512-V0+DPzYyLzIiMiWCg3nNdY+NyIiK9bED/T1xNBj08CaIUyK3sXRpB26OUCIzujMevxY9TRJFHQIxTwgzb0jVLg==', '0.11.4'),
+				array( 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css', 'sha256-DU9iQBJ89dHP2iyusCg++0ych55DAx8QL6P8CYU64bI=', '5.0.0-beta3' ),
+				array( 'https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css', 'sha256-seGyqLj5T52Hx8W7/YTajtNXGXQf+IksfkcaKGoTkbY=', '0.11.4'),
 				array( $this->baseurl . 'media/css/forward.min.css', '', FORWARD_VERSION )
 			);
 		}
@@ -262,13 +262,14 @@
 		protected function GetScripts()
 		{
 			$this->scripts = array(
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==', '3.5.1' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js', 'sha512-hCP3piYGSBPqnXypdKxKPSOzBHF75oU8wQ81a6OiGXHFMeKs9/8ChbgYl7pUvwImXJb03N4bs1o1DzmbokeeFw==', '2.4.4' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.min.js', 'sha512-lmArColmgJ0LRo8c6rZwAhB3mVVSFSsrpqOrmtXMgOFYu8VOwdxTliXrHYdsdmututXwD0Xc1GiGvZlHgNAh4g==', '5.0.0-alpha1' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js', 'sha512-TZlMGFY9xKj38t/5m2FzJ+RM/aD5alMHDe26p0mYUMoCF5G7ibfHUQILq0qQPV3wlsnCwL+TPRNK4vIWGLOkUQ==', '4.4.2' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js', 'sha512-hDWGyh+Iy4Mr9AHOzUP2+Y0iVPn/BwxxaoSleEjH/i1o4EVTF/sh0/A1Syii8PWOae+uPr+T/KHwynoebSuAhw==', '2.0.6' ),
-				array( 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js' , 'sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==', '0.11.4' ),
-				array( $this->baseurl . 'media/js/forward.js', '', FORWARD_VERSION )
+				array( 'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js', 'sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=', '3.6.0' ),
+				array( 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js', 'sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf', '5.0.0-beta3' ),
+				array( 'https://cdn.jsdelivr.net/npm/zxcvbn@4.4.2/dist/zxcvbn.js', 'sha256-9CxlH0BQastrZiSQ8zjdR6WVHTMSA5xKuP5QkEhPNRo=', '4.4.2' ),
+				array( 'https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js', 'sha256-DhdpoP64xch/Frz8CiBQE12en55NX+RhlPGRg6KWm5s=', '1.4.4'),
+				array( 'https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js', 'sha256-Eb6SfNpZyLYBnrvqg4KFxb6vIRg+pLg9vU5Pv5QTzko=', '2.0.8' ),
+				array( 'https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js' , 'sha256-xNhpuwaNiVdna6L8Wy3GNuQz1z+SCmo4NY1c7cJ9Vdc=', '0.11.4' ),
+				array( 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js', 'sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=', '3.6.0'),
+				array( $this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION )
 			);
 		}
 

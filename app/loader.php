@@ -38,6 +38,9 @@
 	/** Options parser */
 	require_once APPPATH . 'code/core/' . 'rdev-options.php';
 
+	/** JSON API */
+	require_once APPPATH . 'code/core/' . 'rdev-api.php';
+
 	/** Page models */
 	require_once APPPATH . 'code/core/' . 'rdev-models.php';
 
