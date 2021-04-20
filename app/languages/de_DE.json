@@ -1,300 +1,201 @@
 {
-	
-	"Short links manager":
-	"Short Links Manager",
-	
-	"Create your own link shortener":
-	"Erstelle deinen eigenen Link-Shortener",
-	
-	"Home page":
-	"Startseite",
 
-	"Installer":
-	"Installateur",
-	
-	"Dashboard":
-	"Instrumententafel",
-	
-	"Users":
-	"Benutzer",
-	
-	"Settings":
-	"Einstellungen",
-	
-	"About":
-	"Informationen",
+    "Short links manager": "Short Links Manager",
 
-	"Sign in":
-	"Anmelden",
+    "Create your own link shortener": "Erstelle deinen eigenen Link-Shortener",
 
-	"Login":
-	"Login",
+    "Home page": "Startseite",
 
-	"You entered an incorrect login or password":
-	"Sie haben ein falsches Login oder Passwort eingegeben",
+    "Installer": "Installateur",
 
-	"Enter username/email":
-	"Geben Sie Benutzernamen oder E-Mail",
+    "Dashboard": "Instrumententafel",
 
-	"Submit":
-	"Einreichen",
-	
-	"Add new":
-	"Neue hinzufügen",
-	
-	"Total clicks":
-	"Gesamtanzahl an Klicks",
-	
-	"Background image":
-	"Hintergrundbild",
-	
-	"Logo font":
-	"Logo Schriftart",
-	
-	"Access to the site requires administrator privileges":
-	"Der Zugriff auf die Site erfordert Administratorrechte",
-	
-	"Top referrer":
-	"Top Referrero",
-	
-	"Top language":
-	"Spitzensprache",
-	
-	"total links":
-	"Links insgesamt",
-	
-	"English":
-	"Englisch",
-	
-	"Email, SMS, Direct":
-	"Email, SMS, Direkt",
-	
-	"Save settings":
-	"Einstellungen speichern",
-	
-	"Main":
-	"Main",
-	
-	"Redirects":
-	"Umleiten",
-	
-	"Cache":
-	"Zwischenspeicher",
-	
-	"Encryption":
-	"Verschlüsselung",
-	
-	"Analytics":
-	"Analytics",
-	
-	"Captcha":
-	"Captcha",
-	
-	"Languages":
-	"Sprachen",
-	
-	"Miscellaneous":
-	"Sonstiges",
-	
-	"URLs":
-	"URLs",
-	
-	"Main website URL":
-	"URL der Hauptwebsite",
-	
-	"Dashboard URL":
-	"Adres kokpitu",
-	"Attention":"Beachtung",
-	
-	"Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.":
-	"Ändern Sie URLs nur, wenn Sie die Site in eine andere Domäne oder einen anderen Ordner verschoben haben. Andernfalls kann der Zugang zum Panel blockiert werden.",
-	
-	"Redirect 404 page":
-	"404-Seite umleiten",
-	
-	"URL to which redirect error 404":
-	"URL, zu der Fehler 404 umgeleitet wird",
-	
-	"Redirect Home page":
-	"Startseite umleiten",
-	
-	"URL to which redirect home page":
-	"URL, zu der die Startseite umgeleitet wird",
-	
-	"Enable Cache for records database":
-	"Cache für Datensatzdatenbank aktivieren",
-	
-	"ReCaptcha site key":
-	"Site-Schlüssel ReCaptcha",
-	
-	"ReCaptcha secret key":
-	"geheimer Schlüssel ReCaptcha",
-	
-	"You can enable %s for admin panel login.":
-	"Sie können %s für die Anmeldung im Admin-Bereich aktivieren.",
-	
-	"Leave these fields blank if you want to disable ReCaptcha V3":
-	"Lassen Sie diese Felder leer, wenn Sie ReCaptcha V3 deaktivieren möchten",
-	
-	"Connection encryption":
-	"Verbindungsverschlüsselung",
-	
-	"Force SSL connection for redirects":
-	"SSL-Verbindung für Umleitungen erzwingen",
-	
-	"Force SSL connection for dashboard":
-	"SSL-Verbindung für Dashboard erzwingen",
-	
-	"You don't have to spend money on certificates from companies like Comodo or RapidSSL.":
-	"Sie müssen kein Geld für Zertifikate von Unternehmen wie Comodo oder RapidSSL ausgeben.",
-	
-	"You can generate a free certificate with":
-	"Mit können Sie ein kostenloses Zertifikat erstellen",
-	
-	"SSL is recommended.":
-	"SSL wird empfohlen.y",
-	
-	"You protect both yourself and your users against a number of attacks. MIDM and Session Hijacking are one of the most dangerous. Never put safety second.":
-	"Sie schützen sich und Ihre Benutzer vor einer Reihe von Angriffen. MIDM und Session Hijacking gehören zu den gefährlichsten. Niemals die Sicherheit an zweiter Stelle setzen.",
-	
-	"JS Redirection":
-	"JS-Umleitung",
-	
-	"Tracking Code (gtag)":
-	"Tracking-Code (gtag)",
-	
-	"Redirect after:":
-	"Weiterleiten nach:",
-	
-	"Immediately":
-	"Sofort",
-	
-	"second":
-	"zweite",
-	
-	"seconds":
-	"sekunden",
-	
-	"eg.:":
-	"z.B.:",
-	
-	"JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.":
-	"Die JavaScript-Umleitung und die Verwendung von Google Analytics funktionieren möglicherweise nicht. Diese Methode ist weniger effektiv und wird nicht empfohlen.",
-	
-	"Anyway, if you want you can use it.":
-	"Wie auch immer, wenn Sie möchten, können Sie es verwenden.",
-	
-	"Choose how languages are detected":
-	"Wählen Sie aus, wie Sprachen erkannt werden",
-	
-	"Automatically (browser)":
-	"Automatisch (Browser)",
-	
-	"Automatically (geolocation)":
-	"Automatisch (Geolocation)",
-	
-	"Permanently defined":
-	"Fest definiert",
-	
-	"Statically defined language":
-	"Statisch definierte Sprache",
-	
-	"You can change these options only in the %s file":
-	"Sie können diese Optionen nur in der %s-Datei ändern",
-	
-	"Dashboard path for URL":
-	"Dashboard-Pfad für URL",
-	
-	"Users database":
-	"Benutzerdatenbank",
-	
-	"Options database":
-	"Optionsdatenbank",
-	
-	"Records database":
-	"Datensatzdatenbank",
-	
-	"Cryptographic method for passwords":
-	"Kryptografische Methode für Kennwörter",
-	
-	"Changing the cryptographic method will make all passwords stop working.":
-	"Wenn Sie die Verschlüsselungsmethode ändern, funktionieren alle Kennwörter nicht mehr.",
-	
-	"Debugging":
-	"Debuggen",
-	
-	"Remember to turn off debugging if you have stopped testing the page.":
-	"Denken Sie daran, das Debuggen zu deaktivieren, wenn Sie das Testen der Seite beendet haben.",
-	
-	"Enabled":
-	"Aktiviert",
-	
-	"Disabled":
-	"Deaktiviert",
-	
-	"Edit":
-	"Bearbeiten",
-	
-	"Delete":
-	"Löschen",
-	
-	"Never":
-	"Noch nie",
-	
-	"Unknown":
-	"Unbekannt",
-	
-	"Add new user":
-	"Neuen Benutzer hinzufügen",
-	
-	"Date created":
-	"Datum erstellt",
-	
-	"Last login":
-	"Letzte Anmeldung",
-	
-	"Administrator":
-	"Administrator",
-	
-	"Analyst":
-	"Analytiker",
-	
-	"Manager":
-	"Manager",
-	
-	"Has full permissions to do everything.":
-	"Hat die vollen Berechtigungen, um alles zu tun.",
-	
-	"Can add and delete records. Cannot change settings or add users.":
-	"Kann Datensätze hinzufügen und löschen. Einstellungen können nicht geändert oder Benutzer hinzugefügt werden.",
-	
-	"Can only view data.":
-	"Kann nur Daten anzeigen.",
-	
-	"Something went wrong!":
-	"Etwas ist schief gelaufen!",
-	
-	"Success!":
-	"Erfolg!",
-	
-	"Settings have been saved.":
-	"Einstellungen wurden gespeichert.",
-	
-	"Holy guacamole!":
-	"Error!",
-	
-	"New link was added.":
-	"Neuer Link wurde hinzugefügt.",
-	
-	"You must provide a URL!":
-	"Sie müssen eine URL angeben!",
-	
-	"The URL you entered is not valid!":
-	"Die eingegebene URL ist ungültig!",
-	
-	"The 404 page redirect URL is not valid!":
-	"Die Weiterleitungs-URL für 404-Seiten ist ungültig!",
-	
-	"The home page redirect URL is not valid!":
-	"Die Weiterleitungs-URL der Homepage ist ungültig!"
+    "Users": "Benutzer",
+
+    "Settings": "Einstellungen",
+
+    "About": "Informationen",
+
+    "Sign in": "Anmelden",
+
+    "Login": "Login",
+
+    "You entered an incorrect login or password": "Sie haben ein falsches Login oder Passwort eingegeben",
+
+    "Enter username/email": "Geben Sie Benutzernamen oder E-Mail",
+
+    "Submit": "Einreichen",
+
+    "Add new": "Neue hinzufügen",
+
+    "Total clicks": "Gesamtanzahl an Klicks",
+
+    "Background image": "Hintergrundbild",
+
+    "Logo font": "Logo Schriftart",
+
+    "Access to the site requires administrator privileges": "Der Zugriff auf die Site erfordert Administratorrechte",
+
+    "Top referrer": "Top Referrero",
+
+    "Top language": "Spitzensprache",
+
+    "total links": "Links insgesamt",
+
+    "English": "Englisch",
+
+    "Email, SMS, Direct": "Email, SMS, Direkt",
+
+    "Save settings": "Einstellungen speichern",
+
+    "Main": "Main",
+
+    "Redirects": "Umleiten",
+
+    "Cache": "Zwischenspeicher",
+
+    "Encryption": "Verschlüsselung",
+
+    "Analytics": "Analytics",
+
+    "Captcha": "Captcha",
+
+    "Languages": "Sprachen",
+
+    "Miscellaneous": "Sonstiges",
+
+    "URLs": "URLs",
+
+    "Main website URL": "URL der Hauptwebsite",
+
+    "Dashboard URL": "Adres kokpitu",
+    "Attention": "Beachtung",
+
+    "Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.": "Ändern Sie URLs nur, wenn Sie die Site in eine andere Domäne oder einen anderen Ordner verschoben haben. Andernfalls kann der Zugang zum Panel blockiert werden.",
+
+    "Redirect 404 page": "404-Seite umleiten",
+
+    "URL to which redirect error 404": "URL, zu der Fehler 404 umgeleitet wird",
+
+    "Redirect Home page": "Startseite umleiten",
+
+    "URL to which redirect home page": "URL, zu der die Startseite umgeleitet wird",
+
+    "Enable Cache for records database": "Cache für Datensatzdatenbank aktivieren",
+
+    "ReCaptcha site key": "Site-Schlüssel ReCaptcha",
+
+    "ReCaptcha secret key": "geheimer Schlüssel ReCaptcha",
+
+    "You can enable %s for admin panel login.": "Sie können %s für die Anmeldung im Admin-Bereich aktivieren.",
+
+    "Leave these fields blank if you want to disable ReCaptcha V3": "Lassen Sie diese Felder leer, wenn Sie ReCaptcha V3 deaktivieren möchten",
+
+    "Connection encryption": "Verbindungsverschlüsselung",
+
+    "Force SSL connection for redirects": "SSL-Verbindung für Umleitungen erzwingen",
+
+    "Force SSL connection for dashboard": "SSL-Verbindung für Dashboard erzwingen",
+
+    "You don't have to spend money on certificates from companies like Comodo or RapidSSL.": "Sie müssen kein Geld für Zertifikate von Unternehmen wie Comodo oder RapidSSL ausgeben.",
+
+    "You can generate a free certificate with": "Mit können Sie ein kostenloses Zertifikat erstellen",
+
+    "SSL is recommended.": "SSL wird empfohlen.y",
+
+    "You protect both yourself and your users against a number of attacks. MIDM and Session Hijacking are one of the most dangerous. Never put safety second.": "Sie schützen sich und Ihre Benutzer vor einer Reihe von Angriffen. MIDM und Session Hijacking gehören zu den gefährlichsten. Niemals die Sicherheit an zweiter Stelle setzen.",
+
+    "JS Redirection": "JS-Umleitung",
+
+    "Tracking Code (gtag)": "Tracking-Code (gtag)",
+
+    "Redirect after:": "Weiterleiten nach:",
+
+    "Immediately": "Sofort",
+
+    "second": "zweite",
+
+    "seconds": "sekunden",
+
+    "eg.:": "z.B.:",
+
+    "JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.": "Die JavaScript-Umleitung und die Verwendung von Google Analytics funktionieren möglicherweise nicht. Diese Methode ist weniger effektiv und wird nicht empfohlen.",
+
+    "Anyway, if you want you can use it.": "Wie auch immer, wenn Sie möchten, können Sie es verwenden.",
+
+    "Choose how languages are detected": "Wählen Sie aus, wie Sprachen erkannt werden",
+
+    "Automatically (browser)": "Automatisch (Browser)",
+
+    "Automatically (geolocation)": "Automatisch (Geolocation)",
+
+    "Permanently defined": "Fest definiert",
+
+    "Statically defined language": "Statisch definierte Sprache",
+
+    "You can change these options only in the %s file": "Sie können diese Optionen nur in der %s-Datei ändern",
+
+    "Dashboard path for URL": "Dashboard-Pfad für URL",
+
+    "Users database": "Benutzerdatenbank",
+
+    "Options database": "Optionsdatenbank",
+
+    "Records database": "Datensatzdatenbank",
+
+    "Cryptographic method for passwords": "Kryptografische Methode für Kennwörter",
+
+    "Changing the cryptographic method will make all passwords stop working.": "Wenn Sie die Verschlüsselungsmethode ändern, funktionieren alle Kennwörter nicht mehr.",
+
+    "Debugging": "Debuggen",
+
+    "Remember to turn off debugging if you have stopped testing the page.": "Denken Sie daran, das Debuggen zu deaktivieren, wenn Sie das Testen der Seite beendet haben.",
+
+    "Enabled": "Aktiviert",
+
+    "Disabled": "Deaktiviert",
+
+    "Edit": "Bearbeiten",
+
+    "Delete": "Löschen",
+
+    "Never": "Noch nie",
+
+    "Unknown": "Unbekannt",
+
+    "Add new user": "Neuen Benutzer hinzufügen",
+
+    "Date created": "Datum erstellt",
+
+    "Last login": "Letzte Anmeldung",
+
+    "Administrator": "Administrator",
+
+    "Analyst": "Analytiker",
+
+    "Manager": "Manager",
+
+    "Has full permissions to do everything.": "Hat die vollen Berechtigungen, um alles zu tun.",
+
+    "Can add and delete records. Cannot change settings or add users.": "Kann Datensätze hinzufügen und löschen. Einstellungen können nicht geändert oder Benutzer hinzugefügt werden.",
+
+    "Can only view data.": "Kann nur Daten anzeigen.",
+
+    "Something went wrong!": "Etwas ist schief gelaufen!",
+
+    "Success!": "Erfolg!",
+
+    "Settings have been saved.": "Einstellungen wurden gespeichert.",
+
+    "Holy guacamole!": "Error!",
+
+    "New link was added.": "Neuer Link wurde hinzugefügt.",
+
+    "You must provide a URL!": "Sie müssen eine URL angeben!",
+
+    "The URL you entered is not valid!": "Die eingegebene URL ist ungültig!",
+
+    "The 404 page redirect URL is not valid!": "Die Weiterleitungs-URL für 404-Seiten ist ungültig!",
+
+    "The home page redirect URL is not valid!": "Die Weiterleitungs-URL der Homepage ist ungültig!"
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,13 +8,19 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
-	defined('ABSPATH') or die('No script kiddies please!');
+
+namespace Forward;
+
+defined('ABSPATH') or die('No script kiddies please!');
 ?>
-		</section>
-	<?php foreach ($this->scripts as $script): ?>
-	<script type="text/javascript" src="<?php echo $script[0] . (isset($script[2]) ? '?ver=' . $script[2] : '') ?>"<?php echo (!empty($script[1]) ? ' integrity="' . $script[1] . '"' : ''); ?> crossorigin="anonymous"></script>
-	<?php endforeach ?>
-<?php if( method_exists( $this, 'Footer' ) ) { $this->Footer(); } ?>
+</div>
+</div>
+<?php foreach ($this->scripts as $script) : ?>
+	<script type="text/javascript" src="<?php echo $script[0] . (isset($script[2]) ? '?ver=' . $script[2] : '') ?>" <?php echo (!empty($script[1]) ? ' integrity="' . $script[1] . '"' : ''); ?> crossorigin="anonymous"></script>
+<?php endforeach ?>
+<?php if (method_exists($this, 'Footer')) {
+	$this->Footer();
+} ?>
 </body>
+
 </html>

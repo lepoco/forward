@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,17 +8,24 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
-	defined('ABSPATH') or die('No script kiddies please!');
 
-	$this->GetHeader();
-	$this->GetNavigation();
+namespace Forward;
+
+defined('ABSPATH') or die('No script kiddies please!');
+
+$this->GetHeader();
+$this->GetNavigation();
 ?>
-			<div class="container">
-				<div class="row">
-					<h3 class="display-6">Statistics</h3>
-				</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="content__title">
+				<h1>Statistics</h1>
+				<span>Aggregate information about your links</span>
 			</div>
+		</div>
+	</div>
+</div>
 <?php
-	$this->GetFooter();
+$this->GetFooter();
 ?>

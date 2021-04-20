@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,27 +8,28 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
 
-	/** Verify PHP version */
-	if ( version_compare( $ver = PHP_VERSION, $req = '7.0.11', '<' ) )
-		exit( sprintf( 'You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req ) );
+namespace Forward;
 
-	/** Define timezone */
-	date_default_timezone_set( 'UTC' );
+/** Verify PHP version */
+if (version_compare($ver = PHP_VERSION, $req = '7.0.11', '<'))
+	exit(sprintf('You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req));
 
-	/** Forward version */
-	define( 'FORWARD_VERSION', '2.0.2' );
+/** Define timezone */
+date_default_timezone_set('UTC');
 
-	/** The name of the directory with Forward files */
-	define( 'APP_FOLDER', 'app' );
+/** Forward version */
+define('FORWARD_VERSION', '2.0.2');
 
-	/** Main constants for all files */
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
-	define( 'APPPATH', ABSPATH . APP_FOLDER . '/' );
+/** The name of the directory with Forward files */
+define('APP_FOLDER', 'app');
 
-	/** Initialization file */
-	if ( !is_file( APPPATH . 'loader.php' ) )
-		exit('Fatal error');
+/** Main constants for all files */
+define('ABSPATH', dirname(__FILE__) . '/');
+define('APPPATH', ABSPATH . APP_FOLDER . '/');
 
-	require_once APPPATH . 'loader.php' ;
+/** Initialization file */
+if (!is_file(APPPATH . 'loader.php'))
+	exit('Fatal error');
+
+require_once APPPATH . 'loader.php';

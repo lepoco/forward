@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,13 +8,28 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
-	defined('ABSPATH') or die('No script kiddies please!');
 
-	use DateTime;
+namespace Forward;
 
-	$this->GetHeader();
-	$this->GetNavigation();
+defined('ABSPATH') or die('No script kiddies please!');
+
+use DateTime;
+
+$this->GetHeader();
+$this->GetNavigation();
+?>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="content__title">
+				<h1>Dashboard</h1>
+				<span>Forward - a modern link shortener</span>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+/*
 ?>
 			<div id="rdev-dashboard" class="block-page distance-navbar">
 				<div class="container-fluid">
@@ -263,6 +279,5 @@
 					</div>
 				</div>
 			</div>
-<?php
-	$this->GetFooter();
-?>
+<?php */
+$this->GetFooter();

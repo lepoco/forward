@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,20 +8,22 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
-	defined('ABSPATH') or die('No script kiddies please!');
 
-    /**
-	*
-	* API
-	*
-	* @author   Leszek Pomianowski <https://rdev.cc>
-	* @license	MIT License
-	* @access   public
-	*/
-	class API
-	{
-        /*
+namespace Forward;
+
+defined('ABSPATH') or die('No script kiddies please!');
+
+/**
+ *
+ * API
+ *
+ * @author   Leszek Pomianowski <https://rdev.cc>
+ * @license	MIT License
+ * @access   public
+ */
+class API
+{
+    /*
          * Actions:
          * create
          * read
@@ -44,27 +47,27 @@
          * ?action=read&token=jkiju12894j81924h&id=
          */
 
-         public function print_response()
-         {
-             $data = array(
-                'code' => 1, //1 success, 0 - unknown error, 2 - ...
-                'kind' => 'forwardUpdateLinks',
-                'etag' => 'QwjtrYbwdO6eAMnCCVyqDgHPkco',
-                'info' => array(
-                    'action' => 'create',
-                    'requested_id' => 4,
-                    'total_results' => 8,
-                    'timestamp' => '54124511',
-                    'execution_time' => '451'
-                ),
-                'request_parameters' => array(
-                    'include_languages' => true,
-                    'include_browsers' => true,
-                    'include_platforms' => true,
-                    'include_referers' => true
-                ),
-                'items' => array(),
-                'error' => ''
-             );
-         }
+    public function print_response()
+    {
+        $data = array(
+            'code' => 1, //1 success, 0 - unknown error, 2 - ...
+            'kind' => 'forwardUpdateLinks',
+            'etag' => 'QwjtrYbwdO6eAMnCCVyqDgHPkco',
+            'info' => array(
+                'action' => 'create',
+                'requested_id' => 4,
+                'total_results' => 8,
+                'timestamp' => '54124511',
+                'execution_time' => '451'
+            ),
+            'request_parameters' => array(
+                'include_languages' => true,
+                'include_browsers' => true,
+                'include_platforms' => true,
+                'include_referers' => true
+            ),
+            'items' => array(),
+            'error' => ''
+        );
     }
+}

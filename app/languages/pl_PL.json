@@ -1,378 +1,253 @@
 {
-	
-	"Short links manager":
-	"Manadżer linków",
-	
-	"Create your own link shortener":
-	"Stwórz swój własny skracacz adresów",
-	
-	"Home page":
-	"Strona główna",
 
-	"Installer":
-	"Instalator",
-	
-	"Dashboard":
-	"Kokpit",
-	
-	"Users":
-	"Użytkownicy",
-	
-	"Settings":
-	"Ustawienia",
-	
-	"About":
-	"Informacje",
+    "Short links manager": "Manadżer linków",
 
-	"Sign in":
-	"Zaloguj się",
+    "Create your own link shortener": "Stwórz swój własny skracacz adresów",
 
-	"Login":
-	"Login",
+    "Home page": "Strona główna",
 
-	"You entered an incorrect login or password":
-	"Podałeś nieprawidłowy login lub hasło",
+    "Installer": "Instalator",
 
-	"Enter username/email":
-	"Wprowadź nazwę użytkownika lub email",
+    "Dashboard": "Kokpit",
 
-	"Submit":
-	"Zatwierdź",
-	
-	"Add new":
-	"Dodaj nowy",
-	
-	"Total clicks":
-	"Kliknięcia",
-	
-	"Background image":
-	"Obrazek w tle",
-	
-	"Logo font":
-	"Krój pisma logo",
-	
-	"Access to the site requires administrator privileges":
-	"Dostęp do witryny wymaga uprawnień administratora",
-	
-	"Top referrer":
-	"Najpopularniejsze źródło",
-	
-	"Top language":
-	"Najpopularniejszy język",
-	
-	"total links":
-	"wszystkich odnośników",
-	
-	"English":
-	"Angielski",
-	
-	"Poland":
-	"Polska",
-	
-	"Email, SMS, Direct":
-	"Email, SMS, Bezpośredni",
-	
-	"Save settings":
-	"Zapisz ustawienia",
-	
-	"Main":
-	"Główne",
-	
-	"Redirects":
-	"Przekierowania",
-	
-	"Cache":
-	"Pamięć podręczna",
-	
-	"Encryption":
-	"Szyfrowanie",
-	
-	"Analytics":
-	"Analityka",
-	
-	"Captcha":
-	"Captcha",
-	
-	"Languages":
-	"Języki",
-	
-	"Miscellaneous":
-	"Dodatkowe",
-	
-	"URLs":
-	"Adresy",
-	
-	"Main website URL":
-	"Główny adres witryny",
-	
-	"Dashboard URL":
-	"Adres kokpitu",
-	"Attention":"Uwaga",
-	
-	"Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.":
-	"Zmień adresy tylko jeśli witryna została przeniesiona do innego folderu lub domeny. W innym przypadku, dostęp do panelu może zostać zablokowany.",
-	
-	"Redirect 404 page":
-	"Przekieruj stronę 404",
-	
-	"URL to which redirect error 404":
-	"Adres, na który przekierować błąd 404",
-	
-	"Redirect Home page":
-	"Przekieruj stronę główną",
-	
-	"URL to which redirect home page":
-	"Adres, na który przekierować stronę główną",
-	
-	"Enable Cache for records database":
-	"Włącz pamięć podręczną dla bazy danych rekordów",
-	
-	"ReCaptcha site key":
-	"Klucz strony ReCaptcha",
-	
-	"ReCaptcha secret key":
-	"Sekretny klucz ReCaptcha",
-	
-	"You can enable %s for admin panel login.":
-	"Możesz włączyć %s dla logowania do kokpitu.",
-	
-	"Leave these fields blank if you want to disable ReCaptcha V3":
-	"Pozostaw te pola puste, jeśli chcesz wyłączyć ReCaptcha V3",
-	
-	"Connection encryption":
-	"Szyfrowanie połączenia",
-	
-	"Force SSL connection for redirects":
-	"Wymuś połączenie SSL dla przekierowań",
-	
-	"Force SSL connection for dashboard":
-	"Wymuś połączenie SSL dla kokpitu",
-	
-	"You don't have to spend money on certificates from companies like Comodo or RapidSSL.":
-	"Nie musisz wydawać pieniędzy na certyfikaty od firm jak Comodo albo RapidSSL",
-	
-	"You can generate a free certificate with":
-	"Możesz wygenerować certyfikat za darmo z pomocą",
-	
-	"SSL is recommended.":
-	"SSL jest rekomendowany",
-	
-	"You protect both yourself and your users against a number of attacks. MIDM and Session Hijacking are one of the most dangerous. Never put safety second.":
-	"Chronisz siebie i swoich użytkowników przed atakami. MIDM i Hijacking sesji są jednymi z bardziej groźnych. Nigdy nie stawiaj bezpieczeństwa na drugim miejscu",
-	
-	"JS Redirection":
-	"Przekierowanie przez JS",
-	
-	"Tracking Code (gtag)":
-	"Kod śledzenia (gtag)",
-	
-	"Redirect after:":
-	"Przekieruj po:",
-	
-	"Immediately":
-	"Natychmiast",
-	
-	"second":
-	"sekundzie",
-	
-	"seconds":
-	"sekundach",
-	
-	"eg.:":
-	"np:",
-	
-	"JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.":
-	"Przekierowanie przez JavaScript i używanie Google Analytics może nie działać. Ta metoda jest mniej efektywna i nie jest rekomendowana.",
-	
-	"Anyway, if you want you can use it.":
-	"Bądź co bądź, jeśli chcesz, możesz jej użyć",
-	
-	"Choose how languages are detected":
-	"Wybierz jak język ma być wykrywany",
-	
-	"Automatically (browser)":
-	"Automatycznie (przeglądarka)",
-	
-	"Automatically (geolocation)":
-	"Automatycznie (geolokalizacja)",
-	
-	"Permanently defined":
-	"Zdefiniowany na stałe",
-	
-	"Statically defined language":
-	"Statycznie wybrany język",
-	
-	"You can change these options only in the %s file":
-	"Możesz zmienić te ustawienia tylko w pliku %s",
-	
-	"Dashboard path for URL":
-	"Ścieżka dla URL kokpitu",
-	
-	"Users database":
-	"Baza danych użytkowników",
-	
-	"Options database":
-	"Baza danych opcji",
-	
-	"Records database":
-	"Baza danych rekordów",
-	
-	"Cryptographic method for passwords":
-	"Metoda kryptograficzna dla haseł",
-	
-	"Changing the cryptographic method will make all passwords stop working.":
-	"Zmiana metody kryptograficznej sprawi, że wszystkie hasła przestaną działać.",
-	
-	"Debugging":
-	"Debugowanie",
-	
-	"Remember to turn off debugging if you have stopped testing the page.":
-	"Pamiętaj, aby wyłączyć debugowanie kiedy skończysz testować witrynę.",
-	
-	"Enabled":
-	"Włączone",
-	
-	"Disabled":
-	"Wyłączone",
-	
-	"Edit":
-	"Edytuj",
-	
-	"Delete":
-	"Usuń",
-	
-	"Never":
-	"Nigdy",
-	
-	"Close":
-	"Zamknij",
-	
-	"Unknown":
-	"Nieznany",
-	
-	"Add user":
-	"Dodaj użytkownika",
-	
-	"Delete user":
-	"Usuń użytkownika",
-	
-	"Add new user":
-	"Dodaj nowego użytkownika",
-	
-	"Date created":
-	"Data utworzenia",
-	
-	"Last login":
-	"Ostatnie logowanie",
-	
-	"Administrator":
-	"Administrator",
-	
-	"Analyst":
-	"Analityk",
-	
-	"Manager":
-	"Menedżer",
-	
-	"Has full permissions to do everything.":
-	"Ma pełne uprawnienia, aby robić wszystko",
-	
-	"Can add and delete records. Cannot change settings or add users.":
-	"Może dodawać i usuwać rekordy. Nie może zmieniać ustawień ani dodawać użytkowników",
-	
-	"Can only view data.":
-	"Może tylko przeglądać dane",
-	
-	"Something went wrong!":
-	"Coś poszło nie tak!",
-	
-	"Success!":
-	"Sukces!",
-	
-	"Settings have been saved.":
-	"Ustawienia zostały zapisane",
-	
-	"Holy guacamole!":
-	"Motyla noga!",
-	
-	"New link was added.":
-	"Nowy link został dodany.",
-	
-	"You must provide a URL!":
-	"Musisz podać adres URL",
-	
-	"The URL you entered is not valid!":
-	"Podany adres jest nieprawidłowy!",
-	
-	"The 404 page redirect URL is not valid!":
-	"Adres przekierowania strony 404 jest nieprawidłowy!",
-	
-	"The home page redirect URL is not valid!":
-	"Adres przekierowania strony głównej jest nieprawidłowy!",
-	
-	"A new user has been added.":
-	"Nowy użytkownik został dodany.",
-	
-	"Login, password and email fields are required!":
-	"Pola login, hasło i email są wymagane!",
-	
-	"Login field contains illegal characters!":
-	"Nazwa użytkownika zawiera niedozwole znaki!",
-	
-	"Email field is invalid!":
-	"Pole e-mail jest nieprawidłowe!",
-	
-	"Password is too short!":
-	"Hasło jest za krótkie!",
-	
-	"The password is too simple. Use letters, numbers and special characters!":
-	"Hasło jest za proste. Użyj liter, cyfr oraz znaków specjalnych!",
-	
-	"Passwords do not match!":
-	"Hasła nie są jednakowe!",
-	
-	"User with this login already exists!":
-	"Użytkownik o tym loginie już istnieje!",
-	
-	"Delete record":
-	"Usuń rekord",
-	
-	"Cancel":
-	"Anuluj",
-	
-	"Are you sure you want to delete the %s record?":
-	"Na pewno chcesz usunąć rekord %s?",
-	
-	"Username":
-	"Nazwa użytkownika",
-	
-	"Email address":
-	"Adres email",
-	
-	"Link has been copied to your clipboard":
-	"Link został skopiowany do Twojego schowka",
-	
-	"A record with this ID already exists!":
-	"Rekord z podanym ID już istnieje!",
-	
-	"Role":
-	"Rola",
-	
-	"Referrers":
-	"Referenci",
-	
-	"Locations":
-	"Lokalizacje",
-	
-	"Password":
-	"Hasło",
-	
-	"Confirm password":
-	"Potwierdź hasło",
-	
-	"This should not happen":
-	"To nie powinno mieć miejsca",
-	
-	"You will be redirected in a few seconds...":
-	"Zostaniesz przekierowany za kilka sekund..."
+    "Users": "Użytkownicy",
+
+    "Settings": "Ustawienia",
+
+    "About": "Informacje",
+
+    "Sign in": "Zaloguj się",
+
+    "Login": "Login",
+
+    "You entered an incorrect login or password": "Podałeś nieprawidłowy login lub hasło",
+
+    "Enter username/email": "Wprowadź nazwę użytkownika lub email",
+
+    "Submit": "Zatwierdź",
+
+    "Add new": "Dodaj nowy",
+
+    "Total clicks": "Kliknięcia",
+
+    "Background image": "Obrazek w tle",
+
+    "Logo font": "Krój pisma logo",
+
+    "Access to the site requires administrator privileges": "Dostęp do witryny wymaga uprawnień administratora",
+
+    "Top referrer": "Najpopularniejsze źródło",
+
+    "Top language": "Najpopularniejszy język",
+
+    "total links": "wszystkich odnośników",
+
+    "English": "Angielski",
+
+    "Poland": "Polska",
+
+    "Email, SMS, Direct": "Email, SMS, Bezpośredni",
+
+    "Save settings": "Zapisz ustawienia",
+
+    "Main": "Główne",
+
+    "Redirects": "Przekierowania",
+
+    "Cache": "Pamięć podręczna",
+
+    "Encryption": "Szyfrowanie",
+
+    "Analytics": "Analityka",
+
+    "Captcha": "Captcha",
+
+    "Languages": "Języki",
+
+    "Miscellaneous": "Dodatkowe",
+
+    "URLs": "Adresy",
+
+    "Main website URL": "Główny adres witryny",
+
+    "Dashboard URL": "Adres kokpitu",
+    "Attention": "Uwaga",
+
+    "Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.": "Zmień adresy tylko jeśli witryna została przeniesiona do innego folderu lub domeny. W innym przypadku, dostęp do panelu może zostać zablokowany.",
+
+    "Redirect 404 page": "Przekieruj stronę 404",
+
+    "URL to which redirect error 404": "Adres, na który przekierować błąd 404",
+
+    "Redirect Home page": "Przekieruj stronę główną",
+
+    "URL to which redirect home page": "Adres, na który przekierować stronę główną",
+
+    "Enable Cache for records database": "Włącz pamięć podręczną dla bazy danych rekordów",
+
+    "ReCaptcha site key": "Klucz strony ReCaptcha",
+
+    "ReCaptcha secret key": "Sekretny klucz ReCaptcha",
+
+    "You can enable %s for admin panel login.": "Możesz włączyć %s dla logowania do kokpitu.",
+
+    "Leave these fields blank if you want to disable ReCaptcha V3": "Pozostaw te pola puste, jeśli chcesz wyłączyć ReCaptcha V3",
+
+    "Connection encryption": "Szyfrowanie połączenia",
+
+    "Force SSL connection for redirects": "Wymuś połączenie SSL dla przekierowań",
+
+    "Force SSL connection for dashboard": "Wymuś połączenie SSL dla kokpitu",
+
+    "You don't have to spend money on certificates from companies like Comodo or RapidSSL.": "Nie musisz wydawać pieniędzy na certyfikaty od firm jak Comodo albo RapidSSL",
+
+    "You can generate a free certificate with": "Możesz wygenerować certyfikat za darmo z pomocą",
+
+    "SSL is recommended.": "SSL jest rekomendowany",
+
+    "You protect both yourself and your users against a number of attacks. MIDM and Session Hijacking are one of the most dangerous. Never put safety second.": "Chronisz siebie i swoich użytkowników przed atakami. MIDM i Hijacking sesji są jednymi z bardziej groźnych. Nigdy nie stawiaj bezpieczeństwa na drugim miejscu",
+
+    "JS Redirection": "Przekierowanie przez JS",
+
+    "Tracking Code (gtag)": "Kod śledzenia (gtag)",
+
+    "Redirect after:": "Przekieruj po:",
+
+    "Immediately": "Natychmiast",
+
+    "second": "sekundzie",
+
+    "seconds": "sekundach",
+
+    "eg.:": "np:",
+
+    "JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.": "Przekierowanie przez JavaScript i używanie Google Analytics może nie działać. Ta metoda jest mniej efektywna i nie jest rekomendowana.",
+
+    "Anyway, if you want you can use it.": "Bądź co bądź, jeśli chcesz, możesz jej użyć",
+
+    "Choose how languages are detected": "Wybierz jak język ma być wykrywany",
+
+    "Automatically (browser)": "Automatycznie (przeglądarka)",
+
+    "Automatically (geolocation)": "Automatycznie (geolokalizacja)",
+
+    "Permanently defined": "Zdefiniowany na stałe",
+
+    "Statically defined language": "Statycznie wybrany język",
+
+    "You can change these options only in the %s file": "Możesz zmienić te ustawienia tylko w pliku %s",
+
+    "Dashboard path for URL": "Ścieżka dla URL kokpitu",
+
+    "Users database": "Baza danych użytkowników",
+
+    "Options database": "Baza danych opcji",
+
+    "Records database": "Baza danych rekordów",
+
+    "Cryptographic method for passwords": "Metoda kryptograficzna dla haseł",
+
+    "Changing the cryptographic method will make all passwords stop working.": "Zmiana metody kryptograficznej sprawi, że wszystkie hasła przestaną działać.",
+
+    "Debugging": "Debugowanie",
+
+    "Remember to turn off debugging if you have stopped testing the page.": "Pamiętaj, aby wyłączyć debugowanie kiedy skończysz testować witrynę.",
+
+    "Enabled": "Włączone",
+
+    "Disabled": "Wyłączone",
+
+    "Edit": "Edytuj",
+
+    "Delete": "Usuń",
+
+    "Never": "Nigdy",
+
+    "Close": "Zamknij",
+
+    "Unknown": "Nieznany",
+
+    "Add user": "Dodaj użytkownika",
+
+    "Delete user": "Usuń użytkownika",
+
+    "Add new user": "Dodaj nowego użytkownika",
+
+    "Date created": "Data utworzenia",
+
+    "Last login": "Ostatnie logowanie",
+
+    "Administrator": "Administrator",
+
+    "Analyst": "Analityk",
+
+    "Manager": "Menedżer",
+
+    "Has full permissions to do everything.": "Ma pełne uprawnienia, aby robić wszystko",
+
+    "Can add and delete records. Cannot change settings or add users.": "Może dodawać i usuwać rekordy. Nie może zmieniać ustawień ani dodawać użytkowników",
+
+    "Can only view data.": "Może tylko przeglądać dane",
+
+    "Something went wrong!": "Coś poszło nie tak!",
+
+    "Success!": "Sukces!",
+
+    "Settings have been saved.": "Ustawienia zostały zapisane",
+
+    "Holy guacamole!": "Motyla noga!",
+
+    "New link was added.": "Nowy link został dodany.",
+
+    "You must provide a URL!": "Musisz podać adres URL",
+
+    "The URL you entered is not valid!": "Podany adres jest nieprawidłowy!",
+
+    "The 404 page redirect URL is not valid!": "Adres przekierowania strony 404 jest nieprawidłowy!",
+
+    "The home page redirect URL is not valid!": "Adres przekierowania strony głównej jest nieprawidłowy!",
+
+    "A new user has been added.": "Nowy użytkownik został dodany.",
+
+    "Login, password and email fields are required!": "Pola login, hasło i email są wymagane!",
+
+    "Login field contains illegal characters!": "Nazwa użytkownika zawiera niedozwole znaki!",
+
+    "Email field is invalid!": "Pole e-mail jest nieprawidłowe!",
+
+    "Password is too short!": "Hasło jest za krótkie!",
+
+    "The password is too simple. Use letters, numbers and special characters!": "Hasło jest za proste. Użyj liter, cyfr oraz znaków specjalnych!",
+
+    "Passwords do not match!": "Hasła nie są jednakowe!",
+
+    "User with this login already exists!": "Użytkownik o tym loginie już istnieje!",
+
+    "Delete record": "Usuń rekord",
+
+    "Cancel": "Anuluj",
+
+    "Are you sure you want to delete the %s record?": "Na pewno chcesz usunąć rekord %s?",
+
+    "Username": "Nazwa użytkownika",
+
+    "Email address": "Adres email",
+
+    "Link has been copied to your clipboard": "Link został skopiowany do Twojego schowka",
+
+    "A record with this ID already exists!": "Rekord z podanym ID już istnieje!",
+
+    "Role": "Rola",
+
+    "Referrers": "Referenci",
+
+    "Locations": "Lokalizacje",
+
+    "Password": "Hasło",
+
+    "Confirm password": "Potwierdź hasło",
+
+    "This should not happen": "To nie powinno mieć miejsca",
+
+    "You will be redirected in a few seconds...": "Zostaniesz przekierowany za kilka sekund..."
 }

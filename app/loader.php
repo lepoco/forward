@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Forward
  *
@@ -7,54 +8,56 @@
  * @link https://www.rdev.cc/forward
  * @license https://opensource.org/licenses/MIT
  */
-	namespace Forward;
-	defined('ABSPATH') or die('No script kiddies please!');
 
-	/** Page models */
-	if ( is_file( APPPATH . 'config.php' ) )
-		require_once APPPATH . 'config.php';
+namespace Forward;
 
-	/** Uri */
-	require_once APPPATH . 'code/core/' . 'rdev-uri.php';
+defined('ABSPATH') or die('No script kiddies please!');
 
-	/** Session manager */
-	require_once APPPATH . 'code/core/' . 'rdev-session.php';
+/** Page models */
+if (is_file(APPPATH . 'config.php'))
+	require_once APPPATH . 'config.php';
 
-	/** Crypter */
-	require_once APPPATH . 'code/core/' . 'rdev-crypter.php';
+/** Uri */
+require_once APPPATH . 'code/core/' . 'rdev-uri.php';
 
-	/** String translator */
-	require_once APPPATH . 'code/core/' . 'rdev-translator.php';
+/** Session manager */
+require_once APPPATH . 'code/core/' . 'rdev-session.php';
 
-	/** Database */
-	require_once APPPATH . 'code/core/' . 'rdev-database.php';
+/** Crypter */
+require_once APPPATH . 'code/core/' . 'rdev-crypter.php';
 
-	/** User Agent */
-	require_once APPPATH . 'code/core/' . 'rdev-agent.php';
+/** String translator */
+require_once APPPATH . 'code/core/' . 'rdev-translator.php';
 
-	/** Ajax parser */
-	require_once APPPATH . 'code/core/' . 'rdev-ajax.php';
+/** Database */
+require_once APPPATH . 'code/core/' . 'rdev-database.php';
 
-	/** Options parser */
-	require_once APPPATH . 'code/core/' . 'rdev-options.php';
+/** User Agent */
+require_once APPPATH . 'code/core/' . 'rdev-agent.php';
 
-	/** JSON API */
-	require_once APPPATH . 'code/core/' . 'rdev-api.php';
+/** Ajax parser */
+require_once APPPATH . 'code/core/' . 'rdev-ajax.php';
 
-	/** Page models */
-	require_once APPPATH . 'code/core/' . 'rdev-models.php';
+/** Options parser */
+require_once APPPATH . 'code/core/' . 'rdev-options.php';
 
-	/** User */
-	require_once APPPATH . 'code/core/' . 'rdev-user.php';
+/** JSON API */
+require_once APPPATH . 'code/core/' . 'rdev-api.php';
 
-	/** Redirect */
-	require_once APPPATH . 'code/core/' . 'rdev-redirect.php';
+/** Page models */
+require_once APPPATH . 'code/core/' . 'rdev-models.php';
 
-	/** Dashboard */
-	require_once APPPATH . 'code/core/' . 'rdev-dashboard.php';
+/** User */
+require_once APPPATH . 'code/core/' . 'rdev-user.php';
 
-	/** Forward */
-	require_once APPPATH . 'code/' . 'rdev-forward.php';
-	
-	/* Start Forward CMS */
-	(new Forward());
+/** Redirect */
+require_once APPPATH . 'code/core/' . 'rdev-redirect.php';
+
+/** Dashboard */
+require_once APPPATH . 'code/core/' . 'rdev-dashboard.php';
+
+/** Forward */
+require_once APPPATH . 'code/' . 'rdev-forward.php';
+
+/* Start Forward CMS */
+(new Forward());
