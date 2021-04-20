@@ -26,75 +26,20 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 		</a>
 	</div>
 	<div class="forward-header__navigation">
-		<form action="#" class="forward-header__navigation__searchbox">
-			<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off"> <button class="btn btn-primary" type="submit"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-					<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-					<path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-				</svg></button>
+		<form class="forward-header__navigation__form">
+			<input type="hidden" value="add_record" name="action">
+			<input type="hidden" value="<?php echo $this->AjaxNonce('add_record'); ?>" name="nonce">
+			<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-rand-value" name="input-rand-value">
+			<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-record-slug" name="input-record-slug">
+			<input type="text" class="form-control" id="inlineFormInputGroup" id="input-record-url" name="input-record-url" placeholder="Quickly add a new record https://" autocomplete="off">
+			<button class="btn btn-primary" type="submit">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+					<path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+				</svg>
+			</button>
 		</form>
 		<ul class="nav ml-auto">
-			<li class="nav-item dropdown"><a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-bell-outline mdi-1x"></i></a>
-				<div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="notificationDropdown">
-					<div class="dropdown-header">
-						<h6 class="dropdown-title">Notifications</h6>
-						<p class="dropdown-title-text">You have 4 unread notification</p>
-					</div>
-					<div class="dropdown-body">
-						<div class="dropdown-list">
-							<div class="icon-wrapper rounded-circle bg-inverse-primary text-primary"><i class="mdi mdi-alert"></i></div>
-							<div class="content-wrapper"><small class="name">Storage Full</small> <small class="content-text">Server storage almost full</small></div>
-						</div>
-						<div class="dropdown-list">
-							<div class="icon-wrapper rounded-circle bg-inverse-success text-success"><i class="mdi mdi-cloud-upload"></i></div>
-							<div class="content-wrapper"><small class="name">Upload Completed</small> <small class="content-text">3 Files uploded successfully</small></div>
-						</div>
-						<div class="dropdown-list">
-							<div class="icon-wrapper rounded-circle bg-inverse-warning text-warning"><i class="mdi mdi-security"></i></div>
-							<div class="content-wrapper"><small class="name">Authentication Required</small> <small class="content-text">Please verify your password to continue using cloud services</small></div>
-						</div>
-					</div>
-					<div class="dropdown-footer"><a href="#">View All</a></div>
-				</div>
-			</li>
-			<li class="nav-item dropdown"><a class="nav-link" href="#" id="messageDropdown" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-message-outline mdi-1x"></i> <span class="notification-indicator notification-indicator-primary notification-indicator-ripple"></span></a>
-				<div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="messageDropdown">
-					<div class="dropdown-header">
-						<h6 class="dropdown-title">Messages</h6>
-						<p class="dropdown-title-text">You have 4 unread messages</p>
-					</div>
-					<div class="dropdown-body">
-						<div class="dropdown-list">
-							<div class="image-wrapper"><img class="profile-img" src="../assets/images/profile/male/image_1.png" alt="profile image">
-								<div class="status-indicator rounded-indicator bg-success"></div>
-							</div>
-							<div class="content-wrapper"><small class="name">Clifford Gordon</small> <small class="content-text">Lorem ipsum dolor sit amet.</small></div>
-						</div>
-						<div class="dropdown-list">
-							<div class="image-wrapper"><img class="profile-img" src="../assets/images/profile/female/image_2.png" alt="profile image">
-								<div class="status-indicator rounded-indicator bg-success"></div>
-							</div>
-							<div class="content-wrapper"><small class="name">Rachel Doyle</small> <small class="content-text">Lorem ipsum dolor sit amet.</small></div>
-						</div>
-						<div class="dropdown-list">
-							<div class="image-wrapper"><img class="profile-img" src="../assets/images/profile/male/image_3.png" alt="profile image">
-								<div class="status-indicator rounded-indicator bg-warning"></div>
-							</div>
-							<div class="content-wrapper"><small class="name">Lewis Guzman</small> <small class="content-text">Lorem ipsum dolor sit amet.</small></div>
-						</div>
-					</div>
-					<div class="dropdown-footer"><a href="#">View All</a></div>
-				</div>
-			</li>
-			<li class="nav-item dropdown"><a class="nav-link" href="#" id="appsDropdown" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-apps mdi-1x"></i></a>
-				<div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="appsDropdown">
-					<div class="dropdown-header">
-						<h6 class="dropdown-title">Apps</h6>
-						<p class="dropdown-title-text mt-2">Authentication required for 3 apps</p>
-					</div>
-					<div class="dropdown-body border-top pt-0"><a class="dropdown-grid"><i class="grid-icon mdi mdi-jira mdi-2x"></i> <span class="grid-tittle">Jira</span> </a><a class="dropdown-grid"><i class="grid-icon mdi mdi-trello mdi-2x"></i> <span class="grid-tittle">Trello</span> </a><a class="dropdown-grid"><i class="grid-icon mdi mdi-artstation mdi-2x"></i> <span class="grid-tittle">Artstation</span> </a><a class="dropdown-grid"><i class="grid-icon mdi mdi-bitbucket mdi-2x"></i> <span class="grid-tittle">Bitbucket</span></a></div>
-					<div class="dropdown-footer"><a href="#">View All</a></div>
-				</div>
-			</li>
 		</ul>
 	</div>
 </nav>

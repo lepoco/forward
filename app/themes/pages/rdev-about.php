@@ -16,6 +16,16 @@ defined('ABSPATH') or die('No script kiddies please!');
 $this->GetHeader();
 $this->GetNavigation();
 ?>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="content__title">
+				<h1>About</h1>
+				<span>Find out more about Forward</span>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-md-3">

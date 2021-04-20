@@ -26,6 +26,83 @@ $this->GetNavigation();
 				<span>Forward - a modern link shortener</span>
 			</div>
 		</div>
+
+		<div class="col-12 col-lg-3">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Top referrer'); ?></span>
+					<h3><?php echo $this->TopReferrer(); ?></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-3">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Top language'); ?></span>
+					<h3><?php echo $this->TopLanguage(); ?></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-3">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Total clicks'); ?></span>
+					<h3><?php echo $this->TotalClicks(); ?></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-3">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('API requests'); ?></span>
+					<h3>0</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-4">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Links'); ?></span>
+					<div class="records-list">
+						<div class="records-list__container">
+							<?php $c = 0;
+							foreach ($this->Records() as $record) : $c++; ?>
+								<div class="records-list__record record-<?php echo $record['record_id']; ?>" data-id="<?php echo $record['record_id']; ?>">
+									<p>/<?php echo $record['record_display_name']; ?></p>
+									<span><?php echo $record['record_url']; ?></span>
+									<h4><?php echo $record['record_clicks']; ?></h4>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-8">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Selected link'); ?></span>
+					<?php
+					$last_record = count($this->Records());
+					$record = $this->Records()[0];
+					?>
+					<h2>/<?php echo $record['record_display_name']; ?></h2>
+					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
+						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">Copy</button>
+						<button class="btn btn-outline-primary btn-sm" type="button">Share</button>
+						<button class="btn btn-outline-primary btn-sm" type="button">Archive</button>
+						<button class="btn btn-outline-primary btn-sm" type="button">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="content__copyright">
+				<p>Created in Poland by Leszek Pomianowski</p>
+				<span>Copyright © 2019-<?php echo date('Y'); ?> RAPIDDEV | MIT License</span>
+			</div>
+		</div>
 	</div>
 </div>
 <?php

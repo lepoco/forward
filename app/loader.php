@@ -17,6 +17,9 @@ defined('ABSPATH') or die('No script kiddies please!');
 if (is_file(APPPATH . 'config.php'))
 	require_once APPPATH . 'config.php';
 
+/** Constants */
+require_once APPPATH . 'code/core/' . 'rdev-constants.php';
+
 /** Uri */
 require_once APPPATH . 'code/core/' . 'rdev-uri.php';
 
