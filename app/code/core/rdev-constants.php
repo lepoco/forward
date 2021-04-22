@@ -30,7 +30,9 @@ final class Constants
 
     public static $knownOrigins = array(
         'Email / SMS / Direct' => array('direct'),
-        'YouTube' => array('www.youtube.com', 'youtube.com')
+        'YouTube' => array('www.youtube.com', 'youtube.com'),
+        'Facebook' => array('facebook.com', 'fb.com'),
+        'Messenger' => array('l.messenger.com', 'messenger.com')
     );
 
     public static $forwardStyles = array(

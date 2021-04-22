@@ -201,18 +201,18 @@ class Model extends Models
 		$config  = "";
 		$config .= "<?php\n\n/**\n * @package Forward\n *\n * @author RapidDev\n * @copyright Copyright (c) 2019-" . date('Y') . ", RapidDev\n * @link https://www.rdev.cc/forward\n * @license https://opensource.org/licenses/MIT\n */\nnamespace Forward;\ndefined('ABSPATH') or die('No script kiddies please!');";
 
-		$config .= "\n\n/** Passwords hash type */\n\tdefine( 'FORWARD_ALGO', " . $this->SetAlgo() . " );";
+		$config .= "\n\n/** Passwords hash type */\ndefine( 'FORWARD_ALGO', " . $this->SetAlgo() . " );";
 
-		$config .= "\n\n/** Database table */\n\tdefine( 'FORWARD_DB_NAME', '" . $args['db_name'] . "' );";
-		$config .= "\n/** Database table */\n\tdefine( 'FORWARD_DB_HOST', '" . $args['db_host'] . "' );";
-		$config .= "\n/** Database table */\n\tdefine( 'FORWARD_DB_USER', '" . $args['db_user'] . "' );";
-		$config .= "\n/** Database table */\n\tdefine( 'FORWARD_DB_PASS', '" . $args['db_pass'] . "' );";
+		$config .= "\n\n/** Database table */\ndefine( 'FORWARD_DB_NAME', '" . $args['db_name'] . "' );";
+		$config .= "\n/** Database table */\ndefine( 'FORWARD_DB_HOST', '" . $args['db_host'] . "' );";
+		$config .= "\n/** Database table */\ndefine( 'FORWARD_DB_USER', '" . $args['db_user'] . "' );";
+		$config .= "\n/** Database table */\ndefine( 'FORWARD_DB_PASS', '" . $args['db_pass'] . "' );";
 
-		$config .= "\n\n/** Session salt */\n\tdefine( 'SESSION_SALT', '" . Crypter::DeepSalter(50) . "' );";
-		$config .= "\n/** Passowrd salt */\n\tdefine( 'PASSWORD_SALT', '" . Crypter::DeepSalter(50) . "' );";
-		$config .= "\n/** Nonce salt */\n\tdefine( 'NONCE_SALT', '" . Crypter::DeepSalter(50) . "' );";
+		$config .= "\n\n/** Session salt */\ndefine( 'SESSION_SALT', '" . Crypter::DeepSalter(64) . "' );";
+		$config .= "\n/** Passowrd salt */\ndefine( 'PASSWORD_SALT', '" . Crypter::DeepSalter(64) . "' );";
+		$config .= "\n/** Nonce salt */\ndefine( 'NONCE_SALT', '" . Crypter::DeepSalter(64) . "' );";
 
-		$config .= "\n\n/** Debugging */\n\tdefine( 'FORWARD_DEBUG', false );";
+		$config .= "\n\n/** Debugging */\ndefine( 'FORWARD_DEBUG', false );";
 		$config .= "\n";
 
 		$path = APPPATH . 'config.php';
@@ -312,8 +312,8 @@ class Model extends Models
 			"INSERT IGNORE INTO forward_records (record_name, record_display_name, record_url) VALUES " .
 				"('" . strtolower($q1) . "', '" . strtoupper($q1) . "', 'https://github.com/rapiddev/Forward'), " .
 				"('" . strtolower($q2) . "', '" . strtoupper($q2) . "', 'https://rdev.cc/'),  " .
-				"('" . strtolower($q3) . "', '" . strtoupper($q2) . "', 'https://lepo.co/'),  " .
-				"('" . strtolower($q4) . "', '" . strtoupper($q3) . "', 'https://4geek.co/')"
+				"('" . strtolower($q3) . "', '" . strtoupper($q3) . "', 'https://4geek.co/'),  " .
+				"('" . strtolower($q4) . "', '" . strtoupper($q4) . "', 'https://lepo.co/')"
 		);
 
 		//Binded

@@ -20,9 +20,12 @@ $this->GetNavigation();
     <div class="row">
         <div class="col-12">
             <div class="content__title">
-                <h1>My Account</h1>
+                <h1><?php echo $this->GetHeaderTitle(); ?></h1>
                 <span>Application users</span>
             </div>
+        </div>
+        <div class="col-12">
+
         </div>
     </div>
 </div>

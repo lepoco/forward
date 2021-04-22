@@ -113,7 +113,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 			</ul>
 			<strong class="sidebar__navigation__title">Session</strong>
 			<ul class="sidebar__navigation__menu">
-				<li>
+				<li class="<?php echo $this->name == 'user-single' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'users/' . $this->Forward->User->Active()['user_id']; ?>">
 						<span>Account</span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">

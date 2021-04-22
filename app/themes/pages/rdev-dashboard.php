@@ -22,7 +22,7 @@ $this->GetNavigation();
 	<div class="row">
 		<div class="col-12">
 			<div class="content__title">
-				<h1>Dashboard</h1>
+				<h1><?php $this->_e('Dashboard'); ?></h1>
 				<span>Forward - a modern link shortener</span>
 			</div>
 		</div>
@@ -91,9 +91,9 @@ $this->GetNavigation();
 					<small><?php echo $record['record_url'] ?></small>
 					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
 						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">Copy</button>
-						<button class="btn btn-outline-primary btn-sm" type="button">Share</button>
-						<button class="btn btn-outline-primary btn-sm" type="button">Archive</button>
-						<button class="btn btn-outline-primary btn-sm" type="button">Delete</button>
+						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>
+						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
+						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
 					</div>
 				</div>
 			</div>
@@ -102,23 +102,23 @@ $this->GetNavigation();
 			<div class="content__card">
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Add new'); ?></span>
-					<form class="forward-form">
+					<form class="forward-form forward-dashboard__add__form">
 						<input type="hidden" value="add_record" name="action">
 						<input type="hidden" value="<?php echo $this->AjaxNonce('add_record'); ?>" name="nonce">
-						<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-rand-value" name="input-rand-value">
+						<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-dashboard-rand-value" name="input-rand-value">
 						<div class="row">
 							<div class="col-12 col-lg-6" style="margin-bottom:1rem;">
 								<div class="form-group">
-									<input type="text" id="input-record-url" name="input-record-url" class="form-control" placeholder="https://">
+									<input type="text" id="input-dashboard-record-url" name="input-record-url" class="form-control" placeholder="https://">
 								</div>
 							</div>
 							<div class="col-12 col-lg-6" style="margin-bottom:1rem;">
 								<div class="form-group">
-									<input type="text" id="input-record-slug" name="input-record-slug" class="form-control" placeholder="<?php echo $this->NewRecord(); ?>" value="<?php echo $this->NewRecord(); ?>">
+									<input type="text" id="input-dashboard-record-slug" name="input-record-slug" class="form-control" placeholder="<?php echo $this->NewRecord(); ?>" value="<?php echo $this->NewRecord(); ?>">
 								</div>
 							</div>
 							<div class="d-grid">
-								<button type="submit" id="add-record-send" class="btn btn-outline-primary"><?php echo $this->_e('Add new'); ?></button>
+								<button type="submit" class="btn btn-outline-primary"><?php echo $this->_e('Add new'); ?></button>
 							</div>
 						</div>
 					</form>

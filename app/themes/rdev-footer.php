@@ -19,16 +19,21 @@ defined('ABSPATH') or die('No script kiddies please!');
 </div>
 <div class="snackbar">
 	<div id="global-snackbar" class="info snackbar__body">
-		<div>
-			<h2>Message</h2>
-			<p>Content</p>
+		<div style="width: 100%;display:flex;align-items: center;justify-content: space-between;">
+			<div>
+				<h2 id="global-snackbar-header" class="snackbar__body__header">Message</h2>
+				<p id="global-snackbar-message" class="snackbar__body__message">Content</p>
+			</div>
+			<button id="global-snackbar-dismiss" class="btn btn-sm" type="button">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+					<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+				</svg>
+			</button>
 		</div>
-		<button class="btn btn-sm" type="button">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-				<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-			</svg>
-		</button>
 	</div>
+</div>
+<div class="root-toast-container">
+	<div id="global-toast-container" class="toast-container"></div>
 </div>
 <?php foreach ($this->scripts as $script) : ?>
 	<script type="text/javascript" src="<?php echo $script[0] . (isset($script[2]) ? '?ver=' . $script[2] : '') ?>" <?php echo (!empty($script[1]) ? ' integrity="' . $script[1] . '"' : ''); ?> crossorigin="anonymous"></script>
