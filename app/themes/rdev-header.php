@@ -92,55 +92,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 			}]
 		}
 	</script>
-	<script type="text/javascript" nonce="<?php echo $this->js_nonce; ?>">
-		let forward = {
-			pagenow: '<?php echo $this->name; ?>',
-			usernonce: '<?php echo $this->body_nonce; ?>',
-			baseurl: '<?php echo $this->baseurl; ?>',
-			version: '<?php echo FORWARD_VERSION; ?>',
-			ajax: '<?php echo ($this->name != 'home' ? $this->AjaxGateway() : ''); ?>',
-			getrecord: '<?php echo $this->AjaxNonce('get_record_data') ?>',
-			removerecord: '<?php echo $this->AjaxNonce('remove_record') ?>'
-			<?php echo (trim($this->geoip != '') ? ', geoip: \'' . $this->geoip . '\'' : ''); ?>
-		};
-		<?php if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') : ?>
-			let visitor_data = {
-				languages: {
-					<?php $c = 0;
-					foreach ($this->GetLanguages() as $key => $lang) {
-						$c++;
-						echo ($c > 1 ? ', ' : '') . $key . ': "' . $lang . '"';
-					} ?>
-				},
-				origins: {
-					<?php $c = 0;
-					foreach ($this->GetOrigins() as $key => $origin) {
-						$c++;
-						echo ($c > 1 ? ', ' : '') . $key . ': "' . $origin . '"';
-					} ?>
-				},
-				platforms: {
-					<?php $c = 0;
-					foreach ($this->GetPlatforms() as $key => $platform) {
-						$c++;
-						echo ($c > 1 ? ', ' : '') . $key . ': "' . $platform . '"';
-					} ?>
-				},
-				agents: {
-					<?php $c = 0;
-					foreach ($this->GetAgents() as $key => $agent) {
-						$c++;
-						echo ($c > 1 ? ', ' : '') . $key . ': "' . $agent . '"';
-					} ?>
-				}
-			};
-			let users = [<?php $c = 0;
-							foreach ($this->GetUsers() as $user) {
-								$c++;
-								echo ($c > 1 ? ', [' : '[') . $user['user_id'] . ', "' . $user['user_display_name'] . '", "' . $user['user_email'] . '"]';
-							} ?>];
-		<?php endif; ?>
-	</script>
+	<?php $this->GetHeaderJson(); ?>
 	<?php if (method_exists($this, 'Header')) {
 		$this->Header();
 	} ?>

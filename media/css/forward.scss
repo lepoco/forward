@@ -77,6 +77,21 @@ body.dark-theme {
         }
         .content {
             border-left: 1px solid $dark-navborder-color;
+            table,
+            .table {
+                color: #fff;
+            }
+            .table-striped>tbody>tr:nth-of-type(odd) {
+                color: #999;
+            }
+            tbody,
+            td,
+            tfoot,
+            th,
+            thead,
+            tr {
+                border-color: #000;
+            }
         }
     }
 }
@@ -319,7 +334,7 @@ body.header-fixed {
         position: absolute;
         padding: 0.5rem;
         bottom: 0;
-        font-size: 9px;
+        font-size: 11px;
         color: #888;
     }
 }

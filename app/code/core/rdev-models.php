@@ -252,6 +252,50 @@ class Models
 		);
 	}
 
+	protected function GetHeaderJson()
+	{
+		$forwardJson = array(
+			'pagenow' => $this->name,
+			'usernonce' => $this->body_nonce,
+			'baseurl' => $this->baseurl,
+			'version' => '\'' . FORWARD_VERSION . '\'',
+			'ajax' => ($this->name != 'home' ? $this->AjaxGateway() : ''),
+			'getrecord' => '\'' . $this->AjaxNonce('get_record_data') . '\'',
+			'removerecord' => '\'' . $this->AjaxNonce('remove_record') . '\''
+		);
+
+		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {
+			$visitors = array(
+				'languages' => array(),
+				'origins' => array(),
+				'platforms' => array(),
+				'agents' => array()
+			);
+
+			foreach ($this->GetLanguages() as $key => $agent) {
+				$visitors['languages'][$key] = $agent;
+			}
+			foreach ($this->GetOrigins() as $key => $agent) {
+				$visitors['origins'][$key] = $agent;
+			}
+			foreach ($this->GetPlatforms() as $key => $agent) {
+				$visitors['platforms'][$key] = $agent;
+			}
+			foreach ($this->GetAgents() as $key => $agent) {
+				$visitors['agents'][$key] = $agent;
+			}
+
+			$forwardJson['visitors'] = $visitors;
+
+			$forwardJson['users'] = array();
+			foreach ($this->GetUsers() as $user) {
+				$forwardJson['users'][] = array($user['user_id'], $user['user_display_name'], $user['user_email']);
+			}
+		}
+
+		echo '<script type="text/javascript" nonce="' . $this->js_nonce . '">let forward = ' . json_encode($forwardJson, JSON_UNESCAPED_UNICODE) . ';</script>' . PHP_EOL;
+	}
+
 	protected function GetStyles()
 	{
 		$this->styles = Constants::$forwardStyles;
@@ -260,8 +304,12 @@ class Models
 
 	protected function GetScripts()
 	{
-		$this->scripts = Constants::$forwardScripts;
-		$this->scripts[] = array($this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION);
+		if ($this->name != 'home') {
+			$this->scripts = Constants::$forwardScripts;
+			$this->scripts[] = array($this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION);
+		} else {
+			$this->scripts = array();
+		}
 	}
 
 	public function Print()

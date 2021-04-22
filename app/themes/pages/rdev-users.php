@@ -24,6 +24,34 @@ $this->GetNavigation();
 				<span>Application users</span>
 			</div>
 		</div>
+		<div class="col-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Username</th>
+						<th scope="col">E-Mail</th>
+						<th scope="col">Role</th>
+						<th scope="col">Last login</th>
+						<th scope="col">Registered</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					foreach ($this->GetUsers() as $user) {
+						$html = '<tr>';
+						$html .= '<th scope="row">' . $user['user_id'] . '</td>';
+						$html .= '<td><a href="' . $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboard') . '/users/' . $user['user_id'] . '">' . $user['user_display_name'] . '</a></td>';
+						$html .= '<td>' . $user['user_email'] . '</td>';
+						$html .= '<td>' . $user['user_role'] . '</td>';
+						$html .= '<td>' . $user['user_last_login'] . '</td>';
+						$html .= '<td>' . $user['user_registered'] . '</td>';
+						echo $html . '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 <?php

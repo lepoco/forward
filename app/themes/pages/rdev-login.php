@@ -69,7 +69,7 @@ $this->GetHeader();
 	</div>
 
 	<div class="splash__footer">
-		Copyright © 2019-<?php echo date('Y'); ?> RapidDev | MIT License
+		Copyright © 2019-<?php echo date('Y'); ?> Leszek Pomianowski | MIT License
 		<br>
 		<?php $this->_e('Background image'); ?>: <i><?php echo $selectedBackground[1] . ' ' . $this->__('created by') . ' ' . $selectedBackground[0]; ?></i>
 		<br>

@@ -61,6 +61,24 @@ body.dark-theme .forward-page .content {
   border-left: 1px solid #000;
 }
 
+body.dark-theme .forward-page .content table,
+body.dark-theme .forward-page .content .table {
+  color: #fff;
+}
+
+body.dark-theme .forward-page .content .table-striped > tbody > tr:nth-of-type(odd) {
+  color: #999;
+}
+
+body.dark-theme .forward-page .content tbody,
+body.dark-theme .forward-page .content td,
+body.dark-theme .forward-page .content tfoot,
+body.dark-theme .forward-page .content th,
+body.dark-theme .forward-page .content thead,
+body.dark-theme .forward-page .content tr {
+  border-color: #000;
+}
+
 .snackbar__body.info {
   color: #0d6efd;
   border: 1px solid #0d6efd !important;
@@ -363,7 +381,7 @@ body.header-fixed .content {
   position: absolute;
   padding: 0.5rem;
   bottom: 0;
-  font-size: 9px;
+  font-size: 11px;
   color: #888;
 }
 
