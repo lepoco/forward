@@ -112,6 +112,14 @@ class Models
 	protected $geoip = '';
 
 	/**
+	 * Record ID for quick add
+	 *
+	 * @var string
+	 * @access protected
+	 */
+	protected string $new_record = '';
+
+	/**
 	 * __construct
 	 * Class constructor
 	 *

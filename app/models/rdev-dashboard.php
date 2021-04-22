@@ -25,8 +25,6 @@ class Model extends Models
 {
 	private int $total_clicks = -1;
 
-	private string $new_record = '';
-
 	private array $last_visitors = array();
 
 	private array $records = array();

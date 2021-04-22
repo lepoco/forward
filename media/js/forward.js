@@ -202,7 +202,7 @@ function showTimeoutToast(header, message, timeout = 3000, type = 'default') {
         currentdate.getSeconds() + '</small></div><div class="toast-body">' +
         message + '</div></div>');
 
-    let toastElement = new bootstrap.Toast(document.getElementById(toastId), { animate: true });;
+    let toastElement = new bootstrap.Toast(document.getElementById(toastId), { animate: true, delay: timeout });;
     toastElement.show();
 }
 
@@ -276,6 +276,61 @@ jQuery('#global-snackbar-dismiss').on('click', function(e) {
  */
 function themeFunctions() {
     consoleLog('The main functions of the theme have loaded correctly.');
+
+    jQuery('.forward-header__navigation__form').on('submit', function(e) {
+        e.preventDefault();
+        consoleLog('New record via Quick Add');
+
+        let target = jQuery('#input-record-url').val();
+
+        jQuery.ajax({
+            url: forward.ajax,
+            type: 'post',
+            data: jQuery('.forward-header__navigation__form').serialize(),
+            success: function(e) {
+                if (e == 's01') {
+                    //jQuery('#add-success').slideToggle();
+
+                    //jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
+
+
+                    let slug = jQuery('#input-record-slug').val();
+                    if (slug == '') {
+                        slug = jQuery('#input-rand-value').val();
+                    }
+                    let url = forward.baseurl + slug;
+                    let target_shorted = jQuery('#input-record-url').val();
+                    let date = new Date();
+                    date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+                    showTimeoutToast('Success!', 'New record has been added', 6000, 'success');
+                    if (forward.pagenow == 'dashboard') {
+                        appendRecordToList(-1, slug, target, url, 0);
+                    }
+                } else {
+
+                    let error_text = __T('e1');
+
+                    if (e == 'e07') {
+                        error_text = __T('e7');
+                    } else if (e == 'e08') {
+                        error_text = __T('e8');
+                    } else if (e == 'e10') {
+                        error_text = __T('e10');
+                    }
+
+                    showTimeoutToast('Quick add error!', error_text, 6000, 'alert');
+                }
+                console.log(e);
+            },
+            fail: function(xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+                jQuery('#add-alert').slideToggle();
+            }
+        });
+    });
 
     if (forward.pagenow == 'install') {
         pageInstall();
@@ -424,7 +479,7 @@ function pageDashboard() {
     let clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
     clipboard_link.on('success', function(e) {
         //showGlobalSnackbar('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
-        showTimeoutToast('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
+        showTimeoutToast('Success!', 'The link has been copied to your clipboard!', 3000, 'success');
     });
 
     function appendRecordToList(id, slug, target, url, clicks) {
@@ -438,64 +493,6 @@ function pageDashboard() {
 
     jQuery('.records-list__record').on('click', function(e) {
         console.log(e);
-    });
-
-    jQuery('.forward-header__navigation__form').on('submit', function(e) {
-        e.preventDefault();
-        consoleLog('New record via Quick Add');
-
-        let target = jQuery('#input-record-url').val();
-
-        jQuery.ajax({
-            url: forward.ajax,
-            type: 'post',
-            data: jQuery('.forward-header__navigation__form').serialize(),
-            success: function(e) {
-                if (e == 's01') {
-                    //jQuery('#add-success').slideToggle();
-
-                    //jQuery('#total_records_count').html(parseInt(jQuery('#total_records_count').html()) + 1);
-
-
-                    let slug = jQuery('#input-record-slug').val();
-                    if (slug == '') {
-                        slug = jQuery('#input-rand-value').val();
-                    }
-                    let url = forward.baseurl + slug;
-                    let target_shorted = jQuery('#input-record-url').val();
-                    let date = new Date();
-                    date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-
-                    appendRecordToList(-1, slug, target, url, 0);
-                    showTimeoutToast('Success!', 'New record has been added', 6000, 'success');
-                    //jQuery("#records_list div:nth-child(2)").after('<div class="card links-card" data-clipboard-text="' + url + '"><div class="card-body"><div><small>' + date + '</small><h2><a target="_blank" rel="noopener" class="overflow-url" href="' + url + '">/' + slug + '</a></h2><p><a target="_blank" rel="noopener" href="' + target_shorted + '">' + target + '...</a></p></div><span>0</span></div></div>');;
-
-                    /*window.setTimeout(function() {
-                        jQuery('#add-success').slideToggle(400, function() { jQuery('#add-success').hide(); });
-                    }, 3000);*/
-                } else {
-
-                    let error_text = __T('e1');
-
-                    if (e == 'e07') {
-                        error_text = __T('e7');
-                    } else if (e == 'e08') {
-                        error_text = __T('e8');
-                    } else if (e == 'e10') {
-                        error_text = __T('e10');
-                    }
-
-                    showTimeoutToast('Quick add error!', error_text, 6000, 'alert');
-                }
-                console.log(e);
-            },
-            fail: function(xhr, textStatus, errorThrown) {
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-                jQuery('#add-alert').slideToggle();
-            }
-        });
     });
 
     jQuery('.forward-dashboard__add__form').on('submit', function(e) {
