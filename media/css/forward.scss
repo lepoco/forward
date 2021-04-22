@@ -228,7 +228,7 @@ body.header-fixed {
         &__body {
             //min-height: 630px;
             background-color: #fff;
-            padding: 40px 56px;
+            padding: 2.5rem 3.5rem;
             border-radius: 12px;
             border: 1px solid hsla(0, 0%, 100%, 0);
             h1 {
@@ -252,7 +252,7 @@ body.header-fixed {
                 color: #bcbcbc;
                 font-size: 12px;
                 padding-top: 12px;
-                margin-top: 1rem;
+                //margin-top: 1rem;
             }
         }
         &__button {
@@ -273,16 +273,31 @@ body.header-fixed {
             font-family: adobe-clean-ux, adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
             line-height: 1.3;
             cursor: pointer;
-            border-radius: 32px;
+            border-radius: 8px;
             min-height: 32px;
             height: auto;
             min-width: 72px;
             padding: 3.5px 14px 4.5px;
             font-size: 14px;
             font-weight: 700;
+            transition-duration: .45s;
+            transition-timing-function: cubic-bezier(.26, .66, .45, .78);
             p {
                 margin: 0;
                 padding: 0;
+            }
+            svg,
+            img {
+                transition-duration: .45s;
+                transition-timing-function: cubic-bezier(.26, .66, .45, .78);
+                opacity: 1;
+            }
+        }
+        &__button:hover {
+            background: transparent;
+            color: #1473e6;
+            svg {
+                fill: #1473e6;
             }
         }
     }

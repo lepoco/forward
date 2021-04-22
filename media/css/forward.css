@@ -247,7 +247,7 @@ body.header-fixed .content {
 
 .splash__card__body {
   background-color: #fff;
-  padding: 40px 56px;
+  padding: 2.5rem 3.5rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0);
 }
@@ -275,7 +275,6 @@ body.header-fixed .content {
   color: #bcbcbc;
   font-size: 12px;
   padding-top: 12px;
-  margin-top: 1rem;
 }
 
 .splash__card__button {
@@ -302,18 +301,40 @@ body.header-fixed .content {
   font-family: adobe-clean-ux, adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
   line-height: 1.3;
   cursor: pointer;
-  border-radius: 32px;
+  border-radius: 8px;
   min-height: 32px;
   height: auto;
   min-width: 72px;
   padding: 3.5px 14px 4.5px;
   font-size: 14px;
   font-weight: 700;
+  -webkit-transition-duration: .45s;
+          transition-duration: .45s;
+  -webkit-transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+          transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
 }
 
 .splash__card__button p {
   margin: 0;
   padding: 0;
+}
+
+.splash__card__button svg,
+.splash__card__button img {
+  -webkit-transition-duration: .45s;
+          transition-duration: .45s;
+  -webkit-transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+          transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+  opacity: 1;
+}
+
+.splash__card__button:hover {
+  background: transparent;
+  color: #1473e6;
+}
+
+.splash__card__button:hover svg {
+  fill: #1473e6;
 }
 
 .splash__logo {
