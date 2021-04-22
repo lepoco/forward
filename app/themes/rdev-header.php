@@ -146,4 +146,4 @@ defined('ABSPATH') or die('No script kiddies please!');
 	} ?>
 </head>
 
-<body id="forward-app" class="<?php echo 'page-' . $this->name; ?> dark-theme header-fixed">
+<body id="forward-app" class="<?php echo 'page-' . $this->name; ?> forward-app dark-theme header-fixed">

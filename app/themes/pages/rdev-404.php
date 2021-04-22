@@ -45,6 +45,8 @@ $this->GetHeader();
 	};
 	noise();
 </script>
+</div>
+</div>
 <?php
 $this->GetFooter();
 ?>

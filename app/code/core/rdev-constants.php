@@ -47,4 +47,13 @@ final class Constants
         array('https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js', 'sha256-xNhpuwaNiVdna6L8Wy3GNuQz1z+SCmo4NY1c7cJ9Vdc=', '0.11.4'),
         //array('https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js', 'sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=', '3.6.0')
     );
+
+    public static $backgrounds = array(
+        array('Marcin Jóźwiak', 'Poznań, Poland', 'bg1_marcin-jozwiak'),
+        array('Marcin Jóźwiak', 'Międzyzdroje, Poland', 'bg2_marcin-jozwiak'),
+        array('Marcin Jóźwiak', 'Poznań, Poland', 'bg3_marcin-jozwiak'),
+        array('Marcin Jóźwiak', 'Dziwnów, Poland', 'bg4_marcin-jozwiak'),
+        array('Adam Borkowski', 'Warsaw, Poland', 'bg5_adam-borkowski'),
+        array('Josh Hild', 'Zakopane, Poland', 'bg6_josh-hild')
+    );
 }
