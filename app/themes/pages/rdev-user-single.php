@@ -17,14 +17,14 @@ $this->GetHeader();
 $this->GetNavigation();
 ?>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-12">
-			<div class="content__title">
-				<h1>Users</h1>
-				<span>Application users</span>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-12">
+            <div class="content__title">
+                <h1>My Account</h1>
+                <span>Application users</span>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
 $this->GetFooter();

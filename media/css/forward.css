@@ -206,6 +206,143 @@ body.header-fixed .content {
 /*
  * Content
  */
+.splash {
+  color: #333;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: inherit;
+}
+
+.splash__background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.splash__background img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.splash__card {
+  max-width: 500px;
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.splash__card__body {
+  background-color: #fff;
+  padding: 40px 56px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.splash__card__body h1 {
+  color: #323232;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0;
+}
+
+.splash__card__body h2 {
+  color: #505050;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 0;
+}
+
+.splash__card__body small {
+  display: block;
+  color: #bcbcbc;
+  font-size: 12px;
+  padding-top: 12px;
+  margin-top: 1rem;
+}
+
+.splash__card__button {
+  background-color: #1473e6;
+  border-color: #1473e6;
+  color: #fff;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: visible;
+  border-style: solid;
+  text-transform: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  margin-top: 1rem;
+  border-style: solid;
+  text-transform: none;
+  text-decoration: none;
+  font-family: adobe-clean-ux, adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+  line-height: 1.3;
+  cursor: pointer;
+  border-radius: 32px;
+  min-height: 32px;
+  height: auto;
+  min-width: 72px;
+  padding: 3.5px 14px 4.5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.splash__card__button p {
+  margin: 0;
+  padding: 0;
+}
+
+.splash__logo {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.splash__logo svg,
+.splash__logo img {
+  width: 250px;
+  max-width: 100%;
+}
+
+.splash__footer {
+  position: absolute;
+  padding: 0.5rem;
+  bottom: 0;
+  font-size: 9px;
+  color: #888;
+}
+
 .forward-page {
   position: relative;
   display: -ms-grid;
@@ -504,7 +641,7 @@ body.header-fixed .content {
   display: block;
   white-space: nowrap;
   max-width: 100%;
-  padding-right: 2.5rem;
+  padding-right: 3.5rem;
   color: #ccc;
   overflow: hidden;
   text-overflow: ellipsis;

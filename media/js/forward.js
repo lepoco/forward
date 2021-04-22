@@ -326,6 +326,10 @@ function pageDashboard() {
             clicks + '</h4></div>');
     }
 
+    jQuery('.records-list__record').on('click', function(e) {
+        console.log(e);
+    });
+
     jQuery('.forward-header__navigation__form').on('submit', function(e) {
         e.preventDefault();
         consoleLog('New record via Quick Add');

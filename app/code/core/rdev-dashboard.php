@@ -82,6 +82,9 @@ class Dashboard
 			$this->Forward->LoadModel('404', 'Page not found');
 		}
 
+		if ($this->subpage == 'users')
+			$user_id = ctype_digit($this->Forward->Path->GetLevel(2)) ? intval($this->Forward->Path->GetLevel(2)) : null;
+
 		switch ($this->subpage) {
 			case 'ajax':
 				new Ajax($this->Forward);
@@ -104,11 +107,9 @@ class Dashboard
 				break;
 
 			case 'users':
-				if ($this->Forward->Path->GetLevel(2) == 'profile')
-					$this->Forward->LoadModel('user-profile', 'Profile');
-				else if ($this->Forward->Path->GetLevel(2) == 'add')
-					$this->Forward->LoadModel('user-add', 'Add user');
-				else if (trim($this->Forward->Path->GetLevel(2)) == '')
+				if ($user_id != null)
+					$this->Forward->LoadModel('user-single', 'Account');
+				else if (trim($this->Forward->Path->GetLevel(2)) == '' || trim($this->Forward->Path->GetLevel(2)) == 'list')
 					$this->Forward->LoadModel('users', 'Users');
 				else
 					$this->Forward->LoadModel('404', 'Page not found');

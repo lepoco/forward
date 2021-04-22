@@ -88,12 +88,40 @@ $this->GetNavigation();
 					$record = $this->Records()[0];
 					?>
 					<h2>/<?php echo $record['record_display_name']; ?></h2>
+					<small><?php echo $record['record_url'] ?></small>
 					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
 						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">Copy</button>
 						<button class="btn btn-outline-primary btn-sm" type="button">Share</button>
 						<button class="btn btn-outline-primary btn-sm" type="button">Archive</button>
 						<button class="btn btn-outline-primary btn-sm" type="button">Delete</button>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-4">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Add new'); ?></span>
+					<form class="forward-form">
+						<input type="hidden" value="add_record" name="action">
+						<input type="hidden" value="<?php echo $this->AjaxNonce('add_record'); ?>" name="nonce">
+						<input type="hidden" value="<?php echo $this->NewRecord(); ?>" id="input-rand-value" name="input-rand-value">
+						<div class="row">
+							<div class="col-12 col-lg-6" style="margin-bottom:1rem;">
+								<div class="form-group">
+									<input type="text" id="input-record-url" name="input-record-url" class="form-control" placeholder="https://">
+								</div>
+							</div>
+							<div class="col-12 col-lg-6" style="margin-bottom:1rem;">
+								<div class="form-group">
+									<input type="text" id="input-record-slug" name="input-record-slug" class="form-control" placeholder="<?php echo $this->NewRecord(); ?>" value="<?php echo $this->NewRecord(); ?>">
+								</div>
+							</div>
+							<div class="d-grid">
+								<button type="submit" id="add-record-send" class="btn btn-outline-primary"><?php echo $this->_e('Add new'); ?></button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
