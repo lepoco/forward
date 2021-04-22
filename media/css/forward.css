@@ -66,6 +66,17 @@ body.dark-theme .forward-page .content .table {
   color: #fff;
 }
 
+body.dark-theme .forward-page .content table a,
+body.dark-theme .forward-page .content .table a {
+  color: #0078d3;
+  text-decoration: none;
+}
+
+body.dark-theme .forward-page .content table a:hover,
+body.dark-theme .forward-page .content .table a:hover {
+  color: #fff;
+}
+
 body.dark-theme .forward-page .content .table-striped > tbody > tr:nth-of-type(odd) {
   color: #999;
 }

@@ -13,34 +13,38 @@ namespace Forward;
 
 defined('ABSPATH') or die('No script kiddies please!');
 
+$selectedBackground = Constants::$backgrounds[rand(0, count(Constants::$backgrounds) - 1)];
 $this->GetHeader();
 ?>
-<div id="big-background">
-	<picture>
-		<source srcset="<?php echo $this->GetImage('bg.webp') ?>" type="image/webp">
-		<source srcset="<?php echo $this->GetImage('bg.jpeg') ?>" type="image/jpeg">
-		<img alt="Forward big background image" src="<?php echo $this->GetImage('bg.jpeg') ?>">
-	</picture>
-</div>
+<section class="splash">
+	<div class="splash__background">
+		<picture>
+			<source srcset="<?php echo $this->GetImage($selectedBackground[2] . '.webp'); ?>" type="image/webp">
+			<source srcset="<?php echo $this->GetImage($selectedBackground[2] . '.jpeg'); ?>" type="image/jpeg">
+			<img alt="Forward big background image" src="<?php echo $this->GetImage($selectedBackground[2] . '.jpeg'); ?>">
+		</picture>
+	</div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
-			<picture class="forward-logo">
-				<source srcset="<?php echo $this->GetImage('forward-logo-wt.webp') ?>" type="image/webp">
-				<source srcset="<?php echo $this->GetImage('forward-logo-wt.jpeg') ?>" type="image/jpeg">
-				<img alt="Forward logo" src="<?php echo $this->GetImage('forward-logo-wt.jpeg') ?>">
-			</picture>
-		</div>
-		<div class="col-12 col-lg-6">
-			<div class="home-card">
-				<div class="card" id="install-form">
-					<div class="card-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-6" style="display: flex;align-items: center;">
+				<picture class="splash__logo">
+					<source srcset="<?php echo $this->GetImage('forward-logo-wt.webp'); ?>" type="image/webp">
+					<source srcset="<?php echo $this->GetImage('forward-logo-wt.jpeg'); ?>" type="image/jpeg">
+					<img alt="Forward logo" src="<?php echo $this->GetImage('forward-logo-wt.jpeg'); ?>">
+				</picture>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="splash__card">
+					<div id="install-form" class="splash__card__body">
 						<div id="install-form-alert" class="alert alert-danger" style="display:none;">
 							<span></span>
 						</div>
-						<form method="post" autocomplete="off">
-							<h1>Quick Install</h1>
+
+						<h1><?php $this->_e('Quick install'); ?></h1>
+						<h2><?php echo $this->_e('Fast and efficient, almost like in a state office'); ?></h2>
+
+						<form method="post" autocomplete="off" style="margin-top:2rem;">
 							<input type="hidden" class="form-control" id="input_scriptname" value="<?php echo dirname($_SERVER["SCRIPT_NAME"]); ?>">
 							<span>Default URL</span>
 							<div class="form-group">
@@ -90,38 +94,37 @@ $this->GetHeader();
 									</div>
 								</div>
 								<div class="col-12">
-									<span class="def_password--strength"></span>
+									<span style="padding-top: 1rem;display: block;" class="def_password--strength"></span>
 								</div>
 							</div>
 						</form>
+						<button id="install-forward" type="button" class="splash__card__button"><?php $this->_e('Install'); ?></button>
 					</div>
-					<button id="install-forward" type="button" class="btn card-button btn-primary">Install</button>
-				</div>
-				<div class="card" id="install-progress" style="display: none;">
-					<div class="card-body">
+					<div id="install-progress" class="splash__card__body" style="display:none;">
 						<div style="display: flex;align-items: center;">
 							<img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPGRlZnM+ICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjguMDQyJSIgeTE9IjAlIiB4Mj0iNjUuNjgyJSIgeTI9IjIzLjg2NSUiIGlkPSJhIj4gICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjNDQ0IiBzdG9wLW9wYWNpdHk9IjAiIG9mZnNldD0iMCUiLz4gICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjNDQ0IiBzdG9wLW9wYWNpdHk9Ii42MzEiIG9mZnNldD0iNjMuMTQ2JSIvPiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiM0NDQiIG9mZnNldD0iMTAwJSIvPiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4gICAgPC9kZWZzPiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSAxKSI+ICAgICAgICAgICAgPHBhdGggZD0iTTM2IDE4YzAtOS45NC04LjA2LTE4LTE4LTE4IiBpZD0iT3ZhbC0yIiBzdHJva2U9InVybCgjYSkiIHN0cm9rZS13aWR0aD0iMiI+ICAgICAgICAgICAgICAgIDxhbmltYXRlVHJhbnNmb3JtICAgICAgICAgICAgICAgICAgICBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iICAgICAgICAgICAgICAgICAgICB0eXBlPSJyb3RhdGUiICAgICAgICAgICAgICAgICAgICBmcm9tPSIwIDE4IDE4IiAgICAgICAgICAgICAgICAgICAgdG89IjM2MCAxOCAxOCIgICAgICAgICAgICAgICAgICAgIGR1cj0iMC45cyIgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgICAgICAgIDwvcGF0aD4gICAgICAgICAgICA8Y2lyY2xlIGZpbGw9IiM0NDQiIGN4PSIzNiIgY3k9IjE4IiByPSIxIj4gICAgICAgICAgICAgICAgPGFuaW1hdGVUcmFuc2Zvcm0gICAgICAgICAgICAgICAgICAgIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgICAgICAgICAgICAgICAgICAgIHR5cGU9InJvdGF0ZSIgICAgICAgICAgICAgICAgICAgIGZyb209IjAgMTggMTgiICAgICAgICAgICAgICAgICAgICB0bz0iMzYwIDE4IDE4IiAgICAgICAgICAgICAgICAgICAgZHVyPSIwLjlzIiAgICAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgICAgICAgICAgPC9jaXJjbGU+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=" alt="Loader" style="margin-right: 15px;">
 							<span>We are just trying to install Forward...</span>
 						</div>
 					</div>
-				</div>
-				<div class="card" id="install-done" style="display: none;">
-					<div class="card-body">
+					<div id="install-done" class="splash__card__body" style="display:none;">
 						<h1>Everything is ready!</h1>
-						<span>You will be redirected in a few seconds</span>
+						<h2>You will be redirected in a few seconds</h2>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="splash-footer">
-	Copyright © 2019-<?php echo date('Y'); ?> RapidDev | MIT License
-	<br>
-	<?php $this->_e('Background image'); ?>: <i>Joyston Judah</i>
-	<br>
-	<?php $this->_e('Logo font'); ?>: Questrial by <i>Joe Prince</i>
-</div>
-<?php
-$this->GetFooter();
-?>
+
+	<div class="splash__footer">
+		Copyright © 2019-<?php echo date('Y'); ?> Leszek Pomianowski | MIT License
+		<br>
+		<?php $this->_e('Background image'); ?>: <i><?php echo $selectedBackground[1] . ' ' . $this->__('created by') . ' ' . $selectedBackground[0]; ?></i>
+		<br>
+		<?php $this->_e('Logo font'); ?>: Questrial by <i>Joe Prince</i>
+	</div>
+</section>
+<div>
+	<div>
+		<?php
+		$this->GetFooter();
+		?>

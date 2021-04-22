@@ -80,6 +80,13 @@ body.dark-theme {
             table,
             .table {
                 color: #fff;
+                a {
+                    color: $forward-accent;
+                    text-decoration: none;
+                }
+                a:hover {
+                    color: #fff;
+                }
             }
             .table-striped>tbody>tr:nth-of-type(odd) {
                 color: #999;
