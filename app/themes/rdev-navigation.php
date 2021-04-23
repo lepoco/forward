@@ -47,11 +47,11 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 <div class="forward-page">
 	<div class="sidebar">
 		<div class="sidebar__navigation">
-			<strong class="sidebar__navigation__title">Main</strong>
+			<strong class="sidebar__navigation__title"><?php $this->_e('Main'); ?></strong>
 			<ul class="sidebar__navigation__menu">
 				<li class="<?php echo $this->name == 'dashboard' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard; ?>">
-						<span>Dashboard</span>
+						<span><?php $this->_e('Dashboard'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M6 1H1v14h5V1zm9 0h-5v5h5V1zm0 9v5h-5v-5h5zM0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V1zm1 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-5z" />
 						</svg>
@@ -59,7 +59,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 				</li>
 				<li class="<?php echo $this->name == 'statistics' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'statistics/'; ?>">
-						<span>Statistics</span>
+						<span><?php $this->_e('Statistics'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
 						</svg>
@@ -67,7 +67,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 				</li>
 				<li class="<?php echo $this->name == 'users' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'users/list/'; ?>">
-						<span>Users</span>
+						<span><?php $this->_e('Users'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
 						</svg>
@@ -83,7 +83,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 				</li>
 				<li class="<?php echo $this->name == 'settings' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'settings/'; ?>">
-						<span>Settings</span>
+						<span><?php $this->_e('Settings'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
 							<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
@@ -91,7 +91,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 					</a>
 				</li>
 			</ul>
-			<strong class="sidebar__navigation__title">Docs</strong>
+			<strong class="sidebar__navigation__title"><?php $this->_e('Docs'); ?></strong>
 			<ul class="sidebar__navigation__menu">
 				<li>
 					<a href="https://github.com/rapiddev/Forward" target="_blank" rel="noopener">
@@ -103,7 +103,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 				</li>
 				<li class="<?php echo $this->name == 'about' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'about/'; ?>">
-						<span>About</span>
+						<span><?php $this->_e('About'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
 							<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
@@ -111,11 +111,11 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 					</a>
 				</li>
 			</ul>
-			<strong class="sidebar__navigation__title">Session</strong>
+			<strong class="sidebar__navigation__title"><?php $this->_e('Session'); ?></strong>
 			<ul class="sidebar__navigation__menu">
 				<li class="<?php echo $this->name == 'user-single' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'users/' . $this->Forward->User->Active()['user_id']; ?>">
-						<span>Account</span>
+						<span><?php $this->_e('Account'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
 							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -124,7 +124,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 				</li>
 				<li>
 					<a href="<?php echo $dashboard . 'signout/'; ?>">
-						<span>Sign Out</span>
+						<span><?php $this->_e('Sign Out'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M7.5 1v7h1V1h-1z" />
 							<path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />

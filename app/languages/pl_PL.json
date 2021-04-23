@@ -16,11 +16,21 @@
 
     "Settings": "Ustawienia",
 
+    "Statistics": "Statystyki",
+
+    "Account": "Konto",
+
     "About": "Informacje",
 
     "Sign in": "Zaloguj się",
 
+    "Sign Out": "Wyloguj się",
+
     "Login": "Login",
+
+    "Session": "Sesja",
+
+    "Docs": "Dokumentacja",
 
     "You entered an incorrect login or password": "Podałeś nieprawidłowy login lub hasło",
 
@@ -37,6 +47,12 @@
     "Logo font": "Krój pisma logo",
 
     "Access to the site requires administrator privileges": "Dostęp do witryny wymaga uprawnień administratora",
+
+    "API requests": "Żądania API",
+
+    "Links": "Odnośniki",
+
+    "Selected link": "Wybrany odnośnik",
 
     "Top referrer": "Najpopularniejsze źródło",
 
@@ -177,13 +193,17 @@
 
     "Date created": "Data utworzenia",
 
-    "Last login": "Ostatnie logowanie",
+    "Archive": "Archiwizuj",
 
     "Administrator": "Administrator",
 
     "Analyst": "Analityk",
 
     "Manager": "Menedżer",
+
+    "Copy": "Kopiuj",
+
+    "Share": "Udostępnij",
 
     "Has full permissions to do everything.": "Ma pełne uprawnienia, aby robić wszystko",
 
@@ -240,6 +260,10 @@
     "A record with this ID already exists!": "Rekord z podanym ID już istnieje!",
 
     "Role": "Rola",
+
+    "Registered": "Zarejestrowany",
+
+    "Last login": "Ostatnie logowanie",
 
     "Referrers": "Referenci",
 

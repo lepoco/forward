@@ -82,7 +82,29 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
     });
 });
 
+jQuery('#settings-form').on('submit', function(e) {
+    e.preventDefault();
 
+    jQuery.ajax({
+        url: forward.ajax,
+        type: 'post',
+        data: jQuery("#settings-form").serialize(),
+        success: function(e) {
+            if (e == 's01') {
+                Forward.toast('Success!', 'The settings have been saved!', 6000, 'success');
+            } else {
+                Forward.toast('Error!', 'Settings could not be saved!', 6000, 'alert');
+            }
+            console.log(e);
+        },
+        fail: function(xhr, textStatus, errorThrown) {
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        }
+    });
+});
 
 /**
  * pageInstall

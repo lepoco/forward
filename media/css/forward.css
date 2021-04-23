@@ -620,6 +620,7 @@ body.header-fixed .content {
 
 .root-toast-container {
   position: fixed;
+  z-index: 50;
   bottom: 0;
   right: 0;
   margin: 1rem;
@@ -802,6 +803,84 @@ body.header-fixed .content {
 
 .forward-form .display-4 {
   margin-top: 2rem;
+}
+
+.settings-page {
+  margin-bottom: 6rem;
+  position: inherit;
+}
+
+.settings-page__save {
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  left: 0;
+  z-index: 5;
+  margin-left: 17rem;
+  background: #1f2940;
+}
+
+.settings-page__save__button {
+  background-color: #1473e6;
+  border-color: #1473e6;
+  color: #fff;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: visible;
+  border-style: solid;
+  text-transform: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  border-style: solid;
+  text-transform: none;
+  text-decoration: none;
+  font-family: adobe-clean-ux, adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+  line-height: 1.3;
+  cursor: pointer;
+  border-radius: 8px;
+  min-height: 40px;
+  height: auto;
+  min-width: 72px;
+  max-width: 100%;
+  padding: 3.5px 14px 4.5px;
+  font-size: 14px;
+  font-weight: 700;
+  -webkit-transition-duration: .45s;
+          transition-duration: .45s;
+  -webkit-transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+          transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+}
+
+.settings-page__save__button p {
+  margin: 0;
+  padding: 0;
+}
+
+.settings-page__save__button svg,
+.settings-page__save__button img {
+  -webkit-transition-duration: .45s;
+          transition-duration: .45s;
+  -webkit-transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+          transition-timing-function: cubic-bezier(0.26, 0.66, 0.45, 0.78);
+  opacity: 1;
+}
+
+.settings-page__save__button:hover {
+  background: transparent;
+  color: #1473e6;
+}
+
+.settings-page__save__button:hover svg {
+  fill: #1473e6;
 }
 
 #dashboard_current_url {

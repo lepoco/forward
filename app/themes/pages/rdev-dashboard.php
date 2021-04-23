@@ -90,7 +90,7 @@ $this->GetNavigation();
 					<h2 id="dashboard_current_name">/<?php echo $record['record_display_name']; ?></h2>
 					<small id="dashboard_current_url"><?php echo $record['record_url'] ?></small>
 					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
-						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">Copy</button>
+						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>"><?php $this->_e('Copy'); ?></button>
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
@@ -122,6 +122,34 @@ $this->GetNavigation();
 							</div>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-2">
+			<div class="content__card">
+				<div class="content__card__body">
+					Lorem ipsum
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-2">
+			<div class="content__card">
+				<div class="content__card__body">
+					Lorem ipsum
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-2">
+			<div class="content__card">
+				<div class="content__card__body">
+					Lorem ipsum
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-2">
+			<div class="content__card">
+				<div class="content__card__body">
+					Lorem ipsum
 				</div>
 			</div>
 		</div>

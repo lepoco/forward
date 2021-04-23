@@ -407,18 +407,18 @@ class Ajax
 		$this->Forward->Options->Update('dashboard', filter_var($_POST['input_dashboard_url'], FILTER_SANITIZE_STRING));
 		$this->Forward->Options->Update('login', filter_var($_POST['input_login_url'], FILTER_SANITIZE_STRING));
 
-		$this->Forward->Options->Update('redirect_404', $_POST['input_redirect_404'] === "1");
+		$this->Forward->Options->Update('redirect_404', $_POST['input_redirect_404'] == "1");
 		$this->Forward->Options->Update('redirect_404_direction', filter_var($_POST['input_redirect_404_direction'], FILTER_SANITIZE_STRING));
-		$this->Forward->Options->Update('redirect_home', $_POST['input_redirect_home'] === "1");
+		$this->Forward->Options->Update('redirect_home', $_POST['input_redirect_home'] == "1");
 		$this->Forward->Options->Update('redirect_home_direction', filter_var($_POST['input_redirect_home_direction'], FILTER_SANITIZE_STRING));
 
-		$this->Forward->Options->Update('cache', $_POST['input_cache'] === "1");
+		$this->Forward->Options->Update('cache', $_POST['input_cache'] == "1");
 
 		$this->Forward->Options->Update('dashboard_captcha_public', filter_var($_POST['input_dashboard_captcha_public'], FILTER_SANITIZE_STRING));
 		$this->Forward->Options->Update('dashboard_captcha_secret', filter_var($_POST['input_dashboard_captcha_secret'], FILTER_SANITIZE_STRING));
 
-		$this->Forward->Options->Update('force_redirect_ssl', $_POST['input_force_redirect_ssl'] === "1");
-		$this->Forward->Options->Update('force_dashboard_ssl', $_POST['input_force_dashboard_ssl'] === "1");
+		$this->Forward->Options->Update('force_redirect_ssl', $_POST['input_force_redirect_ssl'] == "1");
+		$this->Forward->Options->Update('force_dashboard_ssl', $_POST['input_force_dashboard_ssl'] == "1");
 
 		$this->Forward->Options->Update('js_redirect', $_POST['input_js_redirect'] === "1");
 

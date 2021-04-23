@@ -533,6 +533,7 @@ body.header-fixed {
 
 .root-toast-container {
     position: fixed;
+    z-index: 50;
     bottom: 0;
     right: 0;
     margin: 1rem;
@@ -689,6 +690,68 @@ body.header-fixed {
     }
     .display-4 {
         margin-top: 2rem;
+    }
+}
+
+.settings-page {
+    margin-bottom: 6rem;
+    position: inherit;
+    &__save {
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 1rem 2rem;
+        left: 0;
+        z-index: 5;
+        margin-left: 17rem;
+        background: $dark-secondary-colors;
+        &__button {
+            background-color: #1473e6;
+            border-color: #1473e6;
+            color: #fff;
+            justify-content: center;
+            overflow: visible;
+            border-style: solid;
+            text-transform: none;
+            display: inline-flex;
+            align-items: center;
+            margin: 0;
+            border-style: solid;
+            text-transform: none;
+            text-decoration: none;
+            font-family: adobe-clean-ux, adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+            line-height: 1.3;
+            cursor: pointer;
+            border-radius: 8px;
+            min-height: 40px;
+            height: auto;
+            min-width: 72px;
+            max-width: 100%;
+            padding: 3.5px 14px 4.5px;
+            font-size: 14px;
+            font-weight: 700;
+            transition-duration: .45s;
+            transition-timing-function: cubic-bezier(.26, .66, .45, .78);
+            p {
+                margin: 0;
+                padding: 0;
+            }
+            svg,
+            img {
+                transition-duration: .45s;
+                transition-timing-function: cubic-bezier(.26, .66, .45, .78);
+                opacity: 1;
+            }
+        }
+        &__button:hover {
+            background: transparent;
+            color: #1473e6;
+            svg {
+                fill: #1473e6;
+            }
+        }
     }
 }
 

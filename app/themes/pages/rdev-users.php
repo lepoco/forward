@@ -20,7 +20,7 @@ $this->GetNavigation();
 	<div class="row">
 		<div class="col-12">
 			<div class="content__title">
-				<h1>Users</h1>
+				<h1><?php $this->_e('Users'); ?></h1>
 				<span>Application users</span>
 			</div>
 		</div>
@@ -29,11 +29,11 @@ $this->GetNavigation();
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">Username</th>
+						<th scope="col"><?php $this->_e('Username'); ?></th>
 						<th scope="col">E-Mail</th>
-						<th scope="col">Role</th>
-						<th scope="col">Last login</th>
-						<th scope="col">Registered</th>
+						<th scope="col"><?php $this->_e('Role'); ?></th>
+						<th scope="col"><?php $this->_e('Last login'); ?></th>
+						<th scope="col"><?php $this->_e('Registered'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
