@@ -61,6 +61,10 @@ body.dark-theme .forward-page .content {
   border-left: 1px solid #000;
 }
 
+body.dark-theme .forward-page .content__chart .chartjs-chart {
+  background-color: transparent;
+}
+
 body.dark-theme .forward-page .content table,
 body.dark-theme .forward-page .content .table {
   color: #fff;
@@ -616,6 +620,14 @@ body.header-fixed .content {
 .forward-page .content__card h3 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+.forward-page .content table .table-record-url,
+.forward-page .content .table .table-record-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 250px;
 }
 
 .root-toast-container {

@@ -305,6 +305,12 @@ class Ajax
 		if (trim($_POST['input_record_id']) == '')
 			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
 
+		$query = $this->Forward->Database->query("SELECT * FROM forward_records WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
+
+		var_dump(filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT));
+		var_dump($_POST);
+		var_dump($query);
+
 		$query = $this->Forward->Database->query("SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
 		if (empty($query))
 			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);

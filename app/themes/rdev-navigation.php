@@ -20,8 +20,8 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 		<a href="<?php echo $dashboard; ?>">
 			<picture>
 				<source srcset="<?php echo $this->GetImage('forward-logo-wt.webp'); ?>" type="image/webp">
-				<source srcset="<?php echo $this->GetImage('forward-logo-wt.jpeg'); ?>" type="image/jpeg">
-				<img alt="Forward logo" src="<?php echo $this->GetImage('forward-logo-wt.jpeg'); ?>">
+				<source srcset="<?php echo $this->GetImage('forward-logo-wt.png'); ?>" type="image/png">
+				<img alt="Forward logo" src="<?php echo $this->GetImage('forward-logo-wt.png'); ?>">
 			</picture>
 		</a>
 	</div>
@@ -54,6 +54,15 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 						<span><?php $this->_e('Dashboard'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
 							<path d="M6 1H1v14h5V1zm9 0h-5v5h5V1zm0 9v5h-5v-5h5zM0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V1zm1 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-5z" />
+						</svg>
+					</a>
+				</li>
+				<li class="<?php echo $this->name == 'records' ? ' active' : '' ?>">
+					<a href="<?php echo $dashboard . 'records/'; ?>">
+						<span><?php $this->_e('Records'); ?></span>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">
+							<path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+							<path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
 						</svg>
 					</a>
 				</li>

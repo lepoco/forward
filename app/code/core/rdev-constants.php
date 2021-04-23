@@ -36,8 +36,7 @@ final class Constants
     );
 
     public static $forwardStyles = array(
-        array('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css', 'sha256-DU9iQBJ89dHP2iyusCg++0ych55DAx8QL6P8CYU64bI=', '5.0.0-beta3'),
-        array('https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css', 'sha256-seGyqLj5T52Hx8W7/YTajtNXGXQf+IksfkcaKGoTkbY=', '0.11.4')
+        array('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css', 'sha256-DU9iQBJ89dHP2iyusCg++0ych55DAx8QL6P8CYU64bI=', '5.0.0-beta3')
     );
 
     public static $forwardScripts = array(
@@ -46,7 +45,7 @@ final class Constants
         array('https://cdn.jsdelivr.net/npm/zxcvbn@4.4.2/dist/zxcvbn.js', 'sha256-9CxlH0BQastrZiSQ8zjdR6WVHTMSA5xKuP5QkEhPNRo=', '4.4.2'),
         array('https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js', 'sha256-DhdpoP64xch/Frz8CiBQE12en55NX+RhlPGRg6KWm5s=', '1.4.4'),
         array('https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js', 'sha256-Eb6SfNpZyLYBnrvqg4KFxb6vIRg+pLg9vU5Pv5QTzko=', '2.0.8'),
-        array('https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js', 'sha256-xNhpuwaNiVdna6L8Wy3GNuQz1z+SCmo4NY1c7cJ9Vdc=', '0.11.4'),
+        array('https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js', 'sha256-lISRn4x2bHaafBiAb0H5C7mqJli7N0SH+vrapxjIz3k=', '3.1.1')
         //array('https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js', 'sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=', '3.6.0')
     );
 

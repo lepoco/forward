@@ -77,6 +77,11 @@ body.dark-theme {
         }
         .content {
             border-left: 1px solid $dark-navborder-color;
+            &__chart {
+                .chartjs-chart {
+                    background-color: transparent;
+                }
+            }
             table,
             .table {
                 color: #fff;
@@ -526,6 +531,15 @@ body.header-fixed {
             h3 {
                 font-size: 1.1rem;
                 margin: 0;
+            }
+        }
+        table,
+        .table {
+            .table-record-url {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 250px;
             }
         }
     }

@@ -60,13 +60,15 @@ Just press "Install". It's easy: D
 
 ### Third party solutions
 
-- Chartist.js by the Gion Kunz<br/>[https://github.com/gionkunz/chartist-js](https://github.com/gionkunz/chartist-js)
+- Chart.js by the Chart.js Contributors<br/>[https://github.com/chartjs/Chart.js](https://github.com/chartjs/Chart.js)
 - Bootstrap by the Bootstrap team<br/>[https://getbootstrap.com/](https://getbootstrap.com/)
 - jQuery by the jQuery Foundation<br/>[https://jquery.org/](https://jquery.org/)
 - Clipboard.js by the Zeno Rocha<br/>[https://github.com/zenorocha/clipboard.js/](https://github.com/zenorocha/clipboard.js/)
 - Browser.php by Chris Schuld<br/>[https://github.com/cbschuld/Browser.php](https://github.com/cbschuld/Browser.php)
 - Bootstrap Icons by the Bootstrap team<br/>[https://icons.getbootstrap.com/](https://icons.getbootstrap.com/)
 - Material Design Icons by the Google and other creators | Maintained by Austin Andrews<br/>[https://materialdesignicons.com/](https://materialdesignicons.com/)
-- Picture of mountains by the Joyston Judah<br/>[https://www.pexels.com/@joyston-judah-331625](https://www.pexels.com/@joyston-judah-331625)
 - Questrial font by the Joe Prince<br/>[https://fonts.google.com/specimen/Questrial](https://fonts.google.com/specimen/Questrial)
 - Design inspired by the Label Theme<br/>[https://www.uxcandy.co/](https://www.uxcandy.co/)
+- Background images by Marcin Jóźwiak<br/>[https://www.pexels.com/@marcin-jozwiak-199600](https://www.pexels.com/@marcin-jozwiak-199600)
+- Background images by Adam Borkowski<br/>[https://www.pexels.com/@borkography](https://www.pexels.com/@borkography)
+- Background images by Josh Hild<br/>[https://www.pexels.com/@josh-hild-1270765](https://www.pexels.com/@josh-hild-1270765)

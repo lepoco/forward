@@ -95,6 +95,10 @@ $this->GetNavigation();
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
 					</div>
+
+					<div class="content__chart">
+						<canvas id="main-dashboard-chart" class="chartjs-chart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -128,28 +132,40 @@ $this->GetNavigation();
 		<div class="col-12 col-lg-2">
 			<div class="content__card">
 				<div class="content__card__body">
-					Lorem ipsum
+					<span class="content__card__header"><?php echo $this->_e('Origins'); ?></span>
+					<div class="content__chart">
+						<canvas id="dashboard-chart-origins" class="chartjs-chart" width="400" height="400">></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-lg-2">
 			<div class="content__card">
 				<div class="content__card__body">
-					Lorem ipsum
+					<span class="content__card__header"><?php echo $this->_e('Languages'); ?></span>
+					<div class="content__chart">
+						<canvas id="dashboard-chart-languages" class="chartjs-chart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-lg-2">
 			<div class="content__card">
 				<div class="content__card__body">
-					Lorem ipsum
+					<span class="content__card__header"><?php echo $this->_e('Platforms'); ?></span>
+					<div class="content__chart">
+						<canvas id="dashboard-chart-platforms" class="chartjs-chart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-lg-2">
 			<div class="content__card">
 				<div class="content__card__body">
-					Lorem ipsum
+					<span class="content__card__header"><?php echo $this->_e('Browsers'); ?></span>
+					<div class="content__chart">
+						<canvas id="dashboard-chart-browsers" class="chartjs-chart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>

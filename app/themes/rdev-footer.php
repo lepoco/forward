@@ -21,8 +21,8 @@ defined('ABSPATH') or die('No script kiddies please!');
 	<div id="global-snackbar" class="info snackbar__body">
 		<div style="width: 100%;display:flex;align-items: center;justify-content: space-between;">
 			<div>
-				<h2 id="global-snackbar-header" class="snackbar__body__header">Message</h2>
-				<p id="global-snackbar-message" class="snackbar__body__message">Content</p>
+				<h2 id="global-snackbar-header" class="snackbar__body__header"></h2>
+				<p id="global-snackbar-message" class="snackbar__body__message"></p>
 			</div>
 			<button id="global-snackbar-dismiss" class="btn btn-sm" type="button">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">

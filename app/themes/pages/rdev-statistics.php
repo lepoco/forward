@@ -20,7 +20,7 @@ $this->GetNavigation();
 	<div class="row">
 		<div class="col-12">
 			<div class="content__title">
-				<h1>Statistics</h1>
+				<h1><?php $this->_e('Statistics'); ?></h1>
 				<span>Aggregate information about your links</span>
 			</div>
 		</div>

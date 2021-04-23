@@ -273,10 +273,13 @@ class Models
 		);
 
 		$forwardJson['translator'] = array(
-			'e1'      => $this->__('Something went wrong!'),
-			'e7'      => $this->__('You must provide a URL!'),
-			'e8'      => $this->__('A record with this ID already exists!'),
-			'e10'     => $this->__('The URL you entered is not valid!')
+			'success'  => $this->__('Success!'),
+			'error'    => $this->__('Error!'),
+			'error_qa' => $this->__('Quick add error!'),
+			'e1'       => $this->__('Something went wrong!'),
+			'e7'       => $this->__('You must provide a URL!'),
+			'e8'       => $this->__('A record with this ID already exists!'),
+			'e10'      => $this->__('The URL you entered is not valid!')
 		);
 
 		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {

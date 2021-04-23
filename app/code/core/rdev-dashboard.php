@@ -52,6 +52,7 @@ class Dashboard
 		'signout',
 		'users',
 		'api',
+		'records',
 		'settings',
 		'about',
 		'login'
@@ -100,6 +101,10 @@ class Dashboard
 
 			case 'api':
 				$this->Forward->LoadModel('api', 'JSON API');
+				break;
+
+			case 'records':
+				$this->Forward->LoadModel('records', 'Records');
 				break;
 
 			case 'settings':

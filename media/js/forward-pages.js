@@ -69,7 +69,7 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
                     error_text = Forward.__('e10');
                 }
 
-                Forward.toast('Quick add error!', error_text, 6000, 'alert');
+                Forward.toast(Forward.__('error_qa'), error_text, 6000, 'alert');
             }
             console.log(e);
         },
@@ -77,7 +77,7 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
             console.log(xhr);
             console.log(textStatus);
             console.log(errorThrown);
-            jQuery('#add-alert').slideToggle();
+            Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
         }
     });
 });
@@ -91,9 +91,9 @@ jQuery('#settings-form').on('submit', function(e) {
         data: jQuery("#settings-form").serialize(),
         success: function(e) {
             if (e == 's01') {
-                Forward.toast('Success!', 'The settings have been saved!', 6000, 'success');
+                Forward.toast(Forward.__('success'), 'The settings have been saved!', 6000, 'success');
             } else {
-                Forward.toast('Error!', 'Settings could not be saved!', 6000, 'alert');
+                Forward.toast(Forward.__('error'), 'Settings could not be saved!', 6000, 'alert');
             }
             console.log(e);
         },
@@ -242,15 +242,230 @@ function pageDashboard() {
     let clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
     clipboard_link.on('success', function(e) {
         //showGlobalSnackbar('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
-        Forward.toast('Success!', 'The link has been copied to your clipboard!', 3000, 'success');
+        Forward.toast(Forward.__('success'), 'The link has been copied to your clipboard!', 3000, 'success');
     });
 
-    function getRecordById(id) {
+    //Main dashboard charts
+    let chartColors = ["#696ffb", "#7db8f9", "#05478f", "#00cccc", "#6CA5E0", "#1A76CA"];
+    let chartGridLineColor = '#383e5d';
+    let chartFontcolor = '#b9c0d3';
 
+    if (jQuery("#main-dashboard-chart").length) {
+        let e = {
+                type: "line",
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [
+                        { label: "# of clicks", data: [12, 19, 3, 5, 2, 3], backgroundColor: chartColors[0], borderColor: chartColors[0], borderWidth: 1 },
+                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
+                    ],
+                },
+                options: {
+                    fill: true,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    tension: .4,
+                    scales: {
+                        xAxes: [{ display: !1, ticks: { reverse: !1, display: !1, beginAtZero: !1 }, gridLines: { drawBorder: !1, color: chartGridLineColor, zeroLineColor: chartGridLineColor } }],
+                        yAxes: [{ ticks: { max: 25, min: 0, fontColor: chartFontcolor, beginAtZero: !1 }, gridLines: { color: chartGridLineColor, zeroLineColor: chartGridLineColor, display: !0, drawBorder: !1 } }],
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                },
+            },
+            t = document.getElementById("main-dashboard-chart").getContext("2d");
+        new Chart(t, e);
+    };
+
+    /*
+
+
+    //
+
+    //Test chart
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Facebook", "Messenger", "Google", "YouTube", "rdev.cc", "Orange"],
+            datasets: [{
+                label: '# of clicks',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: chartColors,
+                borderColor: 'transparent',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+    */
+
+    if (jQuery("#dashboard-chart-origins").length) {
+        let e = {
+                type: "bar",
+                data: {
+                    labels: ["Facebook", "Messenger", "Google", "YouTube", "rdev.cc", "4geek.co"],
+                    datasets: [{
+                        label: '# of clicks',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: chartColors,
+                        borderColor: 'transparent',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            },
+            t = document.getElementById("dashboard-chart-origins").getContext("2d");
+        new Chart(t, e);
+    };
+
+    if (jQuery("#dashboard-chart-languages").length) {
+        let e = {
+                type: "pie",
+                data: {
+                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
+                    datasets: [{
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: chartColors,
+                            borderColor: 'transparent',
+                            borderWidth: 1
+                        },
+                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
+                    ],
+                },
+                options: {
+                    fill: true,
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    tension: .4,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                },
+            },
+            t = document.getElementById("dashboard-chart-languages").getContext("2d");
+        new Chart(t, e);
+    };
+    if (jQuery("#dashboard-chart-platforms").length) {
+        let e = {
+                type: "pie",
+                data: {
+                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
+                    datasets: [{
+                            data: [2, 9, 13, 45, 2, 3],
+                            backgroundColor: chartColors,
+                            borderColor: 'transparent',
+                            borderWidth: 1
+                        },
+                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
+                    ],
+                },
+                options: {
+                    fill: true,
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    tension: .4,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                },
+            },
+            t = document.getElementById("dashboard-chart-platforms").getContext("2d");
+        new Chart(t, e);
+    };
+    if (jQuery("#dashboard-chart-browsers").length) {
+        let e = {
+                type: "pie",
+                data: {
+                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
+                    datasets: [{
+                            data: [23, 9, 13, 45, 2, 3],
+                            backgroundColor: chartColors,
+                            borderColor: 'transparent',
+                            borderWidth: 1
+                        },
+                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
+                    ],
+                },
+                options: {
+                    fill: true,
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    tension: .4,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                },
+            },
+            t = document.getElementById("dashboard-chart-browsers").getContext("2d");
+        new Chart(t, e);
+    };
+
+    function getRecordById(record_id) {
+        jQuery.ajax({
+            url: forward.ajax,
+            type: 'post',
+            data: {
+                'action': 'get_record_data',
+                'nonce': forward.getrecord,
+                'input_record_id': record_id
+            },
+            success: function(e) {
+                console.log(e);
+                Forward.toast(Forward.__('error'), e, 6000, 'alert');
+                if (e == 's01') {} else {}
+
+            },
+            fail: function(xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+
+                Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
+            }
+        });
+
+        return true;
     }
 
     jQuery('.records-list__record').on('click', function(e) {
-        console.log(e);
+        let coreData = jQuery(this).data();
+        if (coreData['id'] < 1)
+            return;
+
+        let recordData = getRecordById(coreData['id']);
+        console.log(recordData);
     });
 
     jQuery('.forward-dashboard__add__form').on('submit', function(e) {
@@ -275,7 +490,7 @@ function pageDashboard() {
                     date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 
                     appendRecordToList(-1, slug, target, url, 0);
-                    Forward.toast('Success!', 'New record has been added', 6000, 'success');
+                    Forward.toast(Forward.__('success'), 'New record has been added', 6000, 'success');
                 } else {
 
                     let error_text = Forward.__('e1');
@@ -288,7 +503,7 @@ function pageDashboard() {
                         error_text = Forward.__('e10');
                     }
 
-                    Forward.toast('Error!', error_text, 6000, 'alert');
+                    Forward.toast(Forward.__('error'), error_text, 6000, 'alert');
                 }
                 console.log(e);
             },
@@ -296,7 +511,7 @@ function pageDashboard() {
                 console.log(xhr);
                 console.log(textStatus);
                 console.log(errorThrown);
-                jQuery('#add-alert').slideToggle();
+                Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
             }
         });
     });
