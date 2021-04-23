@@ -30,6 +30,14 @@ function appendRecordToList(id, slug, target, url, clicks) {
 }
 
 /**
+ * Sort records table
+ */
+jQuery('table.sortable').each(function(index) {
+    jQuery(this).tablesort();
+});
+
+
+/**
  * appendRecordToList
  */
 jQuery('.forward-header__navigation__form').on('submit', function(e) {

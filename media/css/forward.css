@@ -81,6 +81,33 @@ body.dark-theme .forward-page .content .table a:hover {
   color: #fff;
 }
 
+body.dark-theme .forward-page .content table.sortable th,
+body.dark-theme .forward-page .content .table.sortable th {
+  cursor: pointer;
+}
+
+body.dark-theme .forward-page .content table.sortable th:after,
+body.dark-theme .forward-page .content .table.sortable th:after {
+  display: inline-block;
+  margin-top: 2px;
+  padding-left: .4rem;
+}
+
+body.dark-theme .forward-page .content table.sortable th:not(.sorted):not(.no-sort):after,
+body.dark-theme .forward-page .content .table.sortable th:not(.sorted):not(.no-sort):after {
+  content: url("data:image/svg+xml; utf8, <svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23fff' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z'/></svg>");
+}
+
+body.dark-theme .forward-page .content table.sortable th.sorted.ascending:after,
+body.dark-theme .forward-page .content .table.sortable th.sorted.ascending:after {
+  content: url("data:image/svg+xml; utf8, <svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23fff' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+}
+
+body.dark-theme .forward-page .content table.sortable th.sorted.descending:after,
+body.dark-theme .forward-page .content .table.sortable th.sorted.descending:after {
+  content: url("data:image/svg+xml; utf8, <svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23fff' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z'/></svg>");
+}
+
 body.dark-theme .forward-page .content .table-striped > tbody > tr:nth-of-type(odd) {
   color: #999;
 }
