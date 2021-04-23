@@ -120,10 +120,29 @@ class Forward {
     /**
      * generateId
      * Generates a random string of the given length.
+     * U - uppercase
+     * L - lowercase
+     * N - numbers
+     * S - special characters
      */
-    static generateId(length) {
+    static generateId(length, type = 'ULN') {
+
+        let characters = '';
+
+        type = type.toLowerCase();
+        if (type.includes('u'))
+            characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        if (type.includes('l'))
+            characters += 'abcdefghijklmnopqrstuvwxyz';
+
+        if (type.includes('n'))
+            characters += '0123456789';
+
+        if (type.includes('s'))
+            characters += '!@#$%^&*(){}[];:~';
+
         let result = [];
-        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let charactersLength = characters.length;
         for (let i = 0; i < length; i++) {
             result.push(characters.charAt(Math.floor(Math.random() *
