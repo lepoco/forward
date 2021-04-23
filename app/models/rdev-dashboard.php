@@ -29,20 +29,10 @@ class Model extends Models
 
 	private array $records = array();
 
-	private array $translator;
-
 	protected function Init(): void
 	{
 		$this->GetRecords();
 		$this->GetLastVisitors();
-
-		$this->translator = array(
-			'unknown' => $this->__('Unknown'),
-			'e1'      => $this->__('Something went wrong!'),
-			'e7'      => $this->__('You must provide a URL!'),
-			'e8'      => $this->__('A record with this ID already exists!'),
-			'e10'     => $this->__('The URL you entered is not valid!')
-		);
 	}
 
 	private function GetRecords(): void
@@ -168,17 +158,9 @@ class Model extends Models
 
 	public function Header()
 	{
-		//Translator
-		$html  = "\t\t" . "<script type=\"text/javascript\" nonce=\"$this->js_nonce\">" . PHP_EOL . "\t\t\t" . 'let translator = {';
-		$c = 0;
-		foreach ($this->translator as $key => $value) {
-			$c++;
-			$html .= ($c > 1 ? ' ,' : '') . $key . ': "' . $value . '"';
-		}
-		$html .= '};';
-
+		$html  = '<script type="text/javascript" nonce="' . $this->js_nonce . '">';
 		//Records
-		$html .= PHP_EOL . "\t\t\t" . 'let records = {';
+		$html .= 'let records = {';
 		$c = 0;
 		foreach ($this->records as $r) {
 			$c++;
@@ -194,15 +176,14 @@ class Model extends Models
 		);
 		$date['days'] = cal_days_in_month(CAL_GREGORIAN, (int)$date['m'], (int)$date['y']);
 
-		$html .= PHP_EOL . "\t\t\tlet bar_chart_height = 200;";
-		$html .= PHP_EOL . "\t\t\tlet bar_chart_labels = [";
+		$html .= 'let bar_chart_height = 200;';
 
+		$html .= 'let bar_chart_labels = [';
 		for ($i = 1; $i <= $date['days']; $i++) {
 			$html .= ($i > 1 ? ', ' : '') . '\'' . $i . '\'';
 		}
-
 		$html .= '];';
 
-		echo $html . PHP_EOL . "\t\t</script>" . PHP_EOL;
+		echo $html . '</script>' . PHP_EOL;
 	}
 }

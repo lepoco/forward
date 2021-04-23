@@ -87,8 +87,8 @@ $this->GetNavigation();
 					$last_record = count($this->Records());
 					$record = $this->Records()[0];
 					?>
-					<h2>/<?php echo $record['record_display_name']; ?></h2>
-					<small><?php echo $record['record_url'] ?></small>
+					<h2 id="dashboard_current_name">/<?php echo $record['record_display_name']; ?></h2>
+					<small id="dashboard_current_url"><?php echo $record['record_url'] ?></small>
 					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
 						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>">Copy</button>
 						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>

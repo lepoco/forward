@@ -266,10 +266,17 @@ class Models
 			'pagenow' => $this->name,
 			'usernonce' => $this->body_nonce,
 			'baseurl' => $this->baseurl,
-			'version' => '\'' . FORWARD_VERSION . '\'',
+			'version' => FORWARD_VERSION,
 			'ajax' => ($this->name != 'home' ? $this->AjaxGateway() : ''),
-			'getrecord' => '\'' . $this->AjaxNonce('get_record_data') . '\'',
-			'removerecord' => '\'' . $this->AjaxNonce('remove_record') . '\''
+			'getrecord' => $this->AjaxNonce('get_record_data'),
+			'removerecord' => $this->AjaxNonce('remove_record')
+		);
+
+		$forwardJson['translator'] = array(
+			'e1'      => $this->__('Something went wrong!'),
+			'e7'      => $this->__('You must provide a URL!'),
+			'e8'      => $this->__('A record with this ID already exists!'),
+			'e10'     => $this->__('The URL you entered is not valid!')
 		);
 
 		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {
@@ -314,6 +321,7 @@ class Models
 	{
 		if ($this->name != 'home') {
 			$this->scripts = Constants::$forwardScripts;
+			$this->scripts[] = array($this->baseurl . 'media/js/forward-pages.min.js', '', FORWARD_VERSION);
 			$this->scripts[] = array($this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION);
 		} else {
 			$this->scripts = array();

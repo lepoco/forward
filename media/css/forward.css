@@ -803,4 +803,14 @@ body.header-fixed .content {
 .forward-form .display-4 {
   margin-top: 2rem;
 }
+
+#dashboard_current_url {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  padding-right: 4rem;
+  overflow: hidden;
+}
 /*# sourceMappingURL=forward.css.map */
