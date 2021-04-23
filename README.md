@@ -17,7 +17,7 @@ With the help of Forward you can collect information about:
 
 ## Dashboard
 
-Simple intuitive interface modeled on Adobe and Bit.ly websites.
+Simple intuitive interface inspired by Label Theme [https://www.uxcandy.co/](https://www.uxcandy.co/).
 <br/><br/>
 ![Login form](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-1.png?raw=true)
 <br/><br/>
