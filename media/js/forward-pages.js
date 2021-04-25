@@ -280,22 +280,19 @@ function pageDashboard() {
 
     if (jQuery("#ds_chart_days").length) {
         ds_chart_days = new Chart(document.getElementById("ds_chart_days").getContext("2d"), {
-            type: "line",
+            type: "bar",
             data: {
                 labels: [Forward.__('unknown')],
-                datasets: [
-                    { label: "# of clicks", data: [1], backgroundColor: chartColors[0], borderColor: chartColors[0], borderWidth: 1 },
-                ],
+                datasets: [{
+                    label: '# ' + Forward.__('of clicks'),
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    backgroundColor: Forward.shuffle(chartColors),
+                    borderColor: 'transparent',
+                }, ],
             },
             options: {
-                fill: true,
                 responsive: true,
                 maintainAspectRatio: false,
-                tension: .4,
-                scales: {
-                    xAxes: [{ display: !1, ticks: { reverse: !1, display: !1, beginAtZero: !1 }, gridLines: { drawBorder: !1, color: chartGridLineColor, zeroLineColor: chartGridLineColor } }],
-                    yAxes: [{ ticks: { max: 25, min: 0, fontColor: chartFontcolor, beginAtZero: !1 }, gridLines: { color: chartGridLineColor, zeroLineColor: chartGridLineColor, display: !0, drawBorder: !1 } }],
-                },
                 plugins: {
                     legend: {
                         display: false
@@ -307,35 +304,33 @@ function pageDashboard() {
 
     if (jQuery("#ds_chart_origins").length) {
         ds_chart_origins = new Chart(document.getElementById("ds_chart_origins").getContext("2d"), {
-            type: "bar",
+            type: "doughnut",
             data: {
                 labels: [Forward.__('unknown')],
                 datasets: [{
-                    label: '# ' + Forward.__('of clicks'),
                     data: [1],
                     backgroundColor: Forward.shuffle(chartColors),
                     borderColor: 'transparent',
                     borderWidth: 1
-                }]
+                }],
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
+                fill: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                tension: .4,
                 plugins: {
                     legend: {
                         display: false
                     }
                 }
-            }
+            },
         });
     };
 
     if (jQuery("#ds_chart_languages").length) {
         ds_chart_languages = new Chart(document.getElementById("ds_chart_languages").getContext("2d"), {
-            type: "pie",
+            type: "doughnut",
             data: {
                 labels: [Forward.__('unknown')],
                 datasets: [{
@@ -360,7 +355,7 @@ function pageDashboard() {
     };
     if (jQuery("#ds_chart_platforms").length) {
         ds_chart_platforms = new Chart(document.getElementById("ds_chart_platforms").getContext("2d"), {
-            type: "pie",
+            type: "doughnut",
             data: {
                 labels: [Forward.__('unknown')],
                 datasets: [{
@@ -385,7 +380,7 @@ function pageDashboard() {
     };
     if (jQuery("#ds_chart_agents").length) {
         ds_chart_agents = new Chart(document.getElementById('ds_chart_agents').getContext('2d'), {
-            type: "pie",
+            type: "doughnut",
             data: {
                 labels: [Forward.__('unknown')],
                 datasets: [{
@@ -439,6 +434,7 @@ function pageDashboard() {
                 ds_chart_origins.data.labels = origin_labels_converted;
                 ds_chart_origins.data.datasets[0].data = origins_data;
             }
+            ds_chart_origins.data.datasets[0].backgroundColor = Forward.shuffle(chartColors);
             ds_chart_origins.update();
         }
 

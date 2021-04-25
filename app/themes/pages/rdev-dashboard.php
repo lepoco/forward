@@ -59,7 +59,6 @@ $this->GetNavigation();
 				</div>
 			</div>
 		</div>
-
 		<div class="col-12 col-lg-4">
 			<div class="content__card">
 				<div class="content__card__body">

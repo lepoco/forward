@@ -18,7 +18,7 @@ defined('ABSPATH') or die('No script kiddies please!');
  * Models
  *
  * @author   Leszek Pomianowski <https://rdev.cc>
- * @license	MIT License
+ * @license  MIT License
  * @access   public
  */
 class Models
@@ -260,6 +260,122 @@ class Models
 		);
 	}
 
+	protected function GetJSTranslator()
+	{
+		return array(
+			//Strings
+			'of clicks' => $this->__('of clicks'),
+			'unknown'   => $this->__('Unknown'),
+			'nodata'    => $this->__('No data'),
+			'success'   => $this->__('Success!'),
+			'error'     => $this->__('Error!'),
+			'error_qa'  => $this->__('Quick add error!'),
+			'e1'        => $this->__('Something went wrong!'),
+			'e7'        => $this->__('You must provide a URL!'),
+			'e8'        => $this->__('A record with this ID already exists!'),
+			'e10'       => $this->__('The URL you entered is not valid!'),
+
+			//Languages
+			'en-gb'     => $this->__('English (United Kingdom)'),
+			'en-us'     => $this->__('English (United States)'),
+
+			//Origins
+			'direct'     => $this->__('Email, SMS, Direct'),
+
+			//Platforms
+			'windows_10' => 'Windows 10',
+			'windows_81' => 'Windows 8.1',
+			'windows_8' => 'Windows 8',
+			'windows_7' => 'Windows 7',
+			'windows_vista' => 'Windows Vista',
+			'windows_xp' => 'Windows XP',
+			'windows' => 'Windows (Other)',
+			'windows_ce' => 'Windows CE',
+			'apple' => 'Apple',
+			'linux' => 'Linux',
+			'os_2' => 'OS/2',
+			'beos' => 'BeOS',
+			'iphone' => 'iPhone',
+			'ipod' => 'iPod',
+			'ipad' => 'iPad',
+			'blackberry' => 'Blackberry',
+			'nokia' => 'Nokia',
+			'freebsd' => 'Free BSD',
+			'openbsd' => 'Open BSD',
+			'netbsd' => 'Net BSD',
+			'sunos' => 'Sun OS',
+			'opensolaris' => 'Open Solaris',
+			'android' => 'Android',
+			'sony_playstation' => 'Playstation',
+			'roku' => 'Roku',
+			'apple_tv' => 'Apple TV',
+			'terminal' => 'Terminal',
+			'fire_os' => 'Fire OS',
+			'smart_tv' => 'Smart TV',
+			'chrome_os' => 'Chrome OS',
+			'java_android' => 'Java/Android',
+			'postman' => 'Postman',
+			'iframely' => 'iFramely',
+
+			//Agents
+			'opera' => 'Opera',
+			'opera_mini' => 'Opera Mini',
+			'webtv' => 'WebTV',
+			'edge' => 'MS Edge',
+			'internet_explorer' => 'MS IE',
+			'pocket_internet_explorer' => 'MS IE Pocket',
+			'konqueror' => 'Konqueror',
+			'icab' => 'iCab',
+			'omniweb' => 'OmniWeb',
+			'firebird' => 'AAA',
+			'firefox' => 'Firefox',
+			'brave' => 'Brave',
+			'palemoon' => 'Palemoon',
+			'iceweasel' => 'AAA',
+			'shiretoko' => 'AAA',
+			'mozilla' => 'Mozilla (Other)',
+			'amaya' => 'Amaya',
+			'lynx' => 'Lynx',
+			'safari' => 'Safari',
+			'chrome' => 'Chrome',
+			'google_bot' => 'Google Bot',
+			'curl' => '#CURL',
+			'wget' => '#WGET',
+			'uc_browser' => 'UC Browser',
+			'yandex_bot' => 'Yandex Bot',
+			'yandex_image_resizer' => 'Yahoo Image Resizer',
+			'yandex_images' => 'Yahoo Images',
+			'yandex_video' => 'Yahoo Video',
+			'yandex_media' => 'Yahoo Media',
+			'yandex_blogs' => 'Yahoo Blogs',
+			'yandex_favicons' => 'Yahoo Favicons',
+			'yandex_webmaster' => 'Yahoo WebMaster',
+			'yandex_direct' => 'Yahoo Direct',
+			'yandex_metrika' => 'Yahoo Metrika',
+			'yandex_news' => 'Yahoo News',
+			'yandex_catalog' => 'Yahoo Catalog',
+			'yahoo_slurp' => 'Yahoo Slurp',
+			'w3c_validator' => 'W3C Validator',
+			'icecat' => 'Icecat',
+			'nokia_s60_oss_browser' => 'Nokia S60',
+			'nokia_browser' => 'Nokia Browser',
+			'msn_browser' => 'MSN Browser',
+			'msn_bot' => 'MSN Bot',
+			'bing_bot' => 'Bing Bot',
+			'vivaldi' => 'Vivaldi',
+			'yandex' => 'Yandex',
+			'netscape_navigator' => 'Netscape Navigator',
+			'galeon' => 'Galeon',
+			'netpositive' => 'NetPositive',
+			'phoenix' => 'Phoenix',
+			'playstation' => 'Playstation Browser',
+			'samsungbrowser' => 'Samsung Browser',
+			'silk' => 'Silk',
+			'iframely' => 'Iframely',
+			'cocoarestclient' => 'Cocoa Rest Client',
+		);
+	}
+
 	protected function GetHeaderJson()
 	{
 		$forwardJson = array(
@@ -272,34 +388,7 @@ class Models
 			'removerecord' => $this->AjaxNonce('remove_record')
 		);
 
-		$forwardJson['translator'] = array(
-			'of clicks' => $this->__('of clicks'),
-			'unknown'   => $this->__('Unknown'),
-			'nodata'    => $this->__('No data'),
-			'success'   => $this->__('Success!'),
-			'error'     => $this->__('Error!'),
-			'error_qa'  => $this->__('Quick add error!'),
-			'e1'        => $this->__('Something went wrong!'),
-			'e7'        => $this->__('You must provide a URL!'),
-			'e8'        => $this->__('A record with this ID already exists!'),
-			'e10'       => $this->__('The URL you entered is not valid!'),
-
-			'en-gb'     => $this->__('English (United Kingdom)'),
-			'en-us'     => $this->__('English (United States)'),
-
-			'direct'     => $this->__('Email, SMS, Direct'),
-
-			'windows'    => 'Other Windows',
-			'windows_7'  => 'Windows 7',
-			'windows_10' => 'Windows 10',
-			'apple'      => 'Apple',
-			'android'    => 'Android',
-
-			'internet_explorer' => 'IE',
-			'pocket_internet_explorer' => 'Pocket IE',
-			'chrome'     => 'Chrome',
-			'safari'     => 'Safari'
-		);
+		$forwardJson['translator'] = $this->GetJSTranslator();
 
 		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {
 			$visitors = array(
@@ -308,7 +397,6 @@ class Models
 				'platforms' => array(),
 				'agents' => array()
 			);
-
 			foreach ($this->GetLanguages() as $key => $agent) {
 				$visitors['languages'][$key] = $agent;
 			}
@@ -321,7 +409,6 @@ class Models
 			foreach ($this->GetAgents() as $key => $agent) {
 				$visitors['agents'][$key] = $agent;
 			}
-
 			$forwardJson['visitors'] = $visitors;
 
 			$forwardJson['users'] = array();

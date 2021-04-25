@@ -38,12 +38,19 @@ $this->GetNavigation();
 				</thead>
 				<tbody>
 					<?php
+
+					$user_roles = array(
+						'admin' => $this->__('Administrator'),
+						'analyst' => $this->__('Analyst'),
+						'manager' => $this->__('Manager')
+					);
+
 					foreach ($this->GetUsers() as $user) {
 						$html = '<tr>';
 						$html .= '<th scope="row">' . $user['user_id'] . '</td>';
 						$html .= '<td><a href="' . $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboard') . '/users/' . $user['user_id'] . '">' . $user['user_display_name'] . '</a></td>';
-						$html .= '<td>' . $user['user_email'] . '</td>';
-						$html .= '<td>' . $user['user_role'] . '</td>';
+						$html .= '<td>' . (empty($user['user_email']) ? $this->__('Not specified') : $user['user_email']) . '</td>';
+						$html .= '<td>' . $user_roles[$user['user_role']] . '</td>';
 						$html .= '<td>' . $user['user_last_login'] . '</td>';
 						$html .= '<td>' . $user['user_registered'] . '</td>';
 						echo $html . '</tr>';

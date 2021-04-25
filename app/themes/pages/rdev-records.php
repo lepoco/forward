@@ -20,7 +20,7 @@ $this->GetNavigation();
     <div class="row">
         <div class="col-12">
             <div class="content__title">
-                <h1><?php echo $this->_e('Records'); ?></h1>
+                <h1><?php echo $this->_e('Links'); ?></h1>
                 <span>List of saved links</span>
             </div>
         </div>
@@ -47,7 +47,7 @@ $this->GetNavigation();
                         foreach ($query as $record) {
                             $html = '<tr>';
                             $html .= '<td scope="row" data-sort-value="' . $record['record_id'] . '">' . $record['record_id'] . '</td>';
-                            $html .= '<td data-sort-value="' . $record['record_active'] . '">' . ($record['record_active'] == 1 ? 'Yes' : 'No') . '</td>';
+                            $html .= '<td data-sort-value="' . $record['record_active'] . '">' . ($record['record_active'] == 1 ? $this->__('Yes') : $this->__('No')) . '</td>';
                             $html .= '<td>' . $record['record_display_name'] . '</td>';
                             $html .= '<td class="table-record-url">' . $record['record_url'] . '</td>';
                             $html .= '<td>' . (empty($record['record_description']) ? 'Empty' : $record['record_description']) . '</td>';

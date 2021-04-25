@@ -52,6 +52,8 @@
 
     "Links": "Odnośniki",
 
+    "Records": "Archiwa",
+
     "Selected link": "Wybrany odnośnik",
 
     "Top referrer": "Najpopularniejsze źródło",
@@ -82,6 +84,12 @@
 
     "Languages": "Języki",
 
+    "Origins": "Źródła",
+
+    "Platforms": "Platformy",
+
+    "Browsers": "Przeglądarki",
+
     "Miscellaneous": "Dodatkowe",
 
     "URLs": "Adresy",
@@ -89,6 +97,7 @@
     "Main website URL": "Główny adres witryny",
 
     "Dashboard URL": "Adres kokpitu",
+
     "Attention": "Uwaga",
 
     "Change URLs only if you have moved the site to a different domain or folder. Otherwise, access to the panel may be blocked.": "Zmień adresy tylko jeśli witryna została przeniesiona do innego folderu lub domeny. W innym przypadku, dostęp do panelu może zostać zablokowany.",
@@ -141,6 +150,16 @@
 
     "of clicks": "kliknięć",
 
+    "link clicks": "kliknięcia linku",
+
+    "Active": "Aktywny",
+
+    "Yes": "Tak",
+
+    "No": "Nie",
+
+    "Name": "Nazwa",
+
     "JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.": "Przekierowanie przez JavaScript i używanie Google Analytics może nie działać. Ta metoda jest mniej efektywna i nie jest rekomendowana.",
 
     "Anyway, if you want you can use it.": "Bądź co bądź, jeśli chcesz, możesz jej użyć",
@@ -187,6 +206,8 @@
 
     "Unknown": "Nieznany",
 
+    "Not specified": "Nie podany",
+
     "No data": "Brak danych",
 
     "Add user": "Dodaj użytkownika",
@@ -220,6 +241,18 @@
     "Success!": "Sukces!",
 
     "Error!": "Błąd!",
+
+    "Target": "Cel",
+
+    "Description": "Opis",
+
+    "Clicks": "Kliknięcia",
+
+    "Author": "Autor",
+
+    "Modified": "Zmodyfikowany",
+
+    "Created": "Utworzony",
 
     "Quick add error!": "Błąd szybkiego dodawania",
 
