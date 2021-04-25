@@ -23,16 +23,11 @@ defined('ABSPATH') or die('No script kiddies please!');
  */
 final class Constants
 {
-    public static $knownLanguages = array(
-        'English (United States)' => array('en-us'),
-        'English (United Kingdom)' => array('en-gb')
-    );
-
     public static $knownOrigins = array(
-        'Email / SMS / Direct' => array('direct'),
-        'YouTube' => array('www.youtube.com', 'youtube.com'),
-        'Facebook' => array('facebook.com', 'fb.com'),
-        'Messenger' => array('l.messenger.com', 'messenger.com')
+        'direct' => array('direct'),
+        'youtube' => array('www.youtube.com', 'youtube.com'),
+        'facebook' => array('facebook.com', 'fb.com'),
+        'messenger' => array('l.messenger.com', 'messenger.com')
     );
 
     public static $forwardStyles = array(

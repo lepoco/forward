@@ -20,7 +20,7 @@ jQuery('#show_hide_password a').on('click', function(event) {
 /**
  * appendRecordToList
  */
-function appendRecordToList(id, slug, target, url, clicks) {
+function appendRecordToList(id, slug, target, clicks) {
     jQuery('.records-list__container').prepend('<div class="records-list__record record-' +
         id + '" data-clipboard-text="' + forward.baseurl + slug + '" data-id="' +
         id + '"><p>/' +
@@ -63,7 +63,7 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
 
                 Forward.toast('Success!', 'New record has been added', 6000, 'success');
                 if (forward.pagenow == 'dashboard') {
-                    appendRecordToList(-1, slug, target, url, 0);
+                    appendRecordToList(-1, slug, target, 0);
                 }
             } else {
 
@@ -240,6 +240,8 @@ function pageLogin() {
     }
 }
 
+let clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
+
 /**
  * pageDashboard
  * Features for the Dashboard page
@@ -247,7 +249,19 @@ function pageLogin() {
 function pageDashboard() {
     Forward.console('The functions for page Dashboard have been loaded.');
 
-    let clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
+
+
+    let record_keys = Object.keys(records);
+    for (let i = 0; i < record_keys.length; i++) {
+        appendRecordToList(records[record_keys[i]][0], records[record_keys[i]][4], records[record_keys[i]][5], records[record_keys[i]][1]);
+        if (i == record_keys.length - 1) {
+            updateRecordData(records[record_keys[i]][0]);
+        }
+    }
+
+
+    clipboard_link.destroy();
+    clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
     clipboard_link.on('success', function(e) {
         //showGlobalSnackbar('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
         Forward.toast(Forward.__('success'), 'The link has been copied to your clipboard!', 3000, 'success');
@@ -258,213 +272,271 @@ function pageDashboard() {
     let chartGridLineColor = '#383e5d';
     let chartFontcolor = '#b9c0d3';
 
-    if (jQuery("#main-dashboard-chart").length) {
-        let e = {
-                type: "line",
-                data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                    datasets: [
-                        { label: "# of clicks", data: [12, 19, 3, 5, 2, 3], backgroundColor: chartColors[0], borderColor: chartColors[0], borderWidth: 1 },
-                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
-                    ],
-                },
-                options: {
-                    fill: true,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    tension: .4,
-                    scales: {
-                        xAxes: [{ display: !1, ticks: { reverse: !1, display: !1, beginAtZero: !1 }, gridLines: { drawBorder: !1, color: chartGridLineColor, zeroLineColor: chartGridLineColor } }],
-                        yAxes: [{ ticks: { max: 25, min: 0, fontColor: chartFontcolor, beginAtZero: !1 }, gridLines: { color: chartGridLineColor, zeroLineColor: chartGridLineColor, display: !0, drawBorder: !1 } }],
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                },
-            },
-            t = document.getElementById("main-dashboard-chart").getContext("2d");
-        new Chart(t, e);
-    };
+    let ds_chart_days = null;
+    let ds_chart_origins = null;
+    let ds_chart_languages = null;
+    let ds_chart_platforms = null;
+    let ds_chart_agents = null;
 
-    /*
-
-
-    //
-
-    //Test chart
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Facebook", "Messenger", "Google", "YouTube", "rdev.cc", "Orange"],
-            datasets: [{
-                label: '# of clicks',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: chartColors,
-                borderColor: 'transparent',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    });
-    */
-
-    if (jQuery("#dashboard-chart-origins").length) {
-        let e = {
-                type: "bar",
-                data: {
-                    labels: ["Facebook", "Messenger", "Google", "YouTube", "rdev.cc", "4geek.co"],
-                    datasets: [{
-                        label: '# of clicks',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: chartColors,
-                        borderColor: 'transparent',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                }
-            },
-            t = document.getElementById("dashboard-chart-origins").getContext("2d");
-        new Chart(t, e);
-    };
-
-    if (jQuery("#dashboard-chart-languages").length) {
-        let e = {
-                type: "pie",
-                data: {
-                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
-                    datasets: [{
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: chartColors,
-                            borderColor: 'transparent',
-                            borderWidth: 1
-                        },
-                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
-                    ],
-                },
-                options: {
-                    fill: true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    tension: .4,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                },
-            },
-            t = document.getElementById("dashboard-chart-languages").getContext("2d");
-        new Chart(t, e);
-    };
-    if (jQuery("#dashboard-chart-platforms").length) {
-        let e = {
-                type: "pie",
-                data: {
-                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
-                    datasets: [{
-                            data: [2, 9, 13, 45, 2, 3],
-                            backgroundColor: chartColors,
-                            borderColor: 'transparent',
-                            borderWidth: 1
-                        },
-                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
-                    ],
-                },
-                options: {
-                    fill: true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    tension: .4,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                },
-            },
-            t = document.getElementById("dashboard-chart-platforms").getContext("2d");
-        new Chart(t, e);
-    };
-    if (jQuery("#dashboard-chart-browsers").length) {
-        let e = {
-                type: "pie",
-                data: {
-                    labels: ["English", "Polish", "German", "Green", "Purple", "Orange"],
-                    datasets: [{
-                            data: [23, 9, 13, 45, 2, 3],
-                            backgroundColor: chartColors,
-                            borderColor: 'transparent',
-                            borderWidth: 1
-                        },
-                        //{ label: "# of Points", data: [7, 11, 5, 8, 3, 7], borderColor: chartColors[1], borderWidth: 1, backgroundColor: chartColors[1] },
-                    ],
-                },
-                options: {
-                    fill: true,
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    tension: .4,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                },
-            },
-            t = document.getElementById("dashboard-chart-browsers").getContext("2d");
-        new Chart(t, e);
-    };
-
-    function getRecordById(record_id) {
-        jQuery.ajax({
-            url: forward.ajax,
-            type: 'post',
+    if (jQuery("#ds_chart_days").length) {
+        ds_chart_days = new Chart(document.getElementById("ds_chart_days").getContext("2d"), {
+            type: "line",
             data: {
-                'action': 'get_record_data',
-                'nonce': forward.getrecord,
-                'input_record_id': record_id
+                labels: [Forward.__('unknown')],
+                datasets: [
+                    { label: "# of clicks", data: [1], backgroundColor: chartColors[0], borderColor: chartColors[0], borderWidth: 1 },
+                ],
             },
-            success: function(e) {
-                console.log(e);
-                Forward.toast(Forward.__('error'), e, 6000, 'alert');
-                if (e == 's01') {} else {}
-
+            options: {
+                fill: true,
+                responsive: true,
+                maintainAspectRatio: false,
+                tension: .4,
+                scales: {
+                    xAxes: [{ display: !1, ticks: { reverse: !1, display: !1, beginAtZero: !1 }, gridLines: { drawBorder: !1, color: chartGridLineColor, zeroLineColor: chartGridLineColor } }],
+                    yAxes: [{ ticks: { max: 25, min: 0, fontColor: chartFontcolor, beginAtZero: !1 }, gridLines: { color: chartGridLineColor, zeroLineColor: chartGridLineColor, display: !0, drawBorder: !1 } }],
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             },
-            fail: function(xhr, textStatus, errorThrown) {
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
+        });
+    };
 
-                Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
+    if (jQuery("#ds_chart_origins").length) {
+        ds_chart_origins = new Chart(document.getElementById("ds_chart_origins").getContext("2d"), {
+            type: "bar",
+            data: {
+                labels: [Forward.__('unknown')],
+                datasets: [{
+                    label: '# ' + Forward.__('of clicks'),
+                    data: [1],
+                    backgroundColor: Forward.shuffle(chartColors),
+                    borderColor: 'transparent',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
+    };
 
-        return true;
+    if (jQuery("#ds_chart_languages").length) {
+        ds_chart_languages = new Chart(document.getElementById("ds_chart_languages").getContext("2d"), {
+            type: "pie",
+            data: {
+                labels: [Forward.__('unknown')],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: Forward.shuffle(chartColors),
+                    borderColor: 'transparent',
+                    borderWidth: 1
+                }],
+            },
+            options: {
+                fill: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                tension: .4,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+        });
+    };
+    if (jQuery("#ds_chart_platforms").length) {
+        ds_chart_platforms = new Chart(document.getElementById("ds_chart_platforms").getContext("2d"), {
+            type: "pie",
+            data: {
+                labels: [Forward.__('unknown')],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: Forward.shuffle(chartColors),
+                    borderColor: 'transparent',
+                    borderWidth: 1
+                }],
+            },
+            options: {
+                fill: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                tension: .4,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+        });
+    };
+    if (jQuery("#ds_chart_agents").length) {
+        ds_chart_agents = new Chart(document.getElementById('ds_chart_agents').getContext('2d'), {
+            type: "pie",
+            data: {
+                labels: [Forward.__('unknown')],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: Forward.shuffle(chartColors),
+                    borderColor: 'transparent',
+                    borderWidth: 1
+                }],
+            },
+            options: {
+                fill: true,
+                responsive: true,
+                maintainAspectRatio: true,
+                tension: .4,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+        });
+    };
+
+    function updateRecordCharts(days, origins, languages, platforms, agents) {
+        if (days != null && ds_chart_days != null) {
+            let days_labels = Object.keys(days);
+            let days_data = [];
+            for (let i = 0; i < days_labels.length; i++) {
+                days_data.push(days[days_labels[i]]);
+            }
+            ds_chart_days.data.labels = days_labels;
+            ds_chart_days.data.datasets[0].data = days_data;
+            ds_chart_days.update();
+        }
+        if (origins != null && ds_chart_origins != null) {
+            if (origins.length < 1) {
+                ds_chart_origins.data.labels = [Forward.__('nodata')];
+                ds_chart_origins.data.datasets[0].data = [1];
+            } else {
+                let origins_labels = Object.keys(origins);
+                let origins_data = [];
+                for (let i = 0; i < origins_labels.length; i++) {
+                    origins_data.push(origins[origins_labels[i]]);
+                }
+
+                let origin_labels_converted = [];
+                for (let i = 0; i < origins_labels.length; i++) {
+                    origin_labels_converted.push(Forward.__(forward.visitors.origins[origins_labels[i]]));
+                }
+
+                ds_chart_origins.data.labels = origin_labels_converted;
+                ds_chart_origins.data.datasets[0].data = origins_data;
+            }
+            ds_chart_origins.update();
+        }
+
+        if (languages != null && ds_chart_languages != null) {
+            if (languages.length < 1) {
+                ds_chart_languages.data.labels = [Forward.__('nodata')];
+                ds_chart_languages.data.datasets[0].data = [1];
+            } else {
+                let languages_labels = Object.keys(languages);
+                let languages_data = [];
+                for (let i = 0; i < languages_labels.length; i++) {
+                    languages_data.push(languages[languages_labels[i]]);
+                }
+
+                let language_labels_converted = [];
+                for (let i = 0; i < languages_labels.length; i++) {
+                    language_labels_converted.push(Forward.__(forward.visitors.languages[languages_labels[i]]));
+                }
+
+                ds_chart_languages.data.labels = language_labels_converted;
+                ds_chart_languages.data.datasets[0].data = languages_data;
+            }
+            ds_chart_languages.update();
+        }
+
+        if (platforms != null && ds_chart_platforms != null) {
+            if (platforms.length < 1) {
+                ds_chart_platforms.data.labels = [Forward.__('nodata')];
+                ds_chart_platforms.data.datasets[0].data = [1];
+            } else {
+                let platforms_labels = Object.keys(platforms);
+                let platforms_data = [];
+                for (let i = 0; i < platforms_labels.length; i++) {
+                    platforms_data.push(platforms[platforms_labels[i]]);
+                }
+
+                let platform_labels_converted = [];
+                for (let i = 0; i < platforms_labels.length; i++) {
+                    platform_labels_converted.push(Forward.__(forward.visitors.platforms[platforms_labels[i]]));
+                }
+
+                ds_chart_platforms.data.labels = platform_labels_converted;
+                ds_chart_platforms.data.datasets[0].data = platforms_data;
+            }
+            ds_chart_platforms.update();
+        }
+
+        if (agents != null && ds_chart_agents != null) {
+            if (agents.length < 1) {
+                ds_chart_agents.data.labels = [Forward.__('nodata')];
+                ds_chart_agents.data.datasets[0].data = [1];
+            } else {
+                let agents_labels = Object.keys(agents);
+                let agents_data = [];
+                for (let i = 0; i < agents_labels.length; i++) {
+                    agents_data.push(agents[agents_labels[i]]);
+                }
+
+                let agent_labels_converted = [];
+                for (let i = 0; i < agents_labels.length; i++) {
+                    agent_labels_converted.push(Forward.__(forward.visitors.agents[agents_labels[i]]));
+                }
+
+                ds_chart_agents.data.labels = agent_labels_converted;
+                ds_chart_agents.data.datasets[0].data = agents_data;
+            }
+            ds_chart_agents.update();
+        }
+    }
+
+    function updateRecordData(record_id) {
+        Forward.ajax({
+            'action': 'get_record_data',
+            'nonce': forward.getrecord,
+            'input_record_id': record_id
+        }, function(e) {
+            if (Forward.isJson(e)) {
+                let parsed = JSON.parse(e);
+                //console.log(parsed);
+                updateRecordCharts(parsed['visitors']['days'], parsed['visitors']['origins'], parsed['visitors']['languages'], parsed['visitors']['platforms'], parsed['visitors']['agents']);
+
+                jQuery('#ds_record_name').html('/' + parsed['record_display_name']);
+                jQuery('#ds_record_url').html(parsed['record_url']);
+                jQuery('#ds_record_clicks').html(parsed['record_clicks']);
+
+                jQuery('#ds_record_copy').attr('data-clipboard-text', forward.baseurl + parsed['record_name']);
+
+                clipboard_link.destroy();
+                clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
+
+                clipboard_link.on('success', function(e) {
+                    //showGlobalSnackbar('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
+                    Forward.toast(Forward.__('success'), 'The link has been copied to your clipboard!', 3000, 'success');
+                });
+            } else {
+                Forward.toast(Forward.__('error'), 'Something went wrong...', 6000, 'alert');
+            }
+        });
     }
 
     jQuery('.records-list__record').on('click', function(e) {
@@ -472,8 +544,7 @@ function pageDashboard() {
         if (coreData['id'] < 1)
             return;
 
-        let recordData = getRecordById(coreData['id']);
-        console.log(recordData);
+        updateRecordData(coreData['id']);
     });
 
     jQuery('.forward-dashboard__add__form').on('submit', function(e) {
@@ -481,49 +552,38 @@ function pageDashboard() {
         Forward.console('New record via Standard Add');
 
         let target = jQuery('#input-dashboard-record-url').val();
-        jQuery.ajax({
-            url: forward.ajax,
-            type: 'post',
-            data: jQuery('.forward-dashboard__add__form').serialize(),
-            success: function(e) {
-                if (e == 's01') {
-                    let slug = jQuery('#input-dashboard-record-slug').val();
-                    if (slug == '') {
-                        slug = jQuery('#input-dashboard-rand-value').val();
-                    }
-
-                    let url = forward.baseurl + slug;
-                    let target_shorted = jQuery('#input-record-url').val();
-                    let date = new Date();
-                    date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-
-                    appendRecordToList(-1, slug, target, url, 0);
-                    Forward.toast(Forward.__('success'), 'New record has been added', 6000, 'success');
-                } else {
-
-                    let error_text = Forward.__('e1');
-
-                    if (e == 'e07') {
-                        error_text = Forward.__('e7');
-                    } else if (e == 'e08') {
-                        error_text = Forward.__('e8');
-                    } else if (e == 'e10') {
-                        error_text = Forward.__('e10');
-                    }
-
-                    Forward.toast(Forward.__('error'), error_text, 6000, 'alert');
+        Forward.ajax(jQuery('.forward-dashboard__add__form').serialize(), function(e) {
+            if (e == 's01') {
+                let slug = jQuery('#input-dashboard-record-slug').val();
+                if (slug == '') {
+                    slug = jQuery('#input-dashboard-rand-value').val();
                 }
-                console.log(e);
-            },
-            fail: function(xhr, textStatus, errorThrown) {
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-                Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
+
+                let url = forward.baseurl + slug;
+                let target_shorted = jQuery('#input-record-url').val();
+                let date = new Date();
+                date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+                appendRecordToList(-1, slug, target, 0);
+                Forward.toast(Forward.__('success'), 'New record has been added', 6000, 'success');
+            } else {
+
+                let error_text = Forward.__('e1');
+
+                if (e == 'e07') {
+                    error_text = Forward.__('e7');
+                } else if (e == 'e08') {
+                    error_text = Forward.__('e8');
+                } else if (e == 'e10') {
+                    error_text = Forward.__('e10');
+                }
+
+                Forward.toast(Forward.__('error'), error_text, 6000, 'alert');
             }
+            console.log(e);
         });
     });
-}
+};
 
 /*
 let snackbarBottom = -400;

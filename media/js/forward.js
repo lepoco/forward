@@ -59,6 +59,27 @@ class Forward {
     }
 
     /**
+     * ajax
+     * Sends a query to the server
+     */
+    static ajax(formData, actionOnDone) {
+        jQuery.ajax({
+            url: forward.ajax,
+            type: 'post',
+            data: formData,
+            success: function(e) {
+                actionOnDone(e);
+            },
+            fail: function(xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+                Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
+            }
+        });
+    }
+
+    /**
      * toast
      * Displays a new message in the corner of the screen.
      */
@@ -145,6 +166,29 @@ class Forward {
                 charactersLength)));
         }
         return result.join('');
+    }
+
+    /**
+     * shuffle
+     * Randomize array
+     */
+    static shuffle(array) {
+        let currentIndex = array.length,
+            temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
     }
 
     /**

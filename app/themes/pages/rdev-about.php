@@ -16,7 +16,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 $this->GetHeader();
 $this->GetNavigation();
 ?>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom: 2rem;">
 	<div class="row">
 		<div class="col-12">
 			<div class="content__title">

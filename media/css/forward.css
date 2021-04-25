@@ -621,6 +621,7 @@ body.header-fixed .content {
 }
 
 .forward-page .content__card__body {
+  position: relative;
   height: 100%;
   width: 100%;
   background: #1f2940;
@@ -637,6 +638,33 @@ body.header-fixed .content {
   letter-spacing: .03rem;
   text-shadow: none;
   color: #ccc;
+}
+
+.forward-page .content__card__floating {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  color: #828387;
+  font-size: 13px;
+  text-align: right;
+}
+
+.forward-page .content__card__floating p {
+  margin: 0;
+  margin-top: -6px;
+  padding: 0;
+}
+
+.forward-page .content__card__floating span {
+  display: inline-block;
+  font-size: 22px;
+  margin-right: 5px;
+  color: #fff;
+}
+
+.forward-page .content__card__floating svg {
+  margin-bottom: 8px;
 }
 
 .forward-page .content__card h2 {
@@ -922,7 +950,7 @@ body.header-fixed .content {
   fill: #1473e6;
 }
 
-#dashboard_current_url {
+#ds_record_url {
   display: block;
   max-width: 100%;
   white-space: nowrap;

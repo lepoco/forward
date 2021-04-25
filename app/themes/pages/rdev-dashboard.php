@@ -66,14 +66,6 @@ $this->GetNavigation();
 					<span class="content__card__header"><?php echo $this->_e('Links'); ?></span>
 					<div class="records-list">
 						<div class="records-list__container">
-							<?php $c = 0;
-							foreach ($this->Records() as $record) : $c++; ?>
-								<div class="records-list__record record-<?php echo $record['record_id']; ?>" data-id="<?php echo $record['record_id']; ?>">
-									<p>/<?php echo $record['record_display_name']; ?></p>
-									<span><?php echo $record['record_url']; ?></span>
-									<h4><?php echo $record['record_clicks']; ?></h4>
-								</div>
-							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -83,21 +75,28 @@ $this->GetNavigation();
 			<div class="content__card">
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Selected link'); ?></span>
-					<?php
-					$last_record = count($this->Records());
-					$record = $this->Records()[0];
-					?>
-					<h2 id="dashboard_current_name">/<?php echo $record['record_display_name']; ?></h2>
-					<small id="dashboard_current_url"><?php echo $record['record_url'] ?></small>
-					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;">
-						<button class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text="<?php echo $this->baseurl . $record['record_name']; ?>"><?php $this->_e('Copy'); ?></button>
-						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>
-						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
-						<button class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
+					<h2 id="ds_record_name"></h2>
+					<small id="ds_record_url"></small>
+					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;margin-bottom:.5rem;">
+						<button id="ds_record_copy" class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text=""><?php $this->_e('Copy'); ?></button>
+						<button id="ds_record_share" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>
+						<button id="ds_record_qrcode" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('QR Code'); ?></button>
+						<button id="ds_record_archive" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
+						<button id="ds_record_delete" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
+					</div>
+
+					<div class="content__card__floating">
+						<div>
+							<span id="ds_record_clicks"></span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+								<path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+							</svg>
+						</div>
+						<p><?php echo $this->_e('link clicks'); ?></p>
 					</div>
 
 					<div class="content__chart">
-						<canvas id="main-dashboard-chart" class="chartjs-chart"></canvas>
+						<canvas id="ds_chart_days" class="chartjs-chart" height="200"></canvas>
 					</div>
 				</div>
 			</div>
@@ -134,7 +133,7 @@ $this->GetNavigation();
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Origins'); ?></span>
 					<div class="content__chart">
-						<canvas id="dashboard-chart-origins" class="chartjs-chart" width="400" height="400">></canvas>
+						<canvas id="ds_chart_origins" class="chartjs-chart" width="400" height="400">></canvas>
 					</div>
 				</div>
 			</div>
@@ -144,7 +143,7 @@ $this->GetNavigation();
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Languages'); ?></span>
 					<div class="content__chart">
-						<canvas id="dashboard-chart-languages" class="chartjs-chart"></canvas>
+						<canvas id="ds_chart_languages" class="chartjs-chart"></canvas>
 					</div>
 				</div>
 			</div>
@@ -154,7 +153,7 @@ $this->GetNavigation();
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Platforms'); ?></span>
 					<div class="content__chart">
-						<canvas id="dashboard-chart-platforms" class="chartjs-chart"></canvas>
+						<canvas id="ds_chart_platforms" class="chartjs-chart"></canvas>
 					</div>
 				</div>
 			</div>
@@ -164,7 +163,7 @@ $this->GetNavigation();
 				<div class="content__card__body">
 					<span class="content__card__header"><?php echo $this->_e('Browsers'); ?></span>
 					<div class="content__chart">
-						<canvas id="dashboard-chart-browsers" class="chartjs-chart"></canvas>
+						<canvas id="ds_chart_agents" class="chartjs-chart"></canvas>
 					</div>
 				</div>
 			</div>

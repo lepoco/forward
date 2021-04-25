@@ -530,6 +530,7 @@ body.header-fixed {
             padding-bottom: calc(var(--bs-gutter-x)/ 2);
             //box-shadow: 0 0 10px 0 rgba(4 2 2 / 20%);
             &__body {
+                position: relative;
                 height: 100%;
                 width: 100%;
                 background: #1f2940;
@@ -545,6 +546,29 @@ body.header-fixed {
                 letter-spacing: .03rem;
                 text-shadow: none;
                 color: #ccc;
+            }
+            &__floating {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 1rem;
+                color: #828387;
+                font-size: 13px;
+                text-align: right;
+                p {
+                    margin: 0;
+                    margin-top: -6px;
+                    padding: 0;
+                }
+                span {
+                    display: inline-block;
+                    font-size: 22px;
+                    margin-right: 5px;
+                    color: #fff;
+                }
+                svg {
+                    margin-bottom: 8px;
+                }
             }
             h2 {
                 font-size: 1.8rem;
@@ -791,7 +815,7 @@ body.header-fixed {
     }
 }
 
-#dashboard_current_url {
+#ds_record_url {
     display: block;
     max-width: 100%;
     white-space: nowrap;

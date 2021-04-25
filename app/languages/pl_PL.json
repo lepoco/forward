@@ -139,6 +139,8 @@
 
     "eg.:": "np:",
 
+    "of clicks": "kliknięć",
+
     "JavaScript redirection and the use of Google Analytics may not work. This method is less effective and is not recommended.": "Przekierowanie przez JavaScript i używanie Google Analytics może nie działać. Ta metoda jest mniej efektywna i nie jest rekomendowana.",
 
     "Anyway, if you want you can use it.": "Bądź co bądź, jeśli chcesz, możesz jej użyć",
@@ -184,6 +186,8 @@
     "Close": "Zamknij",
 
     "Unknown": "Nieznany",
+
+    "No data": "Brak danych",
 
     "Add user": "Dodaj użytkownika",
 

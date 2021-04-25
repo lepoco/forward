@@ -306,17 +306,13 @@ class Ajax
 			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
 
 		$query = $this->Forward->Database->query("SELECT * FROM forward_records WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
-
-		var_dump(filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT));
-		var_dump($_POST);
-		var_dump($query);
-
-		$query = $this->Forward->Database->query("SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
 		if (empty($query))
 			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);
 
-		$data = array(
-			'status' => 'success',
+		$data = $query[0];
+		$data['status'] = 'success';
+
+		$data['visitors'] = array(
 			'languages' => array(),
 			'agents' => array(),
 			'origins' => array(),
@@ -331,38 +327,41 @@ class Ajax
 			'days' => cal_days_in_month(CAL_GREGORIAN, (int)date('m', time()), (int)date('Y', time()))
 		);
 		for ($i = 0; $i < $current_date['days']; $i++) {
-			$data['days'][$i] = 0;
+			$data['visitors']['days'][$i] = 0;
 		}
 
-		foreach ($query as $visitor) {
-			$record_time = strtotime($visitor['visitor_date']);
-			if ((int)date('Y', $record_time) == $current_date['y'] && (int)date('m', $record_time) == $current_date['m'])
-				$data['days'][(int)date('d', $record_time)]++;
+		$query = $this->Forward->Database->query("SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
+		if (!empty($query)) {
+			foreach ($query as $visitor) {
+				$record_time = strtotime($visitor['visitor_date']);
+				if ((int)date('Y', $record_time) == $current_date['y'] && (int)date('m', $record_time) == $current_date['m'])
+					$data['visitors']['days'][(int)date('d', $record_time)]++;
 
-			if (isset($data['ip'][$visitor['visitor_ip']]))
-				$data['ip'][$visitor['visitor_ip']]++;
-			else
-				$data['ip'][$visitor['visitor_ip']] = 1;
+				if (isset($data['visitors']['ip'][$visitor['visitor_ip']]))
+					$data['visitors']['ip'][$visitor['visitor_ip']]++;
+				else
+					$data['visitors']['ip'][$visitor['visitor_ip']] = 1;
 
-			if (isset($data['agents'][$visitor['visitor_agent_id']]))
-				$data['agents'][$visitor['visitor_agent_id']]++;
-			else
-				$data['agents'][$visitor['visitor_agent_id']] = 1;
+				if (isset($data['visitors']['agents'][$visitor['visitor_agent_id']]))
+					$data['visitors']['agents'][$visitor['visitor_agent_id']]++;
+				else
+					$data['visitors']['agents'][$visitor['visitor_agent_id']] = 1;
 
-			if (isset($data['platforms'][$visitor['visitor_platform_id']]))
-				$data['platforms'][$visitor['visitor_platform_id']]++;
-			else
-				$data['platforms'][$visitor['visitor_platform_id']] = 1;
+				if (isset($data['visitors']['platforms'][$visitor['visitor_platform_id']]))
+					$data['visitors']['platforms'][$visitor['visitor_platform_id']]++;
+				else
+					$data['visitors']['platforms'][$visitor['visitor_platform_id']] = 1;
 
-			if (isset($data['languages'][$visitor['visitor_language_id']]))
-				$data['languages'][$visitor['visitor_language_id']]++;
-			else
-				$data['languages'][$visitor['visitor_language_id']] = 1;
+				if (isset($data['visitors']['languages'][$visitor['visitor_language_id']]))
+					$data['visitors']['languages'][$visitor['visitor_language_id']]++;
+				else
+					$data['visitors']['languages'][$visitor['visitor_language_id']] = 1;
 
-			if (isset($data['origins'][$visitor['visitor_origin_id']]))
-				$data['origins'][$visitor['visitor_origin_id']]++;
-			else
-				$data['origins'][$visitor['visitor_origin_id']] = 1;
+				if (isset($data['visitors']['origins'][$visitor['visitor_origin_id']]))
+					$data['visitors']['origins'][$visitor['visitor_origin_id']]++;
+				else
+					$data['visitors']['origins'][$visitor['visitor_origin_id']] = 1;
+			}
 		}
 
 		$this->print_response($data, true);

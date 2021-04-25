@@ -273,13 +273,32 @@ class Models
 		);
 
 		$forwardJson['translator'] = array(
-			'success'  => $this->__('Success!'),
-			'error'    => $this->__('Error!'),
-			'error_qa' => $this->__('Quick add error!'),
-			'e1'       => $this->__('Something went wrong!'),
-			'e7'       => $this->__('You must provide a URL!'),
-			'e8'       => $this->__('A record with this ID already exists!'),
-			'e10'      => $this->__('The URL you entered is not valid!')
+			'of clicks' => $this->__('of clicks'),
+			'unknown'   => $this->__('Unknown'),
+			'nodata'    => $this->__('No data'),
+			'success'   => $this->__('Success!'),
+			'error'     => $this->__('Error!'),
+			'error_qa'  => $this->__('Quick add error!'),
+			'e1'        => $this->__('Something went wrong!'),
+			'e7'        => $this->__('You must provide a URL!'),
+			'e8'        => $this->__('A record with this ID already exists!'),
+			'e10'       => $this->__('The URL you entered is not valid!'),
+
+			'en-gb'     => $this->__('English (United Kingdom)'),
+			'en-us'     => $this->__('English (United States)'),
+
+			'direct'     => $this->__('Email, SMS, Direct'),
+
+			'windows'    => 'Other Windows',
+			'windows_7'  => 'Windows 7',
+			'windows_10' => 'Windows 10',
+			'apple'      => 'Apple',
+			'android'    => 'Android',
+
+			'internet_explorer' => 'IE',
+			'pocket_internet_explorer' => 'Pocket IE',
+			'chrome'     => 'Chrome',
+			'safari'     => 'Safari'
 		);
 
 		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {
