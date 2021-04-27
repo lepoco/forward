@@ -316,5 +316,51 @@
 
     "This should not happen": "To nie powinno mieć miejsca",
 
-    "You will be redirected in a few seconds...": "Zostaniesz przekierowany za kilka sekund..."
+    "You will be redirected in a few seconds...": "Zostaniesz przekierowany za kilka sekund...",
+
+    "January": "Styczeń",
+
+    "February": "Luty",
+
+    "March": "Marzec",
+
+    "April": "Kwiecień",
+
+    "May": "Maj",
+
+    "June": "Czerwiec",
+
+    "July": "Lipiec",
+
+    "August": "Sierpień",
+
+    "September": "Wrzesień",
+
+    "October": "Październik",
+
+    "November": "Listopad",
+
+    "December": "Grudzień",
+
+    "Jan": "Sty",
+
+    "Feb": "Lut",
+
+    "Mar": "Mar",
+
+    "Apr": "Kwi",
+
+    "Jun": "Cze",
+
+    "Jul": "Lip",
+
+    "Aug": "Sie",
+
+    "Sep": "Wrz",
+
+    "Oct": "Paź",
+
+    "Nov": "Lis",
+
+    "Dec": "Gru"
 }

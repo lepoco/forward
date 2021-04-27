@@ -389,6 +389,34 @@ class Models
 		);
 
 		$forwardJson['translator'] = $this->GetJSTranslator();
+		$forwardJson['months'] = array(
+			$this->__('January'),
+			$this->__('February'),
+			$this->__('March'),
+			$this->__('April'),
+			$this->__('May'),
+			$this->__('June'),
+			$this->__('July'),
+			$this->__('August'),
+			$this->__('September'),
+			$this->__('October'),
+			$this->__('November'),
+			$this->__('December')
+		);
+		$forwardJson['months_short'] = array(
+			$this->__('Jan'),
+			$this->__('Feb'),
+			$this->__('Mar'),
+			$this->__('Apr'),
+			$this->__('May'),
+			$this->__('Jun'),
+			$this->__('Jul'),
+			$this->__('Aug'),
+			$this->__('Sep'),
+			$this->__('Oct'),
+			$this->__('Nov'),
+			$this->__('Dec')
+		);
 
 		if ($this->Forward->User->IsLoggedIn() && $this->name != 'home') {
 			$visitors = array(

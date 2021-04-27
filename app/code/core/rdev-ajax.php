@@ -321,21 +321,23 @@ class Ajax
 			'ip' => array()
 		);
 
-		$current_date = array(
-			'y' => (int)date('Y', time()),
-			'm' => (int)date('m', time()),
-			'days' => cal_days_in_month(CAL_GREGORIAN, (int)date('m', time()), (int)date('Y', time()))
-		);
-		for ($i = 0; $i < $current_date['days']; $i++) {
-			$data['visitors']['days'][$i] = 0;
+		$recent_days = array();
+		for ($i = 0; $i < 30; $i++) {
+			$timestamp = time();
+			$tm = 86400 * $i; // 60 * 60 * 24 = 86400 = 1 day in seconds
+			$tm = $timestamp - $tm;
+			$recent_days[date('d-m-Y', $tm)] = 0;
 		}
+		$recent_days = array_reverse($recent_days);
 
 		$query = $this->Forward->Database->query("SELECT * FROM forward_statistics_visitors WHERE record_id = ?", filter_var($_POST['input_record_id'], FILTER_VALIDATE_INT))->fetchAll();
 		if (!empty($query)) {
 			foreach ($query as $visitor) {
-				$record_time = strtotime($visitor['visitor_date']);
-				if ((int)date('Y', $record_time) == $current_date['y'] && (int)date('m', $record_time) == $current_date['m'])
-					$data['visitors']['days'][(int)date('d', $record_time)]++;
+
+				$record_date = date('d-m-Y', strtotime($visitor['visitor_date']));
+				if (array_key_exists($record_date, $recent_days)) {
+					$recent_days[$record_date]++;
+				}
 
 				if (isset($data['visitors']['ip'][$visitor['visitor_ip']]))
 					$data['visitors']['ip'][$visitor['visitor_ip']]++;
@@ -362,6 +364,8 @@ class Ajax
 				else
 					$data['visitors']['origins'][$visitor['visitor_origin_id']] = 1;
 			}
+
+			$data['visitors']['days'] = $recent_days;
 		}
 
 		$this->print_response($data, true);

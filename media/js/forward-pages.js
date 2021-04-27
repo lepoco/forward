@@ -278,11 +278,17 @@ function pageDashboard() {
     let ds_chart_platforms = null;
     let ds_chart_agents = null;
 
-    if (jQuery("#ds_chart_days").length) {
-        ds_chart_days = new Chart(document.getElementById("ds_chart_days").getContext("2d"), {
-            type: "bar",
+    let recentDaysList = [];
+    for (let i = 0; i < 30; i++) {
+        let cDate = new Date();
+        cDate.setDate(cDate.getDate() - i);
+        recentDaysList.push(('0' + cDate.getDate()).slice(-2) + ' ' + forward.months_short[cDate.getMonth()]);
+    }
+    if (jQuery('#ds_chart_days').length) {
+        ds_chart_days = new Chart(document.getElementById('ds_chart_days').getContext('2d'), {
+            type: 'bar',
             data: {
-                labels: [Forward.__('unknown')],
+                labels: recentDaysList.reverse(),
                 datasets: [{
                     label: '# ' + Forward.__('of clicks'),
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -296,6 +302,18 @@ function pageDashboard() {
                 plugins: {
                     legend: {
                         display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 5
+                        }
+                    },
+                    y: {
+                        min: 0
                     }
                 }
             },
@@ -405,13 +423,20 @@ function pageDashboard() {
     };
 
     function updateRecordCharts(days, origins, languages, platforms, agents) {
+
         if (days != null && ds_chart_days != null) {
             let days_labels = Object.keys(days);
+            let days_labels_converted = [];
+            let day_splitted = null;
+            for (let i = 0; i < days_labels.length; i++) {
+                day_splitted = days_labels[i].split('-');
+                days_labels_converted.push(day_splitted[0] + ' ' + forward.months_short[parseInt(day_splitted[1]) - 1]);
+            }
             let days_data = [];
             for (let i = 0; i < days_labels.length; i++) {
                 days_data.push(days[days_labels[i]]);
             }
-            ds_chart_days.data.labels = days_labels;
+            ds_chart_days.data.labels = days_labels_converted;
             ds_chart_days.data.datasets[0].data = days_data;
             ds_chart_days.update();
         }
@@ -511,6 +536,7 @@ function pageDashboard() {
             'nonce': forward.getrecord,
             'input_record_id': record_id
         }, function(e) {
+            //console.log(e);
             if (Forward.isJson(e)) {
                 let parsed = JSON.parse(e);
                 //console.log(parsed);
