@@ -60,7 +60,7 @@ $this->GetHeader();
 							<div id="login-alert" class="alert alert-danger fade show" role="alert" style="display: none;margin-top: 30px;">
 								<strong><?php $this->_e('Holy guacamole!'); ?></strong> <?php $this->_e('You entered an incorrect login or password'); ?>
 							</div>
-							<button type="submit" id="button-form" class="splash__card__button"><?php $this->_e('Submit'); ?></button>
+							<button type="submit" id="button-form" class="btn-forward block"><?php $this->_e('Submit'); ?></button>
 						</form>
 					</div>
 				</div>

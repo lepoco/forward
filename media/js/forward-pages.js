@@ -249,8 +249,6 @@ let clipboard_link = new ClipboardJS('.dashboard__btn--copy-recent');
 function pageDashboard() {
     Forward.console('The functions for page Dashboard have been loaded.');
 
-
-
     let record_keys = Object.keys(records);
     for (let i = 0; i < record_keys.length; i++) {
         appendRecordToList(records[record_keys[i]][0], records[record_keys[i]][4], records[record_keys[i]][5], records[record_keys[i]][1]);
@@ -266,6 +264,8 @@ function pageDashboard() {
         //showGlobalSnackbar('Success!', 'The link has been copied to your clipboard!', 4000, 'success');
         Forward.toast(Forward.__('success'), 'The link has been copied to your clipboard!', 3000, 'success');
     });
+
+
 
     //Main dashboard charts
     let chartColors = ["#696ffb", "#7db8f9", "#05478f", "#00cccc", "#6CA5E0", "#1A76CA"];
@@ -313,6 +313,7 @@ function pageDashboard() {
                         }
                     },
                     y: {
+                        display: false,
                         min: 0
                     }
                 }
@@ -361,6 +362,15 @@ function pageDashboard() {
             options: {
                 fill: true,
                 responsive: true,
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                tooltips: {
+                    mode: 'label',
+                    position: 'nearest',
+                    intersect: true,
+                },
                 maintainAspectRatio: true,
                 tension: .4,
                 plugins: {
@@ -546,6 +556,11 @@ function pageDashboard() {
                 jQuery('#ds_record_url').html(parsed['record_url']);
                 jQuery('#ds_record_clicks').html(parsed['record_clicks']);
 
+                jQuery('#ds_archive_name').html('/' + parsed['record_display_name']);
+                jQuery('#ds_archive_target').html(parsed['record_url']);
+                jQuery('#ds_archive_clicks').html(parsed['record_clicks']);
+                jQuery('#ds_archive_action').attr('data-id', parsed['record_id']);
+
                 jQuery('#ds_record_copy').attr('data-clipboard-text', forward.baseurl + parsed['record_name']);
 
                 clipboard_link.destroy();
@@ -562,11 +577,22 @@ function pageDashboard() {
     }
 
     jQuery('.records-list__record').on('click', function(e) {
+        e.preventDefault();
         let coreData = jQuery(this).data();
         if (coreData['id'] < 1)
             return;
 
         updateRecordData(coreData['id']);
+    });
+
+    jQuery('#ds_archive_action').on('click', function(e) {
+        e.preventDefault();
+        console.log(jQuery(this).data());
+        console.log('ARCHIVE RECORD');
+
+        let archiveModal = bootstrap.Modal.getInstance(document.getElementById('archiveRecordModal'));
+        archiveModal.hide();
+        Forward.toast(Forward.__('success'), 'The link has been archived', 6000, 'success');
     });
 
     jQuery('.forward-dashboard__add__form').on('submit', function(e) {

@@ -220,6 +220,8 @@
 
     "Archive": "Archiwizuj",
 
+    "Are you sure you want to archive this link?": "Na pewno chcesz zarchiwizować ten link?",
+
     "Administrator": "Administrator",
 
     "Analyst": "Analityk",
@@ -247,6 +249,8 @@
     "Description": "Opis",
 
     "Clicks": "Kliknięcia",
+
+    "clicks": "kliknięć",
 
     "Author": "Autor",
 

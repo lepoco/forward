@@ -276,8 +276,9 @@ class Models
 			'e10'       => $this->__('The URL you entered is not valid!'),
 
 			//Languages
-			'en-gb'     => $this->__('English (United Kingdom)'),
-			'en-us'     => $this->__('English (United States)'),
+			'en-gb'     => $this->__('English (UK)'),
+			'en-us'     => $this->__('English (US)'),
+			'pl-pl'     => $this->__('Polish'),
 
 			//Origins
 			'direct'     => $this->__('Email, SMS, Direct'),

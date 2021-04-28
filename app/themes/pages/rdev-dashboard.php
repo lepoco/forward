@@ -78,10 +78,8 @@ $this->GetNavigation();
 					<small id="ds_record_url"></small>
 					<div class="d-grid gap-2 d-md-block" style="margin-top:1rem;margin-bottom:.5rem;">
 						<button id="ds_record_copy" class="dashboard__btn--copy-recent btn btn-outline-light btn-sm" type="button" data-clipboard-text=""><?php $this->_e('Copy'); ?></button>
-						<button id="ds_record_share" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Share'); ?></button>
 						<button id="ds_record_qrcode" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('QR Code'); ?></button>
-						<button id="ds_record_archive" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Archive'); ?></button>
-						<button id="ds_record_delete" class="btn btn-outline-primary btn-sm" type="button"><?php $this->_e('Delete'); ?></button>
+						<button id="ds_record_delete" class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#archiveRecordModal"><?php $this->_e('Archive'); ?></button>
 					</div>
 
 					<div class="content__card__floating">
@@ -120,7 +118,7 @@ $this->GetNavigation();
 								</div>
 							</div>
 							<div class="d-grid">
-								<button type="submit" class="btn btn-outline-primary"><?php echo $this->_e('Add new'); ?></button>
+								<button type="submit" class="btn-forward block"><?php echo $this->_e('Add new'); ?></button>
 							</div>
 						</div>
 					</form>
@@ -171,6 +169,25 @@ $this->GetNavigation();
 			<div class="content__copyright">
 				<p>Created in Poland by Leszek Pomianowski</p>
 				<span>Copyright © 2019-<?php echo date('Y'); ?> RAPIDDEV | MIT License</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="archiveRecordModal" tabindex="-1" aria-labelledby="archiveRecordModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p style="text-align:center;"><?php $this->_e('Are you sure you want to archive this link?'); ?></p>
+				<h4 style="text-align:center;" class="display-4" id="ds_archive_name">/AJKSD</h4>
+				<span id="ds_archive_target" style="text-align:center;opacity: 0.6;display:block;"></span>
+				<span style="text-align:center;opacity: 0.6;display:block;"><span id="ds_archive_clicks"></span> <?php $this->_e('clicks'); ?></span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-light" data-bs-dismiss="modal"><?php $this->_e('Cancel'); ?></button>
+				<button id="ds_archive_action" data-id="-1" type="button" class="btn btn-danger"><?php $this->_e('Archive'); ?></button>
 			</div>
 		</div>
 	</div>

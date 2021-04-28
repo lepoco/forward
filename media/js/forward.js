@@ -84,9 +84,7 @@ class Forward {
      * Displays a new message in the corner of the screen.
      */
     static toast(header, message = null, timeout = 3000, type = 'default') {
-        let currentdate = new Date();
         let toastId = 'toast-' + Forward.generateId(32);
-
         let icon = null;
         switch (type) {
             case 'success':
@@ -103,11 +101,7 @@ class Forward {
         jQuery('#global-toast-container').append('<div id="' +
             toastId + '" class="toast fade hide"><div class="toast-header"><svg fill="currentColor" width="20" height="20" xmlns="http://www.w3.org/2000/svg" focusable="false">' + icon + '</svg><strong class="me-auto">' +
             header + '</strong><small>' +
-            currentdate.getHours() +
-            ':' +
-            currentdate.getMinutes() +
-            ':' +
-            currentdate.getSeconds() + '</small></div><div class="toast-body">' +
+            (new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000))).toISOString().substr(11, 8) + '</small></div><div class="toast-body">' +
             message + '</div></div>');
 
         //let element = document.getElementById('global-toast-container');

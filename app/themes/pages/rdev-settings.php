@@ -240,7 +240,7 @@ $this->GetNavigation();
 				</div>
 
 				<div class="settings-page__save">
-					<button id="save-settings" type="submit" class="settings-page__save__button"><?php echo $this->_e('Save settings'); ?></button>
+					<button id="save-settings" type="submit" class="btn-forward"><?php echo $this->_e('Save settings'); ?></button>
 				</div>
 			</form>
 		</div>
