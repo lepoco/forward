@@ -33,7 +33,8 @@ $this->GetNavigation();
 				<small><i>version <?php echo FORWARD_VERSION; ?></i></small>
 			</p>
 			<hr>
-			<h4>Used technologies & things</h1>
+			<h4>Used technologies & things</h4>
+			<div class="container-fluid" style="font-size: 13px;">
 				<div class="row">
 					<div class="col-12 col-lg-6">
 						<ul class="list-unstyled">
@@ -43,6 +44,7 @@ $this->GetNavigation();
 							<li style="margin-bottom: 10px;"><i>jQuery</i> by the jQuery Foundation<br><a target="_blank" rel="noopener" href="https://jquery.org/">https://jquery.org/</a><br><small>jQuery is open-sourced software licensed under the MIT license.</small></li>
 							<li style="margin-bottom: 10px;"><i>Clipboard.js</i> by the Zeno Rocha<br><a target="_blank" rel="noopener" href="https://github.com/zenorocha/clipboard.js/">https://github.com/zenorocha/clipboard.js/</a><br><small>Clipboard.js is open-sourced software licensed under the MIT license.</small></li>
 							<li style="margin-bottom: 10px;"><i>Browser.php</i> by the Chris Schuld<br><a target="_blank" rel="noopener" href="https://github.com/cbschuld/Browser.php">https://github.com/cbschuld/Browser.php</a><br><small>Browser.php is open-sourced software licensed under the MIT license.</small></li>
+							<li style="margin-bottom: 10px;"><i>node-qrcode</i> by the Ryan Day<br><a target="_blank" rel="noopener" href="https://github.com/soldair/node-qrcode">https://github.com/soldair/node-qrcode</a><br><small>node-qrcode is open-sourced software licensed under the MIT license.</small></li>
 						</ul>
 					</div>
 					<div class="col-12 col-lg-6">
@@ -56,12 +58,13 @@ $this->GetNavigation();
 						</ul>
 					</div>
 				</div>
-				<hr>
-				<small>
-					<?php if (is_file(ABSPATH . 'LICENSE')) {
-						echo nl2br(file_get_contents(ABSPATH . 'LICENSE'));
-					} ?>
-				</small>
+			</div>
+			<hr>
+			<small>
+				<?php if (is_file(ABSPATH . 'LICENSE')) {
+					echo nl2br(file_get_contents(ABSPATH . 'LICENSE'));
+				} ?>
+			</small>
 		</div>
 	</div>
 </div>

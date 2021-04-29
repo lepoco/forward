@@ -60,7 +60,7 @@ $this->GetNavigation();
 			</table>
 		</div>
 		<div class="col-12" style="margin-top: 1rem;">
-			<button class="btn-forward"><?php $this->_e('Add new user'); ?></button>
+			<a href="<?php echo $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboard') . '/users/add/'; ?>" class="btn-forward"><?php $this->_e('Add new user'); ?></a>
 		</div>
 	</div>
 </div>

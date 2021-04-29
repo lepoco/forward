@@ -116,6 +116,8 @@ class Dashboard
 					$this->Forward->LoadModel('user-single', 'Account');
 				else if (trim($this->Forward->Path->GetLevel(2)) == '' || trim($this->Forward->Path->GetLevel(2)) == 'list')
 					$this->Forward->LoadModel('users', 'Users');
+				else if (trim($this->Forward->Path->GetLevel(2)) == 'add')
+					$this->Forward->LoadModel('users-add', 'Add user');
 				else
 					$this->Forward->LoadModel('404', 'Page not found');
 				break;

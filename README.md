@@ -68,6 +68,7 @@ Just press "Install". It's easy: D
 - Bootstrap Icons by the Bootstrap team<br/>[https://icons.getbootstrap.com/](https://icons.getbootstrap.com/)
 - Material Design Icons by the Google and other creators | Maintained by Austin Andrews<br/>[https://materialdesignicons.com/](https://materialdesignicons.com/)
 - Questrial font by the Joe Prince<br/>[https://fonts.google.com/specimen/Questrial](https://fonts.google.com/specimen/Questrial)
+- node-qrcode by the Ryan Day<br/>[https://github.com/soldair/node-qrcode](https://github.com/soldair/node-qrcode)
 - Design inspired by the Label Theme<br/>[https://www.uxcandy.co/](https://www.uxcandy.co/)
 - Background images by Marcin Jóźwiak<br/>[https://www.pexels.com/@marcin-jozwiak-199600](https://www.pexels.com/@marcin-jozwiak-199600)
 - Background images by Adam Borkowski<br/>[https://www.pexels.com/@borkography](https://www.pexels.com/@borkography)

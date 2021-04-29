@@ -74,7 +74,7 @@ $dashboard = $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboa
 						</svg>
 					</a>
 				</li>
-				<li class="<?php echo $this->name == 'users' ? ' active' : '' ?>">
+				<li class="<?php echo $this->name == 'users' || $this->name == 'users-add' ? ' active' : '' ?>">
 					<a href="<?php echo $dashboard . 'users/list/'; ?>">
 						<span><?php $this->_e('Users'); ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-grid-1x2" viewBox="0 0 16 16">

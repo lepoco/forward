@@ -4,6 +4,14 @@
  * Licensed under MIT (https://github.com/rapiddev/Forward/blob/master/LICENSE)
  */
 
+let current_record = {
+    id: null,
+    url: null,
+    target: null,
+    name: null,
+    display_name: null
+};
+
 /**
  * show_hide_password
  */
@@ -548,13 +556,23 @@ function pageDashboard() {
         }, function(e) {
             //console.log(e);
             if (Forward.isJson(e)) {
+
                 let parsed = JSON.parse(e);
                 //console.log(parsed);
+
+                current_record.id = parsed['record_id'];
+                current_record.url = forward.baseurl + parsed['record_name'];
+                current_record.target = parsed['record_url'];
+                current_record.name = parsed['record_name'];
+                current_record.display_name = parsed['record_display_name'];
+
                 updateRecordCharts(parsed['visitors']['days'], parsed['visitors']['origins'], parsed['visitors']['languages'], parsed['visitors']['platforms'], parsed['visitors']['agents']);
 
                 jQuery('#ds_record_name').html('/' + parsed['record_display_name']);
                 jQuery('#ds_record_url').html(parsed['record_url']);
                 jQuery('#ds_record_clicks').html(parsed['record_clicks']);
+
+                jQuery('#ds_qrcode_download').attr('download', 'forward_qrcode_' + parsed['record_display_name'] + '.png');
 
                 jQuery('#ds_archive_name').html('/' + parsed['record_display_name']);
                 jQuery('#ds_archive_target').html(parsed['record_url']);
@@ -593,6 +611,38 @@ function pageDashboard() {
         let archiveModal = bootstrap.Modal.getInstance(document.getElementById('archiveRecordModal'));
         archiveModal.hide();
         Forward.toast(Forward.__('success'), 'The link has been archived', 6000, 'success');
+    });
+
+    jQuery('#ds_record_qrcode').on('click', function(e) {
+        let qrcodeModal = new bootstrap.Modal(document.getElementById('qrcodeRecordModal'), {
+            keyboard: false
+        });
+
+        let qrColor = '#000000ff';
+        if (jQuery('.forward-app').hasClass('dark-theme')) {
+            qrColor = '#ffffffff';
+        }
+
+        QRCode.toDataURL(document.getElementById('ds_qrcode_canvas'), current_record.url, {
+            errorCorrectionLevel: 'H',
+            type: 'image/png',
+            quality: 1,
+            margin: 0,
+            scale: 6,
+            color: {
+                dark: qrColor,
+                light: '#00000000'
+            }
+        }, function(error, url) {
+            if (error) {
+                qrcodeModal.hide();
+                Forward.toast(Forward.__('error'), error, 6000, 'alert');
+                return;
+            }
+            jQuery('#ds_qrcode_download').attr('href', url);
+        });
+
+        qrcodeModal.show();
     });
 
     jQuery('.forward-dashboard__add__form').on('submit', function(e) {

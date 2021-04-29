@@ -173,6 +173,24 @@ $this->GetNavigation();
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="qrcodeRecordModal" tabindex="-1" aria-labelledby="qrcodeRecordModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" style="padding: 0;">
+				<div id="ds_qrcode_container" style="display: flex;justify-content: center;align-items: center;">
+					<canvas id="ds_qrcode_canvas"></canvas>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-light" data-bs-dismiss="modal"><?php $this->_e('Close'); ?></button>
+				<a id="ds_qrcode_download" target="_blank" type="button" class="btn btn-success"><?php $this->_e('Save to device'); ?></a>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="archiveRecordModal" tabindex="-1" aria-labelledby="archiveRecordModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
