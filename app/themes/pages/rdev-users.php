@@ -51,7 +51,7 @@ $this->GetNavigation();
 						$html .= '<td><a href="' . $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboard') . '/users/' . $user['user_id'] . '">' . $user['user_display_name'] . '</a></td>';
 						$html .= '<td>' . (empty($user['user_email']) ? $this->__('Not specified') : $user['user_email']) . '</td>';
 						$html .= '<td>' . $user_roles[$user['user_role']] . '</td>';
-						$html .= '<td>' . $user['user_last_login'] . '</td>';
+						$html .= '<td>' . (empty($user['user_last_login']) ? $this->__('Never') : $user['user_last_login']) . '</td>';
 						$html .= '<td>' . $user['user_registered'] . '</td>';
 						echo $html . '</tr>';
 					}

@@ -26,6 +26,30 @@ jQuery('#show_hide_password a').on('click', function(event) {
 });
 
 /**
+ * Password suggest
+ */
+jQuery('.password_strength_control').each(function(e) {
+    let fieldData = jQuery(this).data();
+    let targetClass = 'def_password--strength';
+
+    if ('strengthTarget' in fieldData) {
+        targetClass = fieldData['strengthTarget'];
+    }
+
+    jQuery(this).on('change paste keyup', function() {
+        let e = jQuery(this).val(),
+            s = zxcvbn(e);
+        "" !== e ? jQuery('.' + targetClass).html(Forward.__('strength') + ": <strong>" + {
+            0: Forward.__('worst') + " ☹",
+            1: Forward.__('bad') + " ☹",
+            2: Forward.__('weak') + " ☹",
+            3: Forward.__('good') + " 🙃",
+            4: Forward.__('strong') + " 🙂"
+        }[s.score] + "</strong><br/><span style='display:block;margin-bottom:.8rem;' class='feedback'>" + s.feedback.warning + " " + s.feedback.suggestions + "</span>") : jQuery('.' + targetClass).html('')
+    });
+});
+
+/**
  * appendRecordToList
  */
 function appendRecordToList(id, slug, target, clicks) {
@@ -104,12 +128,73 @@ jQuery('#settings-form').on('submit', function(e) {
     jQuery.ajax({
         url: forward.ajax,
         type: 'post',
-        data: jQuery("#settings-form").serialize(),
+        data: jQuery(this).serialize(),
         success: function(e) {
             if (e == 's01') {
                 Forward.toast(Forward.__('success'), 'The settings have been saved!', 6000, 'success');
             } else {
                 Forward.toast(Forward.__('error'), 'Settings could not be saved!', 6000, 'alert');
+            }
+            console.log(e);
+        },
+        fail: function(xhr, textStatus, errorThrown) {
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        }
+    });
+});
+
+jQuery('#user-add-form').on('submit', function(e) {
+    e.preventDefault();
+    jQuery.ajax({
+        url: forward.ajax,
+        type: 'post',
+        data: jQuery(this).serialize(),
+        success: function(e) {
+            if (e == 's01') {
+                Forward.toast(Forward.__('success'), 'New user successfully added!', 6000, 'success');
+            } else {
+
+                let errorMessage = 'The new user could not be added';
+
+                switch (e) {
+                    case 'e00':
+                        errorMessage = "E00 - Unknown error";
+                        break;
+                    case 'e05':
+                        errorMessage = "No permission";
+                        break;
+                    case 'e06':
+                        errorMessage = "Missing arguments";
+                        break;
+                    case 'e07':
+                        errorMessage = "Empty arguments";
+                        break;
+                    case 'e12':
+                        errorMessage = "Passwords does not match";
+                        break;
+                    case 'e13':
+                        errorMessage = "Password too short";
+                        break;
+                    case 'e15':
+                        errorMessage = "Invalid email";
+                        break;
+                    case 'e16':
+                        errorMessage = "Username with special characters";
+                        break;
+                    case 'e17':
+                        errorMessage = "User with provided email exists";
+                        break;
+                    case 'e18':
+                        errorMessage = "User with provided username exists";
+                        break;
+                    case 'e19':
+                        errorMessage = "Unknown MySQL error";
+                        break;
+                }
+                Forward.toast(Forward.__('error'), errorMessage, 6000, 'alert');
             }
             console.log(e);
         },
@@ -572,8 +657,6 @@ function pageDashboard() {
                 jQuery('#ds_record_url').html(parsed['record_url']);
                 jQuery('#ds_record_clicks').html(parsed['record_clicks']);
 
-                jQuery('#ds_qrcode_download').attr('download', 'forward_qrcode_' + parsed['record_display_name'] + '.png');
-
                 jQuery('#ds_archive_name').html('/' + parsed['record_display_name']);
                 jQuery('#ds_archive_target').html(parsed['record_url']);
                 jQuery('#ds_archive_clicks').html(parsed['record_clicks']);
@@ -623,12 +706,14 @@ function pageDashboard() {
             qrColor = '#ffffffff';
         }
 
+        jQuery('#ds_qrcode_download').attr('download', 'forward_qrcode_' + current_record.display_name + '.png');
+
         QRCode.toDataURL(document.getElementById('ds_qrcode_canvas'), current_record.url, {
             errorCorrectionLevel: 'H',
             type: 'image/png',
             quality: 1,
             margin: 0,
-            scale: 6,
+            scale: 10,
             color: {
                 dark: qrColor,
                 light: '#00000000'

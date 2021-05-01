@@ -254,7 +254,8 @@ body.header-fixed .content {
   overflow: hidden;
 }
 
-.forward-header__navigation__form input {
+.forward-header__navigation__form input,
+.forward-header__navigation__form .form-control {
   height: 100%;
   margin: 0;
   border: none;
@@ -267,7 +268,9 @@ body.header-fixed .content {
 }
 
 .forward-header__navigation__form input:focus,
-.forward-header__navigation__form input:active {
+.forward-header__navigation__form input:active,
+.forward-header__navigation__form .form-control:active,
+.forward-header__navigation__form .form-control:focus {
   background: 0 0;
   border: none;
   -webkit-box-shadow: none;
@@ -845,6 +848,17 @@ body.header-fixed .content {
   border: 1px solid #000;
 }
 
+.forward-form input:active,
+.forward-form input:focus,
+.forward-form select:active,
+.forward-form select:focus,
+.forward-form textarea:active,
+.forward-form textarea:focus {
+  color: #fff;
+  background-color: #1f2940;
+  border: 1px solid #000;
+}
+
 .forward-form input:disabled,
 .forward-form select:disabled,
 .forward-form textarea:disabled {
@@ -855,6 +869,10 @@ body.header-fixed .content {
 
 .forward-form .display-4 {
   margin-top: 2rem;
+}
+
+.forward-form .form-group {
+  margin-bottom: .8rem;
 }
 
 .settings-page {

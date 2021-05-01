@@ -181,7 +181,7 @@ $this->GetNavigation();
 			</div>
 			<div class="modal-body" style="padding: 0;">
 				<div id="ds_qrcode_container" style="display: flex;justify-content: center;align-items: center;">
-					<canvas id="ds_qrcode_canvas"></canvas>
+					<canvas id="ds_qrcode_canvas" style="max-width: 240px;object-fit: contain;"></canvas>
 				</div>
 			</div>
 			<div class="modal-footer">

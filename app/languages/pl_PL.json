@@ -258,6 +258,18 @@
 
     "Created": "Utworzony",
 
+    "Strength": "Siła",
+
+    "Worst": "Beznadziejne",
+
+    "Bad": "Złe",
+
+    "Weak": "Słabe",
+
+    "Good": "Dobre",
+
+    "Strong": "Silne",
+
     "Save to device": "Zapisz na urządzeniu",
 
     "Quick add error!": "Błąd szybkiego dodawania",
@@ -321,6 +333,8 @@
     "Confirm password": "Potwierdź hasło",
 
     "This should not happen": "To nie powinno mieć miejsca",
+
+    "Go back to the dashboard": "Wróć do kokpitu",
 
     "You will be redirected in a few seconds...": "Zostaniesz przekierowany za kilka sekund...",
 

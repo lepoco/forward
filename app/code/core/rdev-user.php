@@ -174,7 +174,7 @@ class User
 	 */
 	public function GetByName(string $username)
 	{
-		$query = $this->Forward->Database->query("SELECT user_id, user_email, user_password, user_role, user_token FROM forward_users WHERE user_name = ?", $username)->fetchArray();
+		$query = $this->Forward->Database->query("SELECT * FROM forward_users WHERE user_name = ?", $username)->fetchArray();
 		return $query;
 	}
 
@@ -187,7 +187,20 @@ class User
 	 */
 	public function GetByEmail(string $email)
 	{
-		$query = $this->Forward->Database->query("SELECT user_id, user_name, user_password, user_role, user_token FROM forward_users WHERE user_email = ?", $email)->fetchArray();
+		$query = $this->Forward->Database->query("SELECT * FROM forward_users WHERE user_email = ?", $email)->fetchArray();
+		return $query;
+	}
+
+	/**
+	 * GetByEmail
+	 * Get's user by e-mail
+	 *
+	 * @param	 int $id
+	 * @access   public
+	 */
+	public function GetById($userId)
+	{
+		$query = $this->Forward->Database->query("SELECT * FROM forward_users WHERE user_id = ?", $userId)->fetchArray();
 		return $query;
 	}
 

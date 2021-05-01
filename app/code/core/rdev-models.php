@@ -265,6 +265,7 @@ class Models
 		return array(
 			//Strings
 			'of clicks' => $this->__('of clicks'),
+			'strength'  => $this->__('Strength'),
 			'unknown'   => $this->__('Unknown'),
 			'nodata'    => $this->__('No data'),
 			'success'   => $this->__('Success!'),
@@ -274,6 +275,12 @@ class Models
 			'e7'        => $this->__('You must provide a URL!'),
 			'e8'        => $this->__('A record with this ID already exists!'),
 			'e10'       => $this->__('The URL you entered is not valid!'),
+
+			'worst'     => $this->__('Worst'),
+			'bad'       => $this->__('Bad'),
+			'weak'      => $this->__('Weak'),
+			'good'      => $this->__('Good'),
+			'strong'    => $this->__('Strong'),
 
 			//Languages
 			'en-gb'     => $this->__('English (UK)'),

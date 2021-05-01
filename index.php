@@ -32,4 +32,8 @@ define('APPPATH', ABSPATH . APP_FOLDER . '/');
 if (!is_file(APPPATH . 'loader.php'))
 	exit('Fatal error');
 
+/** Load files */
 require_once APPPATH . 'loader.php';
+
+/** Start Forward */
+(new Forward());

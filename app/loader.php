@@ -61,6 +61,3 @@ require_once APPPATH . 'code/core/' . 'rdev-dashboard.php';
 
 /** Forward */
 require_once APPPATH . 'code/' . 'rdev-forward.php';
-
-/* Start Forward CMS */
-(new Forward());

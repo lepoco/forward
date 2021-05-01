@@ -19,6 +19,9 @@ $this->GetHeader();
 	<canvas id="noise" style="z-index:100;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.05;"></canvas>
 	<h1 style="font-size: 150px;color:#fff;" class="glitch-title" data-content="404!">404!</h1>
 	<h2 style="font-size: 20px;color:#fff;"><?php $this->_e('This should not happen'); ?></h2>
+	<?php if ($this->Forward->User->IsLoggedIn()) : ?>
+		<a href="<?php echo $this->baseurl . $this->Forward->Options->Get('dashboard', 'dashboard') . '/'; ?>"><?php $this->_e('Go back to the dashboard'); ?></a>
+	<?php endif; ?>
 </section>
 <script type="text/javascript" nonce="<?php echo $this->js_nonce; ?>">
 	const noise = () => {

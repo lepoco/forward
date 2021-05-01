@@ -41,6 +41,9 @@ class Ajax
 	private const ERROR_PASSWORD_TOO_SIMPLE      = 'e14';
 	private const ERROR_INVALID_EMAIL            = 'e15';
 	private const ERROR_SPECIAL_CHARACTERS       = 'e16';
+	private const ERROR_USER_EMAIL_EXISTS        = 'e17';
+	private const ERROR_USER_NAME_EXISTS         = 'e18';
+	private const ERROR_MYSQL_UNKNOWN            = 'e19';
 
 	private const CODE_SUCCESS                   = 's01';
 
@@ -162,7 +165,7 @@ class Ajax
 		$this->Forward->Session->Close();
 
 		if ($text == null)
-			echo ERROR_UNKNOWN;
+			echo self::ERROR_UNKNOWN;
 		else
 				if ($json)
 			echo json_encode($text, JSON_UNESCAPED_UNICODE);
@@ -264,14 +267,14 @@ class Ajax
 	 */
 	private function remove_record()
 	{
+		if (!$this->Forward->User->IsManager())
+			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
+
 		if (!isset($_POST['input_record_id']))
 			$this->print_response(self::ERROR_MISSING_ARGUMENTS);
 
 		if (trim($_POST['input_record_id']) == '')
 			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
-
-		if (!$this->Forward->User->IsManager())
-			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
 
 		$query = $this->Forward->Database->query(
 			"SELECT record_name FROM forward_records WHERE record_id = ?",
@@ -380,6 +383,9 @@ class Ajax
 	 */
 	private function save_settings(): void
 	{
+		if (!$this->Forward->User->IsAdmin())
+			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
+
 		if (!isset(
 			$_POST['input_base_url'],
 			$_POST['input_dashboard_url'],
@@ -408,9 +414,6 @@ class Ajax
 		)
 			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
 
-		if (!$this->Forward->User->IsAdmin())
-			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
-
 		//Update all
 		$this->Forward->Options->Update('base_url', filter_var($_POST['input_base_url'], FILTER_SANITIZE_STRING));
 		$this->Forward->Options->Update('dashboard', filter_var($_POST['input_dashboard_url'], FILTER_SANITIZE_STRING));
@@ -438,6 +441,88 @@ class Ajax
 		$this->Forward->Options->Update('dashboard_language_mode', filter_var(intval($_POST['input_language_type']), FILTER_VALIDATE_INT));
 
 		$this->Forward->Options->Update('dashboard_language', filter_var($_POST['input_language_select'], FILTER_SANITIZE_STRING));
+
+		$this->print_response(self::CODE_SUCCESS);
+	}
+
+	/**
+	 * add_user
+	 * Adds new user to the database
+	 *
+	 * @access   private
+	 * @return	void
+	 */
+	private function add_user(): void
+	{
+		if (!$this->Forward->User->IsAdmin())
+			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
+
+		if (!isset(
+			$_POST['input_user_username'],
+			$_POST['input_user_display_name'],
+			$_POST['input_user_email'],
+			$_POST['input_user_password'],
+			$_POST['input_user_password_confirm']
+		))
+			$this->print_response(self::ERROR_MISSING_ARGUMENTS);
+
+		if (
+			trim($_POST['input_user_username']) == '' ||
+			trim($_POST['input_user_password']) == '' ||
+			trim($_POST['input_user_password_confirm']) == ''
+		)
+			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
+
+		$username = filter_var($_POST['input_user_username'], FILTER_SANITIZE_STRING);
+		$displayname = filter_var($_POST['input_user_display_name'], FILTER_SANITIZE_STRING);
+		$email = filter_var($_POST['input_user_email'], FILTER_SANITIZE_STRING);
+		$passwordBlank = filter_var($_POST['input_user_password'], FILTER_SANITIZE_STRING);
+
+		$userRole = 'analyst';
+		switch ($_POST['input_user_type']) {
+			case '2':
+				$userRole = 'manager';
+				break;
+			case '3':
+				$userRole = 'admin';
+				break;
+		}
+
+		if (!empty($email))
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+				$this->print_response(self::ERROR_INVALID_EMAIL);
+
+		if (preg_match('/[^A-Za-z0-9_-]+/', $username))
+			$this->print_response(self::ERROR_SPECIAL_CHARACTERS);
+
+		if (preg_match('/[^A-Za-z0-9 _-]+/', $displayname))
+			$this->print_response(self::ERROR_SPECIAL_CHARACTERS);
+
+		if (strlen(trim($_POST['input_user_password'])) < 6)
+			$this->print_response(self::ERROR_PASSWORD_TOO_SHORT);
+
+		if (trim($_POST['input_user_password']) != trim($_POST['input_user_password_confirm']))
+			$this->print_response(self::ERROR_PASSWORDS_DONT_MATCH);
+
+		$user = $this->Forward->User->GetByName($username);
+		if (!empty($user))
+			$this->print_response(self::ERROR_USER_NAME_EXISTS);
+
+		$user = $this->Forward->User->GetByEmail($username);
+		if (!empty($user))
+			$this->print_response(self::ERROR_USER_EMAIL_EXISTS);
+
+		$query = $this->Forward->Database->query(
+			"INSERT INTO forward_users (user_name, user_display_name, user_password, user_email, user_token, user_role, user_status) VALUES (?, ?, ?, ?, '', ?, 1)",
+			$username,
+			$displayname,
+			Crypter::Encrypt($passwordBlank, 'password'),
+			$email,
+			$userRole
+		);
+
+		if (empty($query) || $query->affectedRows() < 1)
+			$this->print_response(self::ERROR_MYSQL_UNKNOWN);
 
 		$this->print_response(self::CODE_SUCCESS);
 	}

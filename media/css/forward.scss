@@ -241,7 +241,8 @@ body.header-fixed {
             transition: .3s ease-in-out;
             transition-property: width;
             overflow: hidden;
-            input {
+            input,
+            .form-control {
                 height: 100%;
                 margin: 0;
                 border: none;
@@ -253,7 +254,9 @@ body.header-fixed {
                 color: rgba(255, 255, 255, .8);
             }
             input:focus,
-            input:active {
+            input:active,
+            .form-control:active,
+            .form-control:focus {
                 background: 0 0;
                 border: none;
                 box-shadow: none;
@@ -736,6 +739,16 @@ body.header-fixed {
         background-color: $dark-secondary-colors;
         border: 1px solid #000;
     }
+    input:active,
+    input:focus,
+    select:active,
+    select:focus,
+    textarea:active,
+    textarea:focus {
+        color: #fff;
+        background-color: $dark-secondary-colors;
+        border: 1px solid #000;
+    }
     input:disabled,
     select:disabled,
     textarea:disabled {
@@ -745,6 +758,9 @@ body.header-fixed {
     }
     .display-4 {
         margin-top: 2rem;
+    }
+    .form-group {
+        margin-bottom: .8rem;
     }
 }
 
