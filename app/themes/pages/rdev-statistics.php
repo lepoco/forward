@@ -24,6 +24,22 @@ $this->GetNavigation();
 				<span>Aggregate information about your links</span>
 			</div>
 		</div>
+		<div class="col-12 col-lg-4">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('Visits today'); ?></span>
+					<h3><?php echo $this->VisitsToday(); ?></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-lg-4">
+			<div class="content__card">
+				<div class="content__card__body">
+					<span class="content__card__header"><?php echo $this->_e('AJAX Queries today'); ?></span>
+					<h3><?php echo $this->QueriesToday(); ?></h3>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <?php

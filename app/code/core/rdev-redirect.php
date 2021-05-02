@@ -70,8 +70,10 @@ class Redirect
 			$nonexistent = $this->Forward->Options->Get('non_existent_record', 'error404');
 
 			if ($nonexistent == 'error404') {
+				$this->Forward->AddStatistic('404_record');
 				$this->Forward->LoadModel('404', 'Page not found');
 			} else if ($nonexistent == 'home') {
+				$this->Forward->AddStatistic('home_record');
 				$this->Forward->LoadModel('home', 'Create your own link shortener');
 			} else {
 				exit;
