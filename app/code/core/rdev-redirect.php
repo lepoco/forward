@@ -123,7 +123,7 @@ class Redirect
 	 * @access   public
 	 * @return   string
 	 */
-	private function ParseIP(): string
+	public function ParseIP(): string
 	{
 		if ($this->Forward->Options->Get('store_ip_addresses', true)) {
 			if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {

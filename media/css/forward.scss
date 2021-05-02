@@ -359,6 +359,7 @@
                     .form-control:focus,
                     .form-control:active {
                         box-shadow: none;
+                        border-bottom: 1px solid $forward-accent;
                     }
                     .input-password-preview {
                         a {

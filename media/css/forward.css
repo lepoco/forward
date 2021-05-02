@@ -407,6 +407,7 @@ body.header-fixed .content {
 .splash__card__body form .form-control:active {
   -webkit-box-shadow: none;
           box-shadow: none;
+  border-bottom: 1px solid #0078d3;
 }
 
 .splash__card__body form .input-password-preview a {

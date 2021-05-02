@@ -367,9 +367,9 @@ class Ajax
 				else
 					$data['visitors']['origins'][$visitor['visitor_origin_id']] = 1;
 			}
-
-			$data['visitors']['days'] = $recent_days;
 		}
+
+		$data['visitors']['days'] = $recent_days;
 
 		$this->print_response($data, true);
 	}

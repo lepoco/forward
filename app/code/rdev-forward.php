@@ -90,6 +90,7 @@ class Forward
 			switch ($this->Path->GetLevel(0)) {
 				case '':
 				case null:
+					$this->AddStatistic('home');
 					$this->LoadModel('home', 'Create your own link shortener');
 					break;
 
@@ -237,6 +238,30 @@ class Forward
 				exit("Unable to find model '$name'");
 			}
 		}
+	}
+
+	/**
+	 * AddStatistic
+	 * Checks if the selected page exists
+	 *
+	 * @access   private
+	 */
+	public function AddStatistic($page = null): void
+	{
+		if (empty($page))
+			$page = 'unknown';
+
+		if (!$this->User->IsLoggedIn())
+			$userid = 0;
+		else
+			$userid = $this->User->Active()['user_id'];
+
+		$query = $this->Database->query(
+			"INSERT INTO forward_statistics_pages (statistic_page, statistic_user, statistic_ip) VALUES (?, ?, ?)",
+			$page,
+			$userid,
+			'127.0.0.1'
+		);
 	}
 
 	/**

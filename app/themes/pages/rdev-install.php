@@ -81,15 +81,21 @@ $this->GetHeader();
 									</div>
 								</div>
 								<div class="col-12 col-lg-6">
-									<div class="form-group" style="margin-top:10px;">
-										<label for="input_user_password">Password</label>
-										<div class="input-group" id="show_hide_password">
-											<input type="text" autocomplete="new-password" class="form-control" id="input_user_password" placeholder="password" value="<?php echo Crypter::DeepSalter(15); ?>">
-											<div class="input-group-addon">
-												<a href=""><svg style="width:15px;height:15px" viewBox="0 0 24 24">
-														<path fill="currentColor" d="M17,7H22V17H17V19A1,1 0 0,0 18,20H20V22H17.5C16.95,22 16,21.55 16,21C16,21.55 15.05,22 14.5,22H12V20H14A1,1 0 0,0 15,19V5A1,1 0 0,0 14,4H12V2H14.5C15.05,2 16,2.45 16,3C16,2.45 16.95,2 17.5,2H20V4H18A1,1 0 0,0 17,5V7M2,7H13V9H4V15H13V17H2V7M20,15V9H17V15H20M8.5,12A1.5,1.5 0 0,0 7,10.5A1.5,1.5 0 0,0 5.5,12A1.5,1.5 0 0,0 7,13.5A1.5,1.5 0 0,0 8.5,12M13,10.89C12.39,10.33 11.44,10.38 10.88,11C10.32,11.6 10.37,12.55 11,13.11C11.55,13.63 12.43,13.63 13,13.11V10.89Z" />
-													</svg></a>
-											</div>
+									<div class="input-group input-password-preview password-visible" style="margin-top:10px;">
+										<label for="input_user_password" style="display:block;width:100%;">Password</label>
+										<input type="text" autocomplete="new-password" class="form-control input-password-preview__field" id="input_user_password" name="input_user_password" placeholder="<?php $this->_e('Password'); ?>" value="<?php echo Crypter::DeepSalter(15); ?>">
+										<div class="input-group-addon">
+											<a href="#">
+												<svg class="input-password-preview__eyeclosed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+													<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+													<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+													<path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+												</svg>
+												<svg class="input-password-preview__eyeopen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+													<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+													<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+												</svg>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -98,7 +104,7 @@ $this->GetHeader();
 								</div>
 							</div>
 						</form>
-						<button id="install-forward" type="button" class="splash__card__button"><?php $this->_e('Install'); ?></button>
+						<button id="install-forward" type="button" class="btn-forward block"><?php $this->_e('Install'); ?></button>
 					</div>
 					<div id="install-progress" class="splash__card__body" style="display:none;">
 						<div style="display: flex;align-items: center;">

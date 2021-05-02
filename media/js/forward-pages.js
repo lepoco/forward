@@ -18,7 +18,7 @@ let current_record = {
 jQuery('.input-password-preview a').on('click', function(event) {
     event.preventDefault();
     let parent = jQuery(this).parent().parent();
-    let passwordBox = parent.children('input[name="password"]');
+    let passwordBox = parent.children('input.input-password-preview__field');
 
     if (passwordBox.attr('type') == 'text') {
         passwordBox.attr('type', 'password');

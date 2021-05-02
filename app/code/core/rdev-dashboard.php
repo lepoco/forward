@@ -80,6 +80,7 @@ class Dashboard
 		}
 
 		if (trim($this->Forward->Path->GetLevel(2)) != '' && $this->subpage != 'users') {
+			$this->Forward->AddStatistic('404');
 			$this->Forward->LoadModel('404', 'Page not found');
 		}
 
@@ -88,45 +89,58 @@ class Dashboard
 
 		switch ($this->subpage) {
 			case 'ajax':
+				$this->Forward->AddStatistic('ajax_query');
 				new Ajax($this->Forward);
 				break;
 
 			case '__dashboard__':
+				$this->Forward->AddStatistic('dashboard');
 				$this->Forward->LoadModel('dashboard', 'Dashboard');
 				break;
 
 			case 'statistics':
+				$this->Forward->AddStatistic('statistics');
 				$this->Forward->LoadModel('statistics', 'Statistics');
 				break;
 
 			case 'api':
+				$this->Forward->AddStatistic('api');
 				$this->Forward->LoadModel('api', 'JSON API');
 				break;
 
 			case 'records':
+				$this->Forward->AddStatistic('records');
 				$this->Forward->LoadModel('records', 'Records');
 				break;
 
 			case 'settings':
+				$this->Forward->AddStatistic('settings');
 				$this->Forward->LoadModel('settings', 'Settings');
 				break;
 
 			case 'users':
-				if ($user_id != null)
+				if ($user_id != null) {
 					$this->Forward->LoadModel('user-single', 'Account');
-				else if (trim($this->Forward->Path->GetLevel(2)) == '' || trim($this->Forward->Path->GetLevel(2)) == 'list')
+					$this->Forward->AddStatistic('account');
+				} else if (trim($this->Forward->Path->GetLevel(2)) == '' || trim($this->Forward->Path->GetLevel(2)) == 'list') {
+					$this->Forward->AddStatistic('users_list');
 					$this->Forward->LoadModel('users', 'Users');
-				else if (trim($this->Forward->Path->GetLevel(2)) == 'add')
+				} else if (trim($this->Forward->Path->GetLevel(2)) == 'add') {
+					$this->Forward->AddStatistic('users_add');
 					$this->Forward->LoadModel('users-add', 'Add user');
-				else
+				} else {
+					$this->Forward->AddStatistic('404');
 					$this->Forward->LoadModel('404', 'Page not found');
+				}
 				break;
 
 			case 'about':
+				$this->Forward->AddStatistic('about');
 				$this->Forward->LoadModel('about', 'About');
 				break;
 
 			case 'login':
+				$this->Forward->AddStatistic('login');
 				$this->Forward->LoadModel('login', 'Sign in');
 				break;
 
@@ -136,6 +150,7 @@ class Dashboard
 				break;
 
 			default:
+				$this->Forward->AddStatistic('404');
 				$this->Forward->LoadModel('404', 'Page not found');
 				break;
 		}

@@ -47,7 +47,7 @@ $this->GetHeader();
 							</div>
 							<div class="form-group" style="margin-top: 10px;">
 								<div class="input-group input-password-preview password-hidden">
-									<input type="password" class="form-control" id="password" name="password" placeholder="<?php $this->_e('Password'); ?>">
+									<input type="password" class="form-control input-password-preview__field" id="password" name="password" placeholder="<?php $this->_e('Password'); ?>">
 									<div class="input-group-addon">
 										<a href="#">
 											<svg class="input-password-preview__eyeclosed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
