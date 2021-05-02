@@ -23,7 +23,9 @@ Simple intuitive interface inspired by Label Theme [https://www.uxcandy.co/](htt
 <br/><br/>
 ![Dashboard](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-2.png?raw=true)
 <br/><br/>
-![Options](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-3.png?raw=true)
+![QR Code](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-3.png?raw=true)
+<br/><br/>
+![Records](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-4.png?raw=true)
 
 ## Security
 

@@ -173,6 +173,7 @@ jQuery('#user-add-form').on('submit', function(e) {
     Forward.ajax(jQuery(this).serialize(),
         function(e) {
             if (e == 's01') {
+                jQuery('#input_user_username, #input_user_display_name, #input_user_email, #input_user_password, #input_user_password_confirm').val('');
                 Forward.toast(Forward.__('success'), 'New user successfully added!', 6000, 'success');
             } else {
 
