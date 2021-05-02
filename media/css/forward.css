@@ -386,6 +386,33 @@ body.header-fixed .content {
   padding-top: 12px;
 }
 
+.splash__card__body form {
+  margin-top: .8rem;
+}
+
+.splash__card__body form input,
+.splash__card__body form textarea,
+.splash__card__body form .form-control {
+  padding: 10px 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.splash__card__body form input:focus,
+.splash__card__body form input:active,
+.splash__card__body form textarea:focus,
+.splash__card__body form textarea:active,
+.splash__card__body form .form-control:focus,
+.splash__card__body form .form-control:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.splash__card__body form .input-password-preview a {
+  border-bottom: 1px solid #eee;
+}
+
 .splash__card .btn-forward {
   margin-top: 1rem;
 }
@@ -749,6 +776,36 @@ body.header-fixed .content {
 /*
  * Pages exclusive
  */
+.input-password-preview a {
+  color: #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.input-password-preview.password-hidden .input-password-preview__eyeopen {
+  display: none;
+}
+
+.input-password-preview.password-hidden .input-password-preview__eyeclosed {
+  display: block;
+}
+
+.input-password-preview.password-visible .input-password-preview__eyeopen {
+  display: block;
+}
+
+.input-password-preview.password-visible .input-password-preview__eyeclosed {
+  display: none;
+}
+
 .records-list {
   overflow: hidden;
   height: 100%;

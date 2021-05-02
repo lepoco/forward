@@ -15,13 +15,21 @@ let current_record = {
 /**
  * show_hide_password
  */
-jQuery('#show_hide_password a').on('click', function(event) {
+jQuery('.input-password-preview a').on('click', function(event) {
     event.preventDefault();
+    let parent = jQuery(this).parent().parent();
+    let passwordBox = parent.children('input[name="password"]');
 
-    if (jQuery('#show_hide_password input').attr("type") == "text") {
-        jQuery('#show_hide_password input').attr('type', 'password');
-    } else if (jQuery('#show_hide_password input').attr("type") == "password") {
-        jQuery('#show_hide_password input').attr('type', 'text');
+    if (passwordBox.attr('type') == 'text') {
+        passwordBox.attr('type', 'password');
+
+        parent.addClass('password-hidden');
+        parent.removeClass('password-visible');
+    } else if (passwordBox.attr('type') == 'password' && passwordBox.val().length < 1) {
+        passwordBox.attr('type', 'text');
+
+        parent.addClass('password-visible');
+        parent.removeClass('password-hidden');
     }
 });
 

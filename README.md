@@ -53,7 +53,7 @@ Each Ajax query is verified by the SHA1 encrypted Nonce.
 ## How to install it?
 
 Simply upload files to your hosting using FTP or on your test environment. Installation will start from the root directory.
-Just press "Install". It's easy: D
+Just press "Install". It's easy :D
 
 ### Available full language versions
 
