@@ -118,46 +118,6 @@ class Redirect
 
 	/**
 	 * ParseReferrer
-	 * Gets the IP address of the user
-	 *
-	 * @access   public
-	 * @return   string
-	 */
-	public function ParseIP(): string
-	{
-		if ($this->Forward->Options->Get('store_ip_addresses', true)) {
-			if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-				$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
-				$_SERVER['HTTP_CLIENT_IP'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
-			}
-
-			$client = @$_SERVER['HTTP_CLIENT_IP'];
-			$remote = $_SERVER['REMOTE_ADDR'];
-
-			$forward = '';
-			if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-				if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') > 0) {
-					$addr = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
-					$forward = trim($addr[0]);
-				} else {
-					$forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-				}
-			}
-
-			if (filter_var($client, FILTER_VALIDATE_IP)) {
-				return $client;
-			} elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
-				return $forward;
-			} else {
-				return $remote;
-			}
-		} else {
-			return '';
-		}
-	}
-
-	/**
-	 * ParseReferrer
 	 * Gets the address from which the user came
 	 *
 	 * @access   public
@@ -313,7 +273,7 @@ class Redirect
 		$query = $this->Forward->Database->query(
 			"INSERT INTO forward_statistics_visitors (record_id, visitor_ip, visitor_origin_id, visitor_language_id, visitor_agent_id, visitor_platform_id) VALUES (?,?,?,?,?,?)",
 			$this->id,
-			$this->ParseIP(),
+			$this->Forward->ParseIP(),
 			$this->GetOriginId($this->ParseReferrer()),
 			$this->GetLanguageId($this->ParseLanguage()),
 			$this->GetAgentId($agent->GetBrowser()),
