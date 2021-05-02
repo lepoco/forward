@@ -308,9 +308,13 @@
 
     "Cancel": "Anuluj",
 
+    "Empty": "Pusty",
+
     "Are you sure you want to delete the %s record?": "Na pewno chcesz usunąć rekord %s?",
 
     "Username": "Nazwa użytkownika",
+
+    "User display name": "Wyświetlana nazwa użytkownika",
 
     "Email address": "Adres email",
 

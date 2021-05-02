@@ -69,7 +69,7 @@ class User
 	 */
 	public function LogIn(array $user): void
 	{
-		$token = Crypter::Encrypt(Crypter::DeepSalter(30), 'token');
+		$token = Crypter::Encrypt(Crypter::DeepSalter(32), 'token');
 
 		if ($this->Forward->Database == null)
 			$this->Forward->Database = new Database();
@@ -106,7 +106,7 @@ class User
 
 			$query = $this->Forward->Database->query(
 				"UPDATE forward_users SET user_token = ? WHERE user_id = ?",
-				'',
+				Crypter::Encrypt(Crypter::DeepSalter(32), 'token'),
 				$this->User['user_id'],
 			);
 		}

@@ -78,11 +78,8 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
 
     let target = jQuery('#input-record-url').val();
 
-    jQuery.ajax({
-        url: forward.ajax,
-        type: 'post',
-        data: jQuery('.forward-header__navigation__form').serialize(),
-        success: function(e) {
+    Forward.ajax(jQuery(this).serialize(),
+        function(e) {
             if (e == 's01') {
                 let slug = jQuery('#input-record-slug').val();
                 if (slug == '') {
@@ -112,47 +109,69 @@ jQuery('.forward-header__navigation__form').on('submit', function(e) {
                 Forward.toast(Forward.__('error_qa'), error_text, 6000, 'alert');
             }
             console.log(e);
-        },
-        fail: function(xhr, textStatus, errorThrown) {
-            console.log(xhr);
-            console.log(textStatus);
-            console.log(errorThrown);
-            Forward.toast(Forward.__('error'), errorThrown, 6000, 'alert');
-        }
-    });
+        });
 });
 
 jQuery('#settings-form').on('submit', function(e) {
     e.preventDefault();
 
-    jQuery.ajax({
-        url: forward.ajax,
-        type: 'post',
-        data: jQuery(this).serialize(),
-        success: function(e) {
+    Forward.ajax(jQuery(this).serialize(),
+        function(e) {
             if (e == 's01') {
                 Forward.toast(Forward.__('success'), 'The settings have been saved!', 6000, 'success');
             } else {
                 Forward.toast(Forward.__('error'), 'Settings could not be saved!', 6000, 'alert');
             }
             console.log(e);
-        },
-        fail: function(xhr, textStatus, errorThrown) {
-            console.log(xhr);
-            console.log(textStatus);
-            console.log(errorThrown);
+        });
+});
 
-        }
-    });
+jQuery('#user-change_password').on('submit', function(e) {
+    e.preventDefault();
+
+    Forward.ajax(jQuery(this).serialize(),
+        function(e) {
+            switch (e) {
+                case 's01':
+                    jQuery('#input_user_new_password, #input_user_new_password_confirm').val('');
+                    Forward.toast(Forward.__('success'), 'User password has been changed', 6000, 'success');
+                    break;
+                case 'e07':
+                    Forward.toast(Forward.__('error'), 'You must complete all the fields', 6000, 'alert');
+                    break;
+                case 'e12':
+                    Forward.toast(Forward.__('error'), 'The passwords do not match', 6000, 'alert');
+                    break;
+                case 'e13':
+                    Forward.toast(Forward.__('error'), 'Password is too short', 6000, 'alert');
+                    break;
+                default:
+                    Forward.toast(Forward.__('error'), 'Password update failed. Unknown error.', 6000, 'alert');
+                    break;
+            }
+            console.log(e);
+        });
+});
+
+jQuery('#user-update').on('submit', function(e) {
+    e.preventDefault();
+
+    Forward.ajax(jQuery(this).serialize(),
+        function(e) {
+            if (e == 's01') {
+                Forward.toast(Forward.__('success'), 'User data has been updated', 6000, 'success');
+            } else {
+                Forward.toast(Forward.__('error'), 'User data could not be updated!', 6000, 'alert');
+            }
+            console.log(e);
+        });
 });
 
 jQuery('#user-add-form').on('submit', function(e) {
     e.preventDefault();
-    jQuery.ajax({
-        url: forward.ajax,
-        type: 'post',
-        data: jQuery(this).serialize(),
-        success: function(e) {
+
+    Forward.ajax(jQuery(this).serialize(),
+        function(e) {
             if (e == 's01') {
                 Forward.toast(Forward.__('success'), 'New user successfully added!', 6000, 'success');
             } else {
@@ -197,14 +216,7 @@ jQuery('#user-add-form').on('submit', function(e) {
                 Forward.toast(Forward.__('error'), errorMessage, 6000, 'alert');
             }
             console.log(e);
-        },
-        fail: function(xhr, textStatus, errorThrown) {
-            console.log(xhr);
-            console.log(textStatus);
-            console.log(errorThrown);
-
-        }
-    });
+        });
 });
 
 /**

@@ -53,13 +53,15 @@ $this->GetNavigation();
                         <span class="content__card__header"><?php echo $this->_e('Password change'); ?></span>
                         <form id="user-change_password" class="forward-form" action="<?php echo $this->AjaxGateway(); ?>" style="margin-top:.8rem;">
                             <input type="hidden" value="change_password" name="action">
+                            <input type="hidden" value="<?php echo $this->GetUserData('user_name'); ?>" name="username">
+                            <input type="hidden" value="<?php echo $this->GetUserData('user_id'); ?>" name="id">
                             <input type="hidden" value="<?php echo $this->AjaxNonce('change_password'); ?>" name="nonce">
 
                             <div class="form-group">
-                                <input type="password" id="input-user-new-password" name="input-user-new-password" class="form-control password_strength_control" data-strength-target="input_user_password--strength" placeholder="<?php echo $this->_e('New password'); ?>">
+                                <input type="password" autocomplete="new-password" id="input_user_new_password" name="input_user_new_password" class="form-control password_strength_control" data-strength-target="input_user_password--strength" placeholder="<?php echo $this->_e('New password'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="password" id="input-user-new-password-confirm" name="input-user-new-password-confirm" class="form-control password_strength_control" data-strength-target="input_user_password--strength" placeholder="<?php echo $this->_e('Confirm new password'); ?>">
+                                <input type="password" autocomplete="new-password" id="input_user_new_password_confirm" name="input_user_new_password_confirm" class="form-control password_strength_control" data-strength-target="input_user_password--strength" placeholder="<?php echo $this->_e('Confirm new password'); ?>">
                             </div>
                             <div>
                                 <span class="input_user_password--strength"></span>
@@ -73,6 +75,7 @@ $this->GetNavigation();
             <div class="col-12">
                 <form id="user-update" class="forward-form" action="<?php echo $this->AjaxGateway(); ?>" style="margin-top:1.5rem;">
                     <input type="hidden" value="update_user" name="action">
+                    <input type="hidden" value="<?php echo $this->GetUserData('user_id'); ?>" name="id">
                     <input type="hidden" value="<?php echo $this->AjaxNonce('update_user'); ?>" name="nonce">
 
                     <div class="form-group">
@@ -80,7 +83,7 @@ $this->GetNavigation();
                         <input type="text" class="form-control" id="input_user_username" name="input_user_username" placeholder="<?php echo $this->_e('Username'); ?>" value="<?php echo $this->GetUserData('user_name'); ?>">
                     </div>
                     <div class="form-group">
-                        <label for="input_user_display_name"><?php echo $this->_e('Username'); ?></label>
+                        <label for="input_user_display_name"><?php echo $this->_e('User display name'); ?></label>
                         <input type="text" class="form-control" id="input_user_display_name" name="input_user_display_name" placeholder="<?php echo $this->_e('Display name'); ?>" value="<?php echo $this->GetUserData('user_display_name'); ?>">
                     </div>
                     <div class="form-group">

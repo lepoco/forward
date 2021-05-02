@@ -513,12 +513,119 @@ class Ajax
 			$this->print_response(self::ERROR_USER_EMAIL_EXISTS);
 
 		$query = $this->Forward->Database->query(
-			"INSERT INTO forward_users (user_name, user_display_name, user_password, user_email, user_token, user_role, user_status) VALUES (?, ?, ?, ?, '', ?, 1)",
+			"INSERT INTO forward_users (user_name, user_display_name, user_password, user_email, user_token, user_role, user_status) VALUES (?, ?, ?, ?, ?, ?, 1)",
 			$username,
 			$displayname,
 			Crypter::Encrypt($passwordBlank, 'password'),
 			$email,
+			Crypter::Encrypt(Crypter::DeepSalter(32), 'token'),
 			$userRole
+		);
+
+		if (empty($query) || $query->affectedRows() < 1)
+			$this->print_response(self::ERROR_MYSQL_UNKNOWN);
+
+		$this->print_response(self::CODE_SUCCESS);
+	}
+
+	/**
+	 * add_user
+	 * Adds new user to the database
+	 *
+	 * @access   private
+	 * @return	void
+	 */
+	private function update_user(): void
+	{
+		if (!($this->Forward->User->IsAdmin() || $_POST['id'] == $this->Forward->User->Active()['user_id']))
+			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
+
+		if (!isset(
+			$_POST['id'],
+			$_POST['input_user_username'],
+			$_POST['input_user_display_name'],
+			$_POST['input_user_email']
+		))
+			$this->print_response(self::ERROR_MISSING_ARGUMENTS);
+
+		if (
+			trim($_POST['input_user_username']) == '' ||
+			trim($_POST['input_user_display_name']) == ''
+		)
+			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
+
+		$userid = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
+		$username = filter_var($_POST['input_user_username'], FILTER_SANITIZE_STRING);
+		$displayname = filter_var($_POST['input_user_display_name'], FILTER_SANITIZE_STRING);
+		$email = filter_var($_POST['input_user_email'], FILTER_SANITIZE_STRING);
+
+		if (preg_match('/[^A-Za-z0-9_-]+/', $username))
+			$this->print_response(self::ERROR_SPECIAL_CHARACTERS);
+
+		if (preg_match('/[^A-Za-z0-9 _-]+/', $displayname))
+			$this->print_response(self::ERROR_SPECIAL_CHARACTERS);
+
+		$user = $this->Forward->User->GetById($userid);
+		if (empty($user))
+			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);
+
+		$query = $this->Forward->Database->query(
+			"UPDATE forward_users SET user_name = ?, user_display_name = ?, user_email = ? WHERE user_id = ?",
+			$username,
+			$displayname,
+			$email,
+			$userid
+		);
+
+		if (empty($query) || $query->affectedRows() < 1)
+			$this->print_response(self::ERROR_MYSQL_UNKNOWN);
+
+		$this->print_response(self::CODE_SUCCESS);
+	}
+
+	/**
+	 * add_user
+	 * Adds new user to the database
+	 *
+	 * @access   private
+	 * @return	void
+	 */
+	private function change_password(): void
+	{
+		if (!($this->Forward->User->IsAdmin() || $_POST['id'] == $this->Forward->User->Active()['user_id']))
+			$this->print_response(self::ERROR_INSUFFICIENT_PERMISSIONS);
+
+		if (!isset(
+			$_POST['id'],
+			$_POST['username'],
+			$_POST['input_user_new_password'],
+			$_POST['input_user_new_password_confirm']
+		))
+			$this->print_response(self::ERROR_MISSING_ARGUMENTS);
+
+		if (
+			trim($_POST['id']) == '' ||
+			trim($_POST['input_user_new_password']) == '' ||
+			trim($_POST['input_user_new_password_confirm']) == ''
+		)
+			$this->print_response(self::ERROR_EMPTY_ARGUMENTS);
+
+		if (strlen(trim($_POST['input_user_new_password'])) < 6)
+			$this->print_response(self::ERROR_PASSWORD_TOO_SHORT);
+
+		if (trim($_POST['input_user_new_password']) != trim($_POST['input_user_new_password_confirm']))
+			$this->print_response(self::ERROR_PASSWORDS_DONT_MATCH);
+
+		$userid = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
+
+		$user = $this->Forward->User->GetById($userid);
+		if (empty($user))
+			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);
+
+		$query = $this->Forward->Database->query(
+			"UPDATE forward_users SET user_password = ? WHERE user_id = ?",
+			Crypter::Encrypt($_POST['input_user_new_password'], 'password'),
+			$userid
 		);
 
 		if (empty($query) || $query->affectedRows() < 1)
