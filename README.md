@@ -1,4 +1,4 @@
-![Logo](https://github.com/rapiddev/Forward/blob/master/media/img/forward-logo-bk.png?raw=true)
+![Logo](https://github.com/rapiddev/Forward/blob/master/public/img/forward-logo-bk.png?raw=true)
 
 # Forward
 
@@ -19,13 +19,13 @@ With the help of Forward you can collect information about:
 
 Simple intuitive interface inspired by Label Theme [https://www.uxcandy.co/](https://www.uxcandy.co/).
 <br/><br/>
-![Login form](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-1.png?raw=true)
+![Login form](https://github.com/rapiddev/Forward/blob/master/public/img/forward-screen-1.png?raw=true)
 <br/><br/>
-![Dashboard](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-2.png?raw=true)
+![Dashboard](https://github.com/rapiddev/Forward/blob/master/public/img/forward-screen-2.png?raw=true)
 <br/><br/>
-![QR Code](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-3.png?raw=true)
+![QR Code](https://github.com/rapiddev/Forward/blob/master/public/img/forward-screen-3.png?raw=true)
 <br/><br/>
-![Records](https://github.com/rapiddev/Forward/blob/master/media/img/forward-screen-4.png?raw=true)
+![Records](https://github.com/rapiddev/Forward/blob/master/public/img/forward-screen-4.png?raw=true)
 
 ## Security
 
