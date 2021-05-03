@@ -246,21 +246,46 @@ class Forward
 	 *
 	 * @access   private
 	 */
-	public function AddStatistic($page = null): void
+	public function AddStatistic($page = null, $type = 'page'): void
 	{
-		if (empty($page))
-			$page = 'unknown';
+		if (empty($page)) {
+			$page = null;
+		} else {
+			$query = $this->Database->query("SELECT page_id FROM forward_global_statistics_pages WHERE page_name = ?", $page)->fetchArray();
+
+			if ($query == null) {
+				$query = $this->Database->query("INSERT INTO forward_global_statistics_pages (page_name) VALUES (?)", $page);
+				$page = $query->lastInsertID();
+			} else {
+				$page = filter_var($query['page_id'], FILTER_VALIDATE_INT);
+			}
+		}
+
+		switch ($type) {
+			case 'query':
+				$typeId = 2;
+				break;
+			case 'action':
+				$typeId = 4;
+				break;
+			default:
+				$typeId = 3;
+				break;
+		}
+
 
 		if (!$this->User->IsLoggedIn())
-			$userid = 0;
+			$userid = null;
 		else
 			$userid = $this->User->Active()['user_id'];
 
 		$query = $this->Database->query(
-			"INSERT INTO forward_statistics_pages (statistic_page, statistic_user, statistic_ip) VALUES (?, ?, ?)",
-			$page,
-			$userid,
-			$this->ParseIP()
+			"INSERT INTO forward_global_statistics (statistic_type, statistic_page, statistic_user_id, statistic_user_logged_in, statistic_ip) VALUES (?, ?, ?, ?, ?)",
+			$typeId, //type id
+			$page, //page id
+			$userid, //user id
+			$this->User->IsLoggedIn() ? 1 : 0, //logged in
+			$this->ParseIP(true)
 		);
 	}
 
@@ -271,7 +296,7 @@ class Forward
 	 * @access   public
 	 * @return   string
 	 */
-	public function ParseIP(): string
+	public function ParseIP($pton = false): string
 	{
 		if ($this->Options->Get('store_ip_addresses', true)) {
 			if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
@@ -297,7 +322,7 @@ class Forward
 			} elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
 				return $forward;
 			} else {
-				return $remote;
+				return ($pton ? inet_pton($remote) : $remote);
 			}
 		} else {
 			return '';

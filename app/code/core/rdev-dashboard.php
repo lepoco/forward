@@ -89,7 +89,6 @@ class Dashboard
 
 		switch ($this->subpage) {
 			case 'ajax':
-				$this->Forward->AddStatistic('ajax_query');
 				new Ajax($this->Forward);
 				break;
 

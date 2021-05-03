@@ -29,7 +29,7 @@ class Model extends Models
 
     protected function VisitsToday()
     {
-        $query = $this->Forward->Database->query("SELECT statistic_id FROM forward_statistics_pages WHERE date(statistic_date) = CURDATE() AND statistic_page <> 'ajax_query'")->fetchAll();
+        $query = $this->Forward->Database->query("SELECT statistic_id FROM forward_global_statistics WHERE date(statistic_date) = CURDATE() AND statistic_type = 3")->fetchAll();
         if (empty($query))
             return 0;
 
@@ -38,7 +38,7 @@ class Model extends Models
 
     protected function QueriesToday()
     {
-        $query = $this->Forward->Database->query("SELECT statistic_id FROM forward_statistics_pages WHERE statistic_page = 'ajax_query'")->fetchAll();
+        $query = $this->Forward->Database->query("SELECT statistic_id FROM forward_global_statistics WHERE date(statistic_date) = CURDATE() AND statistic_type = 2")->fetchAll();
         if (empty($query))
             return 0;
 

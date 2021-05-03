@@ -248,7 +248,7 @@ class Models
 
 	protected function GetImage($name)
 	{
-		return $this->baseurl . 'media/img/' . $name;
+		return $this->baseurl . (PUBLIC_PATH == 'root' ? 'public/' : '/') . 'img/' . $name;
 	}
 
 	protected function SetPrefetch()
@@ -459,15 +459,15 @@ class Models
 	protected function GetStyles()
 	{
 		$this->styles = Constants::$forwardStyles;
-		$this->styles[] = array($this->baseurl . 'media/css/forward.min.css', '', FORWARD_VERSION);
+		$this->styles[] = array($this->baseurl . (PUBLIC_PATH == 'root' ? 'public/' : '/') . 'css/forward.min.css', '', FORWARD_VERSION);
 	}
 
 	protected function GetScripts()
 	{
 		if ($this->name != 'home') {
 			$this->scripts = Constants::$forwardScripts;
-			$this->scripts[] = array($this->baseurl . 'media/js/forward-pages.min.js', '', FORWARD_VERSION);
-			$this->scripts[] = array($this->baseurl . 'media/js/forward.min.js', '', FORWARD_VERSION);
+			$this->scripts[] = array($this->baseurl . (PUBLIC_PATH == 'root' ? 'public/' : '/') . 'js/forward-pages.min.js', '', FORWARD_VERSION);
+			$this->scripts[] = array($this->baseurl . (PUBLIC_PATH == 'root' ? 'public/' : '/') . 'js/forward.min.js', '', FORWARD_VERSION);
 		} else {
 			$this->scripts = array();
 		}

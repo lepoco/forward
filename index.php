@@ -11,29 +11,10 @@
 
 namespace Forward;
 
-/** Verify PHP version */
-if (version_compare($ver = PHP_VERSION, $req = '7.0.11', '<'))
-	exit(sprintf('You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+/** Root public path */
+if (!defined('PUBLIC_PATH'))
+	define('PUBLIC_PATH', 'root');
 
-/** Define timezone */
-date_default_timezone_set('UTC');
-
-/** Forward version */
-define('FORWARD_VERSION', '2.0.2');
-
-/** The name of the directory with Forward files */
-define('APP_FOLDER', 'app');
-
-/** Main constants for all files */
-define('ABSPATH', dirname(__FILE__) . '/');
-define('APPPATH', ABSPATH . APP_FOLDER . '/');
-
-/** Initialization file */
-if (!is_file(APPPATH . 'loader.php'))
-	exit('Fatal error');
-
-/** Load files */
-require_once APPPATH . 'loader.php';
-
-/** Start Forward */
-(new Forward());
+/** Public index */
+if (is_file(dirname(__FILE__) . '/public/index.php'))
+	require_once dirname(__FILE__) . '/public/index.php';

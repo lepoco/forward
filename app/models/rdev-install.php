@@ -183,7 +183,11 @@ class Model extends Models
 		$htaccess .= "RewriteEngine On\nRewriteBase /\nRewriteCond %{REQUEST_URI} ^(.*)$\nRewriteCond %{REQUEST_FILENAME} !-f\n";
 		$htaccess .= "RewriteRule .* $dir/index.php [L]\n</IfModule>";
 
-		$path = ABSPATH . '.htaccess';
+		if (PUBLIC_PATH == 'root')
+			$path = ABSPATH . '.htaccess';
+		else
+			$path = ABSPATH . 'public/.htaccess';
+
 		file_put_contents($path, $htaccess);
 	}
 

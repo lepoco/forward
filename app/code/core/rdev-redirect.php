@@ -275,7 +275,7 @@ class Redirect
 		$query = $this->Forward->Database->query(
 			"INSERT INTO forward_statistics_visitors (record_id, visitor_ip, visitor_origin_id, visitor_language_id, visitor_agent_id, visitor_platform_id) VALUES (?,?,?,?,?,?)",
 			$this->id,
-			$this->Forward->ParseIP(),
+			$this->Forward->ParseIP(true),
 			$this->GetOriginId($this->ParseReferrer()),
 			$this->GetLanguageId($this->ParseLanguage()),
 			$this->GetAgentId($agent->GetBrowser()),

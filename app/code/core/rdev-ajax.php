@@ -99,8 +99,10 @@ class Ajax
 
 		if (!$this->is_valid_action())
 			exit(self::ERROR_INVALID_ACTION);
-		else
+		else {
+			$this->Forward->AddStatistic($this->action, 'query');
 			$this->{$this->action}();
+		}
 
 		$this->print_response();
 	}
@@ -203,14 +205,17 @@ class Ajax
 		if (empty($user))
 			$user = $this->Forward->User->GetByEmail($login);
 
-		if (empty($user))
+		if (empty($user)) {
+			$this->Forward->AddStatistic('login_wrong_username', 'action');
 			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);
+		}
 
-		if (!Crypter::Compare($password, $user['user_password'], 'password'))
+		if (!Crypter::Compare($password, $user['user_password'], 'password')) {
+			$this->Forward->AddStatistic('login_wrong_password', 'action');
 			$this->print_response(self::ERROR_ENTRY_DONT_EXISTS);
+		}
 
 		$this->Forward->User->LogIn($user);
-
 		$this->print_response(self::CODE_SUCCESS);
 	}
 
