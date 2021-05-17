@@ -1,63 +1,44 @@
 <?php
 
 /**
- * @package Forward
+ * @package   Forward
  *
- * @author RapidDev
+ * @author    RapidDev
  * @copyright Copyright (c) 2019-2021, RapidDev
- * @link https://www.rdev.cc/forward
- * @license https://opensource.org/licenses/MIT
+ * @link      https://www.rdev.cc/forward
+ * @license   https://opensource.org/licenses/MIT
  */
 
 namespace Forward;
 
 defined('ABSPATH') or die('No script kiddies please!');
 
-/** Page models */
-if (is_file(APPPATH . 'config.php'))
-	require_once APPPATH . 'config.php';
+if (is_file(APPPATH . 'config.php')) {
+    require_once APPPATH . 'config.php';
 
-/** Constants */
-require_once APPPATH . 'code/core/' . 'rdev-constants.php';
+    if (FORWARD_DEBUG) {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
+}
 
-/** Uri */
-require_once APPPATH . 'code/core/' . 'rdev-uri.php';
+require_once APPPATH . 'code/core/' . 'agent.php';
+require_once APPPATH . 'code/core/' . 'api.php';
+require_once APPPATH . 'code/core/' . 'client.php';
+require_once APPPATH . 'code/core/' . 'crypter.php';
+require_once APPPATH . 'code/core/' . 'database.php';
+require_once APPPATH . 'code/core/' . 'models.php';
+require_once APPPATH . 'code/core/' . 'options.php';
+require_once APPPATH . 'code/core/' . 'session.php';
+require_once APPPATH . 'code/core/' . 'statistics.php';
+require_once APPPATH . 'code/core/' . 'translator.php';
+require_once APPPATH . 'code/core/' . 'uri.php';
+require_once APPPATH . 'code/core/' . 'user.php';
 
-/** Session manager */
-require_once APPPATH . 'code/core/' . 'rdev-session.php';
+require_once APPPATH . 'code/components/' . 'ajax.php';
+require_once APPPATH . 'code/components/' . 'redirect.php';
+require_once APPPATH . 'code/components/' . 'dashboard.php';
+require_once APPPATH . 'code/assets/'     . 'constants.php';
 
-/** Crypter */
-require_once APPPATH . 'code/core/' . 'rdev-crypter.php';
-
-/** String translator */
-require_once APPPATH . 'code/core/' . 'rdev-translator.php';
-
-/** Database */
-require_once APPPATH . 'code/core/' . 'rdev-database.php';
-
-/** User Agent */
-require_once APPPATH . 'code/core/' . 'rdev-agent.php';
-
-/** Ajax parser */
-require_once APPPATH . 'code/core/' . 'rdev-ajax.php';
-
-/** Options parser */
-require_once APPPATH . 'code/core/' . 'rdev-options.php';
-
-/** JSON API */
-require_once APPPATH . 'code/core/' . 'rdev-api.php';
-
-/** Page models */
-require_once APPPATH . 'code/core/' . 'rdev-models.php';
-
-/** User */
-require_once APPPATH . 'code/core/' . 'rdev-user.php';
-
-/** Redirect */
-require_once APPPATH . 'code/core/' . 'rdev-redirect.php';
-
-/** Dashboard */
-require_once APPPATH . 'code/core/' . 'rdev-dashboard.php';
-
-/** Forward */
-require_once APPPATH . 'code/' . 'rdev-forward.php';
+require_once APPPATH . 'code/' . 'forward.php';

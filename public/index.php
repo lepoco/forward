@@ -1,42 +1,34 @@
 <?php
 
 /**
- * @package Forward
+ * @package   Forward
  *
- * @author RapidDev
+ * @author    RapidDev
  * @copyright Copyright (c) 2019-2021, RapidDev
- * @link https://www.rdev.cc/forward
- * @license https://opensource.org/licenses/MIT
+ * @link      https://www.rdev.cc/forward
+ * @license   https://opensource.org/licenses/MIT
  */
 
 namespace Forward;
 
-/** Verify PHP version */
-if (version_compare($ver = PHP_VERSION, $req = '7.0.11', '<'))
-    exit(sprintf('You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+define('FORWARD_VERSION', '2.0.3');
+define('APPDIR', 'app');
+define('ABSPATH', dirname(__FILE__) . '\\..\\');
+define('APPPATH', ABSPATH . APPDIR . '\\');
 
-/** Define timezone */
+if (version_compare($ver = PHP_VERSION, $req = '7.4.0', '<')) {
+    exit(sprintf('You are running PHP %s, but Forward needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+}
+
 date_default_timezone_set('UTC');
 
-/** Forward version */
-define('FORWARD_VERSION', '2.0.2');
-
-/** Root public path */
-if (!defined('PUBLIC_PATH'))
+if (!defined('PUBLIC_PATH')) {
     define('PUBLIC_PATH', 'public');
+}
 
-/** The name of the directory with Forward files */
-define('APP_FOLDER', 'app');
-
-/** Main constants for all files */
-define('ABSPATH', dirname(__FILE__) . '\\..\\');
-define('APPPATH', ABSPATH . APP_FOLDER . '/');
-
-/** Initialization file */
-if (!is_file(APPPATH . 'loader.php'))
+if (!is_file(APPPATH . 'loader.php')) {
     exit('Fatal error');
-
-/** Load files */
+}
 require_once APPPATH . 'loader.php';
 
 /** Start Forward */
