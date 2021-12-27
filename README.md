@@ -2,7 +2,7 @@
 
 # Forward
 
-[Created with ![heart](http://i.imgur.com/oXJmdtz.gif) in Poland by RapidDev](https://rdev.cc/)<br />
+[Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)<br />
 Now you can have your own Bit.ly or Google URL shortener equivalent.
 Forward is a simple PHP-based tool with which you can shorten links and collect statistics about activity.
 
@@ -75,3 +75,7 @@ Just press "Install". It's easy :D
 - Background images by Marcin Jóźwiak<br/>[https://www.pexels.com/@marcin-jozwiak-199600](https://www.pexels.com/@marcin-jozwiak-199600)
 - Background images by Adam Borkowski<br/>[https://www.pexels.com/@borkography](https://www.pexels.com/@borkography)
 - Background images by Josh Hild<br/>[https://www.pexels.com/@josh-hild-1270765](https://www.pexels.com/@josh-hild-1270765)
+
+## License
+Forward is free and open source software licensed under **MIT License**. You can use it in private and commercial projects.  
+Keep in mind that you must include a copy of the license in your project.
